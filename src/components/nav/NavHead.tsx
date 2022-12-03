@@ -1,15 +1,20 @@
 import { View, StyleSheet } from "react-native";
 import Money from "../ui/Money";
 import ImageButton from "../ui/ImageButton";
+import { useNavigation } from "@react-navigation/native";
 
 const NavHead = () => {
-  const pressHandler = () => {}
+  const navigation = useNavigation();
+
+  const gachaHandler = () => {
+    navigation.navigate("Gacha");
+  };
 
   return (
     <>
       <View style={styles.rootContainer}>
         <Money />
-        <ImageButton source={require("../../assets/ui/gachaButton.png")} onPress={pressHandler} style={styles.gachaButton}/>
+        <ImageButton source={require("../../assets/ui/gachaButton.png")} onPress={gachaHandler} style={styles.gachaButton}/>
       </View>
     </>
   );

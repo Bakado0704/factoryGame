@@ -10,21 +10,9 @@ const StartScreen = () => {
 
   return (
     <View style={styles.rootScreen}>
-      <ImageBackground
-        source={require("../../src/assets/background/bgYamagawa.png")}
-        resizeMode="cover"
-        style={styles.rootScreen}
-      >
-        <Image
-          source={require("../../src/assets/conveyor/cvYamagawa.png")}
-          style={styles.conveyor}
-        />
-        <View style={styles.innerContainer}>
-          <NavHead />
-          <NavSelect />
-          <NavOperation />
-        </View>
-      </ImageBackground>
+      <NavHead />
+      <NavSelect />
+      <NavOperation />
     </View>
   );
 };
@@ -34,18 +22,7 @@ export default StartScreen;
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
-    position: "relative",
-  },
-  innerContainer: {
-    flex: 1,
     padding: 8,
-  },
-  conveyor: {
-    position: "absolute",
-    height: 282,
-    width: "100%",
-    bottom: 0,
-    left: 0,
   },
   okButton: {
     width: 100,

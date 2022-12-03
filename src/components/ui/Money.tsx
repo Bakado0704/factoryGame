@@ -62,12 +62,12 @@ const styles = StyleSheet.create({
   moneyImg: {
     width: 28,
     height: 28,
-    transform: [{ translateX: 12 }]
+    transform: [{ translateX: 12 }],
   },
   money: {
     fontSize: 14,
     fontFamily: "MochiyPop",
     color: "#fff",
-    transform: [{ translateX: 20 }]
+    transform: [{ translateX: 20 }],
   },
 });

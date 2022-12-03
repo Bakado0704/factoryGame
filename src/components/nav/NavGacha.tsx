@@ -1,28 +1,59 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ImageBackground } from "react-native";
 import ImageButton from "../ui/ImageButton";
+import { useNavigation } from "@react-navigation/native";
 
 const NavGacha = () => {
-  const pressHandler = () => {}
+  const navigation = useNavigation();
+
+  const homeHandler = () => {
+    navigation.navigate("Start");
+  };
+
+  const pressHandler = () => {};
 
   return (
-    <>
-      <View>
-        <ImageButton source={"../../assets/ui/settingButton.svg"} onPress={pressHandler} style={styles.homeButton}/>
-        <ImageButton source={"../../assets/ui/settingButton.svg"} onPress={pressHandler} style={styles.submitButton}/>
-      </View>
-    </>
+    <View style={styles.buttonsContainer}>
+      <ImageButton
+        source={require("../../assets/ui/homeButton.png")}
+        onPress={homeHandler}
+        style={styles.homeButton}
+      />
+      <ImageButton
+        source={require("../../assets/ui/submitButton.png")}
+        onPress={pressHandler}
+        style={styles.submitButton}
+      />
+      <View style={styles.space}></View>
+    </View>
   );
 };
 
 export default NavGacha;
 
 const styles = StyleSheet.create({
+  rootScreen: {
+    flex: 1,
+    alignItems: "flex-end",
+  },
+  buttonsContainer: {
+    width: "100%",
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    transform: [{ translateX: -8 }],
+  },
   homeButton: {
-    width: 100,
-    height: 100,
+    width: 66,
+    height: 67,
   },
   submitButton: {
-    width: 100,
-    height: 100,
+    width: 210,
+    height: 99,
+    marginHorizontal: 8,
+  },
+  space: {
+    width: 66,
+    height: 67,
   },
 });

@@ -1,12 +1,32 @@
 import { View, StyleSheet, ImageBackground } from "react-native";
 import ImageButton from "../../ui/ImageButton";
+import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 const NavOperation = () => {
+  const [state, setState] = useState(false);
+
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setState((state) => !state);
+    }, 600);
+
+    return () => clearInterval(interval);
+  }, []);
+
 
   const pressHandler = () => {
     navigation.navigate("JobChange");
+  };
+
+  const gameHandler = () => {
+    navigation.navigate("Game");
+  };
+
+  const settingHandler = () => {
+    navigation.navigate("Setting");
   };
 
   return (
@@ -19,12 +39,12 @@ const NavOperation = () => {
           <View style={styles.innerContainer}>
             <ImageButton
               source={require("../../../assets/ui/settingButton.png")}
-              onPress={pressHandler}
+              onPress={settingHandler}
               style={styles.settingButton}
             />
             <ImageButton
-              source={require("../../../assets/ui/startButton.png")}
-              onPress={pressHandler}
+              source={state ? require("../../../assets/ui/startButton.png") : require("../../../assets/ui/startButtonOff.png")}
+              onPress={gameHandler}
               style={styles.startButton}
             />
             <ImageButton

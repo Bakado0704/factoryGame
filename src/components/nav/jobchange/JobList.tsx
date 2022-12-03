@@ -1,34 +1,73 @@
-import { FlatList, StyleSheet } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Image,
+  Pressable,
+  View,
+  ImageBackground,
+} from "react-native";
 import { JOB } from "../../../data/data";
-import ImageButton from "../../ui/ImageButton";
-
-export interface Props {
-  itemData: object;
-};
 
 const JobList = () => {
   const renderCategoryItem = (itemData) => {
-    const {item, source} = itemData.item;
+    const source = itemData.item.source;
 
-    const pressHandler = () => {}
+    const pressHandler = () => {};
 
     return (
-      <ImageButton source={require(source)} onPress={pressHandler} style={styles.jobButton}/>
+      <View style={styles.outerContainer}>
+        <Pressable
+          onPress={pressHandler}
+          style={({ pressed }) => pressed && styles.pressed}
+          android_ripple={{ color: "#ccc" }}
+        >
+          <ImageBackground
+            source={require("../../../assets/ui/iconBackground.png")}
+            style={styles.iconBackground}
+          >
+            <Image style={styles.icon} source={source} />
+          </ImageBackground>
+        </Pressable>
+      </View>
     );
-  }
+  };
 
   return (
-    <FlatList
-      data={JOB}
-      renderItem={renderCategoryItem}
-      keyExtractor={(item) => item.id}
-      numColumns={4}
-    />
+    <View style={styles.container}>
+      <FlatList
+        data={JOB}
+        renderItem={renderCategoryItem}
+        keyExtractor={(item) => item.id}
+        numColumns={4}
+      />
+    </View>
   );
-}
+};
 
 export default JobList;
 
 const styles = StyleSheet.create({
-  jobButton: {},
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  outerContainer: {
+    width: 71,
+    height: 71,
+    marginVertical: 4,
+    marginHorizontal: 6,
+  },
+  iconBackground: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 71,
+    height: 71,
+  },
+  icon: {
+    width: 56,
+    height: 56,
+  },
+  pressed: {
+    opacity: 0.75,
+  },
 });
