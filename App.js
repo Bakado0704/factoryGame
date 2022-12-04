@@ -69,13 +69,6 @@ export default function App() {
                 }}
               />
               <Stack.Screen
-                name="Setting"
-                component={SettingScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
                 name="Game"
                 component={GameScreen}
                 options={{

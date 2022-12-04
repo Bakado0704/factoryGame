@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
     height: 55,
     top: 0,
     right: 0,
-    transform: [{ translateX: 25 }, {translateY: -25}],
+    // transform: [{ translateX: 25 }, {translateY: -25}],
   },
 });

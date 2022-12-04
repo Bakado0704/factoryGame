@@ -3,14 +3,18 @@ import ImageButton from "../../ui/ImageButton";
 import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-const NavOperation = () => {
-  const [state, setState] = useState(false);
+type Props = {
+  onSetting: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+const NavOperation = ({ onSetting }: Props) => {
+  const [status, setStatus] = useState(false);
 
   const navigation = useNavigation();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setState((state) => !state);
+      setStatus((status) => !status);
     }, 600);
 
     return () => clearInterval(interval);
@@ -25,9 +29,6 @@ const NavOperation = () => {
     navigation.navigate("Game");
   };
 
-  const settingHandler = () => {
-    navigation.navigate("Setting");
-  };
 
   return (
     <>
@@ -39,11 +40,11 @@ const NavOperation = () => {
           <View style={styles.innerContainer}>
             <ImageButton
               source={require("../../../assets/ui/settingButton.png")}
-              onPress={settingHandler}
+              onPress={onSetting}
               style={styles.settingButton}
             />
             <ImageButton
-              source={state ? require("../../../assets/ui/startButton.png") : require("../../../assets/ui/startButtonOff.png")}
+              source={status ? require("../../../assets/ui/startButton.png") : require("../../../assets/ui/startButtonOff.png")}
               onPress={gameHandler}
               style={styles.startButton}
             />
