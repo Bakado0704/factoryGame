@@ -3,7 +3,7 @@ import NavHead from "../components/nav/NavHead";
 import { useState } from "react";
 import NavSelect from "../components/nav/start/NavSelect";
 import NavOperation from "../components/nav/start/NavOperation";
-import Setting from "../modals/SettingModals";
+import Setting from "../modals/SettingModal";
 
 const StartScreen = () => {
   const [setting, setSetting] = useState(false);

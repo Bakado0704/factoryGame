@@ -2,7 +2,11 @@ import { View, StyleSheet } from "react-native";
 import React from "react";
 import ImageButton from "../components/ui/ImageButton";
 
-const Setting = ({ offSetting }) => {
+type Props = {
+  offSetting: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+const Setting = ({ offSetting }: Props ) => {
   return (
     <>
       <View style={styles.background}></View>

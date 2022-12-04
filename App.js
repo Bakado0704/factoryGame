@@ -1,6 +1,5 @@
 import {
   ImageBackground,
-  SafeAreaView,
   StyleSheet,
   View,
   StatusBar,
@@ -12,7 +11,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import StartScreen from "./src/screens/StartScreen";
-import SettingScreen from "./src/screens/SettingScreen";
 import JobChangeScreen from "./src/screens/JobChangeScreen";
 import GachaScreen from "./src/screens/GachaScreen";
 import GameScreen from "./src/screens/GameScreen";
@@ -95,22 +93,6 @@ export default function App() {
       </View>
     </>
   );
-}
-
-{
-  /* <View style={styles.rootScreen}>
-<ImageBackground
-  source={require("./src/assets/background/bgYamagawa.png")}
-  resizeMode="cover"
-  style={styles.rootScreen}
->
-  <Image
-    source={require("./src/assets/conveyor/cvYamagawa.png")}
-    style={styles.conveyor}
-  />
-  <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-</ImageBackground>
-</View> */
 }
 
 const styles = StyleSheet.create({
