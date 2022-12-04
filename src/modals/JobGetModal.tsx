@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text, ImageBackground } from "react-native";
 import React from "react";
 import { useState, useEffect } from "react";
 import ImageButton from "../components/ui/ImageButton";
@@ -7,7 +7,7 @@ type Props = {
   offModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Gameover = ({ offModal }: Props) => {
+const JobGet = ({ offModal }: Props) => {
   const [state, setState] = useState(false);
 
   useEffect(() => {
@@ -22,43 +22,28 @@ const Gameover = ({ offModal }: Props) => {
     <>
       <View style={styles.rootScreen}>
         <View style={styles.titleContainer}>
-          <Text style={styles.youdead}>倒れてしまった…</Text>
-          <Text style={styles.gameover}>GAMEOVER</Text>
+          <Text style={styles.youdead}>新しい勤務先をアンロックしました</Text>
+          <Text style={styles.gameover}>You got a new work place!</Text>
         </View>
         <View style={styles.innerContainer}>
-          <View>
-            <Text style={[styles.resultText, {fontSize: 20}]}>～記録～</Text>
+          <View style={styles.imageContainer}>
+            <ImageBackground source={require("../assets/background/bgOzasa.png")} style={styles.backgroundImg}/>
           </View>
-          <View style={styles.line} />
-          <Text style={[styles.resultText, {fontSize: 15, color: "red"}]}>新記録</Text>
-          <View style={styles.numberContainer}>
-            <Text style={[styles.resultText, {fontSize: 20}]}>成功回数: </Text>
-            <Text style={[styles.resultText, {fontSize: 25}]}>25</Text>
+          <View style={styles.textContainer}>
+            <Text style={[styles.resultText, {fontSize: 20}]}>会社名: </Text>
+            <Text style={[styles.resultText, {fontSize: 25}]}>山川製作所</Text>
           </View>
-          <View style={styles.line} />
-          <Text style={[styles.resultText, {fontSize: 15, color: "red"}]}>新記録</Text>
+          <View style={styles.textContainer}>
+            <Text style={[styles.resultText, {fontSize: 20}]}>熟練度: </Text>
+            <Text style={[styles.resultText, {fontSize: 20}]}> Lv1</Text>
+          </View>
           <View style={styles.moneyContainer}>
-            <Text style={[styles.resultText, {fontSize: 20}]}>時給:</Text>
+            <Text style={[styles.resultText, {fontSize: 20}]}>基本給:</Text>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={[styles.resultText, {fontSize: 25}]}>340</Text>
-          </View>
-          <View style={styles.line} />
-          <View style={styles.staminaContainer}>
-            <Text style={[styles.resultText, {fontSize: 20}]}>メンタル: </Text>
-            <View style={styles.staminaInnerContainer}>
-              <View style={styles.staminaContainerTop}>
-                <Text style={[styles.resultText, {fontSize: 20}]}>310</Text>
-                <Image source={require("../assets/ui/arrow.png")} style={styles.arrowImg}/>
-                <Text style={[styles.resultText, {fontSize: 20}]}>315</Text>
-              </View>
-              <View style={styles.staminaContainerBottom}>
-                <Image source={require("../assets/ui/stamina.png")} style={styles.staminaImg} />
-                <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}> (+5)</Text>
-              </View>
-            </View>
+            <Text style={[styles.resultText, {fontSize: 20}]}>15</Text>
           </View>
         </View>
         <View style={styles.reactionContainer}>
@@ -67,7 +52,7 @@ const Gameover = ({ offModal }: Props) => {
             style={styles.bubble}
           />
           <View style={styles.commentContainer}>
-            <Text style={styles.comment}>あーあって感じ</Text>
+            <Text style={styles.comment}>ビシバシ行くぞ!!</Text>
           </View>
           <View style={styles.iconContaner}>
             <Image
@@ -89,7 +74,7 @@ const Gameover = ({ offModal }: Props) => {
   );
 };
 
-export default Gameover;
+export default JobGet;
 
 const styles = StyleSheet.create({
   rootScreen: {
@@ -106,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   youdead: {
-    fontSize: 30,
+    fontSize: 20,
     color: "white",
     fontFamily: "MochiyPop",
   },
@@ -124,37 +109,33 @@ const styles = StyleSheet.create({
     paddingBottom: 35,
     borderRadius: 32,
   },
-  numberContainer: {
+  textContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginVertical: 4,
+  },
+  imageContainer: {
+    width: 300,
+    height: 120,
+    marginVertical: 10,
+    overflow: "hidden",
+  },
+  backgroundImg: {
+    width: "100%",
+    height: 310,
   },
   moneyContainer: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  staminaContainer: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-  },
-  staminaInnerContainer: {
-    alignItems: "center",
-  },
-  staminaContainerTop: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  staminaContainerBottom: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 3,
+    marginVertical: 4,
   },
   resultText: {
     fontSize: 20,
     fontFamily: "MochiyPop",
   },
   moneyImg: {
-    width: 34,
-    height: 34,
+    width: 27,
+    height: 27,
     marginLeft: 8,
   },
   arrowImg: {

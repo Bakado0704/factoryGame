@@ -2,7 +2,7 @@ import { View, Image, StyleSheet } from "react-native";
 import { useState } from "react";
 import ImageButton from "../components/ui/ImageButton";
 import { useNavigation } from "@react-navigation/native";
-import Gameover from "../modals/gameoverModal";
+import Gameover from "../modals/GameoverModal";
 
 const GameScreen = () => {
   const [modalIsSetting, setModalIsSetting] = useState(false);

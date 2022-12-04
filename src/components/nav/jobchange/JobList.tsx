@@ -39,6 +39,7 @@ const JobList = () => {
         renderItem={renderCategoryItem}
         keyExtractor={(item) => item.id}
         numColumns={4}
+        scrollEnabled={false}
       />
     </View>
   );

@@ -2,7 +2,12 @@ import { View, StyleSheet, ImageBackground } from "react-native";
 import ImageButton from "../ui/ImageButton";
 import { useNavigation } from "@react-navigation/native";
 
-const NavGacha = () => {
+type Props = {
+  onModal: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+const NavGacha = ({onModal} : Props) => {
+  
   const navigation = useNavigation();
 
   const homeHandler = () => {
@@ -20,7 +25,7 @@ const NavGacha = () => {
       />
       <ImageButton
         source={require("../../assets/ui/submitButton.png")}
-        onPress={pressHandler}
+        onPress={onModal}
         style={styles.submitButton}
       />
       <View style={styles.space}></View>
