@@ -1,8 +1,13 @@
 import { View, Image, Text, StyleSheet } from "react-native";
 import ImageButton from "../../ui/ImageButton";
+import { useNavigation } from "@react-navigation/native";
 
 const NavBody = () => {
-  const pressHandler = () => {};
+  const navigation = useNavigation();
+
+  const pressHandler = () => {
+    navigation.navigate("Testing");
+  };
 
   return (
     <View style={styles.rootContainer}>

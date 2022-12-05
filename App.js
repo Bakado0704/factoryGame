@@ -14,6 +14,7 @@ import StartScreen from "./src/screens/StartScreen";
 import JobChangeScreen from "./src/screens/JobChangeScreen";
 import GachaScreen from "./src/screens/GachaScreen";
 import GameScreen from "./src/screens/GameScreen";
+import TestingScreen from "./src/screens/TestingScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -83,6 +84,13 @@ export default function App() {
               <Stack.Screen
                 name="JobChange"
                 component={JobChangeScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Testing"
+                component={TestingScreen}
                 options={{
                   headerShown: false,
                 }}

@@ -5,8 +5,10 @@ import {
   Image,
   Pressable,
   Text,
+  Animated,
+  SafeAreaView,
 } from "react-native";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import NavGacha from "../components/nav/NavGacha";
 import NavHead from "../components/nav/NavHead";
 import JobGet from "../modals/JobGetModal";
@@ -25,47 +27,97 @@ function GachaScreen() {
     setEnvelopeSetting(true);
   };
 
-  const envelopeHandler = () => {
-    setEnvelopeSetting(false);
-    setEnvelopeIsOpenedFirst(true);
-  };
-
-  if (envelopeOpenedFirst) {
+  const Animation = () => {
     setTimeout(() => {
       setEnvelopeIsOpenedSecond(true);
     }, 1000);
-  }
 
-  if (envelopeOpenedSecond) {
     setTimeout(() => {
-      setEnvelopeIsOpenedThird(true);
       setEnvelopeIsOpenedSecond(false);
-    }, 1000);
-  }
+      setEnvelopeIsOpenedThird(true);
+    }, 2000);
 
-  if (envelopeOpenedThird) {
     setTimeout(() => {
-      setGachaIsSetted(true);
-      setEnvelopeIsOpenedFirst(false);
       setEnvelopeIsOpenedThird(false);
-    }, 1000);
-  }
+      setEnvelopeIsOpenedFirst(false);
+      setGachaIsSetted(true);
+    }, 3000);
+  };
+
+  const envelopeHandler = () => {
+    setEnvelopeSetting(false);
+    setEnvelopeIsOpenedFirst(true);
+    Animation();
+  };
+
+  // useEffect(() => {
+  //   if (envelopeOpenedFirst) {
+  //     setTimeout(() => {
+  //       setEnvelopeIsOpenedSecond(true);
+  //     }, 1000);
+  //   }
+
+  //   if (envelopeOpenedSecond) {
+  //     setTimeout(() => {
+  //       setEnvelopeIsOpenedSecond(false);
+  //       setEnvelopeIsOpenedThird(true);
+  //     }, 2000);
+  //   }
+
+  //   if (envelopeOpenedThird) {
+  //     setTimeout(() => {
+  //       setEnvelopeIsOpenedThird(false);
+  //       setEnvelopeIsOpenedFirst(false);
+  //       setGachaIsSetted(true);
+  //     }, 3000);
+  //   }
+  // }, [envelopeHandler]);
 
   const offModalHandler = () => {
     setModalIsSetting(false);
     setGachaIsSetted(false);
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setState((state) => !state);
-    }, 200);
+  // const animatedValue = useRef(new Animated.Value(0)).current;
 
-    return () => clearInterval(interval);
-  }, []);
+  // const interPolateTop = animatedValue.interpolate({
+  //   inputRange: [0, 500],
+  //   outputRange: ["38.6%", "38.8%"],
+  // })
+
+  // const top = {
+  //   top: interPolateTop,
+  // };
+
+  // Animated.timing(animatedValue, {
+  //   toValue: 500,
+  //   duration: 200,
+  //   useNativeDriver : false,
+  // }).start();
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setState((state) => !state);
+  //   }, 200);
+
+  // const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  // Animated.timing(fadeAnim, {
+  //   toValue: 1,
+  //   duration: 200,
+  //   useNativeDriver: false,
+  // }).start();
+
+  // const fadeOut = () => {
+  //   Animated.timing(fadeAnim, {
+  //     toValue: 0,
+  //     duration: 200,
+  //     useNativeDriver: false,
+  //   }).start();
+  // };
 
   return (
-    <View style={styles.rootScreen}>
+    <SafeAreaView style={styles.rootScreen}>
       <ImageBackground
         source={require("../assets/background/bgGacha.png")}
         resizeMode="cover"
@@ -74,10 +126,12 @@ function GachaScreen() {
         <View style={styles.innerContainer}>
           <NavHead />
           <NavGacha onModal={modalSettingHandler} />
-          <Image
-            source={require("../assets/icon/zimuPerson.png")}
-            style={state ? styles.iconImg : styles.iconImgActive}
-          />
+          <Animated.View style={styles.iconContainer}>
+            <Image
+              source={require("../assets/icon/zimuPerson.png")}
+              style={styles.iconImg}
+            />
+          </Animated.View>
         </View>
         {modalIsSetting && <View style={styles.background} />}
         {modalIsSetting && envelopeSetting && (
@@ -97,15 +151,15 @@ function GachaScreen() {
               source={require("../assets/ui/envelopeOpen.png")}
               style={styles.envelopeClosed}
             />
-            {envelopeOpenedSecond && <View style={styles.sheetOne} />}
-            {/* {envelopeOpenedThird && <View style={styles.sheetTwo}/>} */}
+            {/* {envelopeOpenedSecond && <View style={styles.sheetOne} />}
+            {envelopeOpenedThird && <View style={styles.sheetTwo} />} */}
           </View>
         )}
         {modalIsSetting && gachaIsSetted && (
           <JobGet offModal={offModalHandler} />
         )}
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -121,12 +175,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 8,
   },
-  iconImg: {
+  iconContainer: {
     position: "absolute",
     width: 74,
     height: 61,
-    top: "38.6%",
     left: "16%",
+  },
+  iconImg: {
+    width: "100%",
+    height: "100%",
   },
   iconImgActive: {
     position: "absolute",
