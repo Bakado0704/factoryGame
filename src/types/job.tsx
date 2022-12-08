@@ -1,5 +1,5 @@
+import { BackgroundType } from "./background";
 import { IconType } from "./icon";
-import { Img } from "./img";
 import { Outline } from "./outline";
 
 export const JobName = {
@@ -17,15 +17,16 @@ export const JobName = {
 export type JobName = typeof JobName[keyof typeof JobName];
 
 export interface Job {
-  name: JobName;
+  id: string,
   icon: IconType;
+  name: string;
   isActive: boolean;
   level: number;
   maxNumber: number;
   maxMoney: number;
   perMoney: number;
-  backgroundImg: Img;
-  prodct: JobProduct;
+  backgroundImg: BackgroundType;
+  product: JobProduct;
   owner: {
     name: string;
     message: string;
@@ -35,9 +36,9 @@ export interface Job {
 
 export interface JobProduct {
   default: {
-    before: Img;
+    before: string;
   }[];
   bonus: {
-    before: Img;
+    before: string;
   }[];
 }

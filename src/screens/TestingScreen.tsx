@@ -10,7 +10,6 @@ import {
 } from "react-native";
 
 const App = () => {
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const interPolateColor = fadeAnim.interpolate({
@@ -42,7 +41,6 @@ const App = () => {
         style={[
           styles.fadingContainer,
           {
-            // Bind opacity to animated value
             width: interPolateColor,
           },
         ]}

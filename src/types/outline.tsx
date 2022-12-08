@@ -5,6 +5,6 @@ export interface Outline {
   basicMoney: number;
   holiday: string;
   retirement: string;
-  operation: string;
+  difficulty: string;
   workplace: string;
 }

@@ -7,7 +7,7 @@ export interface Props {
   source: string;
 }
 
-const ImageButton: React.FC<Props> = ({ source, onPress, style }) => {
+const ImageButton= ({ source, onPress, style }: Props) => {
   return (
     <View>
       <Pressable

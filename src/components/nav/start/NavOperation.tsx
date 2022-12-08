@@ -1,6 +1,6 @@
-import { View, StyleSheet, ImageBackground } from "react-native";
+import { View, StyleSheet, ImageBackground, Animated } from "react-native";
 import ImageButton from "../../ui/ImageButton";
-import { useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 type Props = {
@@ -8,17 +8,21 @@ type Props = {
 }
 
 const NavOperation = ({ onSetting }: Props) => {
-  const [status, setStatus] = useState(false);
-
   const navigation = useNavigation();
+  const ButtonAnim = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStatus((status) => !status);
-    }, 600);
+  const ButtonImage  = ButtonAnim.interpolate({
+    inputRange: [0, 100, 101, 200],
+    outputRange: [0, 1, 1, 0],
+  });
 
-    return () => clearInterval(interval);
-  }, []);
+  Animated.loop(
+    Animated.timing(ButtonAnim, {
+      toValue: 200,
+      duration: 1200,
+      useNativeDriver: false,
+    })
+  ).start();
 
 
   const pressHandler = () => {
@@ -44,10 +48,17 @@ const NavOperation = ({ onSetting }: Props) => {
               style={styles.settingButton}
             />
             <ImageButton
-              source={status ? require("../../../assets/ui/startButton.png") : require("../../../assets/ui/startButtonOff.png")}
+              source={require("../../../assets/ui/startButtonOff.png")}
               onPress={gameHandler}
               style={styles.startButton}
             />
+            <Animated.View style={[styles.startButtonContainer, {opacity: ButtonImage}]}>
+              <ImageButton
+                source={require("../../../assets/ui/startButton.png")}
+                onPress={gameHandler}
+                style={styles.startButton}
+              />
+            </Animated.View>
             <ImageButton
               source={require("../../../assets/ui/jobChangeButton.png")}
               onPress={pressHandler}
@@ -78,6 +89,14 @@ const styles = StyleSheet.create({
   settingButton: {
     width: 52,
     height: 56,
+  },
+  startButtonContainer: {
+    position: "absolute",
+    top: 12,
+    left: 52,
+    width: 216,
+    height: 78,
+    marginHorizontal: 10,
   },
   startButton: {
     width: 216,

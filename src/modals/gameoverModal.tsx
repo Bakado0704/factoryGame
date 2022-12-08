@@ -1,6 +1,5 @@
-import { View, StyleSheet, Image, Text } from "react-native";
-import React from "react";
-import { useState, useEffect } from "react";
+import { View, StyleSheet, Image, Text, Animated } from "react-native";
+import React, { useRef } from "react";
 import ImageButton from "../components/ui/ImageButton";
 
 type Props = {
@@ -8,15 +7,20 @@ type Props = {
 };
 
 const Gameover = ({ offModal }: Props) => {
-  const [state, setState] = useState(false);
+  const iconAnim = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setState((state) => !state);
-    }, 200);
+  const iconY = iconAnim.interpolate({
+    inputRange: [0, 100, 101, 200],
+    outputRange: [-2, -2, 0, 0],
+  });
 
-    return () => clearInterval(interval);
-  }, []);
+  Animated.loop(
+    Animated.timing(iconAnim, {
+      toValue: 200,
+      duration: 300,
+      useNativeDriver: false,
+    })
+  ).start();
 
   return (
     <>
@@ -27,36 +31,55 @@ const Gameover = ({ offModal }: Props) => {
         </View>
         <View style={styles.innerContainer}>
           <View>
-            <Text style={[styles.resultText, {fontSize: 20}]}>～記録～</Text>
+            <Text style={[styles.resultText, { fontSize: 20 }]}>～記録～</Text>
           </View>
           <View style={styles.line} />
-          <Text style={[styles.resultText, {fontSize: 15, color: "red"}]}>新記録</Text>
+          <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}>
+            新記録
+          </Text>
           <View style={styles.numberContainer}>
-            <Text style={[styles.resultText, {fontSize: 20}]}>成功回数: </Text>
-            <Text style={[styles.resultText, {fontSize: 25}]}>25</Text>
+            <Text style={[styles.resultText, { fontSize: 20 }]}>
+              成功回数:{" "}
+            </Text>
+            <Text style={[styles.resultText, { fontSize: 25 }]}>25</Text>
           </View>
           <View style={styles.line} />
-          <Text style={[styles.resultText, {fontSize: 15, color: "red"}]}>新記録</Text>
+          <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}>
+            新記録
+          </Text>
           <View style={styles.moneyContainer}>
-            <Text style={[styles.resultText, {fontSize: 20}]}>時給:</Text>
+            <Text style={[styles.resultText, { fontSize: 20 }]}>時給:</Text>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={[styles.resultText, {fontSize: 25}]}>340</Text>
+            <Text style={[styles.resultText, { fontSize: 25 }]}>340</Text>
           </View>
           <View style={styles.line} />
           <View style={styles.staminaContainer}>
-            <Text style={[styles.resultText, {fontSize: 20}]}>メンタル: </Text>
+            <Text style={[styles.resultText, { fontSize: 20 }]}>
+              メンタル:{" "}
+            </Text>
             <View style={styles.staminaInnerContainer}>
               <View style={styles.staminaContainerTop}>
-                <Text style={[styles.resultText, {fontSize: 20}]}>310</Text>
-                <Image source={require("../assets/ui/arrow.png")} style={styles.arrowImg}/>
-                <Text style={[styles.resultText, {fontSize: 20}]}>315</Text>
+                <Text style={[styles.resultText, { fontSize: 20 }]}>310</Text>
+                <Image
+                  source={require("../assets/ui/arrow.png")}
+                  style={styles.arrowImg}
+                />
+                <Text style={[styles.resultText, { fontSize: 20 }]}>315</Text>
               </View>
               <View style={styles.staminaContainerBottom}>
-                <Image source={require("../assets/ui/stamina.png")} style={styles.staminaImg} />
-                <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}> (+5)</Text>
+                <Image
+                  source={require("../assets/ui/stamina.png")}
+                  style={styles.staminaImg}
+                />
+                <Text
+                  style={[styles.resultText, { fontSize: 15, color: "red" }]}
+                >
+                  {" "}
+                  (+5)
+                </Text>
               </View>
             </View>
           </View>
@@ -70,10 +93,14 @@ const Gameover = ({ offModal }: Props) => {
             <Text style={styles.comment}>あーあって感じ</Text>
           </View>
           <View style={styles.iconContaner}>
-            <Image
-              source={require("../assets/icon/takaoOzasa.png")}
-              style={state ? styles.icon : styles.iconActive}
-            />
+            <Animated.View
+              style={[styles.iconBox, { transform: [{ translateY: iconY }] }]}
+            >
+              <Image
+                source={require("../assets/icon/takaoOzasa.png")}
+                style={styles.icon}
+              />
+            </Animated.View>
             <Text style={styles.position}>社長: 小篠隆生(65)</Text>
           </View>
         </View>
@@ -168,7 +195,7 @@ const styles = StyleSheet.create({
   },
   line: {
     width: "100%",
-    borderBottomColor: '#eeeeee',
+    borderBottomColor: "#eeeeee",
     borderBottomWidth: 2,
     marginVertical: 5,
   },
@@ -187,14 +214,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
   },
-  icon: {
+  iconBox: {
     width: 78,
     height: 78,
   },
-  iconActive: {
-    width: 78,
-    height: 78,
-    transform: [{ translateY: 2 }],
+  icon: {
+    width: "100%",
+    height: "100%",
   },
   position: {
     fontSize: 20,

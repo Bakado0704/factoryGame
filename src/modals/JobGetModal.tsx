@@ -1,6 +1,13 @@
-import { View, StyleSheet, Image, Text, ImageBackground } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  ImageBackground,
+  Animated,
+} from "react-native";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useRef } from "react";
 import ImageButton from "../components/ui/ImageButton";
 
 type Props = {
@@ -8,15 +15,20 @@ type Props = {
 };
 
 const JobGet = ({ offModal }: Props) => {
-  const [state, setState] = useState(false);
+  const iconAnim = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setState((state) => !state);
-    }, 200);
+  const iconY = iconAnim.interpolate({
+    inputRange: [0, 100, 101, 200],
+    outputRange: [-2, -2, 0, 0],
+  });
 
-    return () => clearInterval(interval);
-  }, []);
+  Animated.loop(
+    Animated.timing(iconAnim, {
+      toValue: 200,
+      duration: 300,
+      useNativeDriver: false,
+    })
+  ).start();
 
   return (
     <>
@@ -27,23 +39,28 @@ const JobGet = ({ offModal }: Props) => {
         </View>
         <View style={styles.innerContainer}>
           <View style={styles.imageContainer}>
-            <ImageBackground source={require("../assets/background/bgOzasa.png")} style={styles.backgroundImg}/>
+            <ImageBackground
+              source={require("../assets/background/bgOzasa.png")}
+              style={styles.backgroundImg}
+            />
           </View>
           <View style={styles.textContainer}>
-            <Text style={[styles.resultText, {fontSize: 20}]}>会社名: </Text>
-            <Text style={[styles.resultText, {fontSize: 25}]}>山川製作所</Text>
+            <Text style={[styles.resultText, { fontSize: 20 }]}>会社名: </Text>
+            <Text style={[styles.resultText, { fontSize: 25 }]}>
+              山川製作所
+            </Text>
           </View>
           <View style={styles.textContainer}>
-            <Text style={[styles.resultText, {fontSize: 20}]}>熟練度: </Text>
-            <Text style={[styles.resultText, {fontSize: 20}]}> Lv1</Text>
+            <Text style={[styles.resultText, { fontSize: 20 }]}>熟練度: </Text>
+            <Text style={[styles.resultText, { fontSize: 20 }]}> Lv1</Text>
           </View>
           <View style={styles.moneyContainer}>
-            <Text style={[styles.resultText, {fontSize: 20}]}>基本給:</Text>
+            <Text style={[styles.resultText, { fontSize: 20 }]}>基本給:</Text>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={[styles.resultText, {fontSize: 20}]}>15</Text>
+            <Text style={[styles.resultText, { fontSize: 20 }]}>15</Text>
           </View>
         </View>
         <View style={styles.reactionContainer}>
@@ -55,10 +72,12 @@ const JobGet = ({ offModal }: Props) => {
             <Text style={styles.comment}>ビシバシ行くぞ!!</Text>
           </View>
           <View style={styles.iconContaner}>
-            <Image
-              source={require("../assets/icon/takaoOzasa.png")}
-              style={state ? styles.icon : styles.iconActive}
-            />
+            <Animated.View style={[styles.iconBox, { transform: [{ translateY: iconY }] }]}>
+              <Image
+                source={require("../assets/icon/takaoOzasa.png")}
+                style={styles.icon}
+              />
+            </Animated.View>
             <Text style={styles.position}>社長: 小篠隆生(65)</Text>
           </View>
         </View>
@@ -149,7 +168,7 @@ const styles = StyleSheet.create({
   },
   line: {
     width: "100%",
-    borderBottomColor: '#eeeeee',
+    borderBottomColor: "#eeeeee",
     borderBottomWidth: 2,
     marginVertical: 5,
   },
@@ -168,14 +187,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
   },
-  icon: {
+  iconBox: {
     width: 78,
     height: 78,
   },
-  iconActive: {
-    width: 78,
-    height: 78,
-    transform: [{ translateY: 2 }],
+  icon: {
+    width: "100%",
+    height: "100%",
   },
   position: {
     fontSize: 20,

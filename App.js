@@ -5,6 +5,7 @@ import {
   StatusBar,
   Image,
 } from "react-native";
+import { Provider } from "react-redux";
 import React, { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
@@ -15,6 +16,8 @@ import JobChangeScreen from "./src/screens/JobChangeScreen";
 import GachaScreen from "./src/screens/GachaScreen";
 import GameScreen from "./src/screens/GameScreen";
 import TestingScreen from "./src/screens/TestingScreen";
+import ImageBg from "./src/components/ui/ImageBg";
+import { store } from "./src/store/redux/store";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,62 +46,56 @@ export default function App() {
   return (
     <>
       <StatusBar hidden />
-      <View style={styles.rootScreen}>
-        <ImageBackground
-          source={require("./src/assets/background/bgYamagawa.png")}
-          resizeMode="cover"
-          style={styles.rootScreen}
-        >
-          <Image
-            source={require("./src/assets/conveyor/cvYamagawa.png")}
-            style={styles.conveyor}
-          />
-          <NavigationContainer>
-            <Stack.Navigator
-              screenOptions={{
-                contentStyle: { backgroundColor: "transparent" },
-                animation: "none",
-              }}
-            >
-              <Stack.Screen
-                name="Start"
-                component={StartScreen}
-                options={{
-                  headerShown: false,
+      <Provider store={store}>
+        <View style={styles.rootScreen}>
+          <ImageBg>
+            <NavigationContainer>
+              <Stack.Navigator
+                screenOptions={{
+                  contentStyle: { backgroundColor: "transparent" },
+                  animation: "none",
                 }}
-              />
-              <Stack.Screen
-                name="Game"
-                component={GameScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Gacha"
-                component={GachaScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="JobChange"
-                component={JobChangeScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Testing"
-                component={TestingScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </ImageBackground>
-      </View>
+              >
+                <Stack.Screen
+                  name="Start"
+                  component={StartScreen}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Game"
+                  component={GameScreen}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Gacha"
+                  component={GachaScreen}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="JobChange"
+                  component={JobChangeScreen}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Testing"
+                  component={TestingScreen}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </ImageBg>
+        </View>
+      </Provider>
     </>
   );
 }

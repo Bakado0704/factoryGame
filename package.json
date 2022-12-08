@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.16",
     "@react-navigation/native-stack": "^6.9.4",
+    "@reduxjs/toolkit": "^1.9.1",
     "expo": "~47.0.8",
     "expo-app-loading": "^2.1.1",
     "expo-font": "^11.0.1",
@@ -18,7 +19,8 @@
     "expo-status-bar": "~1.4.2",
     "gsap": "^3.11.3",
     "react": "18.1.0",
-    "react-native": "0.70.5"
+    "react-native": "0.70.5",
+    "react-redux": "^8.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

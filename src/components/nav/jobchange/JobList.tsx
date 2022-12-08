@@ -1,18 +1,26 @@
 import {
   FlatList,
   StyleSheet,
-  Image,
   Pressable,
   View,
   ImageBackground,
 } from "react-native";
 import { JOB } from "../../../data/data";
+import { useDispatch } from "react-redux";
+import FaceIcon from "../../icon/FaceIcon";
+import { changeType } from "../../../store/redux/background";
+
+
 
 const JobList = () => {
-  const renderCategoryItem = (itemData) => {
-    const source = itemData.item.source;
+  const dispatch = useDispatch();
 
-    const pressHandler = () => {};
+  const renderCategoryItem = (itemData) => {
+    const pressHandler = () => {
+      dispatch(changeType({ type: itemData.item.backgroundImg }));
+    };
+
+    const type = itemData.item.icon;
 
     return (
       <View style={styles.outerContainer}>
@@ -25,7 +33,7 @@ const JobList = () => {
             source={require("../../../assets/ui/iconBackground.png")}
             style={styles.iconBackground}
           >
-            <Image style={styles.icon} source={source} />
+            <FaceIcon type={type} />
           </ImageBackground>
         </Pressable>
       </View>
