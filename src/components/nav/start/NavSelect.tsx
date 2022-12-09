@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
     height: 70,
   },
   signboard: {
-    width: 219,
-    height: 58,
+    width: 222,
+    height: 60,
     marginHorizontal: 14,
   },
   nextButton: {
