@@ -1,10 +1,60 @@
-import { View, ImageBackground, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import JobList from "../components/nav/jobchange/JobList";
 import ImageButton from "../components/ui/ImageButton";
 import { useNavigation } from "@react-navigation/native";
 import NavHead from "../components/nav/NavHead";
+import { useState } from "react";
+import JobModal from "../modals/JobModal";
+import { IconType } from "../types/icon";
+import { BackgroundType } from "../types/background";
+import Job from "../models/job";
+import { Job as _Job } from "../types/job";
+import Outline from "../models/outline";
+import { store } from "../store/redux/store";
 
 const JobChangeScreen = () => {
+  const [jobModal, setJobModal] = useState(false);
+  const [job, setJob] = useState(new Job(
+    "c1",
+    IconType.yamagawa,
+    "山川製作所",
+    false,
+    1,
+    0,
+    0,
+    15,
+    BackgroundType.yamagawa,
+    {
+      default: [
+        { before: require("../assets/product/product1-normal-first.png") },
+        { before: require("../assets/product/product1-normal-second.png") },
+        { before: require("../assets/product/product1-normal-third.png") },
+      ],
+      bonus: [
+        { before: require("../assets/product/product1-gold-first.png") },
+        { before: require("../assets/product/product1-gold-second.png") },
+        { before: require("../assets/product/product1-gold-third.png") },
+      ],
+      style: { width: 200, height: 80 },
+    },
+    {
+      name: "山川 哲郎(62)",
+      message: "「残業なき労働に価値なし」",
+    },
+    new Outline(
+      "山川製作所",
+      "精密機械工場",
+      "システム基盤構築",
+      15,
+      "完全週休一日制",
+      "90%",
+      "C",
+      "鳥取県",
+      require("../assets/outline/outlineBgYamagawa.png"),
+      require("../assets/outline/outlineButtonYamagawa.png"),
+    )
+  ),);
+
   const navigation = useNavigation();
 
   const jobReturnHandler = () => {
@@ -13,6 +63,15 @@ const JobChangeScreen = () => {
 
   const jobAddHandler = () => {
     navigation.navigate("Gacha");
+  };
+
+  const jobModalOnHandler = (newJob: _Job) => {
+    setJobModal(true);
+    setJob(newJob);
+  };
+
+  const jobModalOffHandler = () => {
+    setJobModal(false);
   };
 
   return (
@@ -26,7 +85,7 @@ const JobChangeScreen = () => {
           <NavHead />
         </View>
         <View style={styles.jobsContainer}>
-          <JobList />
+          <JobList onModal={jobModalOnHandler} />
         </View>
         <View style={styles.buttonsContainer}>
           <ImageButton
@@ -40,6 +99,16 @@ const JobChangeScreen = () => {
             style={styles.gachaButton}
           />
         </View>
+        {jobModal && (
+          <JobModal
+            offModal={jobModalOffHandler}
+            outline={job.outline}
+            backgroundImg={job.backgroundImg}
+            product={job.product}
+            owner={job.owner}
+            icon={job.icon}
+          />
+        )}
       </View>
     </View>
   );
@@ -59,7 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   headContainer: {
-    flex: 1,    
+    flex: 1,
     padding: 8,
   },
   board: {

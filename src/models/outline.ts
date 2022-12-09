@@ -1,6 +1,6 @@
 import { Outline as _Outline } from "../types/outline";
 
-export default class Outline implements _Outline {
+export default class outline implements _Outline {
   constructor(
     public companey: string,
     public category: string,
@@ -9,7 +9,9 @@ export default class Outline implements _Outline {
     public holiday: string,
     public retirement: string,
     public difficulty: string,
-    public workplace: string
+    public workplace: string,
+    public background: string,
+    public button: string,
   ) {
     this.companey = companey;
     this.category = category;
@@ -19,5 +21,7 @@ export default class Outline implements _Outline {
     this.retirement = retirement;
     this.difficulty = difficulty;
     this.workplace = workplace;
+    this.background = background;
+    this.button = button;
   }
 }

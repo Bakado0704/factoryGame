@@ -1,6 +1,8 @@
 import { View, StyleSheet, Image, Text, Animated } from "react-native";
 import React, { useRef } from "react";
 import ImageButton from "../components/ui/ImageButton";
+import { store } from "../store/redux/store";
+import FaceIcon from "../components/icon/FaceIcon";
 
 type Props = {
   offModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,6 +15,9 @@ const Gameover = ({ offModal }: Props) => {
     inputRange: [0, 100, 101, 200],
     outputRange: [-2, -2, 0, 0],
   });
+
+  const name = store.getState().activeOwner.owner.name;
+  const iconType = store.getState().activeJob.type;
 
   Animated.loop(
     Animated.timing(iconAnim, {
@@ -96,12 +101,9 @@ const Gameover = ({ offModal }: Props) => {
             <Animated.View
               style={[styles.iconBox, { transform: [{ translateY: iconY }] }]}
             >
-              <Image
-                source={require("../assets/icon/takaoOzasa.png")}
-                style={styles.icon}
-              />
+              <FaceIcon type={iconType} width={78} height={78}/>
             </Animated.View>
-            <Text style={styles.position}>社長: 小篠隆生(65)</Text>
+            <Text style={styles.position}>社長: {name}</Text>
           </View>
         </View>
         <View style={styles.buttonContainer}>

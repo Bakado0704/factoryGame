@@ -5,9 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 const NavBody = () => {
   const navigation = useNavigation();
 
-  const pressHandler = () => {
-    navigation.navigate("Testing");
-  };
+  const pressHandler = () => {};
 
   return (
     <View style={styles.rootContainer}>
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
   coron: {
     width: 7,
     height: 25,
-    
+
     marginHorizontal: 10,
   },
   moneyImg: {

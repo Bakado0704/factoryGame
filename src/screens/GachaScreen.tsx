@@ -136,7 +136,7 @@ function GachaScreen() {
         {modalIsSetting && envelopeSetting && (
           <View style={styles.envelopeContainer}>
             <Animated.Text style={[styles.text, { opacity: envelopeText }]}>
-              タップして開封しよう
+              タップして開封しよう !
             </Animated.Text>
             <Animated.View
               style={[{ width: envelopeWidth }, { height: envelopeHeight }]}

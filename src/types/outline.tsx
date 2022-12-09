@@ -3,8 +3,10 @@ export interface Outline {
   category: string;
   work: string;
   basicMoney: number;
-  holiday: string;
   retirement: string;
+  holiday: string;
   difficulty: string;
   workplace: string;
+  background: string;
+  button: string;
 }

@@ -15,14 +15,15 @@ const changeProductSlice = createSlice({
         { before: require("../../assets/product/product1-gold-second.png") },
         { before: require("../../assets/product/product1-gold-third.png") },
       ],
+      style: {width: 200, height: 80},
     },
   },
   reducers: {
-    changeType: (state, action) => {
-      state.product = action.payload.type;
+    changeProduct: (state, action) => {
+      state.product = action.payload.product;
     },
-  },
+  }
 });
 
-export const changeType = changeProductSlice.actions.changeType;
+export const changeProduct = changeProductSlice.actions.changeProduct;
 export default changeProductSlice.reducer;

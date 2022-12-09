@@ -4,9 +4,11 @@ import { IconType } from "../../types/icon";
 
 type Props = {
   type: IconType;
+  width: number;
+  height: number;
 };
 
-const FaceIcon = ({ type }: Props) => {
+const FaceIcon = ({ type, width, height }: Props) => {
   let source = require("../../assets/icon/tetsurouYamagawa.png");
 
   switch (type) {
@@ -52,7 +54,7 @@ const FaceIcon = ({ type }: Props) => {
     }
   }
 
-  return <Image source={source} style={styles.icon} />;
+  return <Image source={source} style={{width: width, height: height}} />;
 };
 
 export default FaceIcon;

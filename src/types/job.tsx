@@ -17,7 +17,7 @@ export const JobName = {
 export type JobName = typeof JobName[keyof typeof JobName];
 
 export interface Job {
-  id: string,
+  id: string;
   icon: IconType;
   name: string;
   isActive: boolean;
@@ -31,7 +31,7 @@ export interface Job {
     name: string;
     message: string;
   };
-  Outline: Outline;
+  outline: Outline;
 }
 
 export interface JobProduct {
@@ -41,4 +41,5 @@ export interface JobProduct {
   bonus: {
     before: string;
   }[];
+  style: { width: number; height: number };
 }

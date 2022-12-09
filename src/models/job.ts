@@ -1,9 +1,9 @@
 import { BackgroundType } from "../types/background";
 import { IconType } from "../types/icon";
-import { JobName, JobProduct, Job as _Job } from "../types/job";
+import { JobProduct, Job as _Job } from "../types/job";
 import { Outline } from "../types/outline";
 
-export default class Job implements _Job {
+export default class job implements _Job {
   constructor(
     public id: string,
     public icon: IconType,
@@ -19,7 +19,7 @@ export default class Job implements _Job {
       name: string;
       message: string;
     },
-    public Outline: Outline,
+    public outline: Outline,
 
   ) {
     this.id = id;
@@ -32,6 +32,6 @@ export default class Job implements _Job {
     this.perMoney = perMoney;
     this.backgroundImg = backgroundImg;
     this.owner = owner;
-    this.Outline = Outline;
+    this.outline = outline;
   }
 }

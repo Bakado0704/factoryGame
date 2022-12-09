@@ -1,6 +1,7 @@
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 import React from "react";
 import { BackgroundType } from "../../types/background";
+import { useSelector } from "react-redux";
 
 type Props = {
   type: BackgroundType;
@@ -52,9 +53,25 @@ const Product = ({ type }: Props) => {
     }
   }
 
+  const activeProductFirst = useSelector(
+    (state) => state.activeProduct.product.default[2].before
+  );
+  const activeProductWidth = useSelector(
+    (state) => state.activeProduct.product.style.width
+  );
+  const activeProductHeight = useSelector(
+    (state) => state.activeProduct.product.style.height
+  );
+
   return (
     <>
       <Image source={conveyor} style={styles.conveyor} />
+      <View style={styles.productBox}>
+        <Image
+          source={activeProductFirst}
+          style={{ width: activeProductWidth, height: activeProductHeight }}
+        />
+      </View>
     </>
   );
 };
@@ -72,5 +89,12 @@ const styles = StyleSheet.create({
     width: "100%",
     bottom: 0,
     left: 0,
+  },
+  productBox: {
+    position: "absolute",
+    width: "100%",
+    bottom: "29%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

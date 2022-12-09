@@ -69,7 +69,7 @@ const JobGet = ({ offModal }: Props) => {
             style={styles.bubble}
           />
           <View style={styles.commentContainer}>
-            <Text style={styles.comment}>ビシバシ行くぞ!!</Text>
+            <Text style={styles.comment}>ウチは厳しいぞ、置いてかれるなよ!!</Text>
           </View>
           <View style={styles.iconContaner}>
             <Animated.View style={[styles.iconBox, { transform: [{ translateY: iconY }] }]}>

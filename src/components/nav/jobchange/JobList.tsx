@@ -6,18 +6,29 @@ import {
   ImageBackground,
 } from "react-native";
 import { JOB } from "../../../data/data";
+import { changeOwner } from "../../../store/redux/owner";
+import { changeIcon } from "../../../store/redux/icon";
+import { Job } from "../../../types/job";
 import { useDispatch } from "react-redux";
 import FaceIcon from "../../icon/FaceIcon";
-import { changeType } from "../../../store/redux/background";
+import { store } from "../../../store/redux/store";
 
+type Props = {
+  onModal: (newJob: Job) => void;
+};
 
-
-const JobList = () => {
+const JobList = ({ onModal }: Props) => {
   const dispatch = useDispatch();
 
-  const renderCategoryItem = (itemData) => {
+  const renderCategoryItem = (itemData: { item: Job }) => {
     const pressHandler = () => {
-      dispatch(changeType({ type: itemData.item.backgroundImg }));
+      onModal(itemData.item);
+      dispatch(changeOwner({ owner: itemData.item.owner }));
+      dispatch(changeIcon({ icon: itemData.item.icon }));
+      // console.log(itemData.item.owner);
+      // console.log(itemData.item.icon);
+
+      // console.log(store.getState());
     };
 
     const type = itemData.item.icon;
@@ -33,7 +44,7 @@ const JobList = () => {
             source={require("../../../assets/ui/iconBackground.png")}
             style={styles.iconBackground}
           >
-            <FaceIcon type={type} />
+            <FaceIcon type={type} width={56} height={56} />
           </ImageBackground>
         </Pressable>
       </View>
