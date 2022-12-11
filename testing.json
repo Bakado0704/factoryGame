@@ -1,0 +1,32 @@
+{
+  "backgroundImg": "オリジン弁太郎",
+  "icon": "オリジン弁太郎",
+  "id": "c4",
+  "isActive": false,
+  "level": 1,
+  "maxMoney": 0,
+  "maxNumber": 0,
+  "name": "オリジン弁太郎",
+  "outline": {
+    "background": 33,
+    "basicMoney": 18,
+    "button": 34,
+    "category": "弁当工場",
+    "company": "オリジン弁太郎",
+    "difficulty": "C",
+    "holiday": "週休一日制",
+    "retirement": "80%",
+    "work": "食品の盛り付け",
+    "workplace": "埼玉県"
+  },
+  "owner": {
+    "message": "「経費を建て替えるのはやる気がある証拠」",
+    "name": "辻 踏弥(48)"
+  },
+  "perMoney": 18,
+  "product": {
+    "bonus": [],
+    "default": [],
+    "style": { "height": 86, "width": 200 }
+  }
+}

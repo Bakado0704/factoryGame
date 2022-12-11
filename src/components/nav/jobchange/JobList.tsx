@@ -18,17 +18,10 @@ type Props = {
 };
 
 const JobList = ({ onModal }: Props) => {
-  const dispatch = useDispatch();
 
   const renderCategoryItem = (itemData: { item: Job }) => {
     const pressHandler = () => {
       onModal(itemData.item);
-      dispatch(changeOwner({ owner: itemData.item.owner }));
-      dispatch(changeIcon({ icon: itemData.item.icon }));
-      // console.log(itemData.item.owner);
-      // console.log(itemData.item.icon);
-
-      // console.log(store.getState());
     };
 
     const type = itemData.item.icon;

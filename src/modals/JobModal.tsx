@@ -16,13 +16,11 @@ import { BackgroundType } from "../types/background";
 import { JobProduct } from "../types/job";
 import FaceIcon from "../components/icon/FaceIcon";
 import { IconType } from "../types/icon";
-import { store } from "../store/redux/store";
 
 type Props = {
   offModal: () => void;
+  jobDecide: () => void;
   outline: Outline;
-  backgroundImg: BackgroundType;
-  product: JobProduct;
   owner: {
     name: string;
     message: string;
@@ -32,21 +30,12 @@ type Props = {
 
 const JobModal = ({
   offModal,
+  jobDecide,
   outline,
-  backgroundImg,
-  product,
   owner,
   icon,
 }: Props) => {
-  const dispatch = useDispatch();
-
-  const jobDecide = () => {
-    dispatch(changeType({ type: backgroundImg }));
-    dispatch(changeProduct({ product: product }));
-    offModal();
-  };
-
-  const company = outline.companey;
+  const company = outline.company;
   const category = outline.category;
   const work = outline.work;
   const basicMoney = outline.basicMoney;

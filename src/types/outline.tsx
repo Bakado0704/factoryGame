@@ -1,5 +1,5 @@
 export interface Outline {
-  companey: string;
+  company: string;
   category: string;
   work: string;
   basicMoney: number;

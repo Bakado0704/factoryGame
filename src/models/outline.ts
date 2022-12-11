@@ -2,7 +2,7 @@ import { Outline as _Outline } from "../types/outline";
 
 export default class outline implements _Outline {
   constructor(
-    public companey: string,
+    public company: string,
     public category: string,
     public work: string,
     public basicMoney: number,
@@ -13,7 +13,7 @@ export default class outline implements _Outline {
     public background: string,
     public button: string,
   ) {
-    this.companey = companey;
+    this.company = company;
     this.category = category;
     this.work = work;
     this.basicMoney = basicMoney;

@@ -9,8 +9,12 @@ import { IconType } from "../types/icon";
 import { BackgroundType } from "../types/background";
 import Job from "../models/job";
 import { Job as _Job } from "../types/job";
-import Outline from "../models/outline";
-import { store } from "../store/redux/store";
+import outline from "../models/outline";
+import { useDispatch } from "react-redux";
+import { changeOwner } from "../store/redux/owner";
+import { changeIcon } from "../store/redux/icon";
+import { changeType } from "../store/redux/background";
+import { changeProduct } from "../store/redux/product";
 
 const JobChangeScreen = () => {
   const [jobModal, setJobModal] = useState(false);
@@ -41,7 +45,7 @@ const JobChangeScreen = () => {
       name: "山川 哲郎(62)",
       message: "「残業なき労働に価値なし」",
     },
-    new Outline(
+    new outline(
       "山川製作所",
       "精密機械工場",
       "システム基盤構築",
@@ -56,6 +60,7 @@ const JobChangeScreen = () => {
   ),);
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const jobReturnHandler = () => {
     navigation.navigate("Start");
@@ -68,7 +73,14 @@ const JobChangeScreen = () => {
   const jobModalOnHandler = (newJob: _Job) => {
     setJobModal(true);
     setJob(newJob);
+    dispatch(changeOwner({ owner: newJob.owner }));
+    dispatch(changeIcon({ icon: newJob.icon }));
   };
+
+  const jobDecideHandler = () => {
+    dispatch(changeType({ type: job.backgroundImg }));
+    dispatch(changeProduct({ product: job.product }));
+  }
 
   const jobModalOffHandler = () => {
     setJobModal(false);
@@ -101,10 +113,9 @@ const JobChangeScreen = () => {
         </View>
         {jobModal && (
           <JobModal
+          jobDecide={jobDecideHandler}
             offModal={jobModalOffHandler}
             outline={job.outline}
-            backgroundImg={job.backgroundImg}
-            product={job.product}
             owner={job.owner}
             icon={job.icon}
           />

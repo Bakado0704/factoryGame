@@ -9,7 +9,7 @@ import {
   SafeAreaView,
   Easing,
 } from "react-native";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import NavGacha from "../components/nav/NavGacha";
 import NavHead from "../components/nav/NavHead";
 import JobGet from "../modals/JobGetModal";
