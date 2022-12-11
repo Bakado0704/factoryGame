@@ -1,4 +1,5 @@
 import { BackgroundType } from "./background";
+import { BoardType } from "./board";
 import { IconType } from "./icon";
 import { Outline } from "./outline";
 
@@ -26,6 +27,7 @@ export interface Job {
   maxMoney: number;
   perMoney: number;
   backgroundImg: BackgroundType;
+  boardImg: BoardType;
   product: JobProduct;
   owner: {
     name: string;

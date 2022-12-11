@@ -9,7 +9,7 @@ export interface Props {
 }
 
 const ImageBg = ({ children }: Props) => {
-  const activeType = useSelector((state) => state.activeJob.type);
+  const activeType = useSelector((state) => state.job.job.icon);
 
   return (
     <BackgroundImg type={activeType}>

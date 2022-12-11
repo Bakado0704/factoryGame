@@ -3,9 +3,10 @@ import { Job as _Job } from "../types/job";
 import { IconType } from "../types/icon";
 import { BackgroundType } from "../types/background";
 import Outline from "../models/outline";
+import { BoardType } from "../types/board";
 
-export const JOB = [
-  new Job(
+export const JOB = {
+  c1: new Job(
     "c1",
     IconType.yamagawa,
     "山川製作所",
@@ -15,6 +16,7 @@ export const JOB = [
     0,
     15,
     BackgroundType.yamagawa,
+    BoardType.yamagawa,
     {
       default: [
         { before: require("../assets/product/product1-normal-first.png") },
@@ -42,10 +44,10 @@ export const JOB = [
       "C",
       "鳥取県",
       require("../assets/outline/outlineBgYamagawa.png"),
-      require("../assets/outline/outlineButtonYamagawa.png"),
+      require("../assets/outline/outlineButtonYamagawa.png")
     )
   ),
-  new Job(
+  c2: new Job(
     "c2",
     IconType.souzuki,
     "蒼月",
@@ -55,6 +57,7 @@ export const JOB = [
     0,
     12,
     BackgroundType.souzuki,
+    BoardType.souzuki,
     {
       default: [
         { before: require("../assets/product/product2-normal-first.png") },
@@ -82,11 +85,11 @@ export const JOB = [
       "C",
       "北海道",
       require("../assets/outline/outlineBgNiimori.png"),
-      require("../assets/outline/outlineButtonNiimori.png"),
+      require("../assets/outline/outlineButtonNiimori.png")
     )
   ),
 
-  new Job(
+  c3: new Job(
     "c3",
     IconType.ashBerry,
     "アッシュベリー Inc.",
@@ -96,6 +99,7 @@ export const JOB = [
     0,
     20,
     BackgroundType.ashBerry,
+    BoardType.ashBerry,
     {
       default: [
         { before: require("../assets/product/product3-normal-first.png") },
@@ -123,10 +127,10 @@ export const JOB = [
       "C",
       "東京都",
       require("../assets/outline/outlineBgMiyako.png"),
-      require("../assets/outline/outlineButtonMiyako.png"),
+      require("../assets/outline/outlineButtonMiyako.png")
     )
   ),
-  new Job(
+  c4: new Job(
     "c4",
     IconType.bentaro,
     "オリジン弁太郎",
@@ -136,6 +140,7 @@ export const JOB = [
     0,
     18,
     BackgroundType.bentaro,
+    BoardType.bentaro,
     {
       default: [
         { before: require("../assets/product/product4-normal-first.png") },
@@ -163,10 +168,10 @@ export const JOB = [
       "C",
       "埼玉県",
       require("../assets/outline/outlineBgTsuji.png"),
-      require("../assets/outline/outlineButtonTsuji.png"),
+      require("../assets/outline/outlineButtonTsuji.png")
     )
   ),
-  new Job(
+  c5: new Job(
     "c5",
     IconType.aguron,
     "アグロン精密",
@@ -176,6 +181,7 @@ export const JOB = [
     0,
     25,
     BackgroundType.aguron,
+    BoardType.aguron,
     {
       default: [
         { before: require("../assets/product/product5-normal-first.png") },
@@ -203,10 +209,10 @@ export const JOB = [
       "C",
       "埼玉県",
       require("../assets/outline/outlineBgLie.png"),
-      require("../assets/outline/outlineButtonLie.png"),
+      require("../assets/outline/outlineButtonLie.png")
     )
   ),
-  new Job(
+  c6: new Job(
     "c6",
     IconType.starFoods,
     "スター・フーズ",
@@ -216,6 +222,7 @@ export const JOB = [
     0,
     20,
     BackgroundType.starFoods,
+    BoardType.starFoods,
     {
       default: [
         { before: require("../assets/product/product6-normal-first.png") },
@@ -243,10 +250,10 @@ export const JOB = [
       "C",
       "福井県",
       require("../assets/outline/outlineBgTakeuchi.png"),
-      require("../assets/outline/outlineButtonTakeuchi.png"),
+      require("../assets/outline/outlineButtonTakeuchi.png")
     )
   ),
-  new Job(
+  c7: new Job(
     "c7",
     IconType.sikaga,
     "鹿賀水産",
@@ -256,6 +263,7 @@ export const JOB = [
     0,
     27,
     BackgroundType.sikaga,
+    BoardType.sikaga,
     {
       default: [
         { before: require("../assets/product/product7-normal-first.png") },
@@ -283,10 +291,10 @@ export const JOB = [
       "C",
       "山形県",
       require("../assets/outline/outlineBgKuroguchi.png"),
-      require("../assets/outline/outlineButtonKuroguchi.png"),
+      require("../assets/outline/outlineButtonKuroguchi.png")
     )
   ),
-  new Job(
+  c8: new Job(
     "c8",
     IconType.tamazu,
     "玉津アーセナル",
@@ -296,6 +304,7 @@ export const JOB = [
     0,
     18,
     BackgroundType.tamazu,
+    BoardType.tamazu,
     {
       default: [
         { before: require("../assets/product/product8-normal-first.png") },
@@ -323,10 +332,10 @@ export const JOB = [
       "C",
       "青森県",
       require("../assets/outline/outlineBgYamashita.png"),
-      require("../assets/outline/outlineButtonYamashita.png"),
+      require("../assets/outline/outlineButtonYamashita.png")
     )
   ),
-  new Job(
+  c9: new Job(
     "c9",
     IconType.ozasa,
     "小篠建設",
@@ -336,6 +345,7 @@ export const JOB = [
     0,
     10,
     BackgroundType.ozasa,
+    BoardType.ozasa,
     {
       default: [
         { before: require("../assets/product/product9-normal-first.png") },
@@ -363,10 +373,10 @@ export const JOB = [
       "C",
       "北海道",
       require("../assets/outline/outlineBgOzasa.png"),
-      require("../assets/outline/outlineButtonOzasa.png"),
+      require("../assets/outline/outlineButtonOzasa.png")
     )
   ),
-  new Job(
+  c10: new Job(
     "c10",
     IconType.tanabe,
     "タナベ工務店",
@@ -376,6 +386,7 @@ export const JOB = [
     0,
     10,
     BackgroundType.tanabe,
+    BoardType.tanabe,
     {
       default: [
         { before: require("../assets/product/product10-normal-first.png") },
@@ -403,7 +414,7 @@ export const JOB = [
       "C",
       "東京都",
       require("../assets/outline/outlineBgKamobayashi.png"),
-      require("../assets/outline/outlineButtonKamobayashi.png"),
+      require("../assets/outline/outlineButtonKamobayashi.png")
     )
   ),
-];
+};

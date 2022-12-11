@@ -8,12 +8,7 @@ import {
 } from "react-native";
 import React, { useRef } from "react";
 import ImageButton from "../components/ui/ImageButton";
-import { useDispatch } from "react-redux";
-import { changeType } from "../store/redux/background";
-import { changeProduct } from "../store/redux/product";
 import { Outline } from "../types/outline";
-import { BackgroundType } from "../types/background";
-import { JobProduct } from "../types/job";
 import FaceIcon from "../components/icon/FaceIcon";
 import { IconType } from "../types/icon";
 

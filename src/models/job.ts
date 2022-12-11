@@ -1,4 +1,5 @@
 import { BackgroundType } from "../types/background";
+import { BoardType } from "../types/board";
 import { IconType } from "../types/icon";
 import { JobProduct, Job as _Job } from "../types/job";
 import { Outline } from "../types/outline";
@@ -14,6 +15,7 @@ export default class job implements _Job {
     public maxNumber : number,
     public perMoney : number,
     public backgroundImg : BackgroundType,
+    public boardImg : BoardType,
     public product: JobProduct,
     public owner: {
       name: string;
@@ -31,6 +33,7 @@ export default class job implements _Job {
     this.maxMoney = maxMoney;
     this.perMoney = perMoney;
     this.backgroundImg = backgroundImg;
+    this.boardImg = boardImg;
     this.owner = owner;
     this.outline = outline;
   }

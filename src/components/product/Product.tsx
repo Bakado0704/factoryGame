@@ -54,13 +54,13 @@ const Product = ({ type }: Props) => {
   }
 
   const activeProductFirst = useSelector(
-    (state) => state.activeProduct.product.default[2].before
+    (state) => state.job.job.product.default[2].before
   );
   const activeProductWidth = useSelector(
-    (state) => state.activeProduct.product.style.width
+    (state) => state.job.job.product.style.width
   );
   const activeProductHeight = useSelector(
-    (state) => state.activeProduct.product.style.height
+    (state) => state.job.job.product.style.height
   );
 
   return (

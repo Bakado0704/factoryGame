@@ -1,10 +1,13 @@
 import { View, Image, Text, StyleSheet } from "react-native";
 import ImageButton from "../../ui/ImageButton";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import BoardImg from "../../boardImg/BoardImg";
 
 const NavBody = () => {
   const navigation = useNavigation();
 
+  const activeBoard = useSelector((state) => state.job.job.boardImg);
   const pressHandler = () => {};
 
   return (
@@ -15,10 +18,7 @@ const NavBody = () => {
           onPress={pressHandler}
           style={styles.prevButton}
         />
-        <Image
-          source={require("../../../assets/signboard/yamagawaBoard.png")}
-          style={styles.signboard}
-        />
+        <BoardImg type={activeBoard} />
         <ImageButton
           source={require("../../../assets/ui/nextButton.png")}
           onPress={pressHandler}
@@ -68,11 +68,6 @@ const styles = StyleSheet.create({
     width: 25,
     height: 70,
   },
-  signboard: {
-    width: 222,
-    height: 60,
-    marginHorizontal: 14,
-  },
   nextButton: {
     width: 25,
     height: 70,
@@ -84,7 +79,6 @@ const styles = StyleSheet.create({
   coron: {
     width: 7,
     height: 25,
-
     marginHorizontal: 10,
   },
   moneyImg: {

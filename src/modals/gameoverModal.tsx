@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import ImageButton from "../components/ui/ImageButton";
 import { store } from "../store/redux/store";
 import FaceIcon from "../components/icon/FaceIcon";
+import { useSelector } from "react-redux";
 
 type Props = {
   offModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -16,8 +17,8 @@ const Gameover = ({ offModal }: Props) => {
     outputRange: [-2, -2, 0, 0],
   });
 
-  const name = store.getState().activeOwner.owner.name;
-  const iconType = store.getState().activeJob.type;
+  const name = useSelector((state) => state.job.job.owner.name);
+  const iconType = useSelector((state) => state.job.job.icon);
 
   Animated.loop(
     Animated.timing(iconAnim, {

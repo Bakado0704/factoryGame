@@ -5,15 +5,15 @@ import {
   View,
   ImageBackground,
 } from "react-native";
-import { JOB } from "../../../data/data";
 import { Job } from "../../../types/job";
 import FaceIcon from "../../icon/FaceIcon";
 
 type Props = {
   onModal: (newJob: Job) => void;
+  jobs: Job[];
 };
 
-const JobList = ({ onModal }: Props) => {
+const JobList = ({ onModal, jobs }: Props) => {
 
   const renderCategoryItem = (itemData: { item: Job }) => {
     const pressHandler = () => {
@@ -43,7 +43,7 @@ const JobList = ({ onModal }: Props) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={JOB}
+        data={jobs}
         renderItem={renderCategoryItem}
         keyExtractor={(item) => item.id}
         numColumns={4}

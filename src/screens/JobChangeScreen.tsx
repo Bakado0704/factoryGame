@@ -3,63 +3,17 @@ import JobList from "../components/nav/jobchange/JobList";
 import ImageButton from "../components/ui/ImageButton";
 import { useNavigation } from "@react-navigation/native";
 import NavHead from "../components/nav/NavHead";
-import { useState } from "react";
 import JobModal from "../modals/JobModal";
-import { IconType } from "../types/icon";
-import { BackgroundType } from "../types/background";
 import Job from "../models/job";
 import { Job as _Job } from "../types/job";
-import outline from "../models/outline";
-import { useDispatch } from "react-redux";
-import { changeOwner } from "../store/redux/jobs";
-import { changeIcon } from "../store/redux/icon";
-import { changeType } from "../store/redux/background";
-import { changeProduct } from "../store/redux/product";
-import { changeName } from "../store/redux/jobs";
+import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store/redux/store";
+import { changeJob, changePreviewJob } from "../store/redux/job";
 
 const JobChangeScreen = () => {
-  const [jobModal, setJobModal] = useState(false);
-  const [job, setJob] = useState(new Job(
-    "c1",
-    IconType.yamagawa,
-    "山川製作所",
-    false,
-    1,
-    0,
-    0,
-    15,
-    BackgroundType.yamagawa,
-    {
-      default: [
-        { before: require("../assets/product/product1-normal-first.png") },
-        { before: require("../assets/product/product1-normal-second.png") },
-        { before: require("../assets/product/product1-normal-third.png") },
-      ],
-      bonus: [
-        { before: require("../assets/product/product1-gold-first.png") },
-        { before: require("../assets/product/product1-gold-second.png") },
-        { before: require("../assets/product/product1-gold-third.png") },
-      ],
-      style: { width: 200, height: 80 },
-    },
-    {
-      name: "山川 哲郎(62)",
-      message: "「残業なき労働に価値なし」",
-    },
-    new outline(
-      "山川製作所",
-      "精密機械工場",
-      "システム基盤構築",
-      15,
-      "完全週休一日制",
-      "90%",
-      "C",
-      "鳥取県",
-      require("../assets/outline/outlineBgYamagawa.png"),
-      require("../assets/outline/outlineButtonYamagawa.png"),
-    )
-  ),);
+  const jobs = store.getState().job.jobs;
+  const previewJob = useSelector((state) => state.job.previewJob);
+  const activeJob = useSelector((state) => state.job.job)
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -72,22 +26,18 @@ const JobChangeScreen = () => {
     navigation.navigate("Gacha");
   };
 
-  const jobModalOnHandler = (newJob: _Job) => {
-    setJobModal(true);
-    setJob(newJob);
-    dispatch(changeName(newJob.name));
-    dispatch(changeOwner(newJob.owner));
-    dispatch(changeIcon(newJob.icon));
-    console.log(store.getState())
+  const jobModalOnHandler = (job: Job) => {
+    dispatch(changePreviewJob(job));
   };
 
   const jobDecideHandler = () => {
-    dispatch(changeType({ type: job.backgroundImg }));
-    dispatch(changeProduct({ product: job.product }));
-  }
+    dispatch(changeJob(previewJob));
+    console.log(activeJob);
+  };
 
   const jobModalOffHandler = () => {
-    setJobModal(false);
+    dispatch(changePreviewJob(undefined));
+    console.log(activeJob);
   };
 
   return (
@@ -101,7 +51,7 @@ const JobChangeScreen = () => {
           <NavHead />
         </View>
         <View style={styles.jobsContainer}>
-          <JobList onModal={jobModalOnHandler} />
+          <JobList onModal={jobModalOnHandler} jobs={jobs} />
         </View>
         <View style={styles.buttonsContainer}>
           <ImageButton
@@ -115,13 +65,13 @@ const JobChangeScreen = () => {
             style={styles.gachaButton}
           />
         </View>
-        {jobModal && (
+        {previewJob && (
           <JobModal
-          jobDecide={jobDecideHandler}
+            jobDecide={jobDecideHandler}
             offModal={jobModalOffHandler}
-            outline={job.outline}
-            owner={job.owner}
-            icon={job.icon}
+            outline={previewJob.outline}
+            owner={previewJob.owner}
+            icon={previewJob.icon}
           />
         )}
       </View>
