@@ -11,10 +11,12 @@ import Job from "../models/job";
 import { Job as _Job } from "../types/job";
 import outline from "../models/outline";
 import { useDispatch } from "react-redux";
-import { changeOwner } from "../store/redux/owner";
+import { changeOwner } from "../store/redux/jobs";
 import { changeIcon } from "../store/redux/icon";
 import { changeType } from "../store/redux/background";
 import { changeProduct } from "../store/redux/product";
+import { changeName } from "../store/redux/jobs";
+import { store } from "../store/redux/store";
 
 const JobChangeScreen = () => {
   const [jobModal, setJobModal] = useState(false);
@@ -73,8 +75,10 @@ const JobChangeScreen = () => {
   const jobModalOnHandler = (newJob: _Job) => {
     setJobModal(true);
     setJob(newJob);
-    dispatch(changeOwner({ owner: newJob.owner }));
-    dispatch(changeIcon({ icon: newJob.icon }));
+    dispatch(changeName(newJob.name));
+    dispatch(changeOwner(newJob.owner));
+    dispatch(changeIcon(newJob.icon));
+    console.log(store.getState())
   };
 
   const jobDecideHandler = () => {

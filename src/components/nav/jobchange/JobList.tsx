@@ -6,12 +6,8 @@ import {
   ImageBackground,
 } from "react-native";
 import { JOB } from "../../../data/data";
-import { changeOwner } from "../../../store/redux/owner";
-import { changeIcon } from "../../../store/redux/icon";
 import { Job } from "../../../types/job";
-import { useDispatch } from "react-redux";
 import FaceIcon from "../../icon/FaceIcon";
-import { store } from "../../../store/redux/store";
 
 type Props = {
   onModal: (newJob: Job) => void;
