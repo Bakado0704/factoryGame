@@ -32,12 +32,12 @@ const JobChangeScreen = () => {
 
   const jobDecideHandler = () => {
     dispatch(changeJob(previewJob));
-    console.log(activeJob);
+    // console.log(activeJob);
   };
 
   const jobModalOffHandler = () => {
     dispatch(changePreviewJob(undefined));
-    console.log(activeJob);
+    // console.log(activeJob);
   };
 
   return (
