@@ -6,9 +6,9 @@ export default class outline implements _Outline {
     public category: string,
     public work: string,
     public basicMoney: number,
+    public level: number,
     public holiday: string,
     public retirement: string,
-    public difficulty: string,
     public workplace: string,
     public background: string,
     public button: string,
@@ -17,9 +17,9 @@ export default class outline implements _Outline {
     this.category = category;
     this.work = work;
     this.basicMoney = basicMoney;
+    this.level = level;
     this.holiday = holiday;
     this.retirement = retirement;
-    this.difficulty = difficulty;
     this.workplace = workplace;
     this.background = background;
     this.button = button;

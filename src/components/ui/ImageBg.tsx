@@ -1,8 +1,9 @@
 import { StyleSheet } from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
-import BackgroundImg from "../backgroundImg/BackgroundImg";
-import Product from "../product/Product";
+import BackgroundImg from "../typeui/BackgroundImg";
+import Product from "../typeui/Product";
+import Conveyor from "../typeui/Conveyor";
 
 export interface Props {
   children: React.ReactNode;
@@ -13,7 +14,8 @@ const ImageBg = ({ children }: Props) => {
 
   return (
     <BackgroundImg type={activeType}>
-      <Product type={activeType} />
+      <Conveyor type={activeType} />
+      <Product />
       {children}
     </BackgroundImg>
   );

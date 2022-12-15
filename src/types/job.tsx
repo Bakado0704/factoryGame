@@ -20,7 +20,7 @@ export type JobName = typeof JobName[keyof typeof JobName];
 export interface Job {
   id: string;
   icon: IconType;
-  name: string;
+  name: JobName;
   isActive: boolean;
   level: number;
   maxNumber: number;

@@ -1,9 +1,8 @@
 import { View, StyleSheet, Image, Text, Animated } from "react-native";
 import React, { useRef } from "react";
-import ImageButton from "../components/ui/ImageButton";
-import { store } from "../store/redux/store";
-import FaceIcon from "../components/icon/FaceIcon";
+import FaceIcon from "../components/typeui/FaceIcon";
 import { useSelector } from "react-redux";
+import ImageButton from "../components/ui/ImageButton";
 
 type Props = {
   offModal: (event: React.ChangeEvent<HTMLInputElement>) => void;

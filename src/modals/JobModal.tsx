@@ -9,7 +9,7 @@ import {
 import React, { useRef } from "react";
 import ImageButton from "../components/ui/ImageButton";
 import { Outline } from "../types/outline";
-import FaceIcon from "../components/icon/FaceIcon";
+import FaceIcon from "../components/typeui/FaceIcon";
 import { IconType } from "../types/icon";
 
 type Props = {
@@ -34,9 +34,9 @@ const JobModal = ({
   const category = outline.category;
   const work = outline.work;
   const basicMoney = outline.basicMoney;
+  const level = outline.level;
   const holiday = outline.holiday;
   const retirement = outline.retirement;
-  const difficulty = outline.difficulty;
   const workplace = outline.workplace;
   const background = outline.background;
   const button = outline.button;
@@ -125,6 +125,10 @@ const JobModal = ({
               <Text style={[styles.text, { fontSize: 20 }]}>{basicMoney}</Text>
             </View>
             <View style={styles.textContainer}>
+              <Text style={[styles.text, { fontSize: 15 }]}>熟練度:</Text>
+              <Text style={[styles.text, { fontSize: 20 }]}> Lv{level}</Text>
+            </View>
+            <View style={styles.textContainer}>
               <Text style={[styles.text, { fontSize: 15 }]}>休日:</Text>
               <Text style={[styles.text, { fontSize: 20 }]}> {holiday}</Text>
             </View>
@@ -133,10 +137,6 @@ const JobModal = ({
                 3年以内離職率:
               </Text>
               <Text style={[styles.text, { fontSize: 20 }]}> {retirement}</Text>
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={[styles.text, { fontSize: 15 }]}>難易度:</Text>
-              <Text style={[styles.text, { fontSize: 20 }]}> {difficulty}</Text>
             </View>
             <View style={styles.textContainer}>
               <Text style={[styles.text, { fontSize: 15 }]}>勤務地:</Text>

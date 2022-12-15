@@ -1,20 +1,31 @@
 import { View, Image, StyleSheet } from "react-native";
-import JobList from "../components/nav/jobchange/JobList";
-import ImageButton from "../components/ui/ImageButton";
+import NavJobList from "../components/nav/NavFooter/NavJobList";
 import { useNavigation } from "@react-navigation/native";
-import NavHead from "../components/nav/NavHead";
+import NavHead from "../components/nav/NavHeader/NavHead";
 import JobModal from "../modals/JobModal";
+import UserModal from "../modals/UserModal";
 import Job from "../models/job";
 import { Job as _Job } from "../types/job";
 import { useDispatch, useSelector } from "react-redux";
-import { store } from "../store/redux/store";
-import { changeJob, changePreviewJob } from "../store/redux/job";
+import {
+  changeJob,
+  changePreviewIcon,
+  changePreviewJob,
+  changeUser,
+} from "../store/job";
+import { useState } from "react";
+import UserIcons from "../models/userIcons";
+import JobAddButton from "../components/animation/animationButton/JobAddButton";
+import JobReturnButton from "../components/animation/animationButton/JobReturnButton";
 
 const JobChangeScreen = () => {
-  const jobs = store.getState().job.jobs;
+  const jobs = useSelector((state) => state.job.jobs);
   const previewJob = useSelector((state) => state.job.previewJob);
-  const activeJob = useSelector((state) => state.job.job)
+  const previewIcon = useSelector((state) => state.job.previewIcon);
+  const user = useSelector((state) => state.job.user);
+  const userIcon = useSelector((state) => state.job.user.icon);
 
+  const [userModal, setUserModal] = useState(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -32,12 +43,23 @@ const JobChangeScreen = () => {
 
   const jobDecideHandler = () => {
     dispatch(changeJob(previewJob));
-    // console.log(activeJob);
   };
 
   const jobModalOffHandler = () => {
     dispatch(changePreviewJob(undefined));
-    // console.log(activeJob);
+  };
+
+  const onUserModalHandler = () => {
+    setUserModal(true);
+  };
+
+  const userChangeHandler = (selectedIcon: UserIcons) => {
+    dispatch(changePreviewIcon(selectedIcon));
+  };
+
+  const offUserModalHandler = () => {
+    dispatch(changeUser(previewIcon));
+    setUserModal(false);
   };
 
   return (
@@ -48,22 +70,14 @@ const JobChangeScreen = () => {
       />
       <View style={styles.innerContainer}>
         <View style={styles.headContainer}>
-          <NavHead />
+          <NavHead icon={userIcon} onUserModal={onUserModalHandler} />
         </View>
         <View style={styles.jobsContainer}>
-          <JobList onModal={jobModalOnHandler} jobs={jobs} />
+          <NavJobList onModal={jobModalOnHandler} jobs={jobs} user={user} />
         </View>
         <View style={styles.buttonsContainer}>
-          <ImageButton
-            source={require("../assets/ui/jobReturnButton.png")}
-            onPress={jobReturnHandler}
-            style={styles.returnButton}
-          />
-          <ImageButton
-            source={require("../assets/ui/jobAddButton.png")}
-            onPress={jobAddHandler}
-            style={styles.gachaButton}
-          />
+          <JobReturnButton jobReturnHandler={jobReturnHandler} />
+          <JobAddButton jobAddHandler={jobAddHandler} />
         </View>
         {previewJob && (
           <JobModal
@@ -72,6 +86,13 @@ const JobChangeScreen = () => {
             outline={previewJob.outline}
             owner={previewJob.owner}
             icon={previewJob.icon}
+          />
+        )}
+        {userModal && (
+          <UserModal
+            offUserModal={offUserModalHandler}
+            user={userChangeHandler}
+            previewIcon={previewIcon}
           />
         )}
       </View>

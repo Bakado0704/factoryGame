@@ -3,7 +3,7 @@ import React from "react";
 import ImageButton from "../components/ui/ImageButton";
 
 type Props = {
-  offSetting: (event: React.ChangeEvent<HTMLInputElement>) => void
+  offSetting: () => void
 }
 
 const Setting = ({ offSetting }: Props ) => {

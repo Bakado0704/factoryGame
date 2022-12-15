@@ -1,29 +1,58 @@
 import { View, StyleSheet } from "react-native";
-import NavHead from "../components/nav/NavHead";
+import NavHead from "../components/nav/NavHeader/NavHead";
 import { useState } from "react";
-import NavSelect from "../components/nav/start/NavSelect";
-import NavOperation from "../components/nav/start/NavOperation";
+import NavSelect from "../components/nav/NavMiddle/NavSelect";
+import NavOperation from "../components/nav/NavFooter/NavOperation";
 import Setting from "../modals/SettingModal";
+import UserModal from "../modals/UserModal";
+import { useDispatch, useSelector } from "react-redux";
+import UserIcons from "../models/userIcons";
+import { changePreviewIcon, changeUser } from "../store/job";
 
 const StartScreen = () => {
+  const userIcon = useSelector((state) => state.job.user.icon);
+  const previewIcon = useSelector((state) => state.job.previewIcon);
   const [setting, setSetting] = useState(false);
+  const [userModal, setUserModal] = useState(false);
+
+  const dispatch = useDispatch();
 
   const onSettingHandler = () => {
     setSetting(true);
   };
 
-  const offSettingHandler = () => {
+  const onUserModalHandler = () => {
+    setUserModal(true);
+  };
+
+  const offSettingModalHandler = () => {
     setSetting(false);
+  };
+
+  const userChangeHandler = (selectedIcon: UserIcons) => {
+    dispatch(changePreviewIcon(selectedIcon));
+  };
+
+  const offUserModalHandler = () => {
+    dispatch(changeUser(previewIcon));
+    setUserModal(false);
   };
 
   return (
     <View style={styles.rootScreen}>
       <View style={styles.innerContainer}>
-        <NavHead />
+        <NavHead icon={userIcon} onUserModal={onUserModalHandler} />
         <NavSelect />
         <NavOperation onSetting={onSettingHandler} />
       </View>
-      {setting && <Setting offSetting={offSettingHandler}/>}
+      {setting && <Setting offSetting={offSettingModalHandler} />}
+      {userModal && (
+        <UserModal
+          offUserModal={offUserModalHandler}
+          user={userChangeHandler}
+          previewIcon={previewIcon}
+        />
+      )}
     </View>
   );
 };

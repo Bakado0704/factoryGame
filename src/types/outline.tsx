@@ -3,9 +3,9 @@ export interface Outline {
   category: string;
   work: string;
   basicMoney: number;
+  level: number;
   retirement: string;
   holiday: string;
-  difficulty: string;
   workplace: string;
   background: string;
   button: string;

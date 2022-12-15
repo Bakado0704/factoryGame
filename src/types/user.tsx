@@ -1,21 +1,10 @@
-import { Job, JobName } from "./job";
-import { IconType } from "./icon";
+import { JobName } from "./job";
+import { UserIconType } from "./userIcon";
 
 export interface User {
   name: string;
   money: number;
-  icon: IconType;
+  icon: UserIconType;
   nowJob: JobName;
-  jobs: {
-    yamagawa: Job;
-    niimori: Job;
-    miyako: Job;
-    tsuzi: Job;
-    lie: Job;
-    takeuchi: Job;
-    kuroguchi: Job;
-    yamashiata: Job;
-    ozasa: Job;
-    kamobayashi: Job;
-  };
+  gachaStandBy: boolean;
 }

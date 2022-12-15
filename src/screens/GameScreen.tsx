@@ -1,16 +1,38 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { useState } from "react";
-import ImageButton from "../components/ui/ImageButton";
 import { useNavigation } from "@react-navigation/native";
-import Gameover from "../modals/gameoverModal";
+import Gameover from "../modals/GameoverModal";
+import BgBlack from "../components/ui/BgBlack";
+import NavGameYamagawa from "../components/nav/NavFooter/NavGame/NavGameYamagawa";
+import { Display } from "../components/ui/Display";
 
 const GameScreen = () => {
+  const [time, setTime] = useState(0);
+  const [intervalId, setIntervalId] = useState();
+
   const [modalIsSetting, setModalIsSetting] = useState(false);
   const [modalIsSetted, setModalIsSetted] = useState(false);
   const navigation = useNavigation();
 
-  const pressHandler = () => {
+  const pressFirstHandler = () => {
     setModalIsSetting(true);
+  };
+
+  const pressSecondHandler = () => {
+    const startTime = new Date().getTime();
+    const id = setInterval(() => {
+      setTime(new Date().getTime() - startTime + time);
+    }, 10);
+    setIntervalId(id);
+  };
+
+  const pressThirdHandler = () => {
+    clearInterval(intervalId);
+    setIntervalId(null);
+  };
+
+  const pressFourthHandler = () => {
+    setTime(0);
   };
 
   if (modalIsSetting) {
@@ -27,32 +49,18 @@ const GameScreen = () => {
 
   return (
     <View style={styles.rootScreen}>
+      <View style={styles.innerContainer}>
+        <Display time={time}/>
+      </View>
       {!modalIsSetted && !modalIsSetting && (
-        <View style={styles.innerContainer}>
-          <Image
-            source={require("../assets/ui/playBoard.png")}
-            style={styles.board}
-          />
-          <View style={styles.buttonsContainer}>
-            <ImageButton
-              source={require("../assets/ui/blackButton.png")}
-              onPress={pressHandler}
-              style={styles.button}
-            />
-            <ImageButton
-              source={require("../assets/ui/greenButton.png")}
-              onPress={pressHandler}
-              style={styles.button}
-            />
-            <ImageButton
-              source={require("../assets/ui/yellowButton.png")}
-              onPress={pressHandler}
-              style={styles.button}
-            />
-          </View>
-        </View>
+        <NavGameYamagawa
+          pressFirstHandler={pressFirstHandler}
+          pressSecondHandler={pressSecondHandler}
+          pressThirdHandler={pressThirdHandler}
+          pressFourthHandler={pressFourthHandler}
+        />
       )}
-      {modalIsSetting && <View style={styles.background} />}
+      {modalIsSetting && <BgBlack />}
       {modalIsSetted && <Gameover offModal={offModalHandler} />}
     </View>
   );
@@ -66,39 +74,6 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    justifyContent: "flex-end",
-    position: "relative",
-  },
-  board: {
-    position: "absolute",
-    height: 172,
-    width: "100%",
-    bottom: 0,
-    left: 0,
-  },
-  jobsContainer: {
-    width: "100%",
-  },
-  buttonsContainer: {
-    width: "100%",
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    flexDirection: "row",
-    alignItems: "center",
     justifyContent: "center",
-  },
-  button: {
-    width: 52,
-    height: 56,
-    marginHorizontal: 5,
-  },
-  background: {
-    height: "100%",
-    width: "100%",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    opacity: 0.5,
-    backgroundColor: "black",
   },
 });

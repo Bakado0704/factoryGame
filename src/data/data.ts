@@ -1,16 +1,19 @@
 import Job from "../models/job";
-import { Job as _Job } from "../types/job";
+import User from "../models/user";
 import { IconType } from "../types/icon";
 import { BackgroundType } from "../types/background";
 import Outline from "../models/outline";
 import { BoardType } from "../types/board";
+import { JobName } from "../types/job";
+import { UserIconType } from "../types/userIcon";
+import UserIcons from "../models/userIcons";
 
 export const JOB = {
   c1: new Job(
     "c1",
     IconType.yamagawa,
-    "山川製作所",
-    false,
+    JobName.yamagawa,
+    true,
     1,
     0,
     0,
@@ -39,9 +42,9 @@ export const JOB = {
       "精密機械工場",
       "システム基盤構築",
       15,
+      1,
       "完全週休一日制",
       "90%",
-      "C",
       "鳥取県",
       require("../assets/outline/outlineBgYamagawa.png"),
       require("../assets/outline/outlineButtonYamagawa.png")
@@ -50,7 +53,7 @@ export const JOB = {
   c2: new Job(
     "c2",
     IconType.souzuki,
-    "蒼月",
+    JobName.souzuki,
     false,
     1,
     0,
@@ -80,9 +83,9 @@ export const JOB = {
       "化粧品工場",
       "製品の梱包",
       12,
+      1,
       "週休2日制",
       "72%",
-      "C",
       "北海道",
       require("../assets/outline/outlineBgNiimori.png"),
       require("../assets/outline/outlineButtonNiimori.png")
@@ -92,7 +95,7 @@ export const JOB = {
   c3: new Job(
     "c3",
     IconType.ashBerry,
-    "アッシュベリー Inc.",
+    JobName.ashBerry,
     false,
     1,
     0,
@@ -122,9 +125,9 @@ export const JOB = {
       "食品工場",
       "パンの製造",
       20,
+      1,
       "完全週休一日制",
       "51%",
-      "C",
       "東京都",
       require("../assets/outline/outlineBgMiyako.png"),
       require("../assets/outline/outlineButtonMiyako.png")
@@ -133,7 +136,7 @@ export const JOB = {
   c4: new Job(
     "c4",
     IconType.bentaro,
-    "オリジン弁太郎",
+    JobName.bentaro,
     false,
     1,
     0,
@@ -163,9 +166,9 @@ export const JOB = {
       "弁当工場",
       "食品の盛り付け",
       18,
+      1,
       "週休一日制",
       "80%",
-      "C",
       "埼玉県",
       require("../assets/outline/outlineBgTsuji.png"),
       require("../assets/outline/outlineButtonTsuji.png")
@@ -174,7 +177,7 @@ export const JOB = {
   c5: new Job(
     "c5",
     IconType.aguron,
-    "アグロン精密",
+    JobName.aguron,
     false,
     1,
     0,
@@ -204,9 +207,9 @@ export const JOB = {
       "精密機械工場",
       "PC部材の取付",
       25,
+      1,
       "祝日のみ",
       "87%",
-      "C",
       "埼玉県",
       require("../assets/outline/outlineBgLie.png"),
       require("../assets/outline/outlineButtonLie.png")
@@ -215,7 +218,7 @@ export const JOB = {
   c6: new Job(
     "c6",
     IconType.starFoods,
-    "スター・フーズ",
+    JobName.starFoods,
     false,
     1,
     0,
@@ -245,9 +248,9 @@ export const JOB = {
       "洋菓子工場",
       "ケーキのデコレーション",
       20,
+      1,
       "完全週休一日制",
       "65%",
-      "C",
       "福井県",
       require("../assets/outline/outlineBgTakeuchi.png"),
       require("../assets/outline/outlineButtonTakeuchi.png")
@@ -256,7 +259,7 @@ export const JOB = {
   c7: new Job(
     "c7",
     IconType.sikaga,
-    "鹿賀水産",
+    JobName.sikaga,
     false,
     1,
     0,
@@ -286,9 +289,9 @@ export const JOB = {
       "食品工場",
       "ぶりの切り身加工",
       27,
+      1,
       "祝日のみ",
       "71%",
-      "C",
       "山形県",
       require("../assets/outline/outlineBgKuroguchi.png"),
       require("../assets/outline/outlineButtonKuroguchi.png")
@@ -297,7 +300,7 @@ export const JOB = {
   c8: new Job(
     "c8",
     IconType.tamazu,
-    "玉津アーセナル",
+    JobName.tamazu,
     false,
     1,
     0,
@@ -327,9 +330,9 @@ export const JOB = {
       "精密機械工場",
       "製品の組立",
       18,
+      1,
       "完全週休一日制",
       "61%",
-      "C",
       "青森県",
       require("../assets/outline/outlineBgYamashita.png"),
       require("../assets/outline/outlineButtonYamashita.png")
@@ -338,7 +341,7 @@ export const JOB = {
   c9: new Job(
     "c9",
     IconType.ozasa,
-    "小篠建設",
+    JobName.ozasa,
     false,
     1,
     0,
@@ -368,9 +371,9 @@ export const JOB = {
       "建材工場",
       "建設用鋼板の加工",
       10,
+      1,
       "無し",
       "98%",
-      "C",
       "北海道",
       require("../assets/outline/outlineBgOzasa.png"),
       require("../assets/outline/outlineButtonOzasa.png")
@@ -379,7 +382,7 @@ export const JOB = {
   c10: new Job(
     "c10",
     IconType.tanabe,
-    "タナベ工務店",
+    JobName.tanabe,
     false,
     1,
     0,
@@ -409,12 +412,39 @@ export const JOB = {
       "建材工場",
       "建設用木材の加工",
       10,
+      1,
       "無し",
       "99%",
-      "C",
       "東京都",
       require("../assets/outline/outlineBgKamobayashi.png"),
       require("../assets/outline/outlineButtonKamobayashi.png")
     )
   ),
 };
+
+export const USER = [
+  new User("user001", 1000, UserIconType.man1, JobName.yamagawa, false),
+];
+
+export const USERICONS = [
+  new UserIcons("man1", UserIconType.man1),
+  new UserIcons("man2", UserIconType.man2),
+  new UserIcons("man3", UserIconType.man3),
+  new UserIcons("man4", UserIconType.man4),
+  new UserIcons("man5", UserIconType.man5),
+  new UserIcons("man6", UserIconType.man6),
+  new UserIcons("man7", UserIconType.man7),
+  new UserIcons("man8", UserIconType.man8),
+  new UserIcons("man9", UserIconType.man9),
+  new UserIcons("man10", UserIconType.man10),
+  new UserIcons("woman1", UserIconType.woman1),
+  new UserIcons("woman2", UserIconType.woman2),
+  new UserIcons("woman3", UserIconType.woman3),
+  new UserIcons("woman4", UserIconType.woman4),
+  new UserIcons("woman5", UserIconType.woman5),
+  new UserIcons("woman6", UserIconType.woman6),
+  new UserIcons("woman7", UserIconType.woman7),
+  new UserIcons("woman8", UserIconType.woman8),
+  new UserIcons("woman9", UserIconType.woman9),
+  new UserIcons("woman10", UserIconType.woman10),
+]
