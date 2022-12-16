@@ -29,8 +29,8 @@ const Testing = () => {
     setCount((prevCount) => ++prevCount);
   }, []);
 
-  translateXX = distance[1] - (velocity * count) / 100;
   translateX = distance[0] - (velocity * count) / 100;
+  translateXX = distance[1] - (velocity * count) / 100;
 
   if (translateX <= 0) {
     translateX = 0;
@@ -38,6 +38,8 @@ const Testing = () => {
   if (translateXX <= 0) {
     translateXX = 0;
   }
+
+  useAnimationFrame(isRunning, box);
 
   const pressHandler = () => {
     setIsRunning(true);
@@ -50,10 +52,6 @@ const Testing = () => {
   const pressThirdHandler = () => {
     setCount(0);
   };
-
-  console.log(translateX);
-
-  useAnimationFrame(isRunning, box);
 
   return (
     <View style={styles.rootContainer}>
