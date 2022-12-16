@@ -17,48 +17,55 @@ const Testing = () => {
     }, [loop]);
   };
 
-  let startTime: number;
-  const duration = 1000;
-  const velocity = 20;
+  const velocity = 100;
   const distance = [100, 200];
+  let translateX: number;
+  let translateXX: number;
 
+  const [count, setCount] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
-  const [translateX, setTranslateX] = useState<number>(0);
-  const [translateXX, setTranslateXX] = useState<number>(0);
 
-  const boxFirst = useCallback(() => {
-    const progress = (Date.now() - startTime) / duration;
-    const translateX = distance[0] - velocity * progress;
-    const translateXX = distance[1] - velocity * progress;
-
-    if (translateX > 0) {
-      setTranslateX(translateX);
-    }
-    if (translateXX > 0) {
-      setTranslateXX(translateXX);
-    }
+  const box = useCallback(() => {
+    setCount((prevCount) => ++prevCount);
   }, []);
 
-  useAnimationFrame(isRunning, boxFirst);
+  translateXX = distance[1] - (velocity * count) / 100;
+  translateX = distance[0] - (velocity * count) / 100;
+
+  if (translateX <= 0) {
+    translateX = 0;
+  }
+  if (translateXX <= 0) {
+    translateXX = 0;
+  }
 
   const pressHandler = () => {
     setIsRunning(true);
-    startTime = Date.now();
   };
 
   const pressSecondHandler = () => {
     setIsRunning(false);
-    startTime = Date.now();
   };
+
+  const pressThirdHandler = () => {
+    setCount(0);
+  };
+
+  console.log(translateX);
+
+  useAnimationFrame(isRunning, box);
 
   return (
     <View style={styles.rootContainer}>
-      <View
-        style={[styles.box, { transform: [{ translateX: translateX }] }]}
-      ></View>
-      <View
-        style={[styles.box, { transform: [{ translateX: -translateXX }] }]}
-      ></View>
+      <View style={styles.boxContainer}>
+        <View
+          style={[styles.box, { transform: [{ translateX: translateX }] }]}
+        ></View>
+        <View
+          style={[styles.box, { transform: [{ translateX: -translateXX }] }]}
+        ></View>
+      </View>
+
       <Pressable
         style={({ pressed }) => [
           pressed && styles.pressed,
@@ -77,6 +84,15 @@ const Testing = () => {
         android_ripple={{ color: "#ccc" }}
         onPress={pressSecondHandler}
       ></Pressable>
+      <Pressable
+        style={({ pressed }) => [
+          pressed && styles.pressed,
+          styles.button,
+          { backgroundColor: "black" },
+        ]}
+        android_ripple={{ color: "#ccc" }}
+        onPress={pressThirdHandler}
+      ></Pressable>
     </View>
   );
 };
@@ -89,10 +105,16 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
-  box: {
-    width: 100,
+  boxContainer: {
+    width: "100%",
     height: 100,
-    backgroundColor: "white",
+  },
+  box: {
+    position: "absolute",
+    right: 170,
+    width: 20,
+    height: 100,
+    backgroundColor: "green",
   },
   button: {
     marginTop: 20,
