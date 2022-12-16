@@ -5,10 +5,16 @@ import BoardImg from "../../typeui/BoardImg";
 import RankingButton from "../../animation/animationButton/RankingButton";
 import NextButton from "../../animation/animationButton/NextButton";
 import PrevButton from "../../animation/animationButton/PrevButton";
+import { useNavigation } from "@react-navigation/native";
 
 const NavBody = () => {
   const activeBoard = useSelector((state) => state.job.job.boardImg);
-  const pressHandler = () => {};
+
+  const navigation = useNavigation();
+
+  const pressHandler = () => {
+    navigation.navigate("Testing");
+  };
 
   return (
     <View style={styles.rootContainer}>

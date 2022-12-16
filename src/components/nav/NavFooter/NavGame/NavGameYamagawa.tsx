@@ -6,6 +6,7 @@ type Props = {
   pressSecondHandler: () => void;
   pressThirdHandler: () => void;
   pressFourthHandler: () => void;
+  time: number[];
 };
 
 const NavGameYamagawa = ({
@@ -13,7 +14,13 @@ const NavGameYamagawa = ({
   pressSecondHandler,
   pressThirdHandler,
   pressFourthHandler,
+  time,
 }: Props) => {
+
+  if (time[1] > 0.5 || time[1] < 1.5 ) {
+    console.log("success!");
+  }
+
   return (
     <View style={styles.innerContainer}>
       <Image
@@ -24,12 +31,10 @@ const NavGameYamagawa = ({
         source={require("../../../../assets/ui/judgeSuccess.png")}
         style={styles.judge}
       />
-      <View style={styles.target} />
       <Image
         source={require("../../../../assets/ui/playBoard.png")}
         style={styles.board}
       />
-
       <View style={styles.buttonsContainer}>
         <ImageButton
           source={require("../../../../assets/ui/blackButton.png")}

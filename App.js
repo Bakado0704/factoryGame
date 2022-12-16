@@ -1,8 +1,4 @@
-import {
-  StyleSheet,
-  View,
-  StatusBar,
-} from "react-native";
+import { StyleSheet, View, StatusBar } from "react-native";
 import { Provider } from "react-redux";
 import React, { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
@@ -13,6 +9,7 @@ import StartScreen from "./src/screens/StartScreen";
 import JobChangeScreen from "./src/screens/JobChangeScreen";
 import GachaScreen from "./src/screens/GachaScreen";
 import GameScreen from "./src/screens/GameScreen";
+import TestingScreen from "./src/screens/TestingScreen";
 import ImageBg from "./src/components/ui/ImageBg";
 import { store } from "./src/store/store";
 
@@ -77,6 +74,13 @@ export default function App() {
                 <Stack.Screen
                   name="JobChange"
                   component={JobChangeScreen}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Testing"
+                  component={TestingScreen}
                   options={{
                     headerShown: false,
                   }}
