@@ -125,30 +125,138 @@ const styles = StyleSheet.create({
   },
 });
 
-// import { View, StyleSheet, Pressable } from "react-native";
+// import { View, StyleSheet, Pressable, Animated } from "react-native";
 // import React, { useState, useCallback, useRef, useEffect } from "react";
 
 // const Game = () => {
-//   const velocity = 100;
-//   const distance = [100, -200];
-//   let backgroundColor = "green";
-//   let allowGap = 50;
+//   //指定するパラメーター
+//   const velocity = 100; //速度
+//   const distance = [100, 120, 160, 200]; //間隔
+//   const direction = [1, -1, -1, 1]; //方向
+//   let themeColor = "green"; //ターゲットの色
+//   let allowGap = 50; //中心からここまで成功範囲
+//   let failureGap = 10; //これ以上行くと失敗
 
-//   const useAnimationFrame = (
-//     isRunning: boolean,
-//     callback = () => {},
-//     gaps: number[]
-//   ) => {
+//   //各種宣言
+//   let gaps: number[] = [];
+//   let translateX: number[] = [];
+//   const [count, setCount] = useState<number>(0); //アニメーションを動かす基盤の数
+//   const [isRunning, setIsRunning] = useState<boolean>(false); //アニメーションが動いているかどうか
+//   const [laps, setLaps] = useState<number[]>([]); //ボタンを押したときのカウント
+//   const [opacities, setOpacities] = useState<number[]>([]); //ターゲットそれぞれの透明度
+//   const [color, setColor] = useState<string>(themeColor); //ターゲットのそれぞれの色
+
+//   // const [success, setSuccess] = useState<number>(0);
+//   // const [failure, setFailure] = useState<number>(0);
+
+//   //成功時のアニメーション
+//   let TargetAnim = useRef(new Animated.Value(0)).current;
+
+//   const targetOpacity = TargetAnim.interpolate({
+//     inputRange: [0, 50, 51, 100, 101, 150, 151, 199, 200],
+//     outputRange: [0, 0, 1, 1, 0, 0, 1, 1, 0],
+//   });
+
+//   const AnimationStart = () => {
+//     Animated.timing(TargetAnim, {
+//       toValue: 200,
+//       duration: 200,
+//       useNativeDriver: false,
+//     }).start();
+//   };
+
+//   //スタートした時の処理
+//   const startHandler = () => {
+//     setIsRunning(true);
+//   };
+
+//   //ボタンを押した時の処理
+//   const lapHandler = () => {
+//     AnimationStart();
+//     setTimeout(() => {
+//       TargetAnim.setValue(0);
+//     }, 200);
+
+//     setLaps((prevCount) => [...prevCount, count]);
+//   };
+
+//   //ストップボタンを押した時の処理
+//   const stopRenderHandler = () => {
+//     setLaps([]);
+//     setIsRunning(false);
+//     setTimeout(() => {
+//       ResetCountHandler();
+//     }, 1000);
+//   };
+
+//   //スタート時にリセットする処理
+//   const ResetCountHandler = () => {
+//     setCount(0);
+//     setOpacities([]);
+//     setColor(themeColor);
+//     // setSuccess((prevCount) => ++prevCount);
+//   };
+
+//   // console.log("success" + success);
+//   // console.log("failure" + failure);
+
+//   //translateの位置を指定
+//   for (let i = 0; i < distance.length; i++) {
+//     translateX[i] = distance[i] - (velocity * count) / 100;
+
+//     gaps[i] = distance[i] - laps[i];
+
+//     if (laps.length > i && laps.length >= i + 1) {
+//       translateX[i] = distance[i] - (velocity * laps[i]) / 100;
+
+//       if (gaps[i] <= allowGap) {
+//         opacities[i] = 0;
+//       } else {
+//         opacities[i] = 1;
+//       }
+//     }
+
+//     if (translateX[i] < -failureGap) {
+//       translateX[i] = 0;
+//     }
+//   }
+
+//   //すべてのターゲットを範囲内で押す⇒成功
+
+//   if (
+//     laps.length === distance.length &&
+//     gaps.every((value) => value <= allowGap)
+//   ) {
+//     console.log("success!");
+//     stopRenderHandler();
+//   }
+
+//   //ターゲットを押すのが早すぎた
+
+//   if (gaps.some((value) => value >= allowGap)) {
+//     console.log("Too Early!");
+//     setColor("red");
+//     stopRenderHandler();
+//   }
+
+//   //ターゲットを押すのが遅すぎた
+//   useEffect(() => {
+//     if (translateX.some((value) => value === -failureGap)) {
+//       console.log("Too Late!");
+//       setColor("red");
+//       stopRenderHandler();
+//     }
+//   }, [translateX.some((value) => value === -failureGap)]);
+
+//   //カウンター設定
+//   const useAnimationFrame = (isRunning: boolean, callback = () => {}) => {
 //     const reqIdRef = useRef<number>(0);
 //     const loop = useCallback(() => {
-//       if (
-//         isRunning &&
-//         gaps.every((value) => value <= allowGap || Number.isNaN(value))
-//       ) {
+//       if (isRunning) {
 //         callback();
 //         reqIdRef.current = requestAnimationFrame(loop);
 //       }
-//     }, [isRunning, callback, gaps]);
+//     }, [isRunning, callback]);
 
 //     useEffect(() => {
 //       reqIdRef.current = requestAnimationFrame(loop);
@@ -156,99 +264,54 @@ const styles = StyleSheet.create({
 //     }, [loop]);
 //   };
 
-//   let gaps: number[] = [0, 0];
-//   let translateX: number[] = [0, 0];
-//   const [count, setCount] = useState<number>(0);
-//   const [laps, setLaps] = useState<number[]>([]);
-//   const [isRunning, setIsRunning] = useState<boolean>(false);
-
 //   const box = useCallback(() => {
 //     setCount((prevCount) => ++prevCount);
 //   }, []);
 
-//   const pressHandler = () => {
-//     setIsRunning(true);
-//   };
+//   useAnimationFrame(isRunning, box);
 
-//   const pressSecondHandler = () => {
-//     setLaps((prevCount) => [...prevCount, count]);
-//   };
-
-//   const pressThirdHandler = () => {
-//     setLaps([]);
-//     setIsRunning(false);
-//     setCount(0);
-//   };
-
-//   for (let i = 0; i < distance.length; i++) {
-//     translateX[i] = distance[i] - (velocity * count) / 100;
-//     gaps[i] = distance[i] - laps[i];
-
-//     if (laps.length > i && laps.length >= i + 1) {
-//       translateX[i] = distance[i] - (velocity * laps[i]) / 100;
-//     }
-
-//     if (translateX[i] <= 0) {
-//       translateX[i] = 0;
-//     }
-
-//     if (distance[i] < 0) {
-//       translateX[i] = distance[i] + (velocity * count) / 100;
-//       gaps[i] = -distance[i] - laps[i];
-
-//       if (laps.length > i && laps.length >= i + 1) {
-//         translateX[i] = distance[i] + (velocity * laps[i]) / 100;
-//       }
-
-//       if (translateX[i] >= 0) {
-//         translateX[i] = 0;
-//       }
-//     }
-//   }
-
-//   gaps.some((value) => {
-//     if (value >= allowGap) {
-//       backgroundColor = "red";
-
-//       setTimeout(() => {
-//         pressThirdHandler();
-//       }, 1000);
-//     }
-//   });
-
-//   if (laps.length === distance.length && backgroundColor === "green") {
-//     gaps.every((value) => {
-//       if (value < allowGap) {
-//         setTimeout(() => {
-//           pressThirdHandler();
-//         }, 1000);
-//       }
-//     });
-//   }
-
-//   useAnimationFrame(isRunning, box, gaps);
-
+//   //ターゲットをfor文で表示
 //   var Targets = [];
 //   for (let i = 0; i < distance.length; i++) {
 //     Targets.push(
 //       <View
 //         key={i}
 //         style={[
-//           styles.box,
+//           styles.boxInnerContainer,
 //           {
-//             backgroundColor: backgroundColor,
-//             transform: [{ translateX: translateX[i] }],
+//             transform: [{ translateX: translateX[i] * direction[i] }],
+//             opacity: opacities[i],
 //           },
 //         ]}
-//       ></View>
+//       >
+//         <View
+//           style={[
+//             styles.box,
+//             {
+//               backgroundColor: color,
+//             },
+//           ]}
+//         ></View>
+//       </View>
 //     );
 //   }
 
 //   return (
 //     <View style={styles.rootContainer}>
-//       <View style={styles.boxContainer}>{Targets}</View>
+//       <View style={styles.boxInnerContainer}>
+//         <Animated.View
+//           style={[
+//             styles.box,
+//             { backgroundColor: color, opacity: targetOpacity },
+//           ]}
+//         ></Animated.View>
+//       </View>
+//       <View style={styles.boxOuterContainer}>{Targets}</View>
 //       <View
-//         style={[styles.boxBackground, { backgroundColor: backgroundColor }]}
+//         style={[
+//           styles.boxBackground,
+//           { backgroundColor: themeColor, width: allowGap * 2 },
+//         ]}
 //       ></View>
 //       <Pressable
 //         style={({ pressed }) => [
@@ -257,7 +320,7 @@ const styles = StyleSheet.create({
 //           { backgroundColor: "red" },
 //         ]}
 //         android_ripple={{ color: "#ccc" }}
-//         onPress={pressHandler}
+//         onPress={startHandler}
 //       ></Pressable>
 //       <Pressable
 //         style={({ pressed }) => [
@@ -266,7 +329,7 @@ const styles = StyleSheet.create({
 //           { backgroundColor: "blue" },
 //         ]}
 //         android_ripple={{ color: "#ccc" }}
-//         onPress={pressSecondHandler}
+//         onPress={lapHandler}
 //       ></Pressable>
 //     </View>
 //   );
@@ -281,30 +344,35 @@ const styles = StyleSheet.create({
 //     justifyContent: "flex-start",
 //     alignItems: "center",
 //   },
-//   boxContainer: {
+//   boxOuterContainer: {
 //     width: "100%",
 //     height: 100,
 //   },
+//   boxInnerContainer: {
+//     position: "absolute",
+//     width: "100%",
+//     height: 100,
+//     justifyContent: "flex-start",
+//     alignItems: "center",
+//   },
 //   box: {
 //     position: "absolute",
-//     right: 170,
-//     width: 20,
+//     width: 10,
 //     height: 100,
 //   },
 //   boxBackground: {
 //     position: "absolute",
-//     right: 170,
 //     height: 100,
 //     opacity: 0.1,
-//     top: 0,
 //   },
 //   button: {
 //     marginTop: 20,
 //     width: 100,
-//     height: 20,
+//     height: 100,
 //     backgroundColor: "red",
 //   },
 //   pressed: {
 //     opacity: 0.75,
 //   },
 // });
+
