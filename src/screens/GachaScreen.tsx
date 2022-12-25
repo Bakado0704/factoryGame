@@ -2,12 +2,9 @@ import {
   View,
   ImageBackground,
   StyleSheet,
-  Image,
-  Pressable,
-  Animated,
   SafeAreaView,
 } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import NavGacha from "../components/nav/NavFooter/NavGacha";
 import NavHead from "../components/nav/NavHeader/NavHead";
 import JobGet from "../modals/JobGetModal";

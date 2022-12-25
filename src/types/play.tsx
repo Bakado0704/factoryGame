@@ -17,18 +17,25 @@ export const PlayStatus = {
 export type PlayStatus = typeof PlayStatus[keyof typeof PlayStatus];
 
 export interface PlayPattern {
-  distance: number;
-  direction: boolean;
+  distance: number[];
+  direction: number[];
   target: PlayTarget;
 }
 
 export interface PlayTarget {
-  number: number;
   velocity: number;
   color: PlayColor;
+  ImageSource: string[];
+}
+
+export interface PlayGap {
+  frontGap: number;
+  passedGap: number;
 }
 
 export const PlayColor = {
-  Black: "#000000",
+  Black: "black",
+  Green: "green",
+  Yellow: "yellow"
 } as const;
 export type PlayColor = typeof PlayColor[keyof typeof PlayColor];

@@ -1,0 +1,136 @@
+import { View, StyleSheet, Pressable } from "react-native";
+import React, { useState, useCallback, useRef, useEffect } from "react";
+import { PlayGap } from "../../types/play";
+import PlayPattern from "../../models/playpattern";
+import Targets from "./Targets";
+
+type Props = {
+  playpattern: PlayPattern[][];
+  playgap: PlayGap;
+};
+
+const Counts = ({ playpattern, playgap }: Props) => {
+  //各種宣言
+  const [count, setCount] = useState<number>(0); //アニメーションを動かす基盤の数
+  const [allGaps, setAllGaps] = useState<number[]>([]);
+  const [isRunning, setIsRunning] = useState<boolean>(false); //アニメーションが動いているかどうか
+  const [targetSuccess, setTargetSuccess] = useState<string[]>([]);
+  const [selectedPlayPattern, setSelectedPlayPattern] = useState<PlayPattern[]>(
+    playpattern[0]
+  );
+
+  //時間カウント設定
+  const useAnimationFrame = (isRunning: boolean, callback = () => {}) => {
+    const reqIdRef = useRef<number>(0);
+    const loop = useCallback(() => {
+      if (isRunning) {
+        callback();
+        reqIdRef.current = requestAnimationFrame(loop);
+      }
+    }, [isRunning, callback]);
+
+    useEffect(() => {
+      reqIdRef.current = requestAnimationFrame(loop);
+      return () => cancelAnimationFrame(reqIdRef.current);
+    }, [loop]);
+  };
+
+  //繰り返す処理(カウントを足していく)
+  const box = useCallback(() => {
+    setCount((prevCount) => ++prevCount);
+  }, []);
+
+  useAnimationFrame(isRunning, box);
+
+  //パターンの選定
+  useEffect(() => {
+    if (!isRunning) {
+      setTimeout(() => {
+        setSelectedPlayPattern(
+          playpattern[Math.floor(Math.random() * playpattern.length)]
+        );
+      }, 1000);
+    }
+  }, [isRunning]);
+
+  // すべてのDitanceの宣言
+  let allDistance = [];
+  for (let i = 0; i < selectedPlayPattern.length; i++) {
+    for (let y = 0; y < selectedPlayPattern[i].distance.length; y++) {
+      allDistance.push(selectedPlayPattern[i].distance[y]);
+    }
+  }
+
+  //すべてのgapsがdistanceと同じ数になる && gapsがすべて範囲内の時、成功
+  useEffect(() => {
+    if (
+      allDistance.length === allGaps.length &&
+      allGaps.every((value) => value <= playgap.frontGap)
+    ) {
+      console.log("success!!!!");
+    }
+  }, [allGaps]);
+
+  //ターゲットをfor文で表示
+  var TargetSet = [];
+  for (let i = 0; i < playpattern.length; i++) {
+    TargetSet.push(
+      <Targets
+        key={i}
+        playpattern={selectedPlayPattern[i]}
+        playpatternLength={selectedPlayPattern.length}
+        playgap={playgap}
+        count={count}
+        isRunning={isRunning}
+        allGaps={allGaps}
+        targetSuccess={targetSuccess}
+        setAllGaps={setAllGaps}
+        setCount={setCount}
+        setIsRunning={setIsRunning}
+        setTargetSuccess={setTargetSuccess}
+      />
+    );
+  }
+
+  //スタートした時の処理
+  const stopHandler = () => {
+    setIsRunning(true);
+  };
+
+  return (
+    <>
+      <View style={styles.rootContainer}>{TargetSet}</View>
+      <View>
+        <Pressable
+          style={({ pressed }) => [
+            pressed && styles.pressed,
+            styles.button,
+            { backgroundColor: "red" },
+          ]}
+          android_ripple={{ color: "#ccc" }}
+          onPress={stopHandler}
+        ></Pressable>
+      </View>
+    </>
+  );
+};
+
+export default Counts;
+
+const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    flexDirection: "row",
+  },
+  button: {
+    marginHorizontal: 10,
+    width: 100,
+    height: 100,
+  },
+  pressed: {
+    opacity: 0.75,
+  },
+});
