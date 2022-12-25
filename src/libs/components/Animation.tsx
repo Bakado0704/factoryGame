@@ -45,40 +45,16 @@ const Animation = ({ color, laps, isRunning }: Props) => {
 export default Animation;
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 4,
-    width: "100%",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  boxOuterContainer: {
-    width: "100%",
-    height: 100,
-  },
   boxInnerContainer: {
     position: "absolute",
     width: "100%",
-    height: 100,
+    height: 64,
     justifyContent: "flex-start",
     alignItems: "center",
   },
   box: {
     position: "absolute",
     width: 10,
-    height: 100,
-  },
-  boxBackground: {
-    position: "absolute",
-    height: 100,
-    opacity: 0.1,
-  },
-  button: {
-    marginTop: 20,
-    width: 100,
-    height: 20,
-    backgroundColor: "red",
-  },
-  pressed: {
-    opacity: 0.75,
+    height: 64,
   },
 });

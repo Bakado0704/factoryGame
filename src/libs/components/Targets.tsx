@@ -4,6 +4,7 @@ import { PlayGap } from "../../types/play";
 import PlayPattern from "../../models/playpattern";
 import Target from "./Target";
 import Animation from "./Animation";
+import ImageButton from "../../components/ui/ImageButton";
 
 type Props = {
   playpattern: PlayPattern;
@@ -55,6 +56,7 @@ const Targets = ({
         setAllGaps([]);
         setTargetSuccess([]);
         setColor(themeColor);
+        setIsRunning(true);
       }, 1000);
     }
   }, [isRunning]);
@@ -67,7 +69,9 @@ const Targets = ({
   //targetがすべて成功した時;
   useEffect(() => {
     if (targetSuccess.length === playpatternLength) {
-      setIsRunning(false);
+      setTimeout(() => {
+        setIsRunning(false);
+      }, 200);
     }
   }, [targetSuccess]);
 
@@ -97,7 +101,7 @@ const Targets = ({
           style={[
             styles.boxBackground,
             {
-              backgroundColor: themeColor,
+              backgroundColor: "yellow",
               width: allowGap * 2,
               left: -allowGap,
               transform: [{ translateX: transformX }],
@@ -105,15 +109,11 @@ const Targets = ({
           ]}
         />
       </View>
-      <Pressable
-        style={({ pressed }) => [
-          pressed && styles.pressed,
-          styles.button,
-          { backgroundColor: themeColor },
-        ]}
-        android_ripple={{ color: "#ccc" }}
+      <ImageButton
+        source={playpattern.target.ImageSource}
+        style={styles.button}
         onPress={lapHandler}
-      ></Pressable>
+      />
     </>
   );
 };
@@ -121,67 +121,29 @@ const Targets = ({
 export default Targets;
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    width: "100%",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
   animationContainer: {
     position: "absolute",
     width: "100%",
-    height: 100,
-  },
-  boxOuterContainer: {
-    width: "100%",
-    height: 100,
-  },
-  boxInnerContainer: {
-    position: "absolute",
-    width: "100%",
-    height: 100,
-    justifyContent: "flex-start",
-    alignItems: "center",
+    height: 64,
   },
   box: {
     position: "absolute",
     width: 10,
-    height: 100,
+    height: 64,
   },
   boxBackground: {
     position: "absolute",
-    height: 100,
-    opacity: 0.1,
+    height: 64,
+    opacity: 0.02,
   },
   button: {
-    marginTop: 120,
+    marginTop: 72,
+    marginBottom: 8,
     marginHorizontal: 10,
-    width: 66,
-    height: 66,
-    backgroundColor: "red",
+    width: 59,
+    height: 64,
   },
   pressed: {
     opacity: 0.75,
   },
 });
-
-//targetのすべての数
-// let array1 = [];
-// for (let i = 0; i < playpattern.length; i++) {
-//   for (let y = 0; y < playpattern[i].distance.length; y++) {
-//     array1.push(playpattern[i].distance[y]);
-//   }
-// }
-
-//1番目のボタンのGap配列
-// const gapsHandler = (gaps: number[]) => {
-//   useEffect(() => {
-//     if (gaps.length !== 0) {
-//       setFirstGaps(gaps.filter((gaps) => { return !Number.isNaN(gaps)}))
-//     }
-//   }, [gaps.filter((gaps) => { return !Number.isNaN(gaps) }).length]);
-// }
-
-// console.log(firstGaps)
-
-//すべての色のボタンのターゲットを範囲内で押す⇒成功

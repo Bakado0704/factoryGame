@@ -25,7 +25,7 @@ export interface PlayPattern {
 export interface PlayTarget {
   velocity: number;
   color: PlayColor;
-  ImageSource: string[];
+  ImageSource: string;
 }
 
 export interface PlayGap {

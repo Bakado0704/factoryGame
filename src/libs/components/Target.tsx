@@ -132,18 +132,18 @@ export default Target;
 const styles = StyleSheet.create({
   rootContainer: {
     width: "100%",
-    height: 100,
+    height: 64,
   },
   boxInnerContainer: {
     position: "absolute",
     width: "100%",
-    height: 100,
+    height: 64,
     justifyContent: "flex-start",
     alignItems: "center",
   },
   box: {
     position: "absolute",
-    width: 10,
-    height: 100,
+    width: 6,
+    height: 64,
   },
 });

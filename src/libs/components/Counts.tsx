@@ -1,8 +1,9 @@
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable, Image } from "react-native";
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { PlayGap } from "../../types/play";
 import PlayPattern from "../../models/playpattern";
 import Targets from "./Targets";
+import NavGame from "../../components/nav/NavFooter/NavGame";
 
 type Props = {
   playpattern: PlayPattern[][];
@@ -92,25 +93,18 @@ const Counts = ({ playpattern, playgap }: Props) => {
     );
   }
 
-  //スタートした時の処理
-  const stopHandler = () => {
-    setIsRunning(true);
-  };
-
   return (
     <>
+      <Image
+        source={require("../../assets/ui/playBoardBackground.png")}
+        style={styles.boardTop}
+      />
+      <Image
+        source={require("../../assets/ui/playBoard.png")}
+        style={styles.boardTop}
+      />
       <View style={styles.rootContainer}>{TargetSet}</View>
-      <View>
-        <Pressable
-          style={({ pressed }) => [
-            pressed && styles.pressed,
-            styles.button,
-            { backgroundColor: "red" },
-          ]}
-          android_ripple={{ color: "#ccc" }}
-          onPress={stopHandler}
-        ></Pressable>
-      </View>
+      <NavGame />
     </>
   );
 };
@@ -119,18 +113,16 @@ export default Counts;
 
 const styles = StyleSheet.create({
   rootContainer: {
-    flex: 1,
     width: "100%",
     justifyContent: "center",
     alignItems: "flex-start",
     flexDirection: "row",
   },
-  button: {
-    marginHorizontal: 10,
-    width: 100,
-    height: 100,
-  },
-  pressed: {
-    opacity: 0.75,
-  },
+  boardTop: {
+    position: "absolute",
+    height: 174,
+    width: "100%",
+    bottom: 0,
+    left: 0,
+  }
 });

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Gameover from "../modals/GameoverModal";
 import BgBlack from "../components/ui/BgBlack";
-import NavGame from "../components/nav/NavFooter/NavGame";
 import Game from "../libs/game/game";
 import { BackgroundType } from "../types/background";
 
@@ -28,7 +27,6 @@ const GameScreen = () => {
     <View style={styles.rootScreen}>
       {!modalIsSetted && !modalIsSetting && (
         <>
-          <NavGame />
           <Game type={BackgroundType.yamagawa}/>
         </>
       )}
@@ -43,9 +41,6 @@ export default GameScreen;
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
-  },
-  innerContainer: {
-    flex: 1,
-    justifyContent: "center",
-  },
+    justifyContent: "flex-end",
+  }
 });
