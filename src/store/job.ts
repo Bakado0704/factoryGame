@@ -664,10 +664,13 @@ const JobRedux = createSlice({
       state.user.icon = action.payload.icon;
     },
     staminaDecrese: (state, action: PayloadAction<number>) => {
-      state.play.stamina = state.play.stamina - action.payload * 0.05;
+      state.play.stamina = state.play.stamina - action.payload;
     },
     staminaIncrese: (state, action: PayloadAction<number>) => {
       state.play.stamina = state.play.stamina + action.payload;
+    },
+    staminaReset: (state, action: PayloadAction<number>) => {
+      state.play.stamina = 380 - 80 * action.payload;
     },
   },
 });
@@ -679,4 +682,5 @@ export const changeUser = JobRedux.actions.changeUser;
 export const changePreviewIcon = JobRedux.actions.changePreviewIcon;
 export const staminaDecrese = JobRedux.actions.staminaDecrese;
 export const staminaIncrese = JobRedux.actions.staminaIncrese;
+export const staminaReset= JobRedux.actions.staminaReset;
 export default JobRedux.reducer;

@@ -10,11 +10,10 @@ import { Play } from "../../types/play";
 type Props = {
   type: BackgroundType;
   playState: Play;
-  missHandler: () => void;
-  damageHandler: () => void;
+  damageHandler: (number: number) => void;
 };
 
-const Game = ({ type, playState, missHandler, damageHandler }: Props) => {
+const Game = ({ type, playState, damageHandler }: Props) => {
   let playgap = new PlayGap(20, 10);
   let playpattern = PATTERN_DATES[0];
 
@@ -68,7 +67,6 @@ const Game = ({ type, playState, missHandler, damageHandler }: Props) => {
           playpattern={playpattern}
           playgap={playgap}
           playState={playState}
-          missHandler={missHandler}
           damageHandler={damageHandler}
         />
       </View>

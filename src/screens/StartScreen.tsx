@@ -7,7 +7,7 @@ import Setting from "../modals/SettingModal";
 import UserModal from "../modals/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import UserIcons from "../models/userIcons";
-import { changePreviewIcon, changeUser } from "../store/job";
+import { changePreviewIcon, changeUser, staminaReset } from "../store/job";
 
 const StartScreen = () => {
   const userIcon = useSelector((state) => state.job.user.icon);
@@ -38,12 +38,16 @@ const StartScreen = () => {
     setUserModal(false);
   };
 
+  const staminaResetHandler = () => {
+    dispatch(staminaReset(1.0));
+  };
+
   return (
     <View style={styles.rootScreen}>
       <View style={styles.innerContainer}>
         <NavHead icon={userIcon} onUserModal={onUserModalHandler} />
         <NavSelect />
-        <NavOperation onSetting={onSettingHandler} />
+        <NavOperation onSetting={onSettingHandler} staminaResetHandler={staminaResetHandler}/>
       </View>
       {setting && <Setting offSetting={offSettingModalHandler} />}
       {userModal && (

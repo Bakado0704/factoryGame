@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Gameover from "../modals/GameoverModal";
 import BgBlack from "../components/ui/BgBlack";
@@ -16,21 +16,22 @@ const GameScreen = () => {
   //dispatch関係
   const playState = useSelector((state) => state.job.play);
   const dispatch = useDispatch();
-  const missHandler = () => {
-    dispatch(staminaDecrese(100));
+  const damageHandler = (number: number) => {
+    dispatch(staminaDecrese(number));
   };
-  const damageHandler = () => {
-    dispatch(staminaDecrese(1));
-  };
-  const comboHandler = () => {
-    dispatch(staminaIncrese(10));
+  const comboHandler = (number: number) => {
+    dispatch(staminaIncrese(number));
   };
 
-  if (modalIsSetting) {
-    setTimeout(() => {
-      setModalIsSetted(true);
-    }, 1000);
-  }
+  //スタミナが0になるとゲームオーバー
+  useEffect(() => {
+    if (playState.stamina <= 0) {
+      setModalIsSetting(true);
+      setTimeout(() => {
+        setModalIsSetted(true);
+      }, 1000);
+    }
+  }, [playState.stamina <= 0]);
 
   const offModalHandler = () => {
     setModalIsSetted(false);
@@ -45,7 +46,6 @@ const GameScreen = () => {
           <Game
             type={BackgroundType.yamagawa}
             playState={playState}
-            missHandler={missHandler}
             damageHandler={damageHandler}
           />
         </>

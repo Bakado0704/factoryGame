@@ -56,7 +56,6 @@ const StartButtons = ({ gameHandler, onSetting, pressHandler }: Props) => {
       >
         <Image
           source={require("../../../assets/ui/startButtonOff.png")}
-          onPress={gameHandler}
           style={styles.startButton}
         />
         <Animated.View

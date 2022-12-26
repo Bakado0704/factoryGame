@@ -18,7 +18,6 @@ type Props = {
   setIsRunning: (state: boolean) => void;
   setCount: (number: number) => void;
   setTargetSuccess: (state: string[]) => void;
-  missHandler: () => void;
 };
 
 const Targets = ({
@@ -33,7 +32,6 @@ const Targets = ({
   setIsRunning,
   setCount,
   setTargetSuccess,
-  missHandler,
 }: Props) => {
   let themeColor = playpattern.target.color; //ターゲットの色
   let allowGap = playgap.frontGap; //中心からここまで成功範囲

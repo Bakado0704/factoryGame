@@ -6,24 +6,11 @@ import StartButtons from "../../animation/animationButton/StartButtons";
 
 type Props = {
   onSetting: () => void;
+  staminaResetHandler: () => void;
 };
 
-const NavOperation = ({ onSetting }: Props) => {
+const NavOperation = ({ onSetting, staminaResetHandler }: Props) => {
   const navigation = useNavigation();
-  const ButtonAnim = useRef(new Animated.Value(0)).current;
-
-  const ButtonImage = ButtonAnim.interpolate({
-    inputRange: [0, 100, 101, 200],
-    outputRange: [0, 1, 1, 0],
-  });
-
-  Animated.loop(
-    Animated.timing(ButtonAnim, {
-      toValue: 200,
-      duration: 1200,
-      useNativeDriver: false,
-    })
-  ).start();
 
   const pressHandler = () => {
     navigation.navigate("JobChange");
@@ -31,6 +18,7 @@ const NavOperation = ({ onSetting }: Props) => {
 
   const gameHandler = () => {
     navigation.navigate("Game");
+    staminaResetHandler();
   };
 
   return (

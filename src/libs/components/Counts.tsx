@@ -1,19 +1,19 @@
-import { View, StyleSheet, Pressable, Image } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { Play, PlayGap } from "../../types/play";
 import PlayPattern from "../../models/playpattern";
 import Targets from "./Targets";
 import NavGame from "../../components/nav/NavFooter/NavGame";
+import { useDispatch } from "react-redux";
 
 type Props = {
   playpattern: PlayPattern[][];
   playgap: PlayGap;
   playState: Play;
-  missHandler: () => void;
-  damageHandler: () => void;
+  damageHandler: (number: number) => void;
 };
 
-const Counts = ({ playpattern, playgap, playState, missHandler, damageHandler }: Props) => {
+const Counts = ({ playpattern, playgap, playState, damageHandler }: Props) => {
   //各種宣言
   const [count, setCount] = useState<number>(0); //アニメーションを動かす基盤の数
   const [allGaps, setAllGaps] = useState<number[]>([]);
@@ -25,6 +25,7 @@ const Counts = ({ playpattern, playgap, playState, missHandler, damageHandler }:
 
   //時間カウント設定
   const useAnimationFrame = (isRunning: boolean, callback = () => {}) => {
+    const dispatch = useDispatch();
     const reqIdRef = useRef<number>(0);
     const loop = useCallback(() => {
       if (isRunning) {
@@ -42,11 +43,11 @@ const Counts = ({ playpattern, playgap, playState, missHandler, damageHandler }:
   //繰り返す処理(カウントを足していく)
   const box = useCallback(() => {
     setCount((prevCount) => ++prevCount);
-    damageHandler();
+    damageHandler(1);
   }, []);
 
   useAnimationFrame(isRunning, box);
-  
+
   //パターンの選定
   useEffect(() => {
     if (!isRunning) {
@@ -93,7 +94,6 @@ const Counts = ({ playpattern, playgap, playState, missHandler, damageHandler }:
         setCount={setCount}
         setIsRunning={setIsRunning}
         setTargetSuccess={setTargetSuccess}
-        missHandler={missHandler}
       />
     );
   }
