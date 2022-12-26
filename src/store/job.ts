@@ -8,6 +8,9 @@ import User from "../models/user";
 import { JobName } from "../types/job";
 import { UserIconType } from "../types/userIcon";
 import { UserIcons } from "../types/userIcons";
+import { Play, PlayColor } from "../types/play";
+import PlayPattern from "../models/playpattern";
+import PlayTarget from "../models/playtarget";
 
 export type state = {
   jobs: Job[];
@@ -15,6 +18,7 @@ export type state = {
   previewJob?: Job;
   previewIcon: UserIcons;
   user: User;
+  play: Play;
 };
 
 const initialState: state = {
@@ -511,6 +515,121 @@ const initialState: state = {
     id: "man1",
     icon: UserIconType.man1,
   },
+
+  play: {
+    status: "stop", // ゲームの状態を管理
+    processCount: 0, // 現在のカウント数
+    completeCount: 0, // 成功した数
+    money: 0, // 稼いだ金額
+    stamina: 300, //スタミナ
+    combo: 0, // 今のコンボ数
+    pattern: [
+      [
+        new PlayPattern(
+          [100],
+          [1],
+          new PlayTarget(
+            100,
+            PlayColor.Black,
+            require("../assets/ui/blackButton.png")
+          )
+        ),
+        new PlayPattern(
+          [80, 150, 200],
+          [-1, 1, -1],
+          new PlayTarget(
+            80,
+            PlayColor.Green,
+            require("../assets/ui/greenButton.png")
+          )
+        ),
+        new PlayPattern(
+          [90, 150],
+          [1, -1],
+          new PlayTarget(
+            120,
+            PlayColor.Yellow,
+            require("../assets/ui/yellowButton.png")
+          )
+        ),
+      ],
+      [
+        new PlayPattern(
+          [200],
+          [1],
+          new PlayTarget(
+            100,
+            PlayColor.Black,
+            require("../assets/ui/blackButton.png")
+          )
+        ),
+        new PlayPattern(
+          [100, 150, 200],
+          [-1, 1, -1],
+          new PlayTarget(
+            80,
+            PlayColor.Green,
+            require("../assets/ui/greenButton.png")
+          )
+        ),
+        new PlayPattern(
+          [120, 250],
+          [1, -1],
+          new PlayTarget(
+            120,
+            PlayColor.Yellow,
+            require("../assets/ui/yellowButton.png")
+          )
+        ),
+      ],
+      [
+        new PlayPattern(
+          [300],
+          [1],
+          new PlayTarget(
+            100,
+            PlayColor.Black,
+            require("../assets/ui/blackButton.png")
+          )
+        ),
+        new PlayPattern(
+          [200, 250, 300],
+          [-1, 1, -1],
+          new PlayTarget(
+            80,
+            PlayColor.Green,
+            require("../assets/ui/greenButton.png")
+          )
+        ),
+        new PlayPattern(
+          [120, 250],
+          [1, -1],
+          new PlayTarget(
+            120,
+            PlayColor.Yellow,
+            require("../assets/ui/yellowButton.png")
+          )
+        ),
+      ],
+    ],
+    targets: [
+      new PlayTarget(
+        100,
+        PlayColor.Black,
+        require("../assets/ui/blackButton.png")
+      ),
+      new PlayTarget(
+        80,
+        PlayColor.Green,
+        require("../assets/ui/greenButton.png")
+      ),
+      new PlayTarget(
+        120,
+        PlayColor.Yellow,
+        require("../assets/ui/yellowButton.png")
+      ),
+    ], // 押すボタンの種類
+  },
 };
 
 const JobRedux = createSlice({
@@ -544,6 +663,9 @@ const JobRedux = createSlice({
     changeUser: (state, action: PayloadAction<User | UserIcons>) => {
       state.user.icon = action.payload.icon;
     },
+    changePlayStamina: (state, action: PayloadAction<number>) => {
+      state.play.stamina = state.play.stamina - action.payload;
+    },
   },
 });
 
@@ -552,4 +674,5 @@ export const changeUpdateJob = JobRedux.actions.changeUpdateJob;
 export const changePreviewJob = JobRedux.actions.changePreviewJob;
 export const changeUser = JobRedux.actions.changeUser;
 export const changePreviewIcon = JobRedux.actions.changePreviewIcon;
+export const changePlayStamina = JobRedux.actions.changePlayStamina;
 export default JobRedux.reducer;

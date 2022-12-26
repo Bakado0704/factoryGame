@@ -5,7 +5,7 @@ export interface Play {
   money: number; // 稼いだ金額
   stamina: number;
   combo: number; // 今のコンボ数
-  pattern: PlayPattern[]; // 今やっているゲームのパターン
+  pattern: PlayPattern[][]; // 今やっているゲームのパターン
   targets: PlayTarget[]; // 押すボタンの種類
 }
 

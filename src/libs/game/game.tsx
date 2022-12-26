@@ -4,13 +4,17 @@ import { BackgroundType } from "../../types/background";
 
 import Counts from "../components/Counts";
 import { PATTERN_DATES } from "../datas/dates";
-import  PlayGap from "../../models/playgap";
+import PlayGap from "../../models/playgap";
+import { Play } from "../../types/play";
 
 type Props = {
   type: BackgroundType;
+  playState: Play;
+  missHandler: () => void;
+  damageHandler: () => void;
 };
 
-const Game = ({ type }: Props) => {
+const Game = ({ type, playState, missHandler, damageHandler }: Props) => {
   let playgap = new PlayGap(20, 10);
   let playpattern = PATTERN_DATES[0];
 
@@ -60,7 +64,13 @@ const Game = ({ type }: Props) => {
   return (
     <>
       <View style={styles.rootContainer}>
-        <Counts playpattern={playpattern} playgap={playgap} />
+        <Counts
+          playpattern={playpattern}
+          playgap={playgap}
+          playState={playState}
+          missHandler={missHandler}
+          damageHandler={damageHandler}
+        />
       </View>
     </>
   );
@@ -74,5 +84,5 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "flex-end",
     alignItems: "center",
-  }
+  },
 });

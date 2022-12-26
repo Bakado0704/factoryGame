@@ -1,6 +1,6 @@
 import { View, StyleSheet, Pressable, Image } from "react-native";
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { PlayGap } from "../../types/play";
+import { Play, PlayGap } from "../../types/play";
 import PlayPattern from "../../models/playpattern";
 import Targets from "./Targets";
 import NavGame from "../../components/nav/NavFooter/NavGame";
@@ -8,9 +8,12 @@ import NavGame from "../../components/nav/NavFooter/NavGame";
 type Props = {
   playpattern: PlayPattern[][];
   playgap: PlayGap;
+  playState: Play;
+  missHandler: () => void;
+  damageHandler: () => void;
 };
 
-const Counts = ({ playpattern, playgap }: Props) => {
+const Counts = ({ playpattern, playgap, playState, missHandler, damageHandler }: Props) => {
   //各種宣言
   const [count, setCount] = useState<number>(0); //アニメーションを動かす基盤の数
   const [allGaps, setAllGaps] = useState<number[]>([]);
@@ -39,9 +42,12 @@ const Counts = ({ playpattern, playgap }: Props) => {
   //繰り返す処理(カウントを足していく)
   const box = useCallback(() => {
     setCount((prevCount) => ++prevCount);
+    damageHandler();
   }, []);
 
   useAnimationFrame(isRunning, box);
+
+  console.log(playState.stamina);
 
   //パターンの選定
   useEffect(() => {
@@ -89,6 +95,7 @@ const Counts = ({ playpattern, playgap }: Props) => {
         setCount={setCount}
         setIsRunning={setIsRunning}
         setTargetSuccess={setTargetSuccess}
+        missHandler={missHandler}
       />
     );
   }

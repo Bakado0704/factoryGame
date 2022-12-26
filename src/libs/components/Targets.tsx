@@ -1,6 +1,6 @@
 import { View, StyleSheet, Pressable, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
-import { PlayGap } from "../../types/play";
+import { Play, PlayGap } from "../../types/play";
 import PlayPattern from "../../models/playpattern";
 import Target from "./Target";
 import Animation from "./Animation";
@@ -18,6 +18,7 @@ type Props = {
   setIsRunning: (state: boolean) => void;
   setCount: (number: number) => void;
   setTargetSuccess: (state: string[]) => void;
+  missHandler: () => void;
 };
 
 const Targets = ({
@@ -32,6 +33,7 @@ const Targets = ({
   setIsRunning,
   setCount,
   setTargetSuccess,
+  missHandler,
 }: Props) => {
   let themeColor = playpattern.target.color; //ターゲットの色
   let allowGap = playgap.frontGap; //中心からここまで成功範囲

@@ -5,11 +5,23 @@ import Gameover from "../modals/GameoverModal";
 import BgBlack from "../components/ui/BgBlack";
 import Game from "../libs/game/game";
 import { BackgroundType } from "../types/background";
+import { useDispatch, useSelector } from "react-redux";
+import { changePlayStamina } from "../store/job";
 
 const GameScreen = () => {
   const [modalIsSetting, setModalIsSetting] = useState(false);
   const [modalIsSetted, setModalIsSetted] = useState(false);
   const navigation = useNavigation();
+
+  //dispatch関係
+  const playState = useSelector((state) => state.job.play);
+  const dispatch = useDispatch();
+  const missHandler = () => {
+    dispatch(changePlayStamina(100));
+  };
+  const damageHandler = () => {
+    dispatch(changePlayStamina(1));
+  };
 
   if (modalIsSetting) {
     setTimeout(() => {
@@ -27,7 +39,12 @@ const GameScreen = () => {
     <View style={styles.rootScreen}>
       {!modalIsSetted && !modalIsSetting && (
         <>
-          <Game type={BackgroundType.yamagawa}/>
+          <Game
+            type={BackgroundType.yamagawa}
+            playState={playState}
+            missHandler={missHandler}
+            damageHandler={damageHandler}
+          />
         </>
       )}
       {modalIsSetting && <BgBlack />}
@@ -42,5 +59,5 @@ const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
     justifyContent: "flex-end",
-  }
+  },
 });
