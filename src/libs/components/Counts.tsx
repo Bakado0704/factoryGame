@@ -15,6 +15,7 @@ type Props = {
 
 const Counts = ({ playpattern, playgap, playState, damageHandler }: Props) => {
   //各種宣言
+  const dispatch = useDispatch();
   const [count, setCount] = useState<number>(0); //アニメーションを動かす基盤の数
   const [allGaps, setAllGaps] = useState<number[]>([]);
   const [isRunning, setIsRunning] = useState<boolean>(false); //アニメーションが動いているかどうか
@@ -25,7 +26,6 @@ const Counts = ({ playpattern, playgap, playState, damageHandler }: Props) => {
 
   //時間カウント設定
   const useAnimationFrame = (isRunning: boolean, callback = () => {}) => {
-    const dispatch = useDispatch();
     const reqIdRef = useRef<number>(0);
     const loop = useCallback(() => {
       if (isRunning) {
@@ -129,5 +129,5 @@ const styles = StyleSheet.create({
     width: "100%",
     bottom: 0,
     left: 0,
-  }
+  },
 });

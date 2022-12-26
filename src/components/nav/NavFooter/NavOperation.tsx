@@ -7,9 +7,14 @@ import StartButtons from "../../animation/animationButton/StartButtons";
 type Props = {
   onSetting: () => void;
   staminaResetHandler: () => void;
+  playingStatusHandler: () => void;
 };
 
-const NavOperation = ({ onSetting, staminaResetHandler }: Props) => {
+const NavOperation = ({
+  onSetting,
+  staminaResetHandler,
+  playingStatusHandler,
+}: Props) => {
   const navigation = useNavigation();
 
   const pressHandler = () => {
@@ -19,6 +24,7 @@ const NavOperation = ({ onSetting, staminaResetHandler }: Props) => {
   const gameHandler = () => {
     navigation.navigate("Game");
     staminaResetHandler();
+    playingStatusHandler();
   };
 
   return (

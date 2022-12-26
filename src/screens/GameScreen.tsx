@@ -6,16 +6,15 @@ import BgBlack from "../components/ui/BgBlack";
 import Game from "../libs/game/game";
 import { BackgroundType } from "../types/background";
 import { useDispatch, useSelector } from "react-redux";
-import { staminaDecrese, staminaIncrese } from "../store/job";
+import { changeStatus, staminaDecrese, staminaIncrese } from "../store/job";
+import { PlayStatus } from "../types/play";
 
 const GameScreen = () => {
-  const [modalIsSetting, setModalIsSetting] = useState(false);
-  const [modalIsSetted, setModalIsSetted] = useState(false);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   //dispatch関係
   const playState = useSelector((state) => state.job.play);
-  const dispatch = useDispatch();
   const damageHandler = (number: number) => {
     dispatch(staminaDecrese(number));
   };
@@ -26,32 +25,53 @@ const GameScreen = () => {
   //スタミナが0になるとゲームオーバー
   useEffect(() => {
     if (playState.stamina <= 0) {
-      setModalIsSetting(true);
-      setTimeout(() => {
-        setModalIsSetted(true);
-      }, 1000);
+      dispatch(changeStatus(PlayStatus.gameover));
     }
   }, [playState.stamina <= 0]);
 
+  //結果を受け入れたとき,ステータスをstopに戻し、スタート画面に戻る
   const offModalHandler = () => {
-    setModalIsSetted(false);
-    setModalIsSetting(false);
+    dispatch(changeStatus(PlayStatus.stop));
     navigation.navigate("Start");
   };
 
+  //statusがplayingの場合Gameを出す
+  let game;
+  if (playState.status === PlayStatus.playing) {
+    game = (
+      <Game
+        type={BackgroundType.yamagawa}
+        playState={playState}
+        damageHandler={damageHandler}
+      />
+    );
+  }
+
+  //statusがgameoverの場合モーダルを出す
+  var bgModal;
+  if (playState.status === PlayStatus.gameover) {
+    bgModal = <BgBlack />;
+    setTimeout(() => {
+      dispatch(changeStatus(PlayStatus.result));
+    }, 1000);
+  }
+
+  //statusがresultの場合結果を出す
+  var result;
+  if (playState.status === PlayStatus.result) {
+    result = (
+      <>
+        <BgBlack />
+        <Gameover offModal={offModalHandler} />
+      </>
+    );
+  }
+
   return (
     <View style={styles.rootScreen}>
-      {!modalIsSetted && !modalIsSetting && (
-        <>
-          <Game
-            type={BackgroundType.yamagawa}
-            playState={playState}
-            damageHandler={damageHandler}
-          />
-        </>
-      )}
-      {modalIsSetting && <BgBlack />}
-      {modalIsSetted && <Gameover offModal={offModalHandler} />}
+      {game}
+      {bgModal}
+      {result}
     </View>
   );
 };

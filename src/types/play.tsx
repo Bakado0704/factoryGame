@@ -13,6 +13,7 @@ export const PlayStatus = {
   stop: "stop",
   playing: "playing",
   gameover: "gameover",
+  result: "result",
 } as const;
 export type PlayStatus = typeof PlayStatus[keyof typeof PlayStatus];
 

@@ -8,7 +8,7 @@ import User from "../models/user";
 import { JobName } from "../types/job";
 import { UserIconType } from "../types/userIcon";
 import { UserIcons } from "../types/userIcons";
-import { Play, PlayColor } from "../types/play";
+import { Play, PlayColor, PlayStatus } from "../types/play";
 import PlayPattern from "../models/playpattern";
 import PlayTarget from "../models/playtarget";
 
@@ -672,6 +672,10 @@ const JobRedux = createSlice({
     staminaReset: (state, action: PayloadAction<number>) => {
       state.play.stamina = 380 - 80 * action.payload;
     },
+    changeStatus: (state, action: PayloadAction<PlayStatus>) => {
+      state.play.status = action.payload;
+      console.log(state.play.status);
+    },
   },
 });
 
@@ -683,4 +687,5 @@ export const changePreviewIcon = JobRedux.actions.changePreviewIcon;
 export const staminaDecrese = JobRedux.actions.staminaDecrese;
 export const staminaIncrese = JobRedux.actions.staminaIncrese;
 export const staminaReset= JobRedux.actions.staminaReset;
+export const changeStatus= JobRedux.actions.changeStatus;
 export default JobRedux.reducer;

@@ -7,7 +7,13 @@ import Setting from "../modals/SettingModal";
 import UserModal from "../modals/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import UserIcons from "../models/userIcons";
-import { changePreviewIcon, changeUser, staminaReset } from "../store/job";
+import {
+  changePreviewIcon,
+  changeStatus,
+  changeUser,
+  staminaReset,
+} from "../store/job";
+import { PlayStatus } from "../types/play";
 
 const StartScreen = () => {
   const userIcon = useSelector((state) => state.job.user.icon);
@@ -42,12 +48,20 @@ const StartScreen = () => {
     dispatch(staminaReset(1.0));
   };
 
+  const playingStatusHandler = () => {
+    dispatch(changeStatus(PlayStatus.playing));
+  };
+
   return (
     <View style={styles.rootScreen}>
       <View style={styles.innerContainer}>
         <NavHead icon={userIcon} onUserModal={onUserModalHandler} />
         <NavSelect />
-        <NavOperation onSetting={onSettingHandler} staminaResetHandler={staminaResetHandler}/>
+        <NavOperation
+          onSetting={onSettingHandler}
+          staminaResetHandler={staminaResetHandler}
+          playingStatusHandler={playingStatusHandler}
+        />
       </View>
       {setting && <Setting offSetting={offSettingModalHandler} />}
       {userModal && (
