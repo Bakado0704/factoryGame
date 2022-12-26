@@ -6,7 +6,7 @@ import BgBlack from "../components/ui/BgBlack";
 import Game from "../libs/game/game";
 import { BackgroundType } from "../types/background";
 import { useDispatch, useSelector } from "react-redux";
-import { changePlayStamina } from "../store/job";
+import { staminaDecrese, staminaIncrese } from "../store/job";
 
 const GameScreen = () => {
   const [modalIsSetting, setModalIsSetting] = useState(false);
@@ -17,10 +17,13 @@ const GameScreen = () => {
   const playState = useSelector((state) => state.job.play);
   const dispatch = useDispatch();
   const missHandler = () => {
-    dispatch(changePlayStamina(100));
+    dispatch(staminaDecrese(100));
   };
   const damageHandler = () => {
-    dispatch(changePlayStamina(1));
+    dispatch(staminaDecrese(1));
+  };
+  const comboHandler = () => {
+    dispatch(staminaIncrese(10));
   };
 
   if (modalIsSetting) {

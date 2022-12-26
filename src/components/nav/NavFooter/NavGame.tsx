@@ -1,8 +1,17 @@
 import { View, Image, StyleSheet } from "react-native";
+import Colors from "../../../constants/color";
+import { Play } from "../../../types/play";
 
-const NavGame = () => {
+type Props = {
+  playState: Play;
+};
+
+const NavGame = ({ playState }: Props) => {
+  const length = Math.floor((playState.stamina / 300) * 51);
+
   return (
     <View style={styles.innerContainer}>
+      <View style={[styles.stamina, { width: length }]} />
       <Image
         source={require("../../../assets/ui/judgeSuccess.png")}
         style={styles.judge}
@@ -40,5 +49,12 @@ const styles = StyleSheet.create({
     width: "100%",
     top: 0,
     left: 0,
+  },
+  stamina: {
+    height: 17,
+    backgroundColor: Colors.stamina,
+    position: "absolute",
+    bottom: 74,
+    left: 235,
   },
 });

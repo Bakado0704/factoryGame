@@ -46,9 +46,7 @@ const Counts = ({ playpattern, playgap, playState, missHandler, damageHandler }:
   }, []);
 
   useAnimationFrame(isRunning, box);
-
-  console.log(playState.stamina);
-
+  
   //パターンの選定
   useEffect(() => {
     if (!isRunning) {
@@ -111,7 +109,7 @@ const Counts = ({ playpattern, playgap, playState, missHandler, damageHandler }:
         style={styles.boardTop}
       />
       <View style={styles.rootContainer}>{TargetSet}</View>
-      <NavGame />
+      <NavGame playState={playState} />
     </>
   );
 };
