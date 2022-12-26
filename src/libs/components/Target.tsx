@@ -2,6 +2,7 @@ import { View, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
 import PlayPattern from "../../models/playpattern";
 import PlayGap from "../../models/playgap";
+import { judgeStatus } from "../../types/play";
 
 type Props = {
   playpattern: PlayPattern;
@@ -9,13 +10,11 @@ type Props = {
   laps: number[];
   opacities: number[];
   color: string;
-  targetSuccess: string[];
   count: number;
   allGaps: number[];
   setAllGaps: (number: number[]) => void;
   setColor: (color: string) => void;
-  failureStopHandler: () => void;
-  setTargetSuccess: (state: string[]) => void;
+  judgeHandler: (judge: judgeStatus) => void;
 };
 
 const Target = ({
@@ -26,11 +25,8 @@ const Target = ({
   opacities,
   color,
   allGaps,
-  targetSuccess,
   setAllGaps,
-  setColor,
-  failureStopHandler,
-  setTargetSuccess,
+  judgeHandler,
 }: Props) => {
   //指定するパラメーター
   let velocity: number = playpattern.target.velocity;
@@ -73,30 +69,16 @@ const Target = ({
   //ターゲットを押すのが早すぎた
   useEffect(() => {
     if (gaps.some((value) => value >= allowGap)) {
-      console.log("Too Early!");
-      setColor("red");
-      failureStopHandler();
+      judgeHandler(judgeStatus.failure);
     }
   }, [gaps.some((value) => value >= allowGap)]);
 
   //ターゲットを押すのが遅すぎた
   useEffect(() => {
     if (translateX.some((value) => value <= -failureGap)) {
-      console.log("Too Late!");
-      setColor("red");
-      failureStopHandler();
+      judgeHandler(judgeStatus.failure);
     }
   }, [translateX.some((value) => value <= -failureGap)]);
-
-  //この色のボタンのターゲットを範囲内で押す⇒成功
-  useEffect(() => {
-    if (
-      laps.length === distance.length &&
-      gaps.every((value) => value <= allowGap)
-    ) {
-      setTargetSuccess([...targetSuccess, "success"])
-    }
-  }, [laps.length]);
 
   //ターゲットをfor文で表示
   var Targets1 = [];

@@ -1,6 +1,6 @@
 import { View, StyleSheet, Pressable, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Play, PlayGap } from "../../types/play";
+import { judgeStatus, Play, PlayGap } from "../../types/play";
 import PlayPattern from "../../models/playpattern";
 import Target from "./Target";
 import Animation from "./Animation";
@@ -13,25 +13,24 @@ type Props = {
   count: number;
   isRunning: boolean;
   allGaps: number[];
-  targetSuccess: string[];
+  playState: Play;
   setAllGaps: (number: number[]) => void;
   setIsRunning: (state: boolean) => void;
   setCount: (number: number) => void;
-  setTargetSuccess: (state: string[]) => void;
+  judgeHandler: (judge: judgeStatus) => void;
 };
 
 const Targets = ({
   playpattern,
-  playpatternLength,
   playgap,
   count,
   isRunning,
   allGaps,
-  targetSuccess,
+  playState,
   setAllGaps,
   setIsRunning,
   setCount,
-  setTargetSuccess,
+  judgeHandler,
 }: Props) => {
   let themeColor = playpattern.target.color; //ターゲットの色
   let allowGap = playgap.frontGap; //中心からここまで成功範囲
@@ -41,39 +40,29 @@ const Targets = ({
   const [opacities, setOpacities] = useState<number[]>([]); //ターゲットそれぞれの透明度
   const [color, setColor] = useState<string>(themeColor); //ターゲットのそれぞれの色
 
-  //ストップボタンを押した時の処理
-  const failureStopHandler = () => {
-    setIsRunning(false);
-  };
-
-  //スタート時にリセットする処理
+  //judgeがfailureになったとき赤くする
   useEffect(() => {
-    if (!isRunning) {
-      setTimeout(() => {
-        setCount(0);
-        setLaps([]);
-        setOpacities([]);
-        setAllGaps([]);
-        setTargetSuccess([]);
-        setColor(themeColor);
-        setIsRunning(true);
-      }, 1000);
+    if (playState.judge === judgeStatus.failure) {
+      setColor("red");
     }
-  }, [isRunning]);
+  }, [playState.judge === judgeStatus.failure]);
+
+  //judgeがwaitingになったときリセットする
+  useEffect(() => {
+    if (playState.judge === judgeStatus.waiting) {
+      setCount(0);
+      setLaps([]);
+      setOpacities([]);
+      setAllGaps([]);
+      setColor(themeColor);
+      setIsRunning(true);
+    }
+  }, [playState.judge === judgeStatus.waiting]);
 
   //ボタンを押した時の処理
   const lapHandler = () => {
     setLaps((prevCount) => [...prevCount, count]);
   };
-
-  //targetがすべて成功した時;
-  useEffect(() => {
-    if (targetSuccess.length === playpatternLength) {
-      setTimeout(() => {
-        setIsRunning(false);
-      }, 200);
-    }
-  }, [targetSuccess]);
 
   const { width, height, scale } = Dimensions.get("window");
 
@@ -90,12 +79,10 @@ const Targets = ({
           opacities={opacities}
           color={color}
           count={count}
-          targetSuccess={targetSuccess}
           allGaps={allGaps}
           setAllGaps={setAllGaps}
           setColor={setColor}
-          failureStopHandler={failureStopHandler}
-          setTargetSuccess={setTargetSuccess}
+          judgeHandler={judgeHandler}
         />
         <View
           style={[

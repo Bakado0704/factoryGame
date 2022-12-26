@@ -1,20 +1,23 @@
 import { View, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Gameover from "../modals/GameoverModal";
 import BgBlack from "../components/ui/BgBlack";
 import Game from "../libs/game/game";
 import { BackgroundType } from "../types/background";
 import { useDispatch, useSelector } from "react-redux";
-import { changeStatus, staminaDecrese, staminaIncrese } from "../store/job";
-import { PlayStatus } from "../types/play";
+import { changeJudge, changeStatus, staminaDecrese, staminaIncrese } from "../store/job";
+import { judgeStatus, PlayStatus } from "../types/play";
 
 const GameScreen = () => {
-  const navigation = useNavigation();
   const dispatch = useDispatch();
-
-  //dispatch関係
+  const navigation = useNavigation();
   const playState = useSelector((state) => state.job.play);
+
+  //dispatch関数の宣言
+  const judgeHandler = (judge: judgeStatus) => {
+    dispatch(changeJudge(judge));
+  };
   const damageHandler = (number: number) => {
     dispatch(staminaDecrese(number));
   };
@@ -42,7 +45,9 @@ const GameScreen = () => {
       <Game
         type={BackgroundType.yamagawa}
         playState={playState}
+        judgeHandler={judgeHandler}
         damageHandler={damageHandler}
+        comboHandler={comboHandler}
       />
     );
   }

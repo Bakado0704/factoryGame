@@ -8,7 +8,7 @@ import User from "../models/user";
 import { JobName } from "../types/job";
 import { UserIconType } from "../types/userIcon";
 import { UserIcons } from "../types/userIcons";
-import { Play, PlayColor, PlayStatus } from "../types/play";
+import { judgeStatus, Play, PlayColor, PlayStatus } from "../types/play";
 import PlayPattern from "../models/playpattern";
 import PlayTarget from "../models/playtarget";
 
@@ -518,6 +518,7 @@ const initialState: state = {
 
   play: {
     status: "stop", // ゲームの状態を管理
+    judge: "waiting", // ゲームの状態を管理
     processCount: 0, // 現在のカウント数
     completeCount: 0, // 成功した数
     money: 0, // 稼いだ金額
@@ -674,7 +675,9 @@ const JobRedux = createSlice({
     },
     changeStatus: (state, action: PayloadAction<PlayStatus>) => {
       state.play.status = action.payload;
-      console.log(state.play.status);
+    },
+    changeJudge: (state, action: PayloadAction<judgeStatus>) => {
+      state.play.judge = action.payload;
     },
   },
 });
@@ -688,4 +691,5 @@ export const staminaDecrese = JobRedux.actions.staminaDecrese;
 export const staminaIncrese = JobRedux.actions.staminaIncrese;
 export const staminaReset= JobRedux.actions.staminaReset;
 export const changeStatus= JobRedux.actions.changeStatus;
+export const changeJudge= JobRedux.actions.changeJudge;
 export default JobRedux.reducer;

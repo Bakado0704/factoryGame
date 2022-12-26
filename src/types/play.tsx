@@ -1,5 +1,6 @@
 export interface Play {
   status: PlayStatus; // ゲームの状態を管理
+  judge: judgeStatus; // ゲームの状態を管理
   processCount: number; // 現在のカウント数
   completeCount: number; // 成功した数
   money: number; // 稼いだ金額
@@ -16,6 +17,13 @@ export const PlayStatus = {
   result: "result",
 } as const;
 export type PlayStatus = typeof PlayStatus[keyof typeof PlayStatus];
+
+export const judgeStatus = {
+  waiting: "waiting",
+  success: "success",
+  failure: "failure",
+} as const;
+export type judgeStatus = typeof judgeStatus[keyof typeof judgeStatus];
 
 export interface PlayPattern {
   distance: number[];

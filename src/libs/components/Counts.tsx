@@ -1,28 +1,56 @@
 import { View, StyleSheet, Image } from "react-native";
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { Play, PlayGap } from "../../types/play";
+import { judgeStatus, Play, PlayGap, PlayStatus } from "../../types/play";
 import PlayPattern from "../../models/playpattern";
 import Targets from "./Targets";
 import NavGame from "../../components/nav/NavFooter/NavGame";
-import { useDispatch } from "react-redux";
 
 type Props = {
   playpattern: PlayPattern[][];
   playgap: PlayGap;
   playState: Play;
+  judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
+  comboHandler: (number: number) => void;
 };
 
-const Counts = ({ playpattern, playgap, playState, damageHandler }: Props) => {
+const Counts = ({
+  playpattern,
+  playgap,
+  playState,
+  judgeHandler,
+  damageHandler,
+  comboHandler,
+}: Props) => {
   //各種宣言
-  const dispatch = useDispatch();
   const [count, setCount] = useState<number>(0); //アニメーションを動かす基盤の数
   const [allGaps, setAllGaps] = useState<number[]>([]);
   const [isRunning, setIsRunning] = useState<boolean>(false); //アニメーションが動いているかどうか
-  const [targetSuccess, setTargetSuccess] = useState<string[]>([]);
   const [selectedPlayPattern, setSelectedPlayPattern] = useState<PlayPattern[]>(
     playpattern[0]
   );
+
+  //スタミナカウント設定
+  const useStaminaFrame = (status: PlayStatus, callback = () => {}) => {
+    const reqIdRef = useRef<number>(0);
+    const loop = useCallback(() => {
+      if (status === PlayStatus.playing) {
+        callback();
+        reqIdRef.current = requestAnimationFrame(loop);
+      }
+    }, [status, callback]);
+
+    useEffect(() => {
+      reqIdRef.current = requestAnimationFrame(loop);
+      return () => cancelAnimationFrame(reqIdRef.current);
+    }, [loop]);
+  };
+
+  const stamina = useCallback(() => {
+    damageHandler(0.1);
+  }, []);
+
+  useStaminaFrame(playState.status, stamina);
 
   //時間カウント設定
   const useAnimationFrame = (isRunning: boolean, callback = () => {}) => {
@@ -40,24 +68,20 @@ const Counts = ({ playpattern, playgap, playState, damageHandler }: Props) => {
     }, [loop]);
   };
 
-  //繰り返す処理(カウントを足していく)
   const box = useCallback(() => {
     setCount((prevCount) => ++prevCount);
-    damageHandler(1);
   }, []);
 
   useAnimationFrame(isRunning, box);
 
-  //パターンの選定
+  //statusがplayingに変わったときパターンの選定
   useEffect(() => {
-    if (!isRunning) {
-      setTimeout(() => {
-        setSelectedPlayPattern(
-          playpattern[Math.floor(Math.random() * playpattern.length)]
-        );
-      }, 1000);
+    if (playState.status === PlayStatus.playing) {
+      setSelectedPlayPattern(
+        playpattern[Math.floor(Math.random() * playpattern.length)]
+      );
     }
-  }, [isRunning]);
+  }, [playState.status]);
 
   // すべてのDitanceの宣言
   let allDistance = [];
@@ -67,15 +91,33 @@ const Counts = ({ playpattern, playgap, playState, damageHandler }: Props) => {
     }
   }
 
-  //すべてのgapsがdistanceと同じ数になる && gapsがすべて範囲内の時、成功
+  //すべてのgapsがdistanceと同じ数になる && gapsがすべて範囲内の時、成功にする
+  //judgeが成功の時,isRunnningをfalseにし、waitingにもどす
   useEffect(() => {
     if (
       allDistance.length === allGaps.length &&
       allGaps.every((value) => value <= playgap.frontGap)
     ) {
-      console.log("success!!!!");
+      setTimeout(() => {
+        setIsRunning(false);
+        judgeHandler(judgeStatus.success);
+      }, 200);
+      setTimeout(() => {
+        judgeHandler(judgeStatus.waiting);
+      }, 800);
     }
   }, [allGaps]);
+
+  //judgeが失敗の時,isRunnningをfalse＋100ダメージ、waitingにもどす
+  useEffect(() => {
+    if (playState.judge === judgeStatus.failure) {
+      setIsRunning(false);
+      damageHandler(100);
+      setTimeout(() => {
+        judgeHandler(judgeStatus.waiting);
+      }, 800);
+    }
+  }, [playState.judge === judgeStatus.failure]);
 
   //ターゲットをfor文で表示
   var TargetSet = [];
@@ -89,11 +131,11 @@ const Counts = ({ playpattern, playgap, playState, damageHandler }: Props) => {
         count={count}
         isRunning={isRunning}
         allGaps={allGaps}
-        targetSuccess={targetSuccess}
+        playState={playState}
         setAllGaps={setAllGaps}
         setCount={setCount}
         setIsRunning={setIsRunning}
-        setTargetSuccess={setTargetSuccess}
+        judgeHandler={judgeHandler}
       />
     );
   }
