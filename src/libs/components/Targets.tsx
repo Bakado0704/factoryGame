@@ -59,6 +59,12 @@ const Targets = ({
     }
   }, [playState.judge === judgeStatus.waiting]);
 
+  useEffect(() => {
+    if (laps.length !== 0) {
+      console.log(laps)
+    }
+  }, [laps]);
+
   //ボタンを押した時の処理
   const lapHandler = () => {
     setLaps((prevCount) => [...prevCount, count]);
@@ -80,6 +86,7 @@ const Targets = ({
           color={color}
           count={count}
           allGaps={allGaps}
+          playState={playState}
           setAllGaps={setAllGaps}
           setColor={setColor}
           judgeHandler={judgeHandler}

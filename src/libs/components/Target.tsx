@@ -2,11 +2,12 @@ import { View, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
 import PlayPattern from "../../models/playpattern";
 import PlayGap from "../../models/playgap";
-import { judgeStatus } from "../../types/play";
+import { judgeStatus, Play, PlayStatus } from "../../types/play";
 
 type Props = {
   playpattern: PlayPattern;
   playgap: PlayGap;
+  playState: Play;
   laps: number[];
   opacities: number[];
   color: string;
@@ -20,6 +21,7 @@ type Props = {
 const Target = ({
   playgap,
   playpattern,
+  playState,
   laps,
   count,
   opacities,
@@ -42,17 +44,16 @@ const Target = ({
   //translateの位置を指定
   for (let i = 0; i < distance.length; i++) {
     translateX[i] = Math.floor(distance[i] - (velocity * count) / 100);
-
-    gaps[i] = distance[i] - laps[i] * velocity / 100;
+    gaps[i] = Math.floor(distance[i] - (laps[i] * velocity) / 100);
 
     useEffect(() => {
       if (gaps[i]) {
-        setAllGaps([...allGaps, Math.floor(gaps[i])])
+        setAllGaps([...allGaps, gaps[i]]);
       }
     }, [gaps[i]]);
 
     if (laps.length > i && laps.length >= i + 1) {
-      translateX[i] = distance[i] - (velocity * laps[i]) / 100;
+      translateX[i] = Math.floor(distance[i] - (velocity * laps[i]) / 100);
 
       if (gaps[i] <= allowGap) {
         opacities[i] = 0;
@@ -68,14 +69,20 @@ const Target = ({
 
   //ターゲットを押すのが早すぎた
   useEffect(() => {
-    if (gaps.some((value) => value >= allowGap)) {
+    if (
+      gaps.some((value) => value >= allowGap) &&
+      playState.judge !== judgeStatus.failure
+    ) {
       judgeHandler(judgeStatus.failure);
     }
   }, [gaps.some((value) => value >= allowGap)]);
 
   //ターゲットを押すのが遅すぎた
   useEffect(() => {
-    if (translateX.some((value) => value <= -failureGap)) {
+    if (
+      translateX.some((value) => value <= -failureGap) &&
+      playState.judge !== judgeStatus.failure
+    ) {
       judgeHandler(judgeStatus.failure);
     }
   }, [translateX.some((value) => value <= -failureGap)]);

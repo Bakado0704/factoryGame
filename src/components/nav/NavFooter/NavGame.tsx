@@ -1,21 +1,51 @@
+import { useEffect, useState } from "react";
 import { View, Image, StyleSheet } from "react-native";
 import Colors from "../../../constants/color";
-import { Play } from "../../../types/play";
+import { judgeStatus, Play } from "../../../types/play";
+import JudgeLightSuccess from "../../animation/JudgeLightSuccess";
 
 type Props = {
   playState: Play;
 };
 
 const NavGame = ({ playState }: Props) => {
+  const [judgeLight, setJudgeLight] = useState<JSX.Element>();
+  //デフォルトの場合
+  useEffect(() => {
+    if (playState.judge === judgeStatus.waiting) {
+      setJudgeLight(undefined);
+    }
+  }, [playState.judge === judgeStatus.waiting]);
+
+  //judgeが成功の時
+  useEffect(() => {
+    if (playState.judge === judgeStatus.success) {
+      setJudgeLight(<JudgeLightSuccess />);
+    }
+  }, [playState.judge === judgeStatus.success]);
+
+  //judgeが失敗の時
+  useEffect(() => {
+    if (playState.judge === judgeStatus.failure) {
+      setJudgeLight(
+        <Image
+          source={require("../../../assets/ui/judgeFalse.png")}
+          style={styles.judge}
+        />
+      );
+    }
+  }, [playState.judge === judgeStatus.failure]);
+
   const length = Math.floor((playState.stamina / 300) * 51);
 
   return (
     <View style={styles.innerContainer}>
       <View style={[styles.stamina, { width: length }]} />
       <Image
-        source={require("../../../assets/ui/judgeSuccess.png")}
+        source={require("../../../assets/ui/judgeOff.png")}
         style={styles.judge}
       />
+      {judgeLight}
       <Image
         source={require("../../../assets/ui/playBoardTop.png")}
         style={styles.board}
