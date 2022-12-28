@@ -6,8 +6,8 @@ import BgBlack from "../components/ui/BgBlack";
 import Game from "../libs/game/game";
 import { BackgroundType } from "../types/background";
 import { useDispatch, useSelector } from "react-redux";
-import { changeJudge, changeStatus, staminaDecrese, staminaIncrese } from "../store/job";
-import { judgeStatus, PlayStatus } from "../types/play";
+import { changeActivePattern, changeJudge, changeProcessCount, changeStatus, staminaDecrese, staminaIncrese } from "../store/job";
+import { judgeStatus, PlayPattern, PlayStatus } from "../types/play";
 
 const GameScreen = () => {
   const dispatch = useDispatch();
@@ -23,6 +23,12 @@ const GameScreen = () => {
   };
   const comboHandler = (number: number) => {
     dispatch(staminaIncrese(number));
+  };
+  const processCountHandler = (number: number) => {
+    dispatch(changeProcessCount(number));
+  };
+  const selectedPatternHandler = (pattern: PlayPattern[]) => {
+    dispatch(changeActivePattern(pattern));
   };
 
   //スタミナが0になるとゲームオーバー
@@ -48,6 +54,8 @@ const GameScreen = () => {
         judgeHandler={judgeHandler}
         damageHandler={damageHandler}
         comboHandler={comboHandler}
+        processCountHandler={processCountHandler}
+        selectedPatternHandler={selectedPatternHandler}
       />
     );
   }

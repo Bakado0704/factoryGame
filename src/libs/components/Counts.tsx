@@ -4,6 +4,7 @@ import { judgeStatus, Play, PlayGap, PlayStatus } from "../../types/play";
 import PlayPattern from "../../models/playpattern";
 import Targets from "./Targets";
 import NavGame from "../../components/nav/NavFooter/NavGame";
+import playpattern from "../../models/playpattern";
 
 type Props = {
   playpattern: PlayPattern[][];
@@ -12,6 +13,8 @@ type Props = {
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
   comboHandler: (number: number) => void;
+  processCountHandler: (number: number) => void;
+  selectedPatternHandler: (pattern: PlayPattern[]) => void;
 };
 
 const Counts = ({
@@ -21,6 +24,8 @@ const Counts = ({
   judgeHandler,
   damageHandler,
   comboHandler,
+  processCountHandler,
+  selectedPatternHandler,
 }: Props) => {
   //各種宣言
   const [count, setCount] = useState<number>(0); //アニメーションを動かす基盤の数
@@ -80,7 +85,8 @@ const Counts = ({
       setSelectedPlayPattern(
         playpattern[Math.floor(Math.random() * playpattern.length)]
       );
-      console.log("cahnged!");
+      selectedPatternHandler(selectedPlayPattern);
+      console.log("changed!");
     }
   }, [playState.judge === judgeStatus.waiting]);
 
@@ -95,6 +101,7 @@ const Counts = ({
   //すべてのgapsがdistanceと同じ数になる && gapsがすべて範囲内の時、成功にする
   //judgeが成功の時,isRunnningをfalseにし、waitingにもどす
   useEffect(() => {
+    processCountHandler(allGaps.length);
     if (
       allDistance.length === allGaps.length &&
       allGaps.every((value) => value <= playgap.frontGap)

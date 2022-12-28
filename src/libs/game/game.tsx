@@ -5,7 +5,7 @@ import { BackgroundType } from "../../types/background";
 import Counts from "../components/Counts";
 import { PATTERN_DATES } from "../datas/dates";
 import PlayGap from "../../models/playgap";
-import { judgeStatus, Play } from "../../types/play";
+import { judgeStatus, Play, PlayPattern } from "../../types/play";
 
 type Props = {
   type: BackgroundType;
@@ -13,9 +13,19 @@ type Props = {
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
   comboHandler: (number: number) => void;
+  processCountHandler: (number: number) => void;
+  selectedPatternHandler: (pattern: PlayPattern[]) => void;
 };
 
-const Game = ({ type, playState, judgeHandler, damageHandler, comboHandler }: Props) => {
+const Game = ({
+  type,
+  playState,
+  judgeHandler,
+  damageHandler,
+  comboHandler,
+  processCountHandler,
+  selectedPatternHandler,
+}: Props) => {
   let playgap = new PlayGap(20, 10);
   let playpattern = PATTERN_DATES[0];
 
@@ -72,6 +82,8 @@ const Game = ({ type, playState, judgeHandler, damageHandler, comboHandler }: Pr
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}
           comboHandler={comboHandler}
+          processCountHandler={processCountHandler}
+          selectedPatternHandler={selectedPatternHandler}
         />
       </View>
     </>

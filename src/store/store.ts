@@ -1,4 +1,4 @@
-import { configureStore, MiddlewareArray } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
 import changeJobReducer from "./job";
 

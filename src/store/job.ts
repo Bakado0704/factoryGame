@@ -11,6 +11,7 @@ import { UserIcons } from "../types/userIcons";
 import { judgeStatus, Play, PlayColor, PlayStatus } from "../types/play";
 import PlayPattern from "../models/playpattern";
 import PlayTarget from "../models/playtarget";
+import playpattern from "../models/playpattern";
 
 export type state = {
   jobs: Job[];
@@ -19,6 +20,7 @@ export type state = {
   previewIcon: UserIcons;
   user: User;
   play: Play;
+  activePlayPattern: playpattern[];
 };
 
 const initialState: state = {
@@ -504,7 +506,7 @@ const initialState: state = {
 
   user: {
     name: "user001",
-    money: 1000,
+    money: 10000,
     icon: UserIconType.man1,
     nowJob: JobName.yamagawa,
     gachaStandBy: false,
@@ -522,7 +524,7 @@ const initialState: state = {
     processCount: 0, // 現在のカウント数
     completeCount: 0, // 成功した数
     money: 0, // 稼いだ金額
-    stamina: 300, //スタミナ
+    stamina: 300, // スタミナ
     combo: 0, // 今のコンボ数
     pattern: [
       [
@@ -631,6 +633,36 @@ const initialState: state = {
       ),
     ], // 押すボタンの種類
   },
+
+  activePlayPattern: [
+    new PlayPattern(
+      [100],
+      [1],
+      new PlayTarget(
+        100,
+        PlayColor.Black,
+        require("../assets/ui/blackButton.png")
+      )
+    ),
+    new PlayPattern(
+      [80, 150, 200],
+      [-1, 1, -1],
+      new PlayTarget(
+        80,
+        PlayColor.Green,
+        require("../assets/ui/greenButton.png")
+      )
+    ),
+    new PlayPattern(
+      [90, 150],
+      [1, -1],
+      new PlayTarget(
+        120,
+        PlayColor.Yellow,
+        require("../assets/ui/yellowButton.png")
+      )
+    ),
+  ],
 };
 
 const JobRedux = createSlice({
@@ -678,7 +710,13 @@ const JobRedux = createSlice({
     },
     changeJudge: (state, action: PayloadAction<judgeStatus>) => {
       state.play.judge = action.payload;
-      console.log(action.payload)
+      console.log(action.payload);
+    },
+    changeProcessCount: (state, action: PayloadAction<number>) => {
+      state.play.processCount = action.payload;
+    },
+    changeActivePattern: (state, action: PayloadAction<playpattern[]>) => {
+      state.activePlayPattern = action.payload;
     },
   },
 });
@@ -690,7 +728,9 @@ export const changeUser = JobRedux.actions.changeUser;
 export const changePreviewIcon = JobRedux.actions.changePreviewIcon;
 export const staminaDecrese = JobRedux.actions.staminaDecrese;
 export const staminaIncrese = JobRedux.actions.staminaIncrese;
-export const staminaReset= JobRedux.actions.staminaReset;
-export const changeStatus= JobRedux.actions.changeStatus;
-export const changeJudge= JobRedux.actions.changeJudge;
+export const staminaReset = JobRedux.actions.staminaReset;
+export const changeStatus = JobRedux.actions.changeStatus;
+export const changeJudge = JobRedux.actions.changeJudge;
+export const changeProcessCount = JobRedux.actions.changeProcessCount;
+export const changeActivePattern = JobRedux.actions.changeActivePattern;
 export default JobRedux.reducer;
