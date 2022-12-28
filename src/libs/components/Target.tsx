@@ -2,7 +2,7 @@ import { View, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
 import PlayPattern from "../../models/playpattern";
 import PlayGap from "../../models/playgap";
-import { judgeStatus, Play, PlayStatus } from "../../types/play";
+import { judgeStatus, Play } from "../../types/play";
 
 type Props = {
   playpattern: PlayPattern;
@@ -24,9 +24,9 @@ const Target = ({
   playState,
   laps,
   count,
+  allGaps,
   opacities,
   color,
-  allGaps,
   setAllGaps,
   judgeHandler,
 }: Props) => {
@@ -44,16 +44,11 @@ const Target = ({
   //translateの位置を指定
   for (let i = 0; i < distance.length; i++) {
     translateX[i] = Math.floor(distance[i] - (velocity * count) / 100);
-    gaps[i] = Math.floor(distance[i] - (laps[i] * velocity) / 100);
+    gaps[i] = Math.floor(distance[i] - (velocity * laps[i]) / 100);
 
-    useEffect(() => {
-      if (gaps[i]) {
-        setAllGaps([...allGaps, gaps[i]]);
-      }
-    }, [gaps[i]]);
-
-    if (laps.length > i && laps.length >= i + 1) {
-      translateX[i] = Math.floor(distance[i] - (velocity * laps[i]) / 100);
+    //もしgapsが設定されたら,移動量はそこになる
+    if (gaps[i] || gaps[i] === 0) {
+      translateX[i] = gaps[i];
 
       if (gaps[i] <= allowGap) {
         opacities[i] = 0;
@@ -62,28 +57,29 @@ const Target = ({
       }
     }
 
-    if (translateX[i] < -failureGap) {
-      translateX[i] = 0;
-    }
+    useEffect(() => {
+      // console.log(laps[i]);
+      console.log(gaps[i]);
+      if (gaps[i] || gaps[i] === 0) {
+        setAllGaps([...allGaps, gaps[i]]);
+      }
+      console.log(allGaps);
+    }, [gaps[i] || gaps[i] === 0]);
   }
 
-  //ターゲットを押すのが早すぎた
-  useEffect(() => {
-    if (
-      gaps.some((value) => value >= allowGap) &&
-      playState.judge !== judgeStatus.failure
-    ) {
-      judgeHandler(judgeStatus.failure);
-    }
-  }, [gaps.some((value) => value >= allowGap)]);
+  // //ターゲットを押すのが早すぎた
+  // useEffect(() => {
+  //   if (gaps.some((value) => value >= allowGap)) {
+  //     judgeHandler(judgeStatus.failure);
+  //     console.log("ターゲットを押すのが早すぎた");
+  //   }
+  // }, [gaps.some((value) => value >= allowGap)]);
 
   //ターゲットを押すのが遅すぎた
   useEffect(() => {
-    if (
-      translateX.some((value) => value <= -failureGap) &&
-      playState.judge !== judgeStatus.failure
-    ) {
+    if (translateX.some((value) => value <= -failureGap)) {
       judgeHandler(judgeStatus.failure);
+      console.log("ターゲットを押すのが遅すぎた");
     }
   }, [translateX.some((value) => value <= -failureGap)]);
 

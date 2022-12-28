@@ -22,7 +22,6 @@ const Counts = ({
   damageHandler,
   comboHandler,
 }: Props) => {
-
   //各種宣言
   const [count, setCount] = useState<number>(0); //アニメーションを動かす基盤の数
   const [allGaps, setAllGaps] = useState<number[]>([]);
@@ -75,15 +74,20 @@ const Counts = ({
 
   useAnimationFrame(isRunning, box);
 
-  //statusがplayingに変わったときパターンの選定
+  //judgeが successかfailureに変わったときパターンの選定
   useEffect(() => {
-    if (playState.judge === judgeStatus.success || judgeStatus.failure) {
+    if (
+      playState.judge === judgeStatus.success ||
+      playState.judge === judgeStatus.failure
+    ) {
       setSelectedPlayPattern(
         playpattern[Math.floor(Math.random() * playpattern.length)]
       );
     }
-    console.log(playState.judge === judgeStatus.success || judgeStatus.failure)
-  }, [playState.judge === judgeStatus.success || judgeStatus.failure]);
+  }, [
+    playState.judge === judgeStatus.success ||
+      playState.judge === judgeStatus.failure,
+  ]);
 
   // すべてのDitanceの宣言
   let allDistance = [];
@@ -96,8 +100,6 @@ const Counts = ({
   //すべてのgapsがdistanceと同じ数になる && gapsがすべて範囲内の時、成功にする
   //judgeが成功の時,isRunnningをfalseにし、waitingにもどす
   useEffect(() => {
-    // console.log(allDistance.length);
-    console.log(allGaps);
     if (
       allDistance.length === allGaps.length &&
       allGaps.every((value) => value <= playgap.frontGap)
@@ -110,8 +112,16 @@ const Counts = ({
         judgeHandler(judgeStatus.waiting);
       }, 800);
     }
+    console.log(allGaps)
   }, [allGaps]);
 
+    //ターゲットを押すのが早すぎた
+    useEffect(() => {
+      if (allGaps.some((value) => value >= 20)) {
+        judgeHandler(judgeStatus.failure);
+        console.log("ターゲットを押すのが早すぎた");
+      }
+    }, [allGaps.some((value) => value >= 20)]);
 
   //judgeが失敗の時,isRunnningをfalse＋100ダメージ、waitingにもどす
   useEffect(() => {

@@ -59,18 +59,20 @@ const Targets = ({
     }
   }, [playState.judge === judgeStatus.waiting]);
 
+  //lapsの数がdistanceの数を超えても失敗
   useEffect(() => {
-    if (laps.length !== 0) {
-      console.log(laps)
+    if (laps.length > playpattern.distance.length) {
+      judgeHandler(judgeStatus.failure);
+      console.log("lapsの数がdistanceの数を超えても失敗");
     }
-  }, [laps]);
+  }, [laps.length > playpattern.distance.length]);
 
   //ボタンを押した時の処理
   const lapHandler = () => {
     setLaps((prevCount) => [...prevCount, count]);
   };
 
-  const { width, height, scale } = Dimensions.get("window");
+  const { width } = Dimensions.get("window");
 
   let transformX = width / 2;
 
