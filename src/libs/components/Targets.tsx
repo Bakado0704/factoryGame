@@ -8,7 +8,6 @@ import ImageButton from "../../components/ui/ImageButton";
 
 type Props = {
   playpattern: PlayPattern;
-  playpatternLength: number;
   playgap: PlayGap;
   count: number;
   isRunning: boolean;
@@ -59,14 +58,6 @@ const Targets = ({
     }
   }, [playState.judge === judgeStatus.waiting]);
 
-  //lapsの数がdistanceの数を超えても失敗
-  useEffect(() => {
-    if (laps.length > playpattern.distance.length) {
-      judgeHandler(judgeStatus.failure);
-      console.log("lapsの数がdistanceの数を超えても失敗");
-    }
-  }, [laps.length > playpattern.distance.length]);
-
   //ボタンを押した時の処理
   const lapHandler = () => {
     setLaps((prevCount) => [...prevCount, count]);
@@ -88,9 +79,7 @@ const Targets = ({
           color={color}
           count={count}
           allGaps={allGaps}
-          playState={playState}
           setAllGaps={setAllGaps}
-          setColor={setColor}
           judgeHandler={judgeHandler}
         />
         <View

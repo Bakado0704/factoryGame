@@ -74,20 +74,15 @@ const Counts = ({
 
   useAnimationFrame(isRunning, box);
 
-  //judgeが successかfailureに変わったときパターンの選定
+  //judgeが waitingに変わったときパターンの選定
   useEffect(() => {
-    if (
-      playState.judge === judgeStatus.success ||
-      playState.judge === judgeStatus.failure
-    ) {
+    if (playState.judge === judgeStatus.waiting) {
       setSelectedPlayPattern(
         playpattern[Math.floor(Math.random() * playpattern.length)]
       );
+      console.log("cahnged!");
     }
-  }, [
-    playState.judge === judgeStatus.success ||
-      playState.judge === judgeStatus.failure,
-  ]);
+  }, [playState.judge === judgeStatus.waiting]);
 
   // すべてのDitanceの宣言
   let allDistance = [];
@@ -112,18 +107,17 @@ const Counts = ({
         judgeHandler(judgeStatus.waiting);
       }, 800);
     }
-    console.log(allGaps)
   }, [allGaps]);
 
-    //ターゲットを押すのが早すぎた
-    useEffect(() => {
-      if (allGaps.some((value) => value >= 20)) {
-        judgeHandler(judgeStatus.failure);
-        console.log("ターゲットを押すのが早すぎた");
-      }
-    }, [allGaps.some((value) => value >= 20)]);
+  //ターゲットを押すのが早すぎた
+  useEffect(() => {
+    if (allGaps.some((value) => value >= 20)) {
+      judgeHandler(judgeStatus.failure);
+      console.log("ターゲットを押すのが早すぎた");
+    }
+  }, [allGaps.some((value) => value >= 20)]);
 
-  //judgeが失敗の時,isRunnningをfalse＋100ダメージ、waitingにもどす
+  // judgeが失敗の時,isRunnningをfalse＋100ダメージ、waitingにもどす
   useEffect(() => {
     if (playState.judge === judgeStatus.failure) {
       setIsRunning(false);
@@ -141,7 +135,6 @@ const Counts = ({
       <Targets
         key={i}
         playpattern={selectedPlayPattern[i]}
-        playpatternLength={selectedPlayPattern.length}
         playgap={playgap}
         count={count}
         isRunning={isRunning}
