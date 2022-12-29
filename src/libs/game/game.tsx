@@ -10,9 +10,11 @@ import { judgeStatus, Play, PlayPattern } from "../../types/play";
 type Props = {
   type: BackgroundType;
   playState: Play;
+  perMoney: number;
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
-  comboHandler: (number: number) => void;
+  changeComboHandler: (number: number) => void;
+  changeNowMoneyHandler: (number: number) => void;
   processCountHandler: (number: number) => void;
   selectedPatternHandler: (pattern: PlayPattern[]) => void;
 };
@@ -20,9 +22,11 @@ type Props = {
 const Game = ({
   type,
   playState,
+  perMoney,
   judgeHandler,
   damageHandler,
-  comboHandler,
+  changeComboHandler,
+  changeNowMoneyHandler,
   processCountHandler,
   selectedPatternHandler,
 }: Props) => {
@@ -81,9 +85,11 @@ const Game = ({
           playState={playState}
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}
-          comboHandler={comboHandler}
+          changeComboHandler={changeComboHandler}
+          changeNowMoneyHandler={changeNowMoneyHandler}
           processCountHandler={processCountHandler}
           selectedPatternHandler={selectedPatternHandler}
+          perMoney={perMoney}
         />
       </View>
     </>

@@ -10,9 +10,11 @@ type Props = {
   playpattern: PlayPattern[][];
   playgap: PlayGap;
   playState: Play;
+  perMoney: number;
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
-  comboHandler: (number: number) => void;
+  changeComboHandler: (number: number) => void;
+  changeNowMoneyHandler: (number: number) => void;
   processCountHandler: (number: number) => void;
   selectedPatternHandler: (pattern: PlayPattern[]) => void;
 };
@@ -21,9 +23,11 @@ const Counts = ({
   playpattern,
   playgap,
   playState,
+  perMoney,
   judgeHandler,
   damageHandler,
-  comboHandler,
+  changeComboHandler,
+  changeNowMoneyHandler,
   processCountHandler,
   selectedPatternHandler,
 }: Props) => {
@@ -107,6 +111,8 @@ const Counts = ({
       allGaps.every((value) => value <= playgap.frontGap)
     ) {
       judgeHandler(judgeStatus.success);
+      changeComboHandler(1);
+      changeNowMoneyHandler(perMoney);
       setTimeout(() => {
         setIsRunning(false);
       }, 200);
@@ -128,6 +134,7 @@ const Counts = ({
   useEffect(() => {
     if (playState.judge === judgeStatus.failure) {
       setIsRunning(false);
+      changeComboHandler(0);
       damageHandler(100);
       setTimeout(() => {
         judgeHandler(judgeStatus.waiting);

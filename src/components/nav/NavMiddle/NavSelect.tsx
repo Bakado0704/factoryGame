@@ -1,5 +1,4 @@
 import { View, Image, Text, StyleSheet } from "react-native";
-import ImageButton from "../../ui/ImageButton";
 import { useSelector } from "react-redux";
 import BoardImg from "../../typeui/BoardImg";
 import RankingButton from "../../animation/animationButton/RankingButton";
@@ -7,7 +6,11 @@ import NextButton from "../../animation/animationButton/NextButton";
 import PrevButton from "../../animation/animationButton/PrevButton";
 import { useNavigation } from "@react-navigation/native";
 
-const NavBody = () => {
+type Props = {
+  maxMoney: number;
+};
+
+const NavBody = ({maxMoney}: Props) => {
   const activeBoard = useSelector((state) => state.job.job.boardImg);
 
   const navigation = useNavigation();
@@ -33,7 +36,7 @@ const NavBody = () => {
           source={require("../../../assets/ui/money1.png")}
           style={styles.moneyImg}
         />
-        <Text style={styles.money}>340</Text>
+        <Text style={styles.money}>{maxMoney}</Text>
       </View>
     </View>
   );

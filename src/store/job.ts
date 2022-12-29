@@ -173,11 +173,13 @@ const initialState: state = {
             before: require("../assets/product/product4-normal-second.png"),
           },
           { before: require("../assets/product/product4-normal-third.png") },
+          { before: require("../assets/product/product4-normal-fourth.png") },
         ],
         bonus: [
           { before: require("../assets/product/product4-gold-first.png") },
           { before: require("../assets/product/product4-gold-second.png") },
           { before: require("../assets/product/product4-gold-third.png") },
+          { before: require("../assets/product/product4-gold-fourth.png") },
         ],
         style: { width: 200, height: 86 },
       },
@@ -259,11 +261,13 @@ const initialState: state = {
             before: require("../assets/product/product6-normal-second.png"),
           },
           { before: require("../assets/product/product6-normal-third.png") },
+          { before: require("../assets/product/product6-normal-fourth.png") },
         ],
         bonus: [
           { before: require("../assets/product/product6-gold-first.png") },
           { before: require("../assets/product/product6-gold-second.png") },
           { before: require("../assets/product/product6-gold-third.png") },
+          { before: require("../assets/product/product6-gold-fourth.png") },
         ],
         style: { width: 200, height: 130 },
       },
@@ -345,11 +349,13 @@ const initialState: state = {
             before: require("../assets/product/product8-normal-second.png"),
           },
           { before: require("../assets/product/product8-normal-third.png") },
+          { before: require("../assets/product/product8-normal-fourth.png") },
         ],
         bonus: [
           { before: require("../assets/product/product8-gold-first.png") },
           { before: require("../assets/product/product8-gold-second.png") },
           { before: require("../assets/product/product8-gold-third.png") },
+          { before: require("../assets/product/product8-gold-fourth.png") },
         ],
         style: { width: 120, height: 207 },
       },
@@ -696,6 +702,41 @@ const JobRedux = createSlice({
     changeUser: (state, action: PayloadAction<User | UserIcons>) => {
       state.user.icon = action.payload.icon;
     },
+    changeMaxMoney: (state, action: PayloadAction<number>) => {
+      console.log(action.payload);
+      if (state.job.maxMoney <= action.payload) {
+        state.job.maxMoney = action.payload;
+      }
+    },
+    changeCombo: (state, action: PayloadAction<number>) => {
+      if (action.payload !== 0) {
+        state.play.combo = state.play.combo + action.payload;
+      } else {
+        state.play.combo = 0;
+      }
+    },
+    changeNowMoney: (state, action: PayloadAction<number>) => {
+      if (action.payload !== 0) {
+        if (state.play.combo <= 2) {
+          state.play.money = state.play.money + Math.floor(action.payload);
+        } else if (state.play.combo <= 4) {
+          state.play.money =
+            state.play.money + Math.floor(action.payload * 1.2);
+        } else if (state.play.combo <= 6) {
+          state.play.money =
+            state.play.money + Math.floor(action.payload * 1.6);
+        } else {
+          state.play.money =
+            state.play.money + Math.floor(action.payload * 2.0);
+        }
+      } else {
+        state.play.money = 0;
+      }
+    },
+    changeJobRecord: (state, action: PayloadAction<Job>) => {
+      state.jobs.find((job) => job.name === action.payload.name).maxMoney =
+        action.payload.maxMoney;
+    },
     staminaDecrese: (state, action: PayloadAction<number>) => {
       state.play.stamina = state.play.stamina - action.payload;
     },
@@ -726,6 +767,10 @@ export const changeUpdateJob = JobRedux.actions.changeUpdateJob;
 export const changePreviewJob = JobRedux.actions.changePreviewJob;
 export const changeUser = JobRedux.actions.changeUser;
 export const changePreviewIcon = JobRedux.actions.changePreviewIcon;
+export const changeMaxMoney = JobRedux.actions.changeMaxMoney;
+export const changeNowMoney = JobRedux.actions.changeNowMoney;
+export const changeCombo = JobRedux.actions.changeCombo;
+export const changeJobRecord = JobRedux.actions.changeJobRecord;
 export const staminaDecrese = JobRedux.actions.staminaDecrese;
 export const staminaIncrese = JobRedux.actions.staminaIncrese;
 export const staminaReset = JobRedux.actions.staminaReset;

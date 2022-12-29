@@ -1,23 +1,24 @@
 import { View, StyleSheet, Image, Text, Animated } from "react-native";
 import React, { useRef } from "react";
 import FaceIcon from "../components/typeui/FaceIcon";
-import { useSelector } from "react-redux";
 import ImageButton from "../components/ui/ImageButton";
+import { IconType } from "../types/icon";
 
 type Props = {
+  nowMoney: number;
+  maxMoney: number;
+  name: string;
+  iconType: IconType;
   offModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Gameover = ({ offModal }: Props) => {
+const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
   const iconAnim = useRef(new Animated.Value(0)).current;
 
   const iconY = iconAnim.interpolate({
     inputRange: [0, 100, 101, 200],
     outputRange: [-2, -2, 0, 0],
   });
-
-  const name = useSelector((state) => state.job.job.owner.name);
-  const iconType = useSelector((state) => state.job.job.icon);
 
   Animated.loop(
     Animated.timing(iconAnim, {
@@ -42,24 +43,31 @@ const Gameover = ({ offModal }: Props) => {
           <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}>
             新記録
           </Text>
-          <View style={styles.numberContainer}>
-            <Text style={[styles.resultText, { fontSize: 20 }]}>
-              成功回数:{" "}
-            </Text>
-            <Text style={[styles.resultText, { fontSize: 25 }]}>25</Text>
-          </View>
-          <View style={styles.line} />
-          <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}>
-            新記録
-          </Text>
           <View style={styles.moneyContainer}>
             <Text style={[styles.resultText, { fontSize: 20 }]}>時給:</Text>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={[styles.resultText, { fontSize: 25 }]}>340</Text>
+            <Text style={[styles.resultText, { fontSize: 25 }]}>
+              {nowMoney}
+            </Text>
           </View>
+          <View style={styles.line} />
+          <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}>
+            新記録
+          </Text>
+          <View style={styles.moneyContainer}>
+            <Text style={[styles.resultText, { fontSize: 20 }]}>最高記録:</Text>
+            <Image
+              source={require("../assets/ui/money1.png")}
+              style={styles.moneyImg}
+            />
+            <Text style={[styles.resultText, { fontSize: 25 }]}>
+              {maxMoney}
+            </Text>
+          </View>
+
           <View style={styles.line} />
           <View style={styles.staminaContainer}>
             <Text style={[styles.resultText, { fontSize: 20 }]}>
@@ -101,7 +109,7 @@ const Gameover = ({ offModal }: Props) => {
             <Animated.View
               style={[styles.iconBox, { transform: [{ translateY: iconY }] }]}
             >
-              <FaceIcon type={iconType} width={78} height={78}/>
+              <FaceIcon type={iconType} width={78} height={78} />
             </Animated.View>
             <Text style={styles.position}>社長: {name}</Text>
           </View>
