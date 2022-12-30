@@ -22,8 +22,9 @@ const JobChangeScreen = () => {
   const jobs = useSelector((state) => state.job.jobs);
   const previewJob = useSelector((state) => state.job.previewJob);
   const previewIcon = useSelector((state) => state.job.previewIcon);
-  const user = useSelector((state) => state.job.user);
-  const userIcon = useSelector((state) => state.job.user.icon);
+  const User = useSelector((state) => state.job.user);
+  const userIcon = User.icon;
+  const userMoney = User.money;
 
   const [userModal, setUserModal] = useState(false);
   const navigation = useNavigation();
@@ -70,10 +71,14 @@ const JobChangeScreen = () => {
       />
       <View style={styles.innerContainer}>
         <View style={styles.headContainer}>
-          <NavHead icon={userIcon} onUserModal={onUserModalHandler} />
+          <NavHead
+            icon={userIcon}
+            onUserModal={onUserModalHandler}
+            userMoney={userMoney}
+          />
         </View>
         <View style={styles.jobsContainer}>
-          <NavJobList onModal={jobModalOnHandler} jobs={jobs} user={user} />
+          <NavJobList onModal={jobModalOnHandler} jobs={jobs} user={User} />
         </View>
         <View style={styles.buttonsContainer}>
           <JobReturnButton jobReturnHandler={jobReturnHandler} />

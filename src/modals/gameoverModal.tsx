@@ -49,52 +49,30 @@ const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={[styles.resultText, { fontSize: 25 }]}>
+            <Text
+              style={[
+                styles.resultText,
+                { fontSize: 25, marginLeft: 5 },
+              ]}
+            >
               {nowMoney}
             </Text>
           </View>
           <View style={styles.line} />
-          <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}>
-            新記録
-          </Text>
           <View style={styles.moneyContainer}>
             <Text style={[styles.resultText, { fontSize: 20 }]}>最高記録:</Text>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={[styles.resultText, { fontSize: 25 }]}>
+            <Text
+              style={[
+                styles.resultText,
+                { fontSize: 25,  marginLeft: 5 },
+              ]}
+            >
               {maxMoney}
             </Text>
-          </View>
-
-          <View style={styles.line} />
-          <View style={styles.staminaContainer}>
-            <Text style={[styles.resultText, { fontSize: 20 }]}>
-              メンタル:{" "}
-            </Text>
-            <View style={styles.staminaInnerContainer}>
-              <View style={styles.staminaContainerTop}>
-                <Text style={[styles.resultText, { fontSize: 20 }]}>310</Text>
-                <Image
-                  source={require("../assets/ui/arrow.png")}
-                  style={styles.arrowImg}
-                />
-                <Text style={[styles.resultText, { fontSize: 20 }]}>315</Text>
-              </View>
-              <View style={styles.staminaContainerBottom}>
-                <Image
-                  source={require("../assets/ui/stamina.png")}
-                  style={styles.staminaImg}
-                />
-                <Text
-                  style={[styles.resultText, { fontSize: 15, color: "red" }]}
-                >
-                  {" "}
-                  (+5)
-                </Text>
-              </View>
-            </View>
           </View>
         </View>
         <View style={styles.reactionContainer}>

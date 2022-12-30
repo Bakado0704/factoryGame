@@ -1,7 +1,11 @@
 import { Image, ImageBackground, Text, View, StyleSheet } from "react-native";
 import ImageButton from "./ImageButton";
 
-const UserMoney = () => {
+type Props = {
+  userMoney: number;
+};
+
+const UserMoney = ({ userMoney }: Props) => {
   const pressHandler = () => {};
 
   return (
@@ -17,7 +21,7 @@ const UserMoney = () => {
               source={require("../../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={styles.money}>1,300</Text>
+            <Text style={styles.money}>{userMoney}</Text>
             <ImageButton
               source={require("../../assets/ui/plusButton.png")}
               onPress={pressHandler}

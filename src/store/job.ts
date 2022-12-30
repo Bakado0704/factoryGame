@@ -690,7 +690,6 @@ const JobRedux = createSlice({
         state.jobs[state.jobs.indexOf(action.payload)].outline.level =
           action.payload.outline.level + 1;
       }
-
       state.jobs[state.jobs.indexOf(action.payload)].isActive = true;
     },
     changePreviewJob: (state, action: PayloadAction<Job | undefined>) => {
@@ -702,12 +701,6 @@ const JobRedux = createSlice({
     changeUser: (state, action: PayloadAction<User | UserIcons>) => {
       state.user.icon = action.payload.icon;
     },
-    changeMaxMoney: (state, action: PayloadAction<number>) => {
-      console.log(action.payload);
-      if (state.job.maxMoney <= action.payload) {
-        state.job.maxMoney = action.payload;
-      }
-    },
     changeCombo: (state, action: PayloadAction<number>) => {
       if (action.payload !== 0) {
         state.play.combo = state.play.combo + action.payload;
@@ -717,34 +710,47 @@ const JobRedux = createSlice({
     },
     changeNowMoney: (state, action: PayloadAction<number>) => {
       if (action.payload !== 0) {
+        let plusMoney = Math.floor(action.payload);
         if (state.play.combo <= 2) {
-          state.play.money = state.play.money + Math.floor(action.payload);
+          plusMoney = Math.floor(action.payload);
         } else if (state.play.combo <= 4) {
-          state.play.money =
-            state.play.money + Math.floor(action.payload * 1.2);
+          plusMoney = Math.floor(action.payload * 1.2);
         } else if (state.play.combo <= 6) {
-          state.play.money =
-            state.play.money + Math.floor(action.payload * 1.6);
+          plusMoney = Math.floor(action.payload * 1.6);
         } else {
-          state.play.money =
-            state.play.money + Math.floor(action.payload * 2.0);
+          plusMoney = Math.floor(action.payload * 2.0);
         }
+
+        state.play.money = state.play.money + plusMoney;
       } else {
         state.play.money = 0;
       }
     },
     changeJobRecord: (state, action: PayloadAction<Job>) => {
-      state.jobs.find((job) => job.name === action.payload.name).maxMoney =
-        action.payload.maxMoney;
+      if (state.job.maxMoney <= state.play.money) {
+        //jobsの方のmaxMoneyとjobの方のmaxMoneyを変える
+        state.jobs[state.jobs.indexOf(action.payload)].maxMoney =
+          state.play.money;
+        state.job.maxMoney = state.play.money;
+      }
     },
     staminaDecrese: (state, action: PayloadAction<number>) => {
       state.play.stamina = state.play.stamina - action.payload;
     },
-    staminaIncrese: (state, action: PayloadAction<number>) => {
-      state.play.stamina = state.play.stamina + action.payload;
+    staminaIncrese: (state) => {
+      if (state.play.combo <= 4) {
+        state.play.stamina = state.play.stamina + 0;
+      } else if (state.play.combo <= 6) {
+        state.play.stamina = state.play.stamina + 25;
+      } else {
+        state.play.stamina = state.play.stamina + 50;
+      }
     },
     staminaReset: (state, action: PayloadAction<number>) => {
       state.play.stamina = 380 - 80 * action.payload;
+    },
+    userMoneyIncrease: (state, action: PayloadAction<number>) => {
+      state.user.money = state.user.money + action.payload;
     },
     changeStatus: (state, action: PayloadAction<PlayStatus>) => {
       state.play.status = action.payload;
@@ -767,13 +773,13 @@ export const changeUpdateJob = JobRedux.actions.changeUpdateJob;
 export const changePreviewJob = JobRedux.actions.changePreviewJob;
 export const changeUser = JobRedux.actions.changeUser;
 export const changePreviewIcon = JobRedux.actions.changePreviewIcon;
-export const changeMaxMoney = JobRedux.actions.changeMaxMoney;
 export const changeNowMoney = JobRedux.actions.changeNowMoney;
 export const changeCombo = JobRedux.actions.changeCombo;
 export const changeJobRecord = JobRedux.actions.changeJobRecord;
 export const staminaDecrese = JobRedux.actions.staminaDecrese;
 export const staminaIncrese = JobRedux.actions.staminaIncrese;
 export const staminaReset = JobRedux.actions.staminaReset;
+export const userMoneyIncrease = JobRedux.actions.userMoneyIncrease;
 export const changeStatus = JobRedux.actions.changeStatus;
 export const changeJudge = JobRedux.actions.changeJudge;
 export const changeProcessCount = JobRedux.actions.changeProcessCount;

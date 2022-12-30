@@ -1,9 +1,4 @@
-import {
-  View,
-  ImageBackground,
-  StyleSheet,
-  SafeAreaView,
-} from "react-native";
+import { View, ImageBackground, StyleSheet, SafeAreaView } from "react-native";
 import React, { useState } from "react";
 import NavGacha from "../components/nav/NavFooter/NavGacha";
 import NavHead from "../components/nav/NavHeader/NavHead";
@@ -11,7 +6,7 @@ import JobGet from "../modals/JobGetModal";
 import UserModal from "../modals/UserModal";
 import { Job } from "../types/job";
 import { useDispatch, useSelector } from "react-redux";
-import { changePreviewIcon, changeUpdateJob, changeUser } from "../store/job";
+import { changePreviewIcon, changeUpdateJob, changeUser, userMoneyIncrease } from "../store/job";
 import UserIcons from "../models/userIcons";
 import ZimuPerson from "../components/animation/ZimuPerson";
 import Envelope from "../components/animation/Envelope";
@@ -22,6 +17,8 @@ function GachaScreen() {
   const previewIcon = useSelector((state) => state.job.previewIcon);
   const jobs = useSelector((state) => state.job.jobs);
   const randomJob = jobs[Math.floor(Math.random() * jobs.length)];
+  const User = useSelector((state) => state.job.user);
+  const userMoney = User.money;
 
   const dispatch = useDispatch();
 
@@ -33,6 +30,7 @@ function GachaScreen() {
   const modalSettingHandler = () => {
     setModalIsSetting(true);
     setEnvelopeSetting(true);
+    dispatch(userMoneyIncrease(-1000));
   };
 
   const jobUpdate = (gachaJob: Job) => {
@@ -69,7 +67,11 @@ function GachaScreen() {
         style={styles.rootScreen}
       >
         <View style={styles.innerContainer}>
-          <NavHead icon={userIcon} onUserModal={onUserModalHandler} />
+          <NavHead
+            icon={userIcon}
+            onUserModal={onUserModalHandler}
+            userMoney={userMoney}
+          />
           <NavGacha onModal={modalSettingHandler} />
           <ZimuPerson />
         </View>

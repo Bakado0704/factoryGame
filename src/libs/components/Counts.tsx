@@ -13,6 +13,7 @@ type Props = {
   perMoney: number;
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
+  recoveryHandler: () => void;
   changeComboHandler: (number: number) => void;
   changeNowMoneyHandler: (number: number) => void;
   processCountHandler: (number: number) => void;
@@ -26,6 +27,7 @@ const Counts = ({
   perMoney,
   judgeHandler,
   damageHandler,
+  recoveryHandler,
   changeComboHandler,
   changeNowMoneyHandler,
   processCountHandler,
@@ -112,6 +114,7 @@ const Counts = ({
     ) {
       judgeHandler(judgeStatus.success);
       changeComboHandler(1);
+      recoveryHandler();
       changeNowMoneyHandler(perMoney);
       setTimeout(() => {
         setIsRunning(false);

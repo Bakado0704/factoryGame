@@ -8,10 +8,11 @@ import { useRef } from "react";
 
 type Props = {
   icon: UserIconType;
+  userMoney: number;
   onUserModal: () => void;
 };
 
-const NavHead = ({ icon, onUserModal }: Props) => {
+const NavHead = ({ icon, userMoney, onUserModal }: Props) => {
   const navigation = useNavigation();
 
   const iconAnim = useRef(new Animated.Value(0)).current;
@@ -36,7 +37,7 @@ const NavHead = ({ icon, onUserModal }: Props) => {
   return (
     <>
       <View style={styles.rootContainer}>
-        <UserMoney />
+        <UserMoney userMoney={userMoney}/>
         <View style={styles.settingContainer}>
           <ImageButton
             source={require("../../../assets/ui/gachaButton.png")}

@@ -17,8 +17,10 @@ import { PlayStatus } from "../types/play";
 
 const StartScreen = () => {
   const Job = useSelector((state) => state.job.job);
-  const userIcon = useSelector((state) => state.job.user.icon);
-  const previewIcon = useSelector((state) => state.job.previewIcon);
+  const User = useSelector((state) => state.job.user);
+  const previewIcon = useSelector((state) => state.job.previewIcon)
+  const userIcon = User.icon;
+  const userMoney = User.money;
   const maxMoney = Job.maxMoney;
   const [setting, setSetting] = useState(false);
   const [userModal, setUserModal] = useState(false);
@@ -57,7 +59,7 @@ const StartScreen = () => {
   return (
     <View style={styles.rootScreen}>
       <View style={styles.innerContainer}>
-        <NavHead icon={userIcon} onUserModal={onUserModalHandler} />
+        <NavHead icon={userIcon} onUserModal={onUserModalHandler} userMoney={userMoney} />
         <NavSelect maxMoney={maxMoney} />
         <NavOperation
           onSetting={onSettingHandler}

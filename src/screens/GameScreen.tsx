@@ -10,14 +10,15 @@ import {
   changeCombo,
   changeJobRecord,
   changeJudge,
-  changeMaxMoney,
   changeNowMoney,
   changeProcessCount,
   changeStatus,
   staminaDecrese,
   staminaIncrese,
+  userMoneyIncrease,
 } from "../store/job";
 import { judgeStatus, PlayPattern, PlayStatus } from "../types/play";
+import { Job } from "../types/job";
 
 const GameScreen = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,9 @@ const GameScreen = () => {
   //現在のplay状態
   const playState = useSelector((state) => state.job.play);
   //現在のjob
-  const Job = useSelector((state) => state.job.job);
+  const Job: Job = useSelector((state) => state.job.job);
+  //changeJobRecordに渡すための現在のJob
+  const nowJob = useSelector((state) => state.job.jobs).find((job: Job) => job.id === Job.id);
 
   const nowMoney = playState.money;
   const maxMoney = Job.maxMoney;
@@ -37,6 +40,9 @@ const GameScreen = () => {
   //dispatch関数の宣言
   const judgeHandler = (judge: judgeStatus) => {
     dispatch(changeJudge(judge));
+  };
+  const recoveryHandler = () => {
+    dispatch(staminaIncrese());
   };
   const damageHandler = (number: number) => {
     dispatch(staminaDecrese(number));
@@ -54,19 +60,18 @@ const GameScreen = () => {
     dispatch(changeCombo(number));
   };
 
-
   //スタミナが0になるとゲームオーバー
   useEffect(() => {
     if (playState.stamina <= 0) {
       dispatch(changeStatus(PlayStatus.gameover));
-      dispatch(changeMaxMoney(nowMoney));
+      dispatch(changeJobRecord(nowJob));
+      dispatch(userMoneyIncrease(nowMoney));
     }
   }, [playState.stamina <= 0]);
 
   //結果を受け入れたとき,ステータスをstopに戻し、スタート画面に戻る
   const offModalHandler = () => {
     dispatch(changeStatus(PlayStatus.stop));
-    dispatch(changeJobRecord(Job));
     dispatch(changeNowMoney(0));
     dispatch(changeCombo(0));
     navigation.navigate("Start");
@@ -79,9 +84,11 @@ const GameScreen = () => {
       <Game
         type={jobName}
         playState={playState}
+        nowMoney={nowMoney}
         perMoney={perMoney}
         judgeHandler={judgeHandler}
         damageHandler={damageHandler}
+        recoveryHandler={recoveryHandler}
         changeComboHandler={changeComboHandler}
         changeNowMoneyHandler={changeNowMoneyHandler}
         processCountHandler={processCountHandler}

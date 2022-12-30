@@ -10,14 +10,12 @@ type Props = {
   maxMoney: number;
 };
 
-const NavBody = ({maxMoney}: Props) => {
+const NavBody = ({ maxMoney }: Props) => {
   const activeBoard = useSelector((state) => state.job.job.boardImg);
 
   const navigation = useNavigation();
 
-  const pressHandler = () => {
-    navigation.navigate("Testing");
-  };
+  const pressHandler = () => {};
 
   return (
     <View style={styles.rootContainer}>

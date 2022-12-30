@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text, Image } from "react-native";
 import React from "react";
 import { BackgroundType } from "../../types/background";
 
@@ -6,13 +6,16 @@ import Counts from "../components/Counts";
 import { PATTERN_DATES } from "../datas/dates";
 import PlayGap from "../../models/playgap";
 import { judgeStatus, Play, PlayPattern } from "../../types/play";
+import NowMoney from "../../components/ui/NowMoney";
 
 type Props = {
   type: BackgroundType;
   playState: Play;
   perMoney: number;
+  nowMoney: number;
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
+  recoveryHandler: () => void;
   changeComboHandler: (number: number) => void;
   changeNowMoneyHandler: (number: number) => void;
   processCountHandler: (number: number) => void;
@@ -23,8 +26,10 @@ const Game = ({
   type,
   playState,
   perMoney,
+  nowMoney,
   judgeHandler,
   damageHandler,
+  recoveryHandler,
   changeComboHandler,
   changeNowMoneyHandler,
   processCountHandler,
@@ -79,12 +84,14 @@ const Game = ({
   return (
     <>
       <View style={styles.rootContainer}>
+      <NowMoney nowMoney={nowMoney}/>
         <Counts
           playpattern={playpattern}
           playgap={playgap}
           playState={playState}
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}
+          recoveryHandler={recoveryHandler}
           changeComboHandler={changeComboHandler}
           changeNowMoneyHandler={changeNowMoneyHandler}
           processCountHandler={processCountHandler}
@@ -102,7 +109,27 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     width: "100%",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     alignItems: "center",
+  },
+  innerContainer: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  moneyContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    transform: [{ translateY: -120 }],
+  },
+  moneyImg: {
+    width: 70,
+    height: 70,
+  },
+  moneyText: {
+    fontSize: 60,
+    fontFamily: "MochiyPop",
+    color: "black",
   },
 });
