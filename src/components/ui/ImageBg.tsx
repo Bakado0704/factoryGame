@@ -11,11 +11,12 @@ export interface Props {
 
 const ImageBg = ({ children }: Props) => {
   const activeType = useSelector((state) => state.job.job.icon);
+  const playState = useSelector((state) => state.job.play);
 
   return (
     <BackgroundImg type={activeType}>
       <Conveyor type={activeType} />
-      <Product />
+      <Product playState={playState}/>
       {children}
     </BackgroundImg>
   );

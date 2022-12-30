@@ -6,11 +6,17 @@ import JobGet from "../modals/JobGetModal";
 import UserModal from "../modals/UserModal";
 import { Job } from "../types/job";
 import { useDispatch, useSelector } from "react-redux";
-import { changePreviewIcon, changeUpdateJob, changeUser, userMoneyIncrease } from "../store/job";
+import {
+  changePreviewIcon,
+  changeUpdateJob,
+  changeUser,
+  userMoneyIncrease,
+} from "../store/job";
 import UserIcons from "../models/userIcons";
 import ZimuPerson from "../components/animation/ZimuPerson";
 import Envelope from "../components/animation/Envelope";
 import BgBlack from "../components/ui/BgBlack";
+import Count from "../components/animation/Count";
 
 function GachaScreen() {
   const userIcon = useSelector((state) => state.job.user.icon);

@@ -84,7 +84,7 @@ const Game = ({
   return (
     <>
       <View style={styles.rootContainer}>
-      <NowMoney nowMoney={nowMoney}/>
+      <NowMoney nowMoney={nowMoney} perMoney={perMoney}/>
         <Counts
           playpattern={playpattern}
           playgap={playgap}

@@ -1,14 +1,20 @@
-import { Image, Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import Count from "../animation/Count";
 
 type Props = {
   nowMoney: number;
+  perMoney: number;
 };
 
-const NowMoney = ({ nowMoney }: Props) => {
+const NowMoney = ({ nowMoney, perMoney }: Props) => {
   return (
     <View style={styles.innerContainer}>
       <View style={styles.moneyContainer}>
-        <Text style={styles.moneyText}>{nowMoney}</Text>
+        <Count
+          style={styles.moneyText}
+          targetNum={nowMoney}
+          diffNum={perMoney}
+        />
       </View>
     </View>
   );
@@ -31,7 +37,6 @@ const styles = StyleSheet.create({
   moneyImg: {
     width: 50,
     height: 50,
-
   },
   moneyText: {
     fontSize: 50,

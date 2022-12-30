@@ -4,7 +4,6 @@ import BoardImg from "../../typeui/BoardImg";
 import RankingButton from "../../animation/animationButton/RankingButton";
 import NextButton from "../../animation/animationButton/NextButton";
 import PrevButton from "../../animation/animationButton/PrevButton";
-import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   maxMoney: number;
@@ -12,8 +11,6 @@ type Props = {
 
 const NavBody = ({ maxMoney }: Props) => {
   const activeBoard = useSelector((state) => state.job.job.boardImg);
-
-  const navigation = useNavigation();
 
   const pressHandler = () => {};
 
@@ -34,7 +31,7 @@ const NavBody = ({ maxMoney }: Props) => {
           source={require("../../../assets/ui/money1.png")}
           style={styles.moneyImg}
         />
-        <Text style={styles.money}>{maxMoney}</Text>
+        <Text style={styles.money}>{new Intl.NumberFormat().format(maxMoney)}</Text>
       </View>
     </View>
   );

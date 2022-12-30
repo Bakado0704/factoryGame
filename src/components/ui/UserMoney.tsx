@@ -21,7 +21,7 @@ const UserMoney = ({ userMoney }: Props) => {
               source={require("../../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={styles.money}>{userMoney}</Text>
+            <Text style={styles.money}>{new Intl.NumberFormat().format(userMoney)}</Text>
             <ImageButton
               source={require("../../assets/ui/plusButton.png")}
               onPress={pressHandler}
