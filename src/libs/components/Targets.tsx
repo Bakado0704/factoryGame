@@ -1,6 +1,6 @@
 import { View, StyleSheet, Pressable, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
-import { judgeStatus, Play, PlayGap } from "../../types/play";
+import { judgeStatus, Play, PlayGap, PlayStatus } from "../../types/play";
 import PlayPattern from "../../models/playpattern";
 import Target from "./Target";
 import Animation from "./Animation";
@@ -14,9 +14,11 @@ type Props = {
   allGaps: number[];
   playState: Play;
   setAllGaps: (number: number[]) => void;
+  stateHandler: (state: PlayStatus) => void;
   setIsRunning: (state: boolean) => void;
   setCount: (number: number) => void;
   judgeHandler: (judge: judgeStatus) => void;
+  damageHandler: (number: number) => void;
 };
 
 const Targets = ({
@@ -27,9 +29,11 @@ const Targets = ({
   allGaps,
   playState,
   setAllGaps,
+  stateHandler,
   setIsRunning,
   setCount,
   judgeHandler,
+  damageHandler,
 }: Props) => {
   let themeColor = playpattern.target.color; //ターゲットの色
   let allowGap = playgap.frontGap; //中心からここまで成功範囲
@@ -60,7 +64,9 @@ const Targets = ({
 
   //ボタンを押した時の処理
   const lapHandler = () => {
-    setLaps((prevCount) => [...prevCount, count]);
+    if (playState.judge !== judgeStatus.failure) {
+      setLaps((prevCount) => [...prevCount, count]);
+    }
   };
 
   const { width } = Dimensions.get("window");
@@ -74,13 +80,16 @@ const Targets = ({
         <Target
           playpattern={playpattern}
           playgap={playgap}
+          playState={playState}
           laps={laps}
           opacities={opacities}
           color={color}
           count={count}
           allGaps={allGaps}
           setAllGaps={setAllGaps}
+          stateHandler={stateHandler}
           judgeHandler={judgeHandler}
+          damageHandler={damageHandler}
         />
         <View
           style={[

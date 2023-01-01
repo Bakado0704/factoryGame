@@ -5,7 +5,7 @@ import { BackgroundType } from "../../types/background";
 import Counts from "../components/Counts";
 import { PATTERN_DATES } from "../datas/dates";
 import PlayGap from "../../models/playgap";
-import { judgeStatus, Play, PlayPattern } from "../../types/play";
+import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
 import NowMoney from "../../components/ui/NowMoney";
 
 type Props = {
@@ -14,6 +14,7 @@ type Props = {
   perMoney: number;
   nowMoney: number;
   judgeHandler: (judge: judgeStatus) => void;
+  stateHandler: (state: PlayStatus) => void;
   damageHandler: (number: number) => void;
   recoveryHandler: () => void;
   changeComboHandler: (number: number) => void;
@@ -28,6 +29,7 @@ const Game = ({
   perMoney,
   nowMoney,
   judgeHandler,
+  stateHandler,
   damageHandler,
   recoveryHandler,
   changeComboHandler,
@@ -90,6 +92,7 @@ const Game = ({
           playgap={playgap}
           playState={playState}
           judgeHandler={judgeHandler}
+          stateHandler={stateHandler}
           damageHandler={damageHandler}
           recoveryHandler={recoveryHandler}
           changeComboHandler={changeComboHandler}

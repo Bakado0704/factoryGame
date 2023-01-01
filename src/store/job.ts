@@ -757,7 +757,6 @@ const JobRedux = createSlice({
     },
     changeJudge: (state, action: PayloadAction<judgeStatus>) => {
       state.play.judge = action.payload;
-      // console.log(action.payload);
     },
     changeProcessCount: (state, action: PayloadAction<number>) => {
       state.play.processCount = action.payload;

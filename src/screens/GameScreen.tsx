@@ -41,6 +41,9 @@ const GameScreen = () => {
   const judgeHandler = (judge: judgeStatus) => {
     dispatch(changeJudge(judge));
   };
+  const stateHandler = (state: PlayStatus) => {
+    dispatch(changeStatus(state));
+  };
   const recoveryHandler = () => {
     dispatch(staminaIncrese());
   };
@@ -87,6 +90,7 @@ const GameScreen = () => {
         nowMoney={nowMoney}
         perMoney={perMoney}
         judgeHandler={judgeHandler}
+        stateHandler={stateHandler}
         damageHandler={damageHandler}
         recoveryHandler={recoveryHandler}
         changeComboHandler={changeComboHandler}
@@ -98,7 +102,7 @@ const GameScreen = () => {
   }
 
   //statusがgameoverの場合モーダルを出す
-  var bgModal;
+  let bgModal;
   if (playState.status === PlayStatus.gameover) {
     bgModal = <BgBlack />;
     setTimeout(() => {
@@ -107,7 +111,7 @@ const GameScreen = () => {
   }
 
   //statusがresultの場合結果を出す
-  var result;
+  let result;
   if (playState.status === PlayStatus.result) {
     result = (
       <>

@@ -12,6 +12,7 @@ type Props = {
   playState: Play;
   perMoney: number;
   judgeHandler: (judge: judgeStatus) => void;
+  stateHandler: (state: PlayStatus) => void;
   damageHandler: (number: number) => void;
   recoveryHandler: () => void;
   changeComboHandler: (number: number) => void;
@@ -26,6 +27,7 @@ const Counts = ({
   playState,
   perMoney,
   judgeHandler,
+  stateHandler,
   damageHandler,
   recoveryHandler,
   changeComboHandler,
@@ -40,28 +42,6 @@ const Counts = ({
   const [selectedPlayPattern, setSelectedPlayPattern] = useState<PlayPattern[]>(
     playpattern[0]
   );
-
-  //スタミナカウント設定
-  const useStaminaFrame = (status: PlayStatus, callback = () => {}) => {
-    const reqIdRef = useRef<number>(0);
-    const loop = useCallback(() => {
-      if (status === PlayStatus.playing) {
-        callback();
-        reqIdRef.current = requestAnimationFrame(loop);
-      }
-    }, [status, callback]);
-
-    useEffect(() => {
-      reqIdRef.current = requestAnimationFrame(loop);
-      return () => cancelAnimationFrame(reqIdRef.current);
-    }, [loop]);
-  };
-
-  const stamina = useCallback(() => {
-    damageHandler(0.1);
-  }, []);
-
-  useStaminaFrame(playState.status, stamina);
 
   //時間カウント設定
   const useAnimationFrame = (isRunning: boolean, callback = () => {}) => {
@@ -128,6 +108,7 @@ const Counts = ({
   //ターゲットを押すのが早すぎた
   useEffect(() => {
     if (allGaps.some((value) => value >= 20)) {
+      damageHandler(100);
       judgeHandler(judgeStatus.failure);
       console.log("ターゲットを押すのが早すぎた");
     }
@@ -138,7 +119,6 @@ const Counts = ({
     if (playState.judge === judgeStatus.failure) {
       setIsRunning(false);
       changeComboHandler(0);
-      damageHandler(100);
       setTimeout(() => {
         judgeHandler(judgeStatus.waiting);
       }, 1000);
@@ -158,9 +138,11 @@ const Counts = ({
         allGaps={allGaps}
         playState={playState}
         setAllGaps={setAllGaps}
+        stateHandler={stateHandler}
         setCount={setCount}
         setIsRunning={setIsRunning}
         judgeHandler={judgeHandler}
+        damageHandler={damageHandler}
       />
     );
   }

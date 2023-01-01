@@ -1,60 +1,33 @@
 import { StyleSheet, Image, Animated, View, Dimensions } from "react-native";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { judgeStatus, Play, PlayStatus } from "../../types/play";
+import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
 
 export type Props = {
   playState: Play;
+  activeProductLength: number;
+  proccessCount: number;
+  selectedPlayPattern: PlayPattern[];
+  activeProductWidth: number;
+  activeProductHeight: number;
+  width: number;
+  nextProduct: string;
+  defaultProduct: string;
+  bonusProduct: string;
 };
 
-const Product = ({ playState }: Props) => {
-  //useSelectorの宣言
-  const activeProductLength = useSelector(
-    (state) => state.job.job.product.default.length
-  );
-  const proccessCount = useSelector((state) => state.job.play.processCount);
-  const selectedPlayPattern = useSelector(
-    (state) => state.job.activePlayPattern
-  );
-  const activeProductWidth = useSelector(
-    (state) => state.job.job.product.style.width
-  );
-  const activeProductHeight = useSelector(
-    (state) => state.job.job.product.style.height
-  );
-  const { width } = Dimensions.get("window");
-
-  // すべてのDitanceの宣言
-  let allDistance = [];
-  for (let i = 0; i < selectedPlayPattern.length; i++) {
-    for (let y = 0; y < selectedPlayPattern[i].distance.length; y++) {
-      allDistance.push(selectedPlayPattern[i].distance[y]);
-    }
-  }
-
-  //使用する画像の段階
-  let productNumber = Math.floor(
-    ((activeProductLength - 1) * proccessCount) / allDistance.length
-  );
-
-  //使用する画像の選定
-  const nextProduct = useSelector(
-    (state) => state.job.job.product.default[0].before
-  );
-  const defaultProduct = useSelector(
-    (state) => state.job.job.product.default[productNumber].before
-  );
-  const bonusProduct = useSelector(
-    (state) => state.job.job.product.bonus[productNumber].before
-  );
-  const activeProduct = [
-    defaultProduct,
-    defaultProduct,
-    defaultProduct,
-    defaultProduct,
-    bonusProduct,
-  ][Math.floor(Math.random() * 4)];
-
+const Product = ({
+  playState,
+  activeProductLength,
+  proccessCount,
+  selectedPlayPattern,
+  activeProductWidth,
+  activeProductHeight,
+  width,
+  nextProduct,
+  defaultProduct,
+  bonusProduct,
+}: Props) => {
   //画像を動かす
   let TargetAnim = useRef(new Animated.Value(0)).current;
 
@@ -65,14 +38,13 @@ const Product = ({ playState }: Props) => {
 
   //judgeがsuccessかfailureになったときアニメーション動かす
   useEffect(() => {
-    if (playState.status !== PlayStatus.gameover) {
+    if (playState.stamina > 0) {
       Animated.timing(TargetAnim, {
         toValue: 200,
         duration: 800,
         useNativeDriver: false,
       }).start();
     }
-    console.log(playState.status);
   }, [
     playState.judge === judgeStatus.success ||
       playState.judge === judgeStatus.failure,
@@ -95,91 +67,91 @@ const Product = ({ playState }: Props) => {
       ]}
     >
       <View style={styles.cvContainer}>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}
           />
         </View>
-        <View style={[styles.cvInnerContainer, {width: width /5}]}>
+        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
           <Image
             source={require("../../assets/conveyor/cvLine.png")}
             style={styles.cvLine}

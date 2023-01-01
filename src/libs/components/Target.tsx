@@ -2,7 +2,7 @@ import { View, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
 import PlayPattern from "../../models/playpattern";
 import PlayGap from "../../models/playgap";
-import { judgeStatus } from "../../types/play";
+import { judgeStatus, Play, PlayStatus } from "../../types/play";
 
 type Props = {
   playpattern: PlayPattern;
@@ -12,8 +12,11 @@ type Props = {
   color: string;
   count: number;
   allGaps: number[];
+  playState: Play;
   setAllGaps: (number: number[]) => void;
+  stateHandler: (state: PlayStatus) => void;
   judgeHandler: (judge: judgeStatus) => void;
+  damageHandler: (number: number) => void;
 };
 
 const Target = ({
@@ -24,7 +27,10 @@ const Target = ({
   allGaps,
   opacities,
   color,
+  playState,
   setAllGaps,
+  stateHandler,
+  damageHandler,
   judgeHandler,
 }: Props) => {
   //指定するパラメーター
@@ -65,14 +71,16 @@ const Target = ({
   //ターゲットを押すのが遅すぎた
   useEffect(() => {
     if (translateX.some((value) => value <= -failureGap)) {
-      console.log("ターゲットを押すのが遅すぎた");
+      damageHandler(100);
       judgeHandler(judgeStatus.failure);
+      console.log("ターゲットを押すのが遅すぎた");
     }
   }, [translateX.some((value) => value <= -failureGap)]);
 
   // lapsの数がdistanceの数を超えても失敗
   useEffect(() => {
     if (laps.length > playpattern.distance.length) {
+      damageHandler(100);
       judgeHandler(judgeStatus.failure);
       console.log("lapsの数がdistanceの数を超えても失敗");
     }
