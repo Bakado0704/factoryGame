@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Job from "../models/job";
 import User from "../models/user";
 import { UserIcons } from "../types/userIcons";
-import { judgeStatus, Play, PlayColor, PlayStatus } from "../types/play";
+import { judgeStatus, PlayStatus } from "../types/play";
 import playpattern from "../models/playpattern";
 import initialState from "./initialState";
 
@@ -13,8 +13,33 @@ const JobRedux = createSlice({
     changeJob: (state, action: PayloadAction<Job>) => {
       state.job = action.payload;
       state.user.nowJob = action.payload.name;
+
+      //このタイミングでprevJobとnextJobを更新させる
+      const activeJobs = state.jobs.filter(function (element) {
+        return element.isActive === true;
+      });
+
+      console.log(activeJobs.indexOf(state.job));
+
+      state.nextJob = activeJobs[activeJobs.indexOf(state.job) + 1];
+      state.prevJob = activeJobs[activeJobs.indexOf(state.job) - 1];
+
+      if (activeJobs.indexOf(state.job) === activeJobs.length - 1) {
+        state.nextJob = activeJobs[0];
+      }
+
+      if (activeJobs.indexOf(state.job) === 0) {
+        state.prevJob = activeJobs[activeJobs.length - 1];
+      }
+
+      console.log(state.nextJob)
+      console.log(state.prevJob)
+    },
+    changePreviewJob: (state, action: PayloadAction<Job | undefined>) => {
+      state.previewJob = action.payload;
     },
     changeUpdateJob: (state, action: PayloadAction<Job>) => {
+      //もしすでにそのJOBをアンロックしていたら
       if (state.jobs[state.jobs.indexOf(action.payload)].isActive === true) {
         state.jobs[state.jobs.indexOf(action.payload)].perMoney =
           action.payload.perMoney + 1;
@@ -25,10 +50,8 @@ const JobRedux = createSlice({
         state.jobs[state.jobs.indexOf(action.payload)].outline.level =
           action.payload.outline.level + 1;
       }
+      //もしそのJOBをアンロックしていなかったら
       state.jobs[state.jobs.indexOf(action.payload)].isActive = true;
-    },
-    changePreviewJob: (state, action: PayloadAction<Job | undefined>) => {
-      state.previewJob = action.payload;
     },
     changePreviewIcon: (state, action: PayloadAction<UserIcons>) => {
       state.previewIcon = action.payload;

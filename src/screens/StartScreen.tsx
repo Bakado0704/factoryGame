@@ -16,13 +16,11 @@ import {
 } from "../store/job";
 import { PlayStatus } from "../types/play";
 import { Job } from "../types/job";
-import { useNavigation } from "@react-navigation/native";
 
 const StartScreen = () => {
   const Job = useSelector((state) => state.job.job);
-  const Jobs: Job[] = useSelector((state) => state.job.jobs);
-  //changeJobRecordに渡すための現在のJob
-  const nowJob = Jobs.find((job: Job) => job.id === Job.id);
+  const nextJob = useSelector((state) => state.job.nextJob);
+  const prevJob = useSelector((state) => state.job.prevJob);
   const User = useSelector((state) => state.job.user);
   const previewIcon = useSelector((state) => state.job.previewIcon);
   const activeBoard = Job.boardImg;
@@ -31,32 +29,10 @@ const StartScreen = () => {
   const maxMoney = Job.maxMoney;
   const [setting, setSetting] = useState(false);
   const [userModal, setUserModal] = useState(false);
-  const activeJobs = Jobs.filter(function (element) {
-    return element.isActive === true;
-  });
-
-  if (nowJob === undefined) {
-    throw new Error("jobUndefined");
-  }
-
-  const navigation = useNavigation();
-
-  let nextJobNumber = activeJobs.indexOf(nowJob) + 1;
-  let prevJobNumber = activeJobs.indexOf(nowJob) - 1;
-
-  let nextJob = activeJobs[nextJobNumber];
-  let prevJob = activeJobs[prevJobNumber];
-
-  if (nextJobNumber === activeJobs.length) {
-    nextJob = activeJobs[0];
-  }
-
-  if (prevJobNumber === -1) {
-    prevJob = activeJobs[activeJobs.length - 1];
-  }
-  
 
   const dispatch = useDispatch();
+
+  console.log(Job)
 
   const onSettingHandler = () => {
     setSetting(true);
@@ -102,9 +78,9 @@ const StartScreen = () => {
         <NavSelect
           maxMoney={maxMoney}
           activeBoard={activeBoard}
-          nextJob={nextJob}
-          prevJob={prevJob}
           jobDecideHandler={jobDecideHandler}
+          prevJob={prevJob}
+          nextJob={nextJob}
         />
         <NavOperation
           onSetting={onSettingHandler}

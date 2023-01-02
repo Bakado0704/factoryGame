@@ -12,6 +12,7 @@ import {
   changePreviewIcon,
   changePreviewJob,
   changeUser,
+  userMoneyIncrease,
 } from "../store/job";
 import { useState } from "react";
 import UserIcons from "../models/userIcons";
@@ -29,6 +30,7 @@ const JobChangeScreen = () => {
   const [userModal, setUserModal] = useState(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
 
   const jobReturnHandler = () => {
     navigation.navigate("Start");

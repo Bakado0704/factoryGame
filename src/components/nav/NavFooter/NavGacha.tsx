@@ -1,6 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import ImageButton from "../../ui/ImageButton";
 import { useNavigation } from "@react-navigation/native";
+import { userMoneyIncrease } from "../../../store/job";
+import { useDispatch } from "react-redux";
 
 type Props = {
   onModal: (event: React.ChangeEvent<HTMLInputElement>) => void;

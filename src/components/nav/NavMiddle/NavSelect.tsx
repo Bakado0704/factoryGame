@@ -1,5 +1,4 @@
 import { View, Image, Text, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
 import BoardImg from "../../typeui/BoardImg";
 import RankingButton from "../../animation/animationButton/RankingButton";
 import NextButton from "../../animation/animationButton/NextButton";
@@ -10,28 +9,25 @@ import { Job } from "../../../types/job";
 type Props = {
   maxMoney: number;
   activeBoard: BoardType;
-  nextJob: Job;
   prevJob: Job;
+  nextJob: Job;
   jobDecideHandler: (job: Job) => void;
 };
 
 const NavBody = ({
   maxMoney,
   activeBoard,
-  nextJob,
   prevJob,
+  nextJob,
   jobDecideHandler,
 }: Props) => {
   const prevHandler = () => {
-    // jobDecideHandler(prevJob);
+    jobDecideHandler(prevJob);
   };
 
   const nextHandler = () => {
-    // jobDecideHandler(nextJob);
+    jobDecideHandler(nextJob);
   };
-
-  console.log(prevJob);
-  console.log(nextJob)
 
   const pressHandler = () => {};
 

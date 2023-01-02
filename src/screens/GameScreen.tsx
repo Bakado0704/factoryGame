@@ -37,7 +37,6 @@ const GameScreen = () => {
   const name = Job.owner.name;
   const iconType = Job.icon;
 
-
   //dispatch関数の宣言
   const judgeHandler = (judge: judgeStatus) => {
     dispatch(changeJudge(judge));

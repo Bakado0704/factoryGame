@@ -7,6 +7,7 @@ import UserModal from "../modals/UserModal";
 import { Job } from "../types/job";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeJob,
   changePreviewIcon,
   changeUpdateJob,
   changeUser,
