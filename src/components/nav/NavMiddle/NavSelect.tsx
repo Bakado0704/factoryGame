@@ -4,22 +4,43 @@ import BoardImg from "../../typeui/BoardImg";
 import RankingButton from "../../animation/animationButton/RankingButton";
 import NextButton from "../../animation/animationButton/NextButton";
 import PrevButton from "../../animation/animationButton/PrevButton";
+import { BoardType } from "../../../types/board";
+import { Job } from "../../../types/job";
 
 type Props = {
   maxMoney: number;
+  activeBoard: BoardType;
+  nextJob: Job;
+  prevJob: Job;
+  jobDecideHandler: (job: Job) => void;
 };
 
-const NavBody = ({ maxMoney }: Props) => {
-  const activeBoard = useSelector((state) => state.job.job.boardImg);
+const NavBody = ({
+  maxMoney,
+  activeBoard,
+  nextJob,
+  prevJob,
+  jobDecideHandler,
+}: Props) => {
+  const prevHandler = () => {
+    // jobDecideHandler(prevJob);
+  };
+
+  const nextHandler = () => {
+    // jobDecideHandler(nextJob);
+  };
+
+  console.log(prevJob);
+  console.log(nextJob)
 
   const pressHandler = () => {};
 
   return (
     <View style={styles.rootContainer}>
       <View style={styles.containerTop}>
-        <PrevButton pressHandler={pressHandler} />
+        <PrevButton pressHandler={prevHandler} />
         <BoardImg type={activeBoard} />
-        <NextButton pressHandler={pressHandler} />
+        <NextButton pressHandler={nextHandler} />
       </View>
       <View style={styles.containerBottom}>
         <RankingButton pressHandler={pressHandler} />
@@ -31,7 +52,9 @@ const NavBody = ({ maxMoney }: Props) => {
           source={require("../../../assets/ui/money1.png")}
           style={styles.moneyImg}
         />
-        <Text style={styles.money}>{new Intl.NumberFormat().format(maxMoney)}</Text>
+        <Text style={styles.money}>
+          {new Intl.NumberFormat().format(maxMoney)}
+        </Text>
       </View>
     </View>
   );

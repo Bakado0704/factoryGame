@@ -1,20 +1,17 @@
-import { View, StyleSheet, ImageBackground } from "react-native";
+import { View, StyleSheet } from "react-native";
 import ImageButton from "../../ui/ImageButton";
 import { useNavigation } from "@react-navigation/native";
 
 type Props = {
-  onModal: (event: React.ChangeEvent<HTMLInputElement>) => void
-}
+  onModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
-const NavGacha = ({onModal} : Props) => {
-  
+const NavGacha = ({ onModal }: Props) => {
   const navigation = useNavigation();
 
   const homeHandler = () => {
     navigation.navigate("Start");
   };
-
-  const pressHandler = () => {};
 
   return (
     <View style={styles.buttonsContainer}>

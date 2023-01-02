@@ -16,7 +16,6 @@ import UserIcons from "../models/userIcons";
 import ZimuPerson from "../components/animation/ZimuPerson";
 import Envelope from "../components/animation/Envelope";
 import BgBlack from "../components/ui/BgBlack";
-import Count from "../components/animation/Count";
 
 function GachaScreen() {
   const userIcon = useSelector((state) => state.job.user.icon);
@@ -78,7 +77,9 @@ function GachaScreen() {
             onUserModal={onUserModalHandler}
             userMoney={userMoney}
           />
-          <NavGacha onModal={modalSettingHandler} />
+          <NavGacha
+            onModal={modalSettingHandler}
+          />
           <ZimuPerson />
         </View>
         {modalIsSetting && <BgBlack />}
