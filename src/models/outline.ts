@@ -1,3 +1,4 @@
+import { ImageSourcePropType } from "react-native";
 import { Outline as _Outline } from "../types/outline";
 
 export default class outline implements _Outline {
@@ -10,8 +11,8 @@ export default class outline implements _Outline {
     public holiday: string,
     public retirement: string,
     public workplace: string,
-    public background: string,
-    public button: string,
+    public background: ImageSourcePropType,
+    public button: ImageSourcePropType,
   ) {
     this.company = company;
     this.category = category;

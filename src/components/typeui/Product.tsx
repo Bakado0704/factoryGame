@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Animated, View, Dimensions } from "react-native";
+import { StyleSheet, Image, Animated, View, Dimensions, ImageSourcePropType } from "react-native";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
@@ -11,16 +11,13 @@ export type Props = {
   activeProductWidth: number;
   activeProductHeight: number;
   width: number;
-  nextProduct: string;
-  defaultProduct: string;
-  bonusProduct: string;
+  nextProduct: ImageSourcePropType;
+  defaultProduct: ImageSourcePropType;
+  bonusProduct: ImageSourcePropType;
 };
 
 const Product = ({
   playState,
-  activeProductLength,
-  proccessCount,
-  selectedPlayPattern,
   activeProductWidth,
   activeProductHeight,
   width,

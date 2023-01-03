@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from "react-native";
+
 export interface Outline {
   company: string;
   category: string;
@@ -7,6 +9,6 @@ export interface Outline {
   retirement: string;
   holiday: string;
   workplace: string;
-  background: string;
-  button: string;
+  background: ImageSourcePropType;
+  button: ImageSourcePropType;
 }

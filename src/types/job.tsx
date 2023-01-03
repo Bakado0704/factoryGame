@@ -1,3 +1,4 @@
+import { ImageSourcePropType } from "react-native";
 import { BackgroundType } from "./background";
 import { BoardType } from "./board";
 import { IconType } from "./icon";
@@ -38,10 +39,10 @@ export interface Job {
 
 export interface JobProduct {
   default: {
-    before: string;
+    before: ImageSourcePropType;
   }[];
   bonus: {
-    before: string;
+    before: ImageSourcePropType;
   }[];
   style: { width: number; height: number };
 }

@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, NavigationProp, ParamListBase } from "@react-navigation/native";
 import Gameover from "../modals/GameoverModal";
 import BgBlack from "../components/ui/BgBlack";
 import Game from "../libs/game/game";
@@ -19,16 +19,17 @@ import {
 } from "../store/job";
 import { judgeStatus, PlayPattern, PlayStatus } from "../types/play";
 import { Job } from "../types/job";
+import { RootState } from "../store/store";
 
 const GameScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
   //現在のplay状態
-  const playState = useSelector((state) => state.job.play);
+  const playState = useSelector((state: RootState) => state.job.play);
   //現在のjob
-  const Job: Job = useSelector((state) => state.job.job);
+  const Job: Job = useSelector((state: RootState) => state.job.job);
   //changeJobRecordに渡すための現在のJob
-  const nowJob = useSelector((state) => state.job.jobs).find((job: Job) => job.id === Job.id);
+  const nowJob = useSelector((state: RootState) => state.job.jobs).find((job: Job) => job.id === Job.id);
 
   const nowMoney = playState.money;
   const maxMoney = Job.maxMoney;
@@ -65,7 +66,7 @@ const GameScreen = () => {
 
   //スタミナが0になるとゲームオーバー
   useEffect(() => {
-    if (playState.stamina <= 0) {
+    if (playState.stamina <= 0 && nowJob) {
       dispatch(changeStatus(PlayStatus.gameover));
       dispatch(changeJobRecord(nowJob));
       dispatch(userMoneyIncrease(nowMoney));

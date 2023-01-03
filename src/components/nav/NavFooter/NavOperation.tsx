@@ -1,7 +1,7 @@
 import { View, StyleSheet, ImageBackground, Animated } from "react-native";
 import ImageButton from "../../ui/ImageButton";
 import React, { useRef } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
 import StartButtons from "../../animation/animationButton/StartButtons";
 
 type Props = {
@@ -15,7 +15,7 @@ const NavOperation = ({
   staminaResetHandler,
   playingStatusHandler,
 }: Props) => {
-  const navigation = useNavigation();
+  const navigation:NavigationProp<ParamListBase> = useNavigation();
 
   const pressHandler = () => {
     navigation.navigate("JobChange");

@@ -1,15 +1,17 @@
 import { View, StyleSheet } from "react-native";
 import ImageButton from "../../ui/ImageButton";
-import { useNavigation } from "@react-navigation/native";
-import { userMoneyIncrease } from "../../../store/job";
-import { useDispatch } from "react-redux";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 
 type Props = {
   onModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const NavGacha = ({ onModal }: Props) => {
-  const navigation = useNavigation();
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
 
   const homeHandler = () => {
     navigation.navigate("Start");

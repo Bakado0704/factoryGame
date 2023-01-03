@@ -19,6 +19,8 @@ const JobRedux = createSlice({
         return element.isActive === true;
       });
 
+      // console.log(activeJobs.length);
+      // console.log(action.payload);
       console.log(activeJobs.indexOf(state.job));
 
       state.nextJob = activeJobs[activeJobs.indexOf(state.job) + 1];
@@ -32,6 +34,12 @@ const JobRedux = createSlice({
         state.prevJob = activeJobs[activeJobs.length - 1];
       }
 
+      if (activeJobs.indexOf(state.job) === - 1) {
+        state.nextJob = activeJobs[activeJobs.length - 1];
+        state.prevJob = activeJobs[activeJobs.length - 1];
+      }
+
+      console.log(activeJobs);
       console.log(state.nextJob)
       console.log(state.prevJob)
     },

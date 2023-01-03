@@ -1,12 +1,13 @@
 import { View, StyleSheet } from "react-native";
 import NavHead from "../components/nav/NavHeader/NavHead";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NavSelect from "../components/nav/NavMiddle/NavSelect";
 import NavOperation from "../components/nav/NavFooter/NavOperation";
 import Setting from "../modals/SettingModal";
 import UserModal from "../modals/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import UserIcons from "../models/userIcons";
+import { RootState } from '../store/store';
 import {
   changeJob,
   changePreviewIcon,
@@ -16,13 +17,14 @@ import {
 } from "../store/job";
 import { PlayStatus } from "../types/play";
 import { Job } from "../types/job";
+import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
 
 const StartScreen = () => {
-  const Job = useSelector((state) => state.job.job);
-  const nextJob = useSelector((state) => state.job.nextJob);
-  const prevJob = useSelector((state) => state.job.prevJob);
-  const User = useSelector((state) => state.job.user);
-  const previewIcon = useSelector((state) => state.job.previewIcon);
+  const Job = useSelector((state: RootState) => state.job.job);
+  const nextJob = useSelector((state: RootState) => state.job.nextJob);
+  const prevJob = useSelector((state: RootState) => state.job.prevJob);
+  const User = useSelector((state: RootState) => state.job.user);
+  const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
   const activeBoard = Job.boardImg;
   const userIcon = User.icon;
   const userMoney = User.money;
@@ -31,8 +33,17 @@ const StartScreen = () => {
   const [userModal, setUserModal] = useState(false);
 
   const dispatch = useDispatch();
+  const navigation:NavigationProp<ParamListBase> = useNavigation();
 
-  console.log(Job)
+  // console.log(Job)
+
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener("focus", () => {
+  //     jobDecideHandler(Job)
+  //   });
+
+  //   return unsubscribe;
+  // }, []);
 
   const onSettingHandler = () => {
     setSetting(true);

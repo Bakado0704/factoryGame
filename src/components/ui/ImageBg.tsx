@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import BackgroundImg from "../typeui/BackgroundImg";
 import Product from "../typeui/Product";
 import Conveyor from "../typeui/Conveyor";
+import { RootState } from "../../store/store";
 
 export interface Props {
   children: React.ReactNode;
@@ -11,11 +12,11 @@ export interface Props {
 
 const ImageBg = ({ children }: Props) => {
   //useSelectorの宣言
-  const job = useSelector((state) => state.job.job);
-  const activeType = useSelector((state) => state.job.job.icon);
-  const playState = useSelector((state) => state.job.play);
+  const job = useSelector((state: RootState) => state.job.job);
+  const activeType = useSelector((state: RootState) => state.job.job.icon);
+  const playState = useSelector((state: RootState) => state.job.play);
   const selectedPlayPattern = useSelector(
-    (state) => state.job.activePlayPattern
+    (state: RootState) => state.job.activePlayPattern
   );
   const activeProductLength = job.product.default.length;
   const activeProductWidth = job.product.style.width;

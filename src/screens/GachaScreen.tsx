@@ -17,13 +17,14 @@ import UserIcons from "../models/userIcons";
 import ZimuPerson from "../components/animation/ZimuPerson";
 import Envelope from "../components/animation/Envelope";
 import BgBlack from "../components/ui/BgBlack";
+import { RootState } from "../store/store";
 
 function GachaScreen() {
-  const userIcon = useSelector((state) => state.job.user.icon);
-  const previewIcon = useSelector((state) => state.job.previewIcon);
-  const jobs = useSelector((state) => state.job.jobs);
+  const userIcon = useSelector((state: RootState) => state.job.user.icon);
+  const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
+  const jobs = useSelector((state: RootState) => state.job.jobs);
   const randomJob = jobs[Math.floor(Math.random() * jobs.length)];
-  const User = useSelector((state) => state.job.user);
+  const User = useSelector((state: RootState) => state.job.user);
   const userMoney = User.money;
 
   const dispatch = useDispatch();
@@ -36,7 +37,6 @@ function GachaScreen() {
   const modalSettingHandler = () => {
     setModalIsSetting(true);
     setEnvelopeSetting(true);
-    dispatch(userMoneyIncrease(-1000));
   };
 
   const jobUpdate = (gachaJob: Job) => {

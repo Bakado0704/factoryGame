@@ -1,7 +1,6 @@
 import { StyleSheet, Image, View } from "react-native";
 import React from "react";
 import { BackgroundType } from "../../types/background";
-import { useSelector } from "react-redux";
 
 type Props = {
   type: BackgroundType;
