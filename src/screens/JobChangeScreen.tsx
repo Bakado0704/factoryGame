@@ -30,6 +30,7 @@ const JobChangeScreen = () => {
   const previewJob = useSelector((state: RootState) => state.job.previewJob);
   const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
   const user = useSelector((state: RootState) => state.job.user);
+  const userIcons = useSelector((state: RootState) => state.job.UserIcons);
   const userIcon = user.icon;
   const userMoney = user.money;
 
@@ -117,6 +118,7 @@ const JobChangeScreen = () => {
             offUserModal={offUserModalHandler}
             user={userChangeHandler}
             previewIcon={previewIcon}
+            userIcons={userIcons}
           />
         )}
       </View>

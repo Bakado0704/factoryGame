@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import NavHead from "../components/nav/NavHeader/NavHead";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavSelect from "../components/nav/NavMiddle/NavSelect";
 import NavOperation from "../components/nav/NavFooter/NavOperation";
 import Setting from "../modals/SettingModal";
@@ -32,13 +32,8 @@ const StartScreen = () => {
   const userIcon = user.icon;
   const userMoney = user.money;
   const maxMoney = Job.maxMoney;
-  const [setting, setSetting] = useState(false);
-  const [userModal, setUserModal] = useState(false);
-
   const dispatch = useDispatch();
   const navigation:NavigationProp<ParamListBase> = useNavigation();
-
-  // console.log(Job)
 
   // useEffect(() => {
   //   const unsubscribe = navigation.addListener("focus", () => {
@@ -47,6 +42,9 @@ const StartScreen = () => {
 
   //   return unsubscribe;
   // }, []);
+
+  const [setting, setSetting] = useState(false);
+  const [userModal, setUserModal] = useState(false);
 
   const onSettingHandler = () => {
     setSetting(true);

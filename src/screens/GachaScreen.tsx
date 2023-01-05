@@ -4,9 +4,9 @@ import NavGacha from "../components/nav/NavFooter/NavGacha";
 import NavHead from "../components/nav/NavHeader/NavHead";
 import JobGet from "../modals/JobGetModal";
 import UserModal from "../modals/UserModal";
-import { Job } from "../types/job";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeGachaStatus,
   changePreviewIcon,
   changeUpdateJob,
   changeUser,
@@ -23,46 +23,38 @@ import {
   ParamListBase,
   useNavigation,
 } from "@react-navigation/native";
+import { GachaStatus } from "../types/gacha";
 
 function GachaScreen() {
   const userIcon = useSelector((state: RootState) => state.job.user.icon);
   const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
   const jobs = useSelector((state: RootState) => state.job.jobs);
   const userIcons = useSelector((state: RootState) => state.job.UserIcons);
-    //現在のplay状態
+  //現在のplay状態
   const playState = useSelector((state: RootState) => state.job.play);
   const randomJob = jobs[Math.floor(Math.random() * jobs.length)];
   const user = useSelector((state: RootState) => state.job.user);
   const userMoney = user.money;
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   const dispatch = useDispatch();
-  
 
-  const [modalIsSetting, setModalIsSetting] = useState(false);
-  const [envelopeSetting, setEnvelopeSetting] = useState(false);
-  const [gachaIsSetted, setGachaIsSetted] = useState(false);
   const [userModal, setUserModal] = useState(false);
 
-  const modalSettingHandler = () => {
-    setModalIsSetting(true);
-    setEnvelopeSetting(true);
-  };
-
-  const jobUpdate = (gachaJob: Job) => {
-    dispatch(changeUpdateJob(gachaJob));
-  };
-
   const offModalHandler = () => {
-    setModalIsSetting(false);
-    setGachaIsSetted(false);
+    dispatch(changeGachaStatus(GachaStatus.stop));
+    dispatch(changeUpdateJob(randomJob));
   };
 
-  const onUserModalHandler = () => {
-    setUserModal(true);
+  const modalSettingHandler = () => {
+    dispatch(changeGachaStatus(GachaStatus.closed));
   };
 
-  const gachaSettingHandler = () => {
-    setGachaIsSetted(true);
+  const envelopeOpenHandler = () => {
+    dispatch(changeGachaStatus(GachaStatus.opened));
+  };
+
+  const resultHandler = () => {
+    dispatch(changeGachaStatus(GachaStatus.result));
   };
 
   const userChangeHandler = (selectedIcon: UserIcons) => {
@@ -74,6 +66,10 @@ function GachaScreen() {
     setUserModal(false);
   };
 
+  const onUserModalHandler = () => {
+    setUserModal(true);
+  };
+
   const startMove = (page: page) => {
     dispatch(userPage(page));
     navigation.navigate("Start");
@@ -83,6 +79,35 @@ function GachaScreen() {
     dispatch(userPage(page));
     navigation.navigate("Gacha");
   };
+
+  //statusがclosedの場合封筒を出す
+  let envelope;
+  if (
+    user.gachaStatus === GachaStatus.closed ||
+    user.gachaStatus === GachaStatus.opened
+  ) {
+    envelope = (
+      <>
+        <BgBlack />
+        <Envelope
+          user={user}
+          resultHandler={resultHandler}
+          envelopeOpenHandler={envelopeOpenHandler}
+        />
+      </>
+    );
+  }
+
+  //statusがresultの場合モーダルを出す
+  let result;
+  if (user.gachaStatus === GachaStatus.result) {
+    result = (
+      <>
+        <BgBlack />
+        <JobGet job={randomJob} offModal={offModalHandler} />
+      </>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.rootScreen}>
@@ -99,24 +124,11 @@ function GachaScreen() {
             gachaMove={gachaMove}
             user={user}
           />
-          <NavGacha onModal={modalSettingHandler} startMove={startMove}/>
+          <NavGacha onModal={modalSettingHandler} startMove={startMove} />
           <ZimuPerson />
         </View>
-        {modalIsSetting && <BgBlack />}
-        {modalIsSetting && (
-          <Envelope
-            envelopeSetting={envelopeSetting}
-            setEnvelopeSetting={setEnvelopeSetting}
-            gachaSettingHandler={gachaSettingHandler}
-          />
-        )}
-        {modalIsSetting && gachaIsSetted && (
-          <JobGet
-            job={randomJob}
-            offModal={offModalHandler}
-            jobUpdate={jobUpdate}
-          />
-        )}
+        {envelope}
+        {result}
         {userModal && (
           <UserModal
             offUserModal={offUserModalHandler}

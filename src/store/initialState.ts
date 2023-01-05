@@ -643,6 +643,8 @@ const initialState: state = {
     gachaStandBy: false,
     productType: productType.default,
     page: "start",
+    gachaStatus: "stop",
+    gachaCosts: 1000,
   },
 
   previewJob: undefined,

@@ -1,3 +1,4 @@
+import { GachaStatus } from "../types/gacha";
 import { JobName } from "../types/job";
 import { page } from "../types/page";
 import { productType } from "../types/product";
@@ -13,6 +14,8 @@ export default class User implements User {
     public gachaStandBy: boolean,
     public productType: productType,
     public page: page,
+    public gachaStatus: GachaStatus,
+    public gachaCost: number,
   ) {
     this.name = name;
     this.money = money;
@@ -21,5 +24,7 @@ export default class User implements User {
     this.gachaStandBy = gachaStandBy;
     this.productType = productType;
     this.page = page;
+    this.gachaStatus = gachaStatus;
+    this.gachaCost = gachaCost;
   }
 }

@@ -1,3 +1,4 @@
+import { GachaStatus } from "./gacha";
 import { JobName } from "./job";
 import { page } from "./page";
 import { productType } from "./product";
@@ -11,4 +12,6 @@ export interface User {
   gachaStandBy: boolean;
   productType: productType;
   page: page;
+  gachaStatus: GachaStatus;
+  gachaCost: number;
 }

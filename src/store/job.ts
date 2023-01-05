@@ -7,6 +7,7 @@ import playpattern from "../models/playpattern";
 import initialState from "./initialState";
 import { productType } from "../types/product";
 import { page } from "../types/page";
+import { GachaStatus } from "../types/gacha";
 
 const JobRedux = createSlice({
   name: "JobRedux",
@@ -29,9 +30,10 @@ const JobRedux = createSlice({
         return element.isActive === true;
       });
 
-      // console.log(activeJobs.length);
+      // console.log(activeJobs[0]);
       // console.log(action.payload);
-      console.log(activeJobs.indexOf(state.job));
+      // console.log(activeJobs.findIndex((job) => job === action.payload));
+      // console.log(activeJobs.indexOf(action.payload));
 
       state.nextJob = activeJobs[activeJobs.indexOf(state.job) + 1];
       state.prevJob = activeJobs[activeJobs.indexOf(state.job) - 1];
@@ -136,6 +138,9 @@ const JobRedux = createSlice({
         state.centerProduct = state.job.product.default;
       }
     },
+    changeGachaStatus: (state, action: PayloadAction<GachaStatus>) => {
+      state.user.gachaStatus = action.payload;
+    },
     staminaDecrese: (state, action: PayloadAction<number>) => {
       state.play.stamina = state.play.stamina - action.payload;
     },
@@ -183,6 +188,7 @@ export const changeJobRecord = JobRedux.actions.changeJobRecord;
 export const changeProductType = JobRedux.actions.changeProductType;
 export const changeNextProduct = JobRedux.actions.changeNextProduct;
 export const changeCenterProduct = JobRedux.actions.changeCenterProduct;
+export const changeGachaStatus = JobRedux.actions.changeGachaStatus;
 export const staminaDecrese = JobRedux.actions.staminaDecrese;
 export const staminaIncrese = JobRedux.actions.staminaIncrese;
 export const staminaReset = JobRedux.actions.staminaReset;

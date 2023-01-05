@@ -1,20 +1,19 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Image, StyleSheet, Animated, View, Pressable } from "react-native";
+import User from "../../models/user";
+import { GachaStatus } from "../../types/gacha";
 
 type Props = {
-  envelopeSetting: boolean;
-  setEnvelopeSetting: (boolean: boolean) => void;
-  gachaSettingHandler: () => void;
+  user: User;
+  resultHandler: () => void;
+  envelopeOpenHandler: () => void;
 };
 
-const Envelope = ({ envelopeSetting, gachaSettingHandler, setEnvelopeSetting }: Props) => {
-  const [envelopeOpenedFirst, setEnvelopeOpened] = useState(false);
-
+const Envelope = ({ user, resultHandler, envelopeOpenHandler }: Props) => {
   const envelopeAnim = useRef(new Animated.Value(0)).current;
-  const envelopeTextAnim = useRef(new Animated.Value(0)).current;
   const sheetAnim = useRef(new Animated.Value(0)).current;
 
-  const envelopeText = envelopeTextAnim.interpolate({
+  const envelopeText = envelopeAnim.interpolate({
     inputRange: [0, 1, 2],
     outputRange: [0, 1, 0],
   });
@@ -51,23 +50,29 @@ const Envelope = ({ envelopeSetting, gachaSettingHandler, setEnvelopeSetting }: 
     ]).start();
   };
 
+  Animated.loop(
+    Animated.timing(envelopeAnim, {
+      toValue: 2,
+      duration: 1800,
+      useNativeDriver: false,
+    })
+  ).start();
+
   const animation = () => {
     sheetAnimation(),
       setTimeout(() => {
-        setEnvelopeOpened(false);
-        gachaSettingHandler();
+        resultHandler();
       }, 3000);
   };
 
   const envelopeHandler = () => {
-    setEnvelopeSetting(false);
-    setEnvelopeOpened(true);
+    envelopeOpenHandler();
     animation();
   };
 
   return (
     <>
-      {envelopeSetting && (
+      {user.gachaStatus === GachaStatus.closed && (
         <View style={styles.envelopeContainer}>
           <Animated.Text style={[styles.text, { opacity: envelopeText }]}>
             タップして開封しよう !
@@ -84,13 +89,13 @@ const Envelope = ({ envelopeSetting, gachaSettingHandler, setEnvelopeSetting }: 
           </Animated.View>
         </View>
       )}
-      {envelopeOpenedFirst && (
+      {user.gachaStatus === GachaStatus.opened && (
         <View style={styles.envelopeContainer}>
           <Image
             source={require("../../assets/ui/envelopeOpen.png")}
             style={styles.envelopeClosed}
           />
-          {envelopeOpenedFirst && (
+          {user.gachaStatus === GachaStatus.opened && (
             <Animated.View
               style={[
                 styles.sheet,

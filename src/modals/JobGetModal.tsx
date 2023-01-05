@@ -14,14 +14,11 @@ import CompanyImg from "../components/background/CompanyImg"
 
 type Props = {
   offModal: () => void;
-  jobUpdate: (job: Job) => void;
   job: Job;
 };
 
-const JobGet = ({ offModal, job, jobUpdate }: Props) => {
+const JobGet = ({ offModal, job }: Props) => {
   const prevJob = JSON.stringify(job)
-
-  jobUpdate(job);
 
   const name = job.name;
   const level = job.level;

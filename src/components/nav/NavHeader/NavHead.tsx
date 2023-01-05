@@ -10,7 +10,7 @@ import { UserIconType } from "../../../types/userIcon";
 import UserIcon from "../../face/UserIcon";
 import { useRef } from "react";
 import { page } from "../../../types/page";
-import { User } from "../../../types/user";
+import User from "../../../models/user";
 
 type Props = {
   icon: UserIconType;
