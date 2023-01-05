@@ -1,13 +1,13 @@
 import { View, StyleSheet, Animated, Pressable } from "react-native";
-import UserMoney from "../../ui/UserMoney";
-import ImageButton from "../../ui/ImageButton";
+import UserMoney from "../../money/UserMoney";
+import ImageButton from "../../button/ImageButton";
 import {
   NavigationProp,
   ParamListBase,
   useNavigation,
 } from "@react-navigation/native";
 import { UserIconType } from "../../../types/userIcon";
-import UserIcon from "../../typeui/UserIcon";
+import UserIcon from "../../face/UserIcon";
 import { useRef } from "react";
 import { page } from "../../../types/page";
 import { User } from "../../../types/user";

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Job } from "../../../types/job";
 import { User } from "../../../types/user";
-import FaceIcon from "../../typeui/FaceIcon";
+import FaceIcon from "../../face/FaceIcon";
 
 type Props = {
   onModal: (newJob: Job) => void;

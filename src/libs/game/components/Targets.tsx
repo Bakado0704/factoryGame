@@ -1,10 +1,10 @@
 import { View, StyleSheet, Pressable, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
-import { judgeStatus, Play, PlayGap, PlayStatus } from "../../types/play";
-import PlayPattern from "../../models/playpattern";
+import { judgeStatus, Play, PlayGap, PlayStatus } from "../../../types/play";
+import PlayPattern from "../../../models/playpattern";
 import Target from "./Target";
 import Animation from "./Animation";
-import ImageButton from "../../components/ui/ImageButton";
+import ImageButton from "../../../components/button/ImageButton";
 
 type Props = {
   playpattern: PlayPattern;

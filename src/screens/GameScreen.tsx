@@ -2,8 +2,8 @@ import { View, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
 import { useNavigation, NavigationProp, ParamListBase } from "@react-navigation/native";
 import Gameover from "../modals/GameoverModal";
-import BgBlack from "../components/ui/BgBlack";
-import Game from "../libs/game/game";
+import BgBlack from "../components/background/BgBlack";
+import Game from "../libs/game";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeActivePattern,

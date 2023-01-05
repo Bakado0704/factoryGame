@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import React from "react";
-import ImageButton from "../components/ui/ImageButton";
+import ImageButton from "../components/button/ImageButton";
 
 type Props = {
   offSetting: () => void

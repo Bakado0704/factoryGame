@@ -7,10 +7,10 @@ import {
 } from "react-native";
 import React from "react";
 import { useRef } from "react";
-import ImageButton from "../components/ui/ImageButton";
+import ImageButton from "../components/button/ImageButton";
 import { Job } from "../types/job";
-import FaceIcon from "../components/typeui/FaceIcon";
-import CompanyImg from "../components/typeui/CompanyImg"
+import FaceIcon from "../components/face/FaceIcon";
+import CompanyImg from "../components/background/CompanyImg"
 
 type Props = {
   offModal: () => void;

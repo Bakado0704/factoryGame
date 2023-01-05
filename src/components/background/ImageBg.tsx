@@ -1,13 +1,10 @@
-import { Dimensions, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import BackgroundImg from "../typeui/BackgroundImg";
-import Product from "../typeui/Product";
-import Conveyor from "../typeui/Conveyor";
+import { Dimensions } from "react-native";
+import React from "react";
+import { useSelector } from "react-redux";
+import BackgroundImg from "./BackgroundImg";
+import Product from "./Product";
+import Conveyor from "./Conveyor";
 import { RootState } from "../../store/store";
-import { judgeStatus } from "../../types/play";
-import { changeProductType } from "../../store/job";
-import { productType } from "../../types/product";
 
 export interface Props {
   children: React.ReactNode;

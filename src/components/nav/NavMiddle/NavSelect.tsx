@@ -1,5 +1,5 @@
 import { View, Image, Text, StyleSheet } from "react-native";
-import BoardImg from "../../typeui/BoardImg";
+import BoardImg from "../../background/BoardImg";
 import RankingButton from "../../animation/animationButton/RankingButton";
 import NextButton from "../../animation/animationButton/NextButton";
 import PrevButton from "../../animation/animationButton/PrevButton";

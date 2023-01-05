@@ -7,9 +7,9 @@ import {
   Animated,
 } from "react-native";
 import React, { useRef } from "react";
-import ImageButton from "../components/ui/ImageButton";
+import ImageButton from "../components/button/ImageButton";
 import { Outline } from "../types/outline";
-import FaceIcon from "../components/typeui/FaceIcon";
+import FaceIcon from "../components/face/FaceIcon";
 import { IconType } from "../types/icon";
 
 type Props = {

@@ -1,10 +1,10 @@
 import { View, StyleSheet, Image } from "react-native";
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { judgeStatus, Play, PlayGap, PlayStatus } from "../../types/play";
-import PlayPattern from "../../models/playpattern";
+import { judgeStatus, Play, PlayGap, PlayStatus } from "../../../types/play";
+import PlayPattern from "../../../models/playpattern";
 import Targets from "./Targets";
-import NavGame from "../../components/game/NavGame";
-import playpattern from "../../models/playpattern";
+import NavGame from "../../../components/game/NavGame";
+import playpattern from "../../../models/playpattern";
 
 type Props = {
   playpattern: PlayPattern[][];
@@ -162,11 +162,11 @@ const Counts = ({
   return (
     <>
       <Image
-        source={require("../../assets/ui/playBoardBackground.png")}
+        source={require("../../../assets/ui/playBoardBackground.png")}
         style={styles.boardTop}
       />
       <Image
-        source={require("../../assets/ui/playBoard.png")}
+        source={require("../../../assets/ui/playBoard.png")}
         style={styles.boardTop}
       />
       <View style={styles.rootContainer}>{TargetSet}</View>

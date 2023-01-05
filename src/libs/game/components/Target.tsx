@@ -1,8 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
-import PlayPattern from "../../models/playpattern";
-import PlayGap from "../../models/playgap";
-import { judgeStatus, Play, PlayStatus } from "../../types/play";
+import PlayPattern from "../../../models/playpattern";
+import PlayGap from "../../../models/playgap";
+import { judgeStatus, Play, PlayStatus } from "../../../types/play";
 
 type Props = {
   playpattern: PlayPattern;

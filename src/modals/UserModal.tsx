@@ -7,9 +7,9 @@ import {
   TextInput,
 } from "react-native";
 import React, { useState } from "react";
-import ImageButton from "../components/ui/ImageButton";
+import ImageButton from "../components/button/ImageButton";
 import UserIcons from "../models/userIcons";
-import UserIcon from "../components/typeui/UserIcon";
+import UserIcon from "../components/face/UserIcon";
 
 type Props = {
   offUserModal: () => void;

@@ -1,5 +1,5 @@
 import { View, StyleSheet, ImageBackground, Animated } from "react-native";
-import ImageButton from "../../ui/ImageButton";
+import ImageButton from "../../button/ImageButton";
 import React, { useRef } from "react";
 import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
 import StartButtons from "../../animation/animationButton/StartButtons";

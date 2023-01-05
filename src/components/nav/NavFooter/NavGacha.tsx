@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import { page } from "../../../types/page";
-import ImageButton from "../../ui/ImageButton";
+import ImageButton from "../../button/ImageButton";
 
 type Props = {
   onModal: (event: React.ChangeEvent<HTMLInputElement>) => void;

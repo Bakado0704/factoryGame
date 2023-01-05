@@ -2,11 +2,11 @@ import { View, StyleSheet, Text, Image } from "react-native";
 import React from "react";
 import { BackgroundType } from "../../types/background";
 
-import Counts from "../components/Counts";
-import { PATTERN_DATES } from "../datas/dates";
+import Counts from "./components/Counts";
+import { PATTERN_DATES } from "./datas/dates";
 import PlayGap from "../../models/playgap";
 import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
-import NowMoney from "../../components/ui/NowMoney";
+import NowMoney from "../../components/money/NowMoney";
 
 type Props = {
   type: BackgroundType;

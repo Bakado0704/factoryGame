@@ -15,7 +15,7 @@ import {
 import UserIcons from "../models/userIcons";
 import ZimuPerson from "../components/animation/ZimuPerson";
 import Envelope from "../components/animation/Envelope";
-import BgBlack from "../components/ui/BgBlack";
+import BgBlack from "../components/background/BgBlack";
 import { RootState } from "../store/store";
 import { page } from "../types/page";
 import {

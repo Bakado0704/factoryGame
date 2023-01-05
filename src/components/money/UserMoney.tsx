@@ -1,5 +1,5 @@
 import { Image, ImageBackground, Text, View, StyleSheet } from "react-native";
-import ImageButton from "./ImageButton";
+import ImageButton from "../button/ImageButton";
 
 type Props = {
   userMoney: number;
