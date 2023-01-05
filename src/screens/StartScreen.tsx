@@ -14,20 +14,22 @@ import {
   changeStatus,
   changeUser,
   staminaReset,
+  userPage,
 } from "../store/job";
 import { PlayStatus } from "../types/play";
 import { Job } from "../types/job";
 import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
+import { page } from "../types/page";
 
 const StartScreen = () => {
   const Job = useSelector((state: RootState) => state.job.job);
   const nextJob = useSelector((state: RootState) => state.job.nextJob);
   const prevJob = useSelector((state: RootState) => state.job.prevJob);
-  const User = useSelector((state: RootState) => state.job.user);
+  const user = useSelector((state: RootState) => state.job.user);
   const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
   const activeBoard = Job.boardImg;
-  const userIcon = User.icon;
-  const userMoney = User.money;
+  const userIcon = user.icon;
+  const userMoney = user.money;
   const maxMoney = Job.maxMoney;
   const [setting, setSetting] = useState(false);
   const [userModal, setUserModal] = useState(false);
@@ -39,7 +41,7 @@ const StartScreen = () => {
 
   // useEffect(() => {
   //   const unsubscribe = navigation.addListener("focus", () => {
-  //     jobDecideHandler(Job)
+  //     dispatch(changeJob(Job));
   //   });
 
   //   return unsubscribe;
@@ -78,6 +80,11 @@ const StartScreen = () => {
     dispatch(changeJob(job));
   };
 
+  const gachaMove = (page: page) => {
+    dispatch(userPage(page));
+    navigation.navigate("Gacha");
+  };
+
   return (
     <View style={styles.rootScreen}>
       <View style={styles.innerContainer}>
@@ -85,6 +92,8 @@ const StartScreen = () => {
           icon={userIcon}
           onUserModal={onUserModalHandler}
           userMoney={userMoney}
+          user={user}
+          gachaMove={gachaMove}
         />
         <NavSelect
           maxMoney={maxMoney}

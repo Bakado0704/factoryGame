@@ -21,6 +21,9 @@ type Props = {
   changeNowMoneyHandler: (number: number) => void;
   processCountHandler: (number: number) => void;
   selectedPatternHandler: (pattern: PlayPattern[]) => void;
+  changeProductTypeHandler: () => void;
+  changeNextProductHandler: () => void;
+  changeCenterProductHandler: () => void;
 };
 
 const Game = ({
@@ -36,6 +39,9 @@ const Game = ({
   changeNowMoneyHandler,
   processCountHandler,
   selectedPatternHandler,
+  changeProductTypeHandler,
+  changeNextProductHandler,
+  changeCenterProductHandler,
 }: Props) => {
   let playgap = new PlayGap(20, 10);
   let playpattern = PATTERN_DATES[0];
@@ -100,6 +106,9 @@ const Game = ({
           processCountHandler={processCountHandler}
           selectedPatternHandler={selectedPatternHandler}
           perMoney={perMoney}
+          changeProductTypeHandler={changeProductTypeHandler}
+          changeNextProductHandler={changeNextProductHandler}
+          changeCenterProductHandler={changeCenterProductHandler}
         />
       </View>
     </>

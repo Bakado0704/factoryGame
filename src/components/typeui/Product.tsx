@@ -1,8 +1,12 @@
-import { StyleSheet, Image, Animated, View, Dimensions, ImageSourcePropType } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  Animated,
+  View,
+  ImageSourcePropType,
+} from "react-native";
 import React, { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
 import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
-
 export type Props = {
   playState: Play;
   activeProductLength: number;
@@ -11,9 +15,8 @@ export type Props = {
   activeProductWidth: number;
   activeProductHeight: number;
   width: number;
-  nextProduct: ImageSourcePropType;
-  defaultProduct: ImageSourcePropType;
-  bonusProduct: ImageSourcePropType;
+  NEXTPRODUCT: ImageSourcePropType;
+  CENTERPRODUCT: ImageSourcePropType;
 };
 
 const Product = ({
@@ -21,9 +24,8 @@ const Product = ({
   activeProductWidth,
   activeProductHeight,
   width,
-  nextProduct,
-  defaultProduct,
-  bonusProduct,
+  NEXTPRODUCT,
+  CENTERPRODUCT,
 }: Props) => {
   //画像を動かす
   let TargetAnim = useRef(new Animated.Value(0)).current;
@@ -35,13 +37,11 @@ const Product = ({
 
   //judgeがsuccessかfailureになったときアニメーション動かす
   useEffect(() => {
-    if (playState.stamina > 0) {
-      Animated.timing(TargetAnim, {
-        toValue: 200,
-        duration: 800,
-        useNativeDriver: false,
-      }).start();
-    }
+    Animated.timing(TargetAnim, {
+      toValue: 200,
+      duration: 800,
+      useNativeDriver: false,
+    }).start();
   }, [
     playState.judge === judgeStatus.success ||
       playState.judge === judgeStatus.failure,
@@ -52,7 +52,7 @@ const Product = ({
     if (playState.judge === judgeStatus.waiting) {
       setTimeout(() => {
         TargetAnim.setValue(0);
-      }, 200);
+      }, 100);
     }
   }, [playState.judge === judgeStatus.waiting]);
 
@@ -157,19 +157,19 @@ const Product = ({
       </View>
       <View style={styles.ImageContainer}>
         <Image
-          source={nextProduct}
+          source={NEXTPRODUCT}
           style={{ width: activeProductWidth, height: activeProductHeight }}
         />
       </View>
       <View style={styles.ImageContainer}>
         <Image
-          source={defaultProduct}
+          source={CENTERPRODUCT}
           style={{ width: activeProductWidth, height: activeProductHeight }}
         />
       </View>
       <View style={styles.ImageContainer}>
         <Image
-          source={defaultProduct}
+          source={CENTERPRODUCT}
           style={{ width: activeProductWidth, height: activeProductHeight }}
         />
       </View>

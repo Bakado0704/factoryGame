@@ -5,6 +5,8 @@ import { UserIcons } from "../types/userIcons";
 import { judgeStatus, PlayStatus } from "../types/play";
 import playpattern from "../models/playpattern";
 import initialState from "./initialState";
+import { productType } from "../types/product";
+import { page } from "../types/page";
 
 const JobRedux = createSlice({
   name: "JobRedux",
@@ -13,6 +15,14 @@ const JobRedux = createSlice({
     changeJob: (state, action: PayloadAction<Job>) => {
       state.job = action.payload;
       state.user.nowJob = action.payload.name;
+
+      if (state.user.productType === "bonus") {
+        state.nextProduct = action.payload.product.bonus;
+        state.centerProduct = action.payload.product.bonus;
+      } else {
+        state.nextProduct = action.payload.product.default;
+        state.centerProduct = action.payload.product.default;
+      }
 
       //このタイミングでprevJobとnextJobを更新させる
       const activeJobs = state.jobs.filter(function (element) {
@@ -34,14 +44,14 @@ const JobRedux = createSlice({
         state.prevJob = activeJobs[activeJobs.length - 1];
       }
 
-      if (activeJobs.indexOf(state.job) === - 1) {
+      if (activeJobs.indexOf(state.job) === -1) {
         state.nextJob = activeJobs[activeJobs.length - 1];
         state.prevJob = activeJobs[activeJobs.length - 1];
       }
 
-      console.log(activeJobs);
-      console.log(state.nextJob)
-      console.log(state.prevJob)
+      // console.log(activeJobs);
+      // console.log(state.nextJob)
+      // console.log(state.prevJob)
     },
     changePreviewJob: (state, action: PayloadAction<Job | undefined>) => {
       state.previewJob = action.payload;
@@ -75,16 +85,20 @@ const JobRedux = createSlice({
       }
     },
     changeNowMoney: (state, action: PayloadAction<number>) => {
+      let bonus = 1.0;
+      if (state.user.productType === "bonus") {
+        bonus = 2.0;
+      }
       if (action.payload !== 0) {
-        let plusMoney = Math.floor(action.payload);
+        let plusMoney = Math.floor(action.payload) * bonus;
         if (state.play.combo <= 2) {
-          plusMoney = Math.floor(action.payload);
+          plusMoney = Math.floor(action.payload) * bonus;
         } else if (state.play.combo <= 4) {
-          plusMoney = Math.floor(action.payload * 1.2);
+          plusMoney = Math.floor(action.payload * 1.2) * bonus;
         } else if (state.play.combo <= 6) {
-          plusMoney = Math.floor(action.payload * 1.6);
+          plusMoney = Math.floor(action.payload * 1.6) * bonus;
         } else {
-          plusMoney = Math.floor(action.payload * 2.0);
+          plusMoney = Math.floor(action.payload * 2.0) * bonus;
         }
 
         state.play.money = state.play.money + plusMoney;
@@ -98,6 +112,28 @@ const JobRedux = createSlice({
         state.jobs[state.jobs.indexOf(action.payload)].maxMoney =
           state.play.money;
         state.job.maxMoney = state.play.money;
+      }
+    },
+    changeProductType: (state) => {
+      let r = Math.random() * 10;
+      if (r > 7) {
+        state.user.productType = productType.bonus;
+      } else {
+        state.user.productType = productType.default;
+      }
+    },
+    changeNextProduct: (state) => {
+      if (state.user.productType === "bonus") {
+        state.nextProduct = state.job.product.bonus;
+      } else {
+        state.nextProduct = state.job.product.default;
+      }
+    },
+    changeCenterProduct: (state) => {
+      if (state.user.productType === "bonus") {
+        state.centerProduct = state.job.product.bonus;
+      } else {
+        state.centerProduct = state.job.product.default;
       }
     },
     staminaDecrese: (state, action: PayloadAction<number>) => {
@@ -117,6 +153,9 @@ const JobRedux = createSlice({
     },
     userMoneyIncrease: (state, action: PayloadAction<number>) => {
       state.user.money = state.user.money + action.payload;
+    },
+    userPage: (state, action: PayloadAction<page>) => {
+      state.user.page = action.payload;
     },
     changeStatus: (state, action: PayloadAction<PlayStatus>) => {
       state.play.status = action.payload;
@@ -141,10 +180,14 @@ export const changePreviewIcon = JobRedux.actions.changePreviewIcon;
 export const changeNowMoney = JobRedux.actions.changeNowMoney;
 export const changeCombo = JobRedux.actions.changeCombo;
 export const changeJobRecord = JobRedux.actions.changeJobRecord;
+export const changeProductType = JobRedux.actions.changeProductType;
+export const changeNextProduct = JobRedux.actions.changeNextProduct;
+export const changeCenterProduct = JobRedux.actions.changeCenterProduct;
 export const staminaDecrese = JobRedux.actions.staminaDecrese;
 export const staminaIncrese = JobRedux.actions.staminaIncrese;
 export const staminaReset = JobRedux.actions.staminaReset;
 export const userMoneyIncrease = JobRedux.actions.userMoneyIncrease;
+export const userPage = JobRedux.actions.userPage;
 export const changeStatus = JobRedux.actions.changeStatus;
 export const changeJudge = JobRedux.actions.changeJudge;
 export const changeProcessCount = JobRedux.actions.changeProcessCount;

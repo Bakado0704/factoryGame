@@ -4,19 +4,23 @@ import Job from "../models/job";
 import Outline from "../models/outline";
 import { BoardType } from "../types/board";
 import User from "../models/user";
-import { JobName } from "../types/job";
+import { JobName, JobProduct } from "../types/job";
 import { UserIconType } from "../types/userIcon";
 import { UserIcons } from "../types/userIcons";
 import { Play, PlayColor, PlayStatus } from "../types/play";
 import PlayPattern from "../models/playpattern";
 import PlayTarget from "../models/playtarget";
 import playpattern from "../models/playpattern";
+import { productType } from "../types/product";
+import { ImageSourcePropType } from "react-native";
 
 export type state = {
   jobs: Job[];
   job: Job;
   nextJob: Job;
   prevJob: Job;
+  nextProduct: { before: ImageSourcePropType }[];
+  centerProduct: { before: ImageSourcePropType }[];
   previewJob?: Job;
   previewIcon: UserIcons;
   user: User;
@@ -595,12 +599,26 @@ const initialState: state = {
     },
   },
 
+  nextProduct: [
+    { before: require("../assets/product/product1-normal-first.png") },
+    { before: require("../assets/product/product1-normal-second.png") },
+    { before: require("../assets/product/product1-normal-third.png") },
+  ],
+
+  centerProduct: [
+    { before: require("../assets/product/product1-normal-first.png") },
+    { before: require("../assets/product/product1-normal-second.png") },
+    { before: require("../assets/product/product1-normal-third.png") },
+  ],
+
   user: {
     name: "user001",
     money: 10000,
     icon: UserIconType.man1,
     nowJob: JobName.yamagawa,
     gachaStandBy: false,
+    productType: productType.default,
+    page: "start",
   },
 
   previewJob: undefined,
@@ -755,6 +773,5 @@ const initialState: state = {
     ),
   ],
 };
-
 
 export default initialState;

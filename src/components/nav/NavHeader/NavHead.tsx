@@ -1,19 +1,27 @@
 import { View, StyleSheet, Animated, Pressable } from "react-native";
 import UserMoney from "../../ui/UserMoney";
 import ImageButton from "../../ui/ImageButton";
-import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 import { UserIconType } from "../../../types/userIcon";
 import UserIcon from "../../typeui/UserIcon";
 import { useRef } from "react";
+import { page } from "../../../types/page";
+import { User } from "../../../types/user";
 
 type Props = {
   icon: UserIconType;
   userMoney: number;
+  user: User;
   onUserModal: () => void;
+  gachaMove: (page: page) => void;
 };
 
-const NavHead = ({ icon, userMoney, onUserModal }: Props) => {
-  const navigation:NavigationProp<ParamListBase> = useNavigation();
+const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
 
   const iconAnim = useRef(new Animated.Value(0)).current;
 
@@ -31,19 +39,21 @@ const NavHead = ({ icon, userMoney, onUserModal }: Props) => {
   ).start();
 
   const gachaHandler = () => {
-    navigation.navigate("Gacha");
+    gachaMove(page.gacha);
   };
 
   return (
     <>
       <View style={styles.rootContainer}>
-        <UserMoney userMoney={userMoney}/>
+        <UserMoney userMoney={userMoney} />
         <View style={styles.settingContainer}>
-          <ImageButton
-            source={require("../../../assets/ui/gachaButton.png")}
-            onPress={gachaHandler}
-            style={styles.gachaButton}
-          />
+          {user.page !== page.gacha && (
+            <ImageButton
+              source={require("../../../assets/ui/gachaButton.png")}
+              onPress={gachaHandler}
+              style={styles.gachaButton}
+            />
+          )}
           <Animated.View
             style={{
               marginLeft: 4,

@@ -7,26 +7,33 @@ import UserModal from "../modals/UserModal";
 import { Job } from "../types/job";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  changeJob,
   changePreviewIcon,
   changeUpdateJob,
   changeUser,
-  userMoneyIncrease,
+  userPage,
 } from "../store/job";
 import UserIcons from "../models/userIcons";
 import ZimuPerson from "../components/animation/ZimuPerson";
 import Envelope from "../components/animation/Envelope";
 import BgBlack from "../components/ui/BgBlack";
 import { RootState } from "../store/store";
+import { page } from "../types/page";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 
 function GachaScreen() {
   const userIcon = useSelector((state: RootState) => state.job.user.icon);
   const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
   const jobs = useSelector((state: RootState) => state.job.jobs);
+  //現在のplay状態
+  const playState = useSelector((state: RootState) => state.job.play);
   const randomJob = jobs[Math.floor(Math.random() * jobs.length)];
-  const User = useSelector((state: RootState) => state.job.user);
-  const userMoney = User.money;
-
+  const user = useSelector((state: RootState) => state.job.user);
+  const userMoney = user.money;
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
   const dispatch = useDispatch();
 
   const [modalIsSetting, setModalIsSetting] = useState(false);
@@ -65,6 +72,16 @@ function GachaScreen() {
     setUserModal(false);
   };
 
+  const startMove = (page: page) => {
+    dispatch(userPage(page));
+    navigation.navigate("Start");
+  };
+
+  const gachaMove = (page: page) => {
+    dispatch(userPage(page));
+    navigation.navigate("Gacha");
+  };
+
   return (
     <SafeAreaView style={styles.rootScreen}>
       <ImageBackground
@@ -77,10 +94,10 @@ function GachaScreen() {
             icon={userIcon}
             onUserModal={onUserModalHandler}
             userMoney={userMoney}
+            gachaMove={gachaMove}
+            user={user}
           />
-          <NavGacha
-            onModal={modalSettingHandler}
-          />
+          <NavGacha onModal={modalSettingHandler} startMove={startMove} />
           <ZimuPerson />
         </View>
         {modalIsSetting && <BgBlack />}

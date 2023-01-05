@@ -7,11 +7,14 @@ import Game from "../libs/game/game";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeActivePattern,
+  changeCenterProduct,
   changeCombo,
   changeJobRecord,
   changeJudge,
+  changeNextProduct,
   changeNowMoney,
   changeProcessCount,
+  changeProductType,
   changeStatus,
   staminaDecrese,
   staminaIncrese,
@@ -63,6 +66,15 @@ const GameScreen = () => {
   const changeComboHandler = (number: number) => {
     dispatch(changeCombo(number));
   };
+  const changeProductTypeHandler = () => {
+    dispatch(changeProductType());
+  };
+  const changeNextProductHandler = () => {
+    dispatch(changeNextProduct());
+  };
+  const changeCenterProductHandler = () => {
+    dispatch(changeCenterProduct());
+  };
 
   //スタミナが0になるとゲームオーバー
   useEffect(() => {
@@ -71,7 +83,7 @@ const GameScreen = () => {
       dispatch(changeJobRecord(nowJob));
       dispatch(userMoneyIncrease(nowMoney));
     }
-  }, [playState.stamina <= 0]);
+  }, [playState.stamina <= 0 && nowJob]);
 
   //結果を受け入れたとき,ステータスをstopに戻し、スタート画面に戻る
   const offModalHandler = () => {
@@ -98,6 +110,9 @@ const GameScreen = () => {
         changeNowMoneyHandler={changeNowMoneyHandler}
         processCountHandler={processCountHandler}
         selectedPatternHandler={selectedPatternHandler}
+        changeProductTypeHandler={changeProductTypeHandler}
+        changeNextProductHandler={changeNextProductHandler}
+        changeCenterProductHandler={changeCenterProductHandler}
       />
     );
   }

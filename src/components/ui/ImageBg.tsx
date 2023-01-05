@@ -1,10 +1,13 @@
 import { Dimensions, StyleSheet } from "react-native";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import BackgroundImg from "../typeui/BackgroundImg";
 import Product from "../typeui/Product";
 import Conveyor from "../typeui/Conveyor";
 import { RootState } from "../../store/store";
+import { judgeStatus } from "../../types/play";
+import { changeProductType } from "../../store/job";
+import { productType } from "../../types/product";
 
 export interface Props {
   children: React.ReactNode;
@@ -15,6 +18,8 @@ const ImageBg = ({ children }: Props) => {
   const job = useSelector((state: RootState) => state.job.job);
   const activeType = useSelector((state: RootState) => state.job.job.icon);
   const playState = useSelector((state: RootState) => state.job.play);
+  const nextProduct = useSelector((state: RootState) => state.job.nextProduct);
+  const centerProduct = useSelector((state: RootState) => state.job.centerProduct);
   const selectedPlayPattern = useSelector(
     (state: RootState) => state.job.activePlayPattern
   );
@@ -37,17 +42,8 @@ const ImageBg = ({ children }: Props) => {
     ((activeProductLength - 1) * proccessCount) / allDistance.length
   );
 
-  //使用する画像の選定
-  const nextProduct = job.product.default[0].before;
-  const defaultProduct = job.product.default[productNumber].before;
-  const bonusProduct = job.product.bonus[productNumber].before;
-  const activeProduct = [
-    defaultProduct,
-    defaultProduct,
-    defaultProduct,
-    defaultProduct,
-    bonusProduct,
-  ][Math.floor(Math.random() * 4)];
+  let NEXTPRODUCT = nextProduct[0].before;
+  let CENTERPRODUCT = centerProduct[productNumber].before;
 
   return (
     <BackgroundImg type={activeType}>
@@ -60,9 +56,8 @@ const ImageBg = ({ children }: Props) => {
         activeProductWidth={activeProductWidth}
         activeProductHeight={activeProductHeight}
         width={width}
-        nextProduct={nextProduct}
-        defaultProduct={defaultProduct}
-        bonusProduct={bonusProduct}
+        NEXTPRODUCT={NEXTPRODUCT}
+        CENTERPRODUCT={CENTERPRODUCT}
       />
       {children}
     </BackgroundImg>
@@ -70,10 +65,3 @@ const ImageBg = ({ children }: Props) => {
 };
 
 export default ImageBg;
-
-const styles = StyleSheet.create({
-  rootScreen: {
-    flex: 1,
-    position: "relative",
-  },
-});

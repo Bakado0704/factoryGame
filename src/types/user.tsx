@@ -1,4 +1,6 @@
 import { JobName } from "./job";
+import { page } from "./page";
+import { productType } from "./product";
 import { UserIconType } from "./userIcon";
 
 export interface User {
@@ -7,4 +9,6 @@ export interface User {
   icon: UserIconType;
   nowJob: JobName;
   gachaStandBy: boolean;
+  productType: productType;
+  page: page;
 }

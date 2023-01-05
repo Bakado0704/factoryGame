@@ -1,20 +1,15 @@
 import { View, StyleSheet } from "react-native";
+import { page } from "../../../types/page";
 import ImageButton from "../../ui/ImageButton";
-import {
-  NavigationProp,
-  ParamListBase,
-  useNavigation,
-} from "@react-navigation/native";
 
 type Props = {
   onModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  startMove: (page: page) => void;
 };
 
-const NavGacha = ({ onModal }: Props) => {
-  const navigation: NavigationProp<ParamListBase> = useNavigation();
-
+const NavGacha = ({ onModal, startMove }: Props) => {
   const homeHandler = () => {
-    navigation.navigate("Start");
+    startMove(page.start);
   };
 
   return (

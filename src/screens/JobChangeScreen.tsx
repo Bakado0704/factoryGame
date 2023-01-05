@@ -1,6 +1,10 @@
 import { View, Image, StyleSheet } from "react-native";
 import NavJobList from "../components/nav/NavFooter/NavJobList";
-import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 import NavHead from "../components/nav/NavHeader/NavHead";
 import JobModal from "../modals/JobModal";
 import UserModal from "../modals/UserModal";
@@ -12,32 +16,34 @@ import {
   changePreviewIcon,
   changePreviewJob,
   changeUser,
+  userPage,
 } from "../store/job";
 import { useState } from "react";
 import UserIcons from "../models/userIcons";
 import JobAddButton from "../components/animation/animationButton/JobAddButton";
 import JobReturnButton from "../components/animation/animationButton/JobReturnButton";
 import { RootState } from "../store/store";
+import { page } from "../types/page";
 
 const JobChangeScreen = () => {
   const jobs = useSelector((state: RootState) => state.job.jobs);
   const previewJob = useSelector((state: RootState) => state.job.previewJob);
   const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
-  const User = useSelector((state: RootState) => state.job.user);
-  const userIcon = User.icon;
-  const userMoney = User.money;
+  const user = useSelector((state: RootState) => state.job.user);
+  const userIcon = user.icon;
+  const userMoney = user.money;
 
   const [userModal, setUserModal] = useState(false);
-  const navigation:NavigationProp<ParamListBase> = useNavigation();
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
   const dispatch = useDispatch();
 
-
-
   const jobReturnHandler = () => {
+    dispatch(userPage(page.start));
     navigation.navigate("Start");
   };
 
   const jobAddHandler = () => {
+    dispatch(userPage(page.gacha));
     navigation.navigate("Gacha");
   };
 
@@ -47,7 +53,7 @@ const JobChangeScreen = () => {
 
   const jobDecideHandler = () => {
     if (previewJob === undefined) {
-      throw new Error ("previewJobUndefined")
+      throw new Error("previewJobUndefined");
     }
     dispatch(changeJob(previewJob));
   };
@@ -58,6 +64,11 @@ const JobChangeScreen = () => {
 
   const onUserModalHandler = () => {
     setUserModal(true);
+  };
+
+  const gachaMove = (page: page) => {
+    dispatch(userPage(page));
+    navigation.navigate("Gacha");
   };
 
   const userChangeHandler = (selectedIcon: UserIcons) => {
@@ -81,10 +92,12 @@ const JobChangeScreen = () => {
             icon={userIcon}
             onUserModal={onUserModalHandler}
             userMoney={userMoney}
+            gachaMove={gachaMove}
+            user={user}
           />
         </View>
         <View style={styles.jobsContainer}>
-          <NavJobList onModal={jobModalOnHandler} jobs={jobs} user={User} />
+          <NavJobList onModal={jobModalOnHandler} jobs={jobs} user={user} />
         </View>
         <View style={styles.buttonsContainer}>
           <JobReturnButton jobReturnHandler={jobReturnHandler} />
