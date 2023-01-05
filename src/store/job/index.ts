@@ -8,8 +8,8 @@ import { changeUserNowJob } from "../job";
 
 const dispatch = useDispatch();
 
-const JobRedux = createSlice({
-  name: "JobRedux",
+const JobsRedux = createSlice({
+  name: "jobRedux",
   initialState,
   reducers: {
     changeJob: (state, action: PayloadAction<Job>) => {
@@ -97,10 +97,10 @@ const JobRedux = createSlice({
   },
 });
 
-export const changeJob = JobRedux.actions.changeJob;
-export const changeUpdateJob = JobRedux.actions.changeUpdateJob;
-export const changePreviewJob = JobRedux.actions.changePreviewJob;
-export const changeJobRecord = JobRedux.actions.changeJobRecord;
-export const changeNextProduct = JobRedux.actions.changeNextProduct;
-export const changeCenterProduct = JobRedux.actions.changeCenterProduct;
-export default JobRedux.reducer;
+export const changeJob = JobsRedux.actions.changeJob;
+export const changeUpdateJob = JobsRedux.actions.changeUpdateJob;
+export const changePreviewJob = JobsRedux.actions.changePreviewJob;
+export const changeJobRecord = JobsRedux.actions.changeJobRecord;
+export const changeNextProduct = JobsRedux.actions.changeNextProduct;
+export const changeCenterProduct = JobsRedux.actions.changeCenterProduct;
+export default JobsRedux.reducer;
