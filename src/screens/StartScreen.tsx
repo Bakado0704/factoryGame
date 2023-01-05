@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import NavHead from "../components/nav/NavHeader/NavHead";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NavSelect from "../components/nav/NavMiddle/NavSelect";
 import NavOperation from "../components/nav/NavFooter/NavOperation";
 import Setting from "../modals/SettingModal";

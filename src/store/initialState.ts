@@ -4,9 +4,9 @@ import Job from "../models/job";
 import Outline from "../models/outline";
 import { BoardType } from "../types/board";
 import User from "../models/user";
-import { JobName, JobProduct } from "../types/job";
+import { JobName } from "../types/job";
 import { UserIconType } from "../types/userIcon";
-import { Play, PlayColor, PlayStatus } from "../types/play";
+import { Play, PlayColor } from "../types/play";
 import PlayPattern from "../models/playpattern";
 import PlayTarget from "../models/playtarget";
 import playpattern from "../models/playpattern";
@@ -644,7 +644,7 @@ const initialState: state = {
     productType: productType.default,
     page: "start",
     gachaStatus: "stop",
-    gachaCosts: 1000,
+    gachaCost: 1000,
   },
 
   previewJob: undefined,

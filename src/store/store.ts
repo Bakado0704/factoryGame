@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import changeJobReducer from "./job";
+import changeJobReducers from "./job";
 
 export const store = configureStore({
   reducer: {
-    job: changeJobReducer,
+    job: changeJobReducers,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

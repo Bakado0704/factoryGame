@@ -1,11 +1,6 @@
 import { View, StyleSheet, Animated, Pressable } from "react-native";
 import UserMoney from "../../money/UserMoney";
 import ImageButton from "../../button/ImageButton";
-import {
-  NavigationProp,
-  ParamListBase,
-  useNavigation,
-} from "@react-navigation/native";
 import { UserIconType } from "../../../types/userIcon";
 import UserIcon from "../../face/UserIcon";
 import { useRef } from "react";
@@ -21,8 +16,6 @@ type Props = {
 };
 
 const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
-  const navigation: NavigationProp<ParamListBase> = useNavigation();
-
   const iconAnim = useRef(new Animated.Value(0)).current;
 
   const iconY = iconAnim.interpolate({

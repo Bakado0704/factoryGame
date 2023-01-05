@@ -8,6 +8,7 @@ import initialState from "./initialState";
 import { productType } from "../types/product";
 import { page } from "../types/page";
 import { GachaStatus } from "../types/gacha";
+import { JobName } from "../types/job";
 
 const JobRedux = createSlice({
   name: "JobRedux",
@@ -138,6 +139,9 @@ const JobRedux = createSlice({
         state.centerProduct = state.job.product.default;
       }
     },
+    changeUserNowJob: (state, action: PayloadAction<JobName>) => {
+      state.user.nowJob = action.payload;
+    },
     changeGachaStatus: (state, action: PayloadAction<GachaStatus>) => {
       state.user.gachaStatus = action.payload;
     },
@@ -189,6 +193,7 @@ export const changeProductType = JobRedux.actions.changeProductType;
 export const changeNextProduct = JobRedux.actions.changeNextProduct;
 export const changeCenterProduct = JobRedux.actions.changeCenterProduct;
 export const changeGachaStatus = JobRedux.actions.changeGachaStatus;
+export const changeUserNowJob = JobRedux.actions.changeUserNowJob;
 export const staminaDecrese = JobRedux.actions.staminaDecrese;
 export const staminaIncrese = JobRedux.actions.staminaIncrese;
 export const staminaReset = JobRedux.actions.staminaReset;
