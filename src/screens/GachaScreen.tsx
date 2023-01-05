@@ -28,13 +28,15 @@ function GachaScreen() {
   const userIcon = useSelector((state: RootState) => state.job.user.icon);
   const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
   const jobs = useSelector((state: RootState) => state.job.jobs);
-  //現在のplay状態
+  const userIcons = useSelector((state: RootState) => state.job.UserIcons);
+    //現在のplay状態
   const playState = useSelector((state: RootState) => state.job.play);
   const randomJob = jobs[Math.floor(Math.random() * jobs.length)];
   const user = useSelector((state: RootState) => state.job.user);
   const userMoney = user.money;
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   const dispatch = useDispatch();
+  
 
   const [modalIsSetting, setModalIsSetting] = useState(false);
   const [envelopeSetting, setEnvelopeSetting] = useState(false);
@@ -97,7 +99,7 @@ function GachaScreen() {
             gachaMove={gachaMove}
             user={user}
           />
-          <NavGacha onModal={modalSettingHandler} startMove={startMove} />
+          <NavGacha onModal={modalSettingHandler} startMove={startMove}/>
           <ZimuPerson />
         </View>
         {modalIsSetting && <BgBlack />}
@@ -120,6 +122,7 @@ function GachaScreen() {
             offUserModal={offUserModalHandler}
             user={userChangeHandler}
             previewIcon={previewIcon}
+            userIcons={userIcons}
           />
         )}
       </ImageBackground>

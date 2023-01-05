@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { View, Image, StyleSheet } from "react-native";
-import Colors from "../../../constants/color";
-import { judgeStatus, Play } from "../../../types/play";
-import JudgeLightSuccess from "../../animation/JudgeLightSuccess";
+import Colors from "../../constants/color";
+import { judgeStatus, Play } from "../../types/play";
+import JudgeLightSuccess from "../animation/JudgeLightSuccess";
 
 type Props = {
   playState: Play;
@@ -29,7 +29,7 @@ const NavGame = ({ playState }: Props) => {
     if (playState.judge === judgeStatus.failure) {
       setJudgeLight(
         <Image
-          source={require("../../../assets/ui/judgeFalse.png")}
+          source={require("../../assets/ui/judgeFalse.png")}
           style={styles.judge}
         />
       );
@@ -42,12 +42,12 @@ const NavGame = ({ playState }: Props) => {
     <View style={styles.innerContainer}>
       <View style={[styles.stamina, { width: length }]} />
       <Image
-        source={require("../../../assets/ui/judgeOff.png")}
+        source={require("../../assets/ui/judgeOff.png")}
         style={styles.judge}
       />
       {judgeLight}
       <Image
-        source={require("../../../assets/ui/playBoardTop.png")}
+        source={require("../../assets/ui/playBoardTop.png")}
         style={styles.board}
       />
     </View>

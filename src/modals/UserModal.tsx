@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import ImageButton from "../components/ui/ImageButton";
-import { USERICONS } from "../data/data";
 import UserIcons from "../models/userIcons";
 import UserIcon from "../components/typeui/UserIcon";
 
@@ -16,9 +15,10 @@ type Props = {
   offUserModal: () => void;
   user: (item: UserIcons) => void;
   previewIcon: UserIcons;
+  userIcons: UserIcons[];
 };
 
-const userModal = ({ offUserModal, user, previewIcon }: Props) => {
+const userModal = ({ offUserModal, user, previewIcon, userIcons }: Props) => {
   const [userName, setEnteredUserName] = useState("社畜 太郎");
 
   function nameInputHandler(enteredName: string) {
@@ -70,7 +70,7 @@ const userModal = ({ offUserModal, user, previewIcon }: Props) => {
         <View style={styles.innerContainer}>
           <View style={styles.container}>
             <FlatList
-              data={USERICONS}
+              data={userIcons}
               renderItem={renderIconItem}
               keyExtractor={(item) => item.id}
               numColumns={4}

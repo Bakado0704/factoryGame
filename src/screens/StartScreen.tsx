@@ -27,6 +27,7 @@ const StartScreen = () => {
   const prevJob = useSelector((state: RootState) => state.job.prevJob);
   const user = useSelector((state: RootState) => state.job.user);
   const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
+  const userIcons = useSelector((state: RootState) => state.job.UserIcons);
   const activeBoard = Job.boardImg;
   const userIcon = user.icon;
   const userMoney = user.money;
@@ -114,6 +115,7 @@ const StartScreen = () => {
           offUserModal={offUserModalHandler}
           user={userChangeHandler}
           previewIcon={previewIcon}
+          userIcons={userIcons}
         />
       )}
     </View>

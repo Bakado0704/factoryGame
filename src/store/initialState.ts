@@ -6,13 +6,13 @@ import { BoardType } from "../types/board";
 import User from "../models/user";
 import { JobName, JobProduct } from "../types/job";
 import { UserIconType } from "../types/userIcon";
-import { UserIcons } from "../types/userIcons";
 import { Play, PlayColor, PlayStatus } from "../types/play";
 import PlayPattern from "../models/playpattern";
 import PlayTarget from "../models/playtarget";
 import playpattern from "../models/playpattern";
 import { productType } from "../types/product";
 import { ImageSourcePropType } from "react-native";
+import UserIcons from "../models/userIcons";
 
 export type state = {
   jobs: Job[];
@@ -24,6 +24,7 @@ export type state = {
   previewJob?: Job;
   previewIcon: UserIcons;
   user: User;
+  UserIcons: UserIcons[];
   play: Play;
   activePlayPattern: playpattern[];
 };
@@ -609,6 +610,29 @@ const initialState: state = {
     { before: require("../assets/product/product1-normal-first.png") },
     { before: require("../assets/product/product1-normal-second.png") },
     { before: require("../assets/product/product1-normal-third.png") },
+  ],
+
+  UserIcons : [
+    new UserIcons("man1", UserIconType.man1),
+    new UserIcons("man2", UserIconType.man2),
+    new UserIcons("man3", UserIconType.man3),
+    new UserIcons("man4", UserIconType.man4),
+    new UserIcons("man5", UserIconType.man5),
+    new UserIcons("man6", UserIconType.man6),
+    new UserIcons("man7", UserIconType.man7),
+    new UserIcons("man8", UserIconType.man8),
+    new UserIcons("man9", UserIconType.man9),
+    new UserIcons("man10", UserIconType.man10),
+    new UserIcons("woman1", UserIconType.woman1),
+    new UserIcons("woman2", UserIconType.woman2),
+    new UserIcons("woman3", UserIconType.woman3),
+    new UserIcons("woman4", UserIconType.woman4),
+    new UserIcons("woman5", UserIconType.woman5),
+    new UserIcons("woman6", UserIconType.woman6),
+    new UserIcons("woman7", UserIconType.woman7),
+    new UserIcons("woman8", UserIconType.woman8),
+    new UserIcons("woman9", UserIconType.woman9),
+    new UserIcons("woman10", UserIconType.woman10),
   ],
 
   user: {

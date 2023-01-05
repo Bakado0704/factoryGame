@@ -3,7 +3,7 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import { judgeStatus, Play, PlayGap, PlayStatus } from "../../types/play";
 import PlayPattern from "../../models/playpattern";
 import Targets from "./Targets";
-import NavGame from "../../components/nav/NavFooter/NavGame";
+import NavGame from "../../components/game/NavGame";
 import playpattern from "../../models/playpattern";
 
 type Props = {
