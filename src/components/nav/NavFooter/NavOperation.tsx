@@ -1,7 +1,11 @@
 import { View, StyleSheet, ImageBackground, Animated } from "react-native";
 import ImageButton from "../../button/ImageButton";
 import React, { useRef } from "react";
-import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 import StartButtons from "../../animation/animationButton/StartButtons";
 
 type Props = {
@@ -15,7 +19,7 @@ const NavOperation = ({
   staminaResetHandler,
   playingStatusHandler,
 }: Props) => {
-  const navigation:NavigationProp<ParamListBase> = useNavigation();
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
 
   const pressHandler = () => {
     navigation.navigate("JobChange");
@@ -30,16 +34,11 @@ const NavOperation = ({
   return (
     <>
       <View style={styles.rootConteiner}>
-        <ImageBackground
-          source={require("../../../assets/ui/operationBoard.png")}
-          resizeMode="cover"
-        >
-          <StartButtons
-            gameHandler={gameHandler}
-            onSetting={onSetting}
-            pressHandler={pressHandler}
-          />
-        </ImageBackground>
+        <StartButtons
+          gameHandler={gameHandler}
+          onSetting={onSetting}
+          pressHandler={pressHandler}
+        />
       </View>
     </>
   );

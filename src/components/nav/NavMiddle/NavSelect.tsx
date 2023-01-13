@@ -51,6 +51,11 @@ const NavBody = ({
         <Text style={styles.money}>
           {new Intl.NumberFormat().format(maxMoney)}
         </Text>
+        {/* <TextStroke stroke={1} color={"black"}>
+          <Text style={styles.money}>
+            {new Intl.NumberFormat().format(maxMoney)}
+          </Text>
+        </TextStroke> */}
       </View>
     </View>
   );
