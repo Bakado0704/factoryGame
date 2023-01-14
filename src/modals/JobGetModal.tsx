@@ -1,16 +1,12 @@
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  Animated,
-} from "react-native";
+import { View, StyleSheet, Image, Text } from "react-native";
 import React from "react";
-import { useRef } from "react";
 import ImageButton from "../components/button/ImageButton";
 import { Job } from "../types/job";
-import FaceIcon from "../components/face/FaceIcon";
-import CompanyImg from "../components/background/CompanyImg"
+import CompanyImg from "../components/background/CompanyImg";
+import Comment from "../components/modal/Comment";
+import Colors from "../constants/color";
+import { ShadowText } from "../components/text/ShadowText";
+import Title from "../components/modal/Title";
 
 type Props = {
   offModal: () => void;
@@ -18,7 +14,7 @@ type Props = {
 };
 
 const JobGet = ({ offModal, job }: Props) => {
-  const prevJob = JSON.stringify(job)
+  const prevJob = JSON.stringify(job);
 
   const name = job.name;
   const level = job.level;
@@ -30,94 +26,88 @@ const JobGet = ({ offModal, job }: Props) => {
   const BackgroundImg = job.backgroundImg;
   const isActive = JSON.parse(prevJob).isActive;
 
-  const iconAnim = useRef(new Animated.Value(0)).current;
-
-  const iconY = iconAnim.interpolate({
-    inputRange: [0, 100, 101, 200],
-    outputRange: [-2, -2, 0, 0],
-  });
-
-  Animated.loop(
-    Animated.timing(iconAnim, {
-      toValue: 200,
-      duration: 300,
-      useNativeDriver: false,
-    })
-  ).start();
-
   return (
     <>
       <View style={styles.rootScreen}>
-        {!isActive && <View style={styles.titleContainer}>
-          <Text style={styles.youdead}>新しい勤務先をアンロックしました</Text>
-          <Text style={styles.gameover}>You got a new work place!</Text>
-        </View>}
-        {isActive && <View style={styles.titleContainer}>
-          <Text style={styles.youdead}>熟練度が上がりました</Text>
-          <Text style={styles.gameover}>You got a new skill!</Text>
-        </View>}
+        {!isActive && (
+          <View style={styles.titleContainer}>
+            <Text style={styles.youdead}>新しい勤務先をアンロックしました</Text>
+            <Text style={styles.gameover}>You got a new work place!</Text>
+          </View>
+        )}
+        {isActive && (
+          <View style={styles.titleContainer}>
+            <Text style={styles.youdead}>熟練度が上がりました</Text>
+            <Text style={styles.gameover}>You got a new skill!</Text>
+          </View>
+        )}
         <View style={styles.innerContainer}>
+          <Title title={name} />
           <View style={styles.imageContainer}>
-            <CompanyImg type={BackgroundImg}/>
+            <CompanyImg type={BackgroundImg} />
           </View>
-          <View style={styles.textContainer}>
-            <Text style={[styles.resultText, { fontSize: 20 }]}>会社名: </Text>
-            <Text style={[styles.resultText, { fontSize: 25 }]}>{name}</Text>
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={[styles.resultText, { fontSize: 20 }]}>熟練度: </Text>
-              <View style={styles.textInnerContainer}>
-                <Text style={[styles.resultText, { fontSize: 20 }]}> Lv{prevLevel}</Text>
-                {isActive && <Image
+          <View style={styles.resultDetailContainer}>
+            <View style={styles.resultBackground} />
+            <ShadowText size={18} color="white">
+              熟練度:
+            </ShadowText>
+            <View style={styles.textInnerContainer}>
+              <ShadowText size={18} color="white">
+                {" "}
+                Lv{prevLevel}
+              </ShadowText>
+              {isActive && (
+                <Image
                   source={require("../assets/ui/arrow.png")}
                   style={styles.arrowImg}
-                 />}
-                {isActive && <Text style={[styles.resultText, { fontSize: 20, color: "red" }]}>Lv{level}</Text>}
-              </View>
+                />
+              )}
+              {isActive && (
+                <ShadowText size={18} color="red">
+                  {" "}
+                  Lv{level}
+                </ShadowText>
+              )}
+            </View>
           </View>
-          <View style={styles.moneyContainer}>
-            <Text style={[styles.resultText, { fontSize: 20 }]}>基本給: </Text>
+          <View style={styles.resultDetailContainer}>
+            <View style={styles.resultBackground} />
+            <ShadowText size={18} color="white">
+              基本給:
+            </ShadowText>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={[styles.resultText, { fontSize: 20 }]}>
+            <ShadowText size={20} color="white">
               {prevPerMoney}
-            </Text>
+            </ShadowText>
             <View style={styles.textInnerContainer}>
-                {isActive && <Image
+              {isActive && (
+                <Image
                   source={require("../assets/ui/arrow.png")}
                   style={styles.arrowImg}
-                 />}
-                {isActive && <Image
+                />
+              )}
+              {isActive && (
+                <Image
                   source={require("../assets/ui/money1.png")}
                   style={styles.moneyImg}
-                />}
-                {isActive && <Text style={[styles.resultText, { fontSize: 20, color: "red" }]}>
+                />
+              )}
+              {isActive && (
+                <ShadowText size={20} color="red">
                   {perMoney}
-                </Text>}
-              </View>
+                </ShadowText>
+              )}
+            </View>
           </View>
         </View>
-        <View style={styles.reactionContainer}>
-          <Image
-            source={require("../assets/ui/bubble.png")}
-            style={styles.bubble}
-          />
-          <View style={styles.commentContainer}>
-            <Text style={styles.comment}>
-              ウチは厳しいぞ、置いてかれるなよ!!
-            </Text>
-          </View>
-          <View style={styles.iconContaner}>
-            <Animated.View
-              style={[styles.iconBox, { transform: [{ translateY: iconY }] }]}
-            >
-              <FaceIcon width={78} height={78} type={icon} />
-            </Animated.View>
-            <Text style={styles.position}>社長: {ownerName}</Text>
-          </View>
-        </View>
+        <Comment
+          name={ownerName}
+          comment="ウチは厳しいぞ、置いてかれるなよ!!"
+          iconType={icon}
+        />
         <View style={styles.buttonContainer}>
           <ImageButton
             source={require("../assets/ui/okButton.png")}
@@ -158,12 +148,14 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: Colors.modalMainColor,
     width: "100%",
-    marginTop: 10,
+    marginTop: 20,
     padding: 10,
+    paddingTop: 15,
     paddingBottom: 35,
-    borderRadius: 32,
+    borderWidth: 3,
+    borderColor: Colors.modalEdgeColor,
   },
   textContainer: {
     flexDirection: "row",
@@ -179,24 +171,44 @@ const styles = StyleSheet.create({
     height: 120,
     marginVertical: 10,
     overflow: "hidden",
+    borderWidth: 2,
+    borderColor: Colors.modalEdgeColor,
   },
   moneyContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 4,
   },
+  resultDetailContainer: {
+    width: "100%",
+    height: 32,
+    marginVertical: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  resultBackground: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    borderRadius: 10,
+    backgroundColor: Colors.modalEdgeColor,
+    opacity: 0.5,
+  },
   resultText: {
     fontSize: 20,
     fontFamily: "MochiyPop",
   },
   moneyImg: {
-    width: 27,
-    height: 27,
+    width: 24,
+    height: 24,
+    marginLeft: 8,
+    marginRight: 4,
   },
   arrowImg: {
     width: 14,
     height: 14,
-    marginHorizontal: 4,
+    marginLeft: 8,
   },
   staminaImg: {
     width: 90,
@@ -207,47 +219,6 @@ const styles = StyleSheet.create({
     borderBottomColor: "#eeeeee",
     borderBottomWidth: 2,
     marginVertical: 5,
-  },
-  reactionContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: -30,
-    position: "relative",
-  },
-  bubble: {
-    width: 300,
-    height: 86,
-  },
-  iconContaner: {
-    width: 300,
-    flexDirection: "row",
-    alignItems: "flex-end",
-  },
-  iconBox: {
-    width: 78,
-    height: 78,
-  },
-  icon: {
-    width: "100%",
-    height: "100%",
-  },
-  position: {
-    fontSize: 20,
-    fontFamily: "MochiyPop",
-    margin: 10,
-    color: "white",
-  },
-  commentContainer: {
-    position: "absolute",
-    justifyContent: "center",
-    alignItems: "center",
-    top: 0,
-    width: "100%",
-    height: 64,
-  },
-  comment: {
-    fontSize: 15,
-    fontFamily: "MochiyPop",
   },
   buttonContainer: {
     justifyContent: "center",

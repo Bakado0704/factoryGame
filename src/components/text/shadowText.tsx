@@ -6,9 +6,10 @@ import { TextStroke } from "./TextStroke";
 type Props = {
   size: number;
   children: React.ReactNode;
+  color: string;
 };
 
-export const ShadowText = ({ children, size }: Props) => {
+export const ShadowText = ({ children, size, color }: Props) => {
   return (
     <View style={styles.outerContainer}>
       <View style={styles.innerContainer}>
@@ -22,7 +23,7 @@ export const ShadowText = ({ children, size }: Props) => {
       </View>
       <TextStroke stroke={1} color={Colors.textMainColor}>
         <Text
-          style={{ fontSize: size, fontFamily: "MochiyPop", color: "white" }}
+          style={{ fontSize: size, fontFamily: "MochiyPop", color: color }}
         >
           {children}
         </Text>

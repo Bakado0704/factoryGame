@@ -1,10 +1,11 @@
 import { View, StyleSheet, Image, Text, Animated } from "react-native";
-import React, { useRef } from "react";
-import FaceIcon from "../components/face/FaceIcon";
+import React from "react";
 import ImageButton from "../components/button/ImageButton";
 import { IconType } from "../types/icon";
 import Colors from "../constants/color";
 import { ShadowText } from "../components/text/ShadowText";
+import Comment from "../components/modal/Comment";
+import Title from "../components/modal/Title";
 
 type Props = {
   nowMoney: number;
@@ -15,21 +16,6 @@ type Props = {
 };
 
 const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
-  const iconAnim = useRef(new Animated.Value(0)).current;
-
-  const iconY = iconAnim.interpolate({
-    inputRange: [0, 100, 101, 200],
-    outputRange: [-2, -2, 0, 0],
-  });
-
-  Animated.loop(
-    Animated.timing(iconAnim, {
-      toValue: 200,
-      duration: 300,
-      useNativeDriver: false,
-    })
-  ).start();
-
   return (
     <>
       <View style={styles.rootScreen}>
@@ -38,17 +24,9 @@ const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
           <Text style={styles.gameover}>GAMEOVER</Text>
         </View>
         <View style={styles.innerContainer}>
-          <View style={styles.modalTitleContanier}>
-            <Image
-              source={require("../assets/ui/modalTitle.png")}
-              style={styles.modalTitleImg}
-            />
-            <View style={styles.modalTitleText}>
-              <ShadowText size={20}>記録</ShadowText>
-            </View>
-          </View>
-          <View style={{marginBottom: -20}}>
-          <ShadowText size={14}>時給</ShadowText>
+          <Title title="記録"/>
+          <View style={{ marginBottom: -20 }}>
+            <ShadowText size={14} color="white">時給</ShadowText>
           </View>
           <View style={styles.resultOuterContainer}>
             <Image
@@ -60,43 +38,27 @@ const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
                 source={require("../assets/ui/money1.png")}
                 style={styles.moneyBigImg}
               />
-              <ShadowText size={60}>{nowMoney}</ShadowText>
+              <ShadowText size={60} color="white">{nowMoney}</ShadowText>
             </View>
           </View>
 
           <View style={styles.resultDetailContainer}>
             <View style={styles.resultBackground} />
-            <ShadowText size={18}>成功回数:</ShadowText>
-            <ShadowText size={20}> 0</ShadowText>
+            <ShadowText size={18} color="white">成功回数:</ShadowText>
+            <ShadowText size={20} color="white"> 0</ShadowText>
           </View>
 
           <View style={styles.resultDetailContainer}>
             <View style={styles.resultBackground} />
-            <ShadowText size={18}>最高記録:</ShadowText>
+            <ShadowText size={18} color="white">最高記録:</ShadowText>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <ShadowText size={20}>{maxMoney}</ShadowText>
+            <ShadowText size={20} color="white">{maxMoney}</ShadowText>
           </View>
         </View>
-        <View style={styles.reactionContainer}>
-          <Image
-            source={require("../assets/ui/bubble.png")}
-            style={styles.bubble}
-          />
-          <View style={styles.commentContainer}>
-            <Text style={styles.comment}>あーあって感じ</Text>
-          </View>
-          <View style={styles.iconContaner}>
-            <Animated.View
-              style={[styles.iconBox, { transform: [{ translateY: iconY }] }]}
-            >
-              <FaceIcon type={iconType} width={78} height={78} />
-            </Animated.View>
-            <Text style={styles.position}>社長: {name}</Text>
-          </View>
-        </View>
+        <Comment name={name} comment="あーあって感じ" iconType={iconType} />
         <View style={styles.buttonContainer}>
           <ImageButton
             source={require("../assets/ui/okButton.png")}
@@ -130,15 +92,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 260,
     height: 37,
-    marginTop: -27,
+    marginTop: -30,
   },
   modalTitleImg: {
     position: "absolute",
     width: "100%",
     height: "100%",
-  },
-  modalTitleText: {
-    transform: [{ translateY: -2 }],
   },
   youdead: {
     fontSize: 30,
@@ -156,6 +115,7 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 20,
     padding: 10,
+    paddingTop: 15,
     paddingBottom: 35,
     borderWidth: 3,
     borderColor: Colors.modalEdgeColor,
@@ -183,6 +143,7 @@ const styles = StyleSheet.create({
   },
   resultDetailContainer: {
     width: "100%",
+    height: 32,
     marginVertical: 5,
     flexDirection: "row",
     alignItems: "center",
@@ -236,48 +197,6 @@ const styles = StyleSheet.create({
   staminaImg: {
     width: 90,
     height: 30,
-  },
-  reactionContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: -30,
-    position: "relative",
-  },
-  bubble: {
-    width: 300,
-    height: 86,
-  },
-  iconContaner: {
-    width: 300,
-    flexDirection: "row",
-    alignItems: "flex-end",
-  },
-  iconBox: {
-    width: 78,
-    height: 78,
-  },
-  icon: {
-    width: "100%",
-    height: "100%",
-  },
-  position: {
-    fontSize: 20,
-    fontFamily: "MochiyPop",
-    margin: 10,
-    color: "white",
-  },
-  commentContainer: {
-    position: "absolute",
-    justifyContent: "center",
-    alignItems: "center",
-    top: 0,
-    width: "100%",
-    height: 64,
-  },
-  comment: {
-    fontSize: 15,
-    fontFamily: "MochiyPop",
-    color: Colors.textMainColor,
   },
   buttonContainer: {
     justifyContent: "center",

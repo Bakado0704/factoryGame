@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from "react-native";
+
 export interface Play {
   status: PlayStatus; // ゲームの状態を管理
   judge: judgeStatus; // ゲームの状態を管理
@@ -34,7 +36,7 @@ export interface PlayPattern {
 export interface PlayTarget {
   velocity: number;
   color: PlayColor;
-  ImageSource: string;
+  ImageSource: ImageSourcePropType;
 }
 
 export interface PlayGap {

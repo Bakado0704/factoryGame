@@ -1,10 +1,10 @@
-import { Image, Pressable, StyleSheet, View } from "react-native";
+import { Image, ImageSourcePropType, Pressable, StyleSheet, View } from "react-native";
 import React from "react";
 
 export interface Props {
   onPress: (event: React.ChangeEvent<HTMLInputElement>) => void;
   style: object;
-  source: string;
+  source: ImageSourcePropType;
 }
 
 const ImageButton= ({ source, onPress, style }: Props) => {
