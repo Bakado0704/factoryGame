@@ -4,6 +4,7 @@ import FaceIcon from "../components/face/FaceIcon";
 import ImageButton from "../components/button/ImageButton";
 import { IconType } from "../types/icon";
 import Colors from "../constants/color";
+import { ShadowText } from "../components/text/ShadowText";
 
 type Props = {
   nowMoney: number;
@@ -37,13 +38,12 @@ const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
           <Text style={styles.gameover}>GAMEOVER</Text>
         </View>
         <View style={styles.innerContainer}>
-
           <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}>
             新記録
           </Text>
           <View style={styles.resultContainer}>
-          <View style={styles.resultBackground} />
-            <Text style={[styles.resultText, { fontSize: 20 }]}>時給:</Text>
+            <View style={styles.resultBackground} />
+            <ShadowText size={20}>時給:</ShadowText>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
@@ -52,10 +52,11 @@ const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
               {nowMoney}
             </Text>
           </View>
-  
+
           <View style={styles.resultContainer}>
             <View style={styles.resultBackground} />
             <Text style={[styles.resultText, { fontSize: 20 }]}>最高記録:</Text>
+
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
