@@ -38,32 +38,46 @@ const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
           <Text style={styles.gameover}>GAMEOVER</Text>
         </View>
         <View style={styles.innerContainer}>
-          <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}>
-            新記録
-          </Text>
-          <View style={styles.resultContainer}>
-            <View style={styles.resultBackground} />
-            <ShadowText size={20}>時給:</ShadowText>
+          <View style={styles.modalTitleContanier}>
             <Image
-              source={require("../assets/ui/money1.png")}
-              style={styles.moneyImg}
+              source={require("../assets/ui/modalTitle.png")}
+              style={styles.modalTitleImg}
             />
-            <Text style={[styles.resultText, { fontSize: 25, marginLeft: 5 }]}>
-              {nowMoney}
-            </Text>
+            <View style={styles.modalTitleText}>
+              <ShadowText size={20}>記録</ShadowText>
+            </View>
+          </View>
+          <View style={{marginBottom: -20}}>
+          <ShadowText size={14}>時給</ShadowText>
+          </View>
+          <View style={styles.resultOuterContainer}>
+            <Image
+              source={require("../assets/ui/modalBackgroundLight.png")}
+              style={styles.modalBackgroundLight}
+            />
+            <View style={styles.resultInnerContainer}>
+              <Image
+                source={require("../assets/ui/money1.png")}
+                style={styles.moneyBigImg}
+              />
+              <ShadowText size={60}>{nowMoney}</ShadowText>
+            </View>
           </View>
 
-          <View style={styles.resultContainer}>
+          <View style={styles.resultDetailContainer}>
             <View style={styles.resultBackground} />
-            <Text style={[styles.resultText, { fontSize: 20 }]}>最高記録:</Text>
+            <ShadowText size={18}>成功回数:</ShadowText>
+            <ShadowText size={20}> 0</ShadowText>
+          </View>
 
+          <View style={styles.resultDetailContainer}>
+            <View style={styles.resultBackground} />
+            <ShadowText size={18}>最高記録:</ShadowText>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={[styles.resultText, { fontSize: 25, marginLeft: 5 }]}>
-              {maxMoney}
-            </Text>
+            <ShadowText size={20}>{maxMoney}</ShadowText>
           </View>
         </View>
         <View style={styles.reactionContainer}>
@@ -111,6 +125,21 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
+  modalTitleContanier: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 260,
+    height: 37,
+    marginTop: -27,
+  },
+  modalTitleImg: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
+  modalTitleText: {
+    transform: [{ translateY: -2 }],
+  },
   youdead: {
     fontSize: 30,
     color: "white",
@@ -125,7 +154,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.modalMainColor,
     width: "100%",
-    marginTop: 10,
+    marginTop: 20,
     padding: 10,
     paddingBottom: 35,
     borderWidth: 3,
@@ -135,7 +164,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  resultContainer: {
+  resultOuterContainer: {
+    width: 260,
+    height: 106,
+    marginVertical: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  resultInnerContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
+  modalBackgroundLight: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
+  resultDetailContainer: {
     width: "100%",
     marginVertical: 5,
     flexDirection: "row",
@@ -148,6 +194,7 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 10,
     backgroundColor: Colors.modalEdgeColor,
+    opacity: 0.5,
   },
   staminaContainer: {
     flexDirection: "row",
@@ -170,9 +217,16 @@ const styles = StyleSheet.create({
     fontFamily: "MochiyPop",
   },
   moneyImg: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     marginLeft: 8,
+    marginRight: 4,
+  },
+  moneyBigImg: {
+    width: 60,
+    height: 60,
+    marginLeft: 8,
+    marginRight: 4,
   },
   arrowImg: {
     width: 20,
@@ -223,6 +277,7 @@ const styles = StyleSheet.create({
   comment: {
     fontSize: 15,
     fontFamily: "MochiyPop",
+    color: Colors.textMainColor,
   },
   buttonContainer: {
     justifyContent: "center",
