@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import FaceIcon from "../components/face/FaceIcon";
 import ImageButton from "../components/button/ImageButton";
 import { IconType } from "../types/icon";
+import Colors from "../constants/color";
 
 type Props = {
   nowMoney: number;
@@ -36,41 +37,30 @@ const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
           <Text style={styles.gameover}>GAMEOVER</Text>
         </View>
         <View style={styles.innerContainer}>
-          <View>
-            <Text style={[styles.resultText, { fontSize: 20 }]}>～記録～</Text>
-          </View>
-          <View style={styles.line} />
+
           <Text style={[styles.resultText, { fontSize: 15, color: "red" }]}>
             新記録
           </Text>
-          <View style={styles.moneyContainer}>
+          <View style={styles.resultContainer}>
+          <View style={styles.resultBackground} />
             <Text style={[styles.resultText, { fontSize: 20 }]}>時給:</Text>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text
-              style={[
-                styles.resultText,
-                { fontSize: 25, marginLeft: 5 },
-              ]}
-            >
+            <Text style={[styles.resultText, { fontSize: 25, marginLeft: 5 }]}>
               {nowMoney}
             </Text>
           </View>
-          <View style={styles.line} />
-          <View style={styles.moneyContainer}>
+  
+          <View style={styles.resultContainer}>
+            <View style={styles.resultBackground} />
             <Text style={[styles.resultText, { fontSize: 20 }]}>最高記録:</Text>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text
-              style={[
-                styles.resultText,
-                { fontSize: 25,  marginLeft: 5 },
-              ]}
-            >
+            <Text style={[styles.resultText, { fontSize: 25, marginLeft: 5 }]}>
               {maxMoney}
             </Text>
           </View>
@@ -132,20 +122,31 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: Colors.modalMainColor,
     width: "100%",
     marginTop: 10,
     padding: 10,
     paddingBottom: 35,
-    borderRadius: 32,
+    borderWidth: 3,
+    borderColor: Colors.modalEdgeColor,
   },
   numberContainer: {
     flexDirection: "row",
     alignItems: "center",
   },
-  moneyContainer: {
+  resultContainer: {
+    width: "100%",
+    marginVertical: 5,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+  },
+  resultBackground: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    borderRadius: 10,
+    backgroundColor: Colors.modalEdgeColor,
   },
   staminaContainer: {
     flexDirection: "row",
@@ -168,8 +169,8 @@ const styles = StyleSheet.create({
     fontFamily: "MochiyPop",
   },
   moneyImg: {
-    width: 34,
-    height: 34,
+    width: 30,
+    height: 30,
     marginLeft: 8,
   },
   arrowImg: {
@@ -180,12 +181,6 @@ const styles = StyleSheet.create({
   staminaImg: {
     width: 90,
     height: 30,
-  },
-  line: {
-    width: "100%",
-    borderBottomColor: "#eeeeee",
-    borderBottomWidth: 2,
-    marginVertical: 5,
   },
   reactionContainer: {
     justifyContent: "center",
