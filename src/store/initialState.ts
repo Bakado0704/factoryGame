@@ -39,7 +39,7 @@ const initialState: state = {
       1,
       0,
       0,
-      15,
+      [15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
       BackgroundType.yamagawa,
       BoardType.yamagawa,
       {
@@ -82,7 +82,7 @@ const initialState: state = {
       1,
       0,
       0,
-      12,
+      [12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
       BackgroundType.souzuki,
       BoardType.souzuki,
       {
@@ -126,7 +126,7 @@ const initialState: state = {
       1,
       0,
       0,
-      20,
+      [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
       BackgroundType.ashBerry,
       BoardType.ashBerry,
       {
@@ -169,7 +169,7 @@ const initialState: state = {
       1,
       0,
       0,
-      18,
+      [18, 19, 20, 21, 22, 23, 24, 25, 26, 27],
       BackgroundType.bentaro,
       BoardType.bentaro,
       {
@@ -214,7 +214,7 @@ const initialState: state = {
       1,
       0,
       0,
-      25,
+      [27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
       BackgroundType.aguron,
       BoardType.aguron,
       {
@@ -257,7 +257,7 @@ const initialState: state = {
       1,
       0,
       0,
-      20,
+      [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
       BackgroundType.starFoods,
       BoardType.starFoods,
       {
@@ -302,7 +302,7 @@ const initialState: state = {
       1,
       0,
       0,
-      27,
+      [27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
       BackgroundType.sikaga,
       BoardType.sikaga,
       {
@@ -345,7 +345,7 @@ const initialState: state = {
       1,
       0,
       0,
-      18,
+      [18, 19, 20, 21, 22, 23, 24, 25, 26, 27],
       BackgroundType.tamazu,
       BoardType.tamazu,
       {
@@ -390,7 +390,7 @@ const initialState: state = {
       1,
       0,
       0,
-      10,
+      [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
       BackgroundType.ozasa,
       BoardType.ozasa,
       {
@@ -433,7 +433,7 @@ const initialState: state = {
       1,
       0,
       0,
-      10,
+      [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
       BackgroundType.tanabe,
       BoardType.tanabe,
       {
@@ -482,7 +482,7 @@ const initialState: state = {
     level: 1,
     maxNumber: 0,
     maxMoney: 0,
-    perMoney: 15,
+    perMoney: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
     backgroundImg: BackgroundType.yamagawa,
     boardImg: BoardType.yamagawa,
     product: {
@@ -524,7 +524,7 @@ const initialState: state = {
     level: 1,
     maxNumber: 0,
     maxMoney: 0,
-    perMoney: 15,
+    perMoney: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
     backgroundImg: BackgroundType.yamagawa,
     boardImg: BoardType.yamagawa,
     product: {
@@ -566,7 +566,7 @@ const initialState: state = {
     level: 1,
     maxNumber: 0,
     maxMoney: 0,
-    perMoney: 15,
+    perMoney: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
     backgroundImg: BackgroundType.yamagawa,
     boardImg: BoardType.yamagawa,
     product: {
@@ -612,7 +612,7 @@ const initialState: state = {
     { before: require("../assets/product/product1-normal-third.png") },
   ],
 
-  UserIcons : [
+  UserIcons: [
     new UserIcons("man1", UserIconType.man1),
     new UserIcons("man2", UserIconType.man2),
     new UserIcons("man3", UserIconType.man3),

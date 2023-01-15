@@ -13,7 +13,7 @@ export default class job implements _Job {
     public level : number,
     public maxMoney : number,
     public maxNumber : number,
-    public perMoney : number,
+    public perMoney : number[],
     public backgroundImg : BackgroundType,
     public boardImg : BoardType,
     public product: JobProduct,

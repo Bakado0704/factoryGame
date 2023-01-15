@@ -1,28 +1,36 @@
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import { ShadowText } from "../text/ShadowText";
-import Colors from "../../constants/color";
 
 export interface Props {
   title: string;
+  headColor: string;
+  borderColor: string;
 }
 
-const Title = ({ title }: Props) => {
+const JobTitle = ({ title, headColor, borderColor }: Props) => {
   return (
-    <View style={styles.modalTitleContanier}>
+    <View
+      style={[
+        styles.modalTitleContanier,
+        { backgroundColor: headColor, borderColor: borderColor },
+      ]}
+    >
       <View style={styles.modalTitleTop} />
       <View style={{ transform: [{ translateY: -2 }] }}>
         <ShadowText size={20} color="white">
           {title}
         </ShadowText>
       </View>
-      <View style={styles.modalTitleBottom} />
-      <View style={styles.modalTitleBottomShadow} />
+      <View style={[styles.modalTitleBottom, { backgroundColor: borderColor }]} />
+      <View
+        style={[styles.modalTitleBottomShadow, { backgroundColor: borderColor }]}
+      />
     </View>
   );
 };
 
-export default Title;
+export default JobTitle;
 
 const styles = StyleSheet.create({
   modalTitleContanier: {
@@ -31,9 +39,7 @@ const styles = StyleSheet.create({
     width: 260,
     height: 37,
     marginTop: -30,
-    backgroundColor: Colors.modalHeadColor,
-    borderColor: Colors.modalEdgeColor,
-    borderWidth: 1,
+    borderWidth: 2,
     transform: [{ translateY: -5 }],
   },
   modalTitleTop: {
@@ -49,7 +55,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 2,
     opacity: 0.5,
-    backgroundColor: Colors.modalEdgeColor,
     position: "absolute",
     bottom: 0,
     left: 0,
@@ -58,7 +63,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 5,
     opacity: 0.5,
-    backgroundColor: Colors.modalEdgeColor,
     position: "absolute",
     bottom: 0,
     left: 0,

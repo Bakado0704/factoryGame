@@ -26,7 +26,7 @@ export interface Job {
   level: number;
   maxNumber: number;
   maxMoney: number;
-  perMoney: number;
+  perMoney: number[];
   backgroundImg: BackgroundType;
   boardImg: BoardType;
   product: JobProduct;

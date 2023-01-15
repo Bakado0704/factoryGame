@@ -2,19 +2,20 @@ const Colors = {
   textMainColor: "#3e3a39",
   
   stamina: "#77C392",
+  modalHeadColor: "#595757",
   modalMainColor: "#7f7f7f",
   modalEdgeColor: "#3e3a39",
 
   yamagawaHeadColor: "#595757",
-  yamagawaMainColor: "#727171",
+  yamagawaMainColor: "#848484",
   yamagawaBorderColor: "#3e3a39",
 
   souzukiHeadColor: "#67682c",
-  souzukiMainColor: "#898a2a",
+  souzukiMainColor: "#a8a574",
   souzukiBorderColor: "#464721",
 
   ashBerryHeadColor: "#4b4c6a",
-  ashBerryMainColor: "#64658c",
+  ashBerryMainColor: "#8385a5",
   ashBerryBorderColor: "#272d43",
 
   bentaroHeadColor: "#894556",
@@ -22,23 +23,23 @@ const Colors = {
   bentaroBorderColor: "#612030",
 
   aguronHeadColor: "#0c6565",
-  aguronMainColor: "#477776",
+  aguronMainColor: "#759e9b",
   aguronBorderColor: "#055054",
 
-  starFoodsHeadColor: "#82573a",
-  starFoodsMainColor: "#b78066",
-  starFoodsBorderColor: "#6b421e",
+  starFoodsHeadColor: "#8e674d",
+  starFoodsMainColor: "#c69987",
+  starFoodsBorderColor: "#6c4c34",
 
   sikagaHeadColor: "#4a676e",
-  sikagaMainColor: "#6e8285",
+  sikagaMainColor: "#8ba2a5",
   sikagaBorderColor: "#293f48",
 
-  tamazuHeadColor: "#773b52",
-  tamazuMainColor: "#977184",
+  tamazuHeadColor: "#895269",
+  tamazuMainColor: "#aa8d9d",
   tamazuBorderColor: "#572034",
 
   ozasaHeadColor: "#405059",
-  ozasaMainColor: "#5f7077",
+  ozasaMainColor: "#768c93",
   ozasaBorderColor: "#313c44",
 
   tanabeHeadColor: "#5d624f",

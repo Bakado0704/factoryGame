@@ -7,6 +7,7 @@ import Comment from "../components/modal/Comment";
 import Colors from "../constants/color";
 import { ShadowText } from "../components/text/ShadowText";
 import Title from "../components/modal/Title";
+import JobTitle from "../components/modal/JobTitle";
 
 type Props = {
   offModal: () => void;
@@ -14,17 +15,82 @@ type Props = {
 };
 
 const JobGet = ({ offModal, job }: Props) => {
-  const prevJob = JSON.stringify(job);
-
   const name = job.name;
-  const level = job.level;
-  const prevLevel = JSON.parse(prevJob).level;
-  const perMoney = job.perMoney;
-  const prevPerMoney = JSON.parse(prevJob).perMoney;
+  const level = job.level + 1;
+  const prevLevel = job.level;
+  const perMoney = job.perMoney[level - 1];
+  const prevPerMoney = job.perMoney[prevLevel - 1];
   const ownerName = job.owner.name;
   const icon = job.icon;
   const BackgroundImg = job.backgroundImg;
-  const isActive = JSON.parse(prevJob).isActive;
+  const isActive = job.isActive;
+
+  let headColor = Colors.yamagawaHeadColor;
+  let mainColor = Colors.yamagawaMainColor;
+  let borderColor = Colors.yamagawaBorderColor;
+
+  switch (name) {
+    case "山川製作所": {
+      headColor = Colors.yamagawaHeadColor;
+      mainColor = Colors.yamagawaMainColor;
+      borderColor = Colors.yamagawaBorderColor;
+      break;
+    }
+    case "蒼月": {
+      headColor = Colors.souzukiHeadColor;
+      mainColor = Colors.souzukiMainColor;
+      borderColor = Colors.souzukiBorderColor;
+      break;
+    }
+    case "アッシュベリーInc": {
+      headColor = Colors.ashBerryHeadColor;
+      mainColor = Colors.ashBerryMainColor;
+      borderColor = Colors.ashBerryBorderColor;
+      break;
+    }
+    case "オリジン弁太郎": {
+      headColor = Colors.bentaroHeadColor;
+      mainColor = Colors.bentaroMainColor;
+      borderColor = Colors.bentaroBorderColor;
+      break;
+    }
+    case "アグロン精密": {
+      headColor = Colors.aguronHeadColor;
+      mainColor = Colors.aguronMainColor;
+      borderColor = Colors.aguronBorderColor;
+      break;
+    }
+    case "スターフーズ": {
+      headColor = Colors.starFoodsHeadColor;
+      mainColor = Colors.starFoodsMainColor;
+      borderColor = Colors.starFoodsBorderColor;
+      break;
+    }
+    case "鹿賀水産": {
+      headColor = Colors.sikagaHeadColor;
+      mainColor = Colors.sikagaMainColor;
+      borderColor = Colors.sikagaBorderColor;
+      break;
+    }
+    case "玉津アーセナル": {
+      headColor = Colors.tamazuHeadColor;
+      mainColor = Colors.tamazuMainColor;
+      borderColor = Colors.tamazuBorderColor;
+      break;
+    }
+    case "小篠建設": {
+      headColor = Colors.ozasaHeadColor;
+      mainColor = Colors.ozasaMainColor;
+      borderColor = Colors.ozasaBorderColor;
+      break;
+    }
+    case "タナベ建設": {
+      headColor = Colors.tanabeHeadColor;
+      mainColor = Colors.tanabeMainColor;
+      borderColor = Colors.tanabeBorderColor;
+      break;
+    }
+  }
 
   return (
     <>
@@ -41,13 +107,13 @@ const JobGet = ({ offModal, job }: Props) => {
             <Text style={styles.gameover}>You got a new skill!</Text>
           </View>
         )}
-        <View style={styles.innerContainer}>
-          <Title title={name} />
-          <View style={styles.imageContainer}>
+        <View style={[styles.innerContainer, {backgroundColor: mainColor, borderColor: borderColor}]}>
+          <JobTitle title={name} headColor={headColor} borderColor={borderColor}/>
+          <View style={[styles.imageContainer, {borderColor: borderColor}]}>
             <CompanyImg type={BackgroundImg} />
           </View>
           <View style={styles.resultDetailContainer}>
-            <View style={styles.resultBackground} />
+            <View style={[styles.resultBackground, {backgroundColor: borderColor}]} />
             <ShadowText size={18} color="white">
               熟練度:
             </ShadowText>
@@ -71,7 +137,7 @@ const JobGet = ({ offModal, job }: Props) => {
             </View>
           </View>
           <View style={styles.resultDetailContainer}>
-            <View style={styles.resultBackground} />
+            <View style={[styles.resultBackground, {backgroundColor: borderColor}]} />
             <ShadowText size={18} color="white">
               基本給:
             </ShadowText>
@@ -148,14 +214,12 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     alignItems: "center",
-    backgroundColor: Colors.modalMainColor,
     width: "100%",
     marginTop: 20,
     padding: 10,
     paddingTop: 15,
     paddingBottom: 35,
     borderWidth: 3,
-    borderColor: Colors.modalEdgeColor,
   },
   textContainer: {
     flexDirection: "row",
@@ -172,7 +236,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     overflow: "hidden",
     borderWidth: 2,
-    borderColor: Colors.modalEdgeColor,
   },
   moneyContainer: {
     flexDirection: "row",
@@ -192,7 +255,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     borderRadius: 10,
-    backgroundColor: Colors.modalEdgeColor,
     opacity: 0.5,
   },
   resultText: {

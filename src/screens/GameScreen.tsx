@@ -36,10 +36,12 @@ const GameScreen = () => {
 
   const nowMoney = playState.money;
   const maxMoney = Job.maxMoney;
-  const perMoney = Job.perMoney;
+  const perMoney = Job.outline.basicMoney;
   const jobName = Job.name;
   const name = Job.owner.name;
   const iconType = Job.icon;
+
+  console.log(perMoney);
 
   //dispatch関数の宣言
   const judgeHandler = (judge: judgeStatus) => {

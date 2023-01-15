@@ -67,8 +67,8 @@ const JobChangeScreen = () => {
     setUserModal(true);
   };
 
-  const gachaMove = (page: page) => {
-    dispatch(userPage(page));
+  const gachaMove = () => {
+    dispatch(userPage("gacha"));
     navigation.navigate("Gacha");
   };
 

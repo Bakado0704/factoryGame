@@ -62,14 +62,12 @@ const JobRedux = createSlice({
     changeUpdateJob: (state, action: PayloadAction<Job>) => {
       //もしすでにそのJOBをアンロックしていたら
       if (state.jobs[state.jobs.indexOf(action.payload)].isActive === true) {
-        state.jobs[state.jobs.indexOf(action.payload)].perMoney =
-          action.payload.perMoney + 1;
-        state.jobs[state.jobs.indexOf(action.payload)].outline.basicMoney =
-          action.payload.outline.basicMoney;
         state.jobs[state.jobs.indexOf(action.payload)].level =
           action.payload.level + 1;
         state.jobs[state.jobs.indexOf(action.payload)].outline.level =
           action.payload.outline.level + 1;
+        state.jobs[state.jobs.indexOf(action.payload)].outline.basicMoney =
+          action.payload.perMoney[action.payload.level - 1];
       }
       //もしそのJOBをアンロックしていなかったら
       state.jobs[state.jobs.indexOf(action.payload)].isActive = true;
