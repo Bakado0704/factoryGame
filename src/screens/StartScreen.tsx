@@ -31,6 +31,7 @@ const StartScreen = () => {
   const activeBoard = Job.boardImg;
   const userIcon = user.icon;
   const userMoney = user.money;
+  const page = user.page;
   const maxMoney = Job.maxMoney;
   const dispatch = useDispatch();
   const navigation:NavigationProp<ParamListBase> = useNavigation();
@@ -79,9 +80,14 @@ const StartScreen = () => {
     dispatch(changeJob(job));
   };
 
-  const gachaMove = (page: page) => {
-    dispatch(userPage(page));
+  const gachaMove = () => {
+    dispatch(userPage("gacha"));
     navigation.navigate("Gacha");
+  };
+
+  const rankingMove = () => {
+    dispatch(userPage("ranking"));
+    navigation.navigate("Ranking");
   };
 
   return (
@@ -97,7 +103,9 @@ const StartScreen = () => {
         <NavSelect
           maxMoney={maxMoney}
           activeBoard={activeBoard}
+          page={page}
           jobDecideHandler={jobDecideHandler}
+          rankingMove={rankingMove}
           prevJob={prevJob}
           nextJob={nextJob}
         />

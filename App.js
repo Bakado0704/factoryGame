@@ -12,6 +12,7 @@ import GameScreen from "./src/screens/GameScreen";
 import TestingScreen from "./src/screens/TestingScreen";
 import ImageBg from "./src/components/background/ImageBg";
 import { store } from "./src/store/store";
+import RankingScreen from "./src/screens/RankingScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -79,8 +80,8 @@ export default function App() {
                   }}
                 />
                 <Stack.Screen
-                  name="Testing"
-                  component={TestingScreen}
+                  name="Ranking"
+                  component={RankingScreen}
                   options={{
                     headerShown: false,
                   }}

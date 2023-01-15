@@ -5,13 +5,17 @@ import NextButton from "../../animation/animationButton/NextButton";
 import PrevButton from "../../animation/animationButton/PrevButton";
 import { BoardType } from "../../../types/board";
 import { Job } from "../../../types/job";
+import { page } from "../../../types/page";
+import { ShadowText } from "../../text/ShadowText";
 
 type Props = {
   maxMoney: number;
   activeBoard: BoardType;
+  page: page;
   prevJob: Job;
   nextJob: Job;
   jobDecideHandler: (job: Job) => void;
+  rankingMove: () => void;
 };
 
 const NavBody = ({
@@ -19,7 +23,9 @@ const NavBody = ({
   activeBoard,
   prevJob,
   nextJob,
+  page,
   jobDecideHandler,
+  rankingMove,
 }: Props) => {
   const prevHandler = () => {
     jobDecideHandler(prevJob);
@@ -29,7 +35,9 @@ const NavBody = ({
     jobDecideHandler(nextJob);
   };
 
-  const pressHandler = () => {};
+  const pressHandler = () => {
+    rankingMove();
+  };
 
   return (
     <View style={styles.rootContainer}>
@@ -38,7 +46,7 @@ const NavBody = ({
         <BoardImg type={activeBoard} />
         <NextButton pressHandler={nextHandler} />
       </View>
-      <View style={styles.containerBottom}>
+      {page !== "ranking" && <View style={styles.containerBottom}>
         <RankingButton pressHandler={pressHandler} />
         <Image
           source={require("../../../assets/ui/rankingCoron.png")}
@@ -48,15 +56,8 @@ const NavBody = ({
           source={require("../../../assets/ui/money1.png")}
           style={styles.moneyImg}
         />
-        <Text style={styles.money}>
-          {new Intl.NumberFormat().format(maxMoney)}
-        </Text>
-        {/* <TextStroke stroke={1} color={"black"}>
-          <Text style={styles.money}>
-            {new Intl.NumberFormat().format(maxMoney)}
-          </Text>
-        </TextStroke> */}
-      </View>
+        <ShadowText size={20} color="white">{new Intl.NumberFormat().format(maxMoney)}</ShadowText>
+      </View>}
     </View>
   );
 };
@@ -96,11 +97,6 @@ const styles = StyleSheet.create({
   moneyImg: {
     width: 33,
     height: 33,
-    padding: 14,
-  },
-  money: {
-    fontSize: 20,
-    fontFamily: "MochiyPop",
-    marginHorizontal: 7,
+    marginRight: 5,
   },
 });

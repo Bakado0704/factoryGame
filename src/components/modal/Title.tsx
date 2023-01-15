@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         width: 260,
         height: 37,
         marginTop: -30,
+        transform: [{ translateY: -5 }]
       },
       modalTitleImg: {
         position: "absolute",

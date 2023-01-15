@@ -12,7 +12,7 @@ type Props = {
   userMoney: number;
   user: User;
   onUserModal: () => void;
-  gachaMove: (page: page) => void;
+  gachaMove: () => void;
 };
 
 const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
@@ -32,7 +32,7 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
   ).start();
 
   const gachaHandler = () => {
-    gachaMove(page.gacha);
+    gachaMove();
   };
 
   return (

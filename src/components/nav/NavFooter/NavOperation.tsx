@@ -1,6 +1,9 @@
-import { View, StyleSheet, ImageBackground, Animated } from "react-native";
-import ImageButton from "../../button/ImageButton";
-import React, { useRef } from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+} from "react-native";
+import React from "react";
 import {
   NavigationProp,
   ParamListBase,
@@ -34,11 +37,15 @@ const NavOperation = ({
   return (
     <>
       <View style={styles.rootConteiner}>
-        <StartButtons
-          gameHandler={gameHandler}
-          onSetting={onSetting}
-          pressHandler={pressHandler}
-        />
+          <Image
+            source={require("../../../assets/ui/operationBoard.png")}
+            style={styles.operationBoard}
+          />
+          <StartButtons
+            gameHandler={gameHandler}
+            onSetting={onSetting}
+            pressHandler={pressHandler}
+          />
       </View>
     </>
   );
@@ -62,6 +69,11 @@ const styles = StyleSheet.create({
   settingButton: {
     width: 52,
     height: 56,
+  },
+  operationBoard: {
+    width: 360,
+    height: 102,
+    position: "absolute",
   },
   startButtonContainer: {
     position: "absolute",
