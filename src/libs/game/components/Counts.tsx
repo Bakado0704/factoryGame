@@ -14,8 +14,8 @@ type Props = {
   judgeHandler: (judge: judgeStatus) => void;
   stateHandler: (state: PlayStatus) => void;
   damageHandler: (number: number) => void;
-  recoveryHandler: () => void;
   changeComboHandler: (number: number) => void;
+  changeCompleteCount: (number: number) => void;
   changeNowMoneyHandler: (number: number) => void;
   processCountHandler: (number: number) => void;
   selectedPatternHandler: (pattern: PlayPattern[]) => void;
@@ -32,8 +32,8 @@ const Counts = ({
   judgeHandler,
   stateHandler,
   damageHandler,
-  recoveryHandler,
   changeComboHandler,
+  changeCompleteCount,
   changeNowMoneyHandler,
   processCountHandler,
   selectedPatternHandler,
@@ -103,7 +103,7 @@ const Counts = ({
       changeProductTypeHandler(),
       changeNextProductHandler(),
       changeComboHandler(1);
-      recoveryHandler();
+      changeCompleteCount(1);
       setTimeout(() => {
         setIsRunning(false);
       }, 200);

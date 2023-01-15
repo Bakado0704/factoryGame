@@ -9,6 +9,7 @@ import {
   changeActivePattern,
   changeCenterProduct,
   changeCombo,
+  changeCompletecount,
   changeJobRecord,
   changeJudge,
   changeNextProduct,
@@ -16,8 +17,8 @@ import {
   changeProcessCount,
   changeProductType,
   changeStatus,
+  resetCompletecount,
   staminaDecrese,
-  staminaIncrese,
   userMoneyIncrease,
 } from "../store/job";
 import { judgeStatus, PlayPattern, PlayStatus } from "../types/play";
@@ -35,13 +36,14 @@ const GameScreen = () => {
   const nowJob = useSelector((state: RootState) => state.job.jobs).find((job: Job) => job.id === Job.id);
 
   const nowMoney = playState.money;
+  const completeCount = playState.completeCount;
   const maxMoney = Job.maxMoney;
   const perMoney = Job.outline.basicMoney;
   const jobName = Job.name;
   const name = Job.owner.name;
   const iconType = Job.icon;
 
-  console.log(perMoney);
+  console.log(completeCount)
 
   //dispatch関数の宣言
   const judgeHandler = (judge: judgeStatus) => {
@@ -49,9 +51,6 @@ const GameScreen = () => {
   };
   const stateHandler = (state: PlayStatus) => {
     dispatch(changeStatus(state));
-  };
-  const recoveryHandler = () => {
-    dispatch(staminaIncrese());
   };
   const damageHandler = (number: number) => {
     dispatch(staminaDecrese(number));
@@ -67,6 +66,9 @@ const GameScreen = () => {
   };
   const changeComboHandler = (number: number) => {
     dispatch(changeCombo(number));
+  };
+  const changeCompleteCount = (number: number) => {
+    dispatch(changeCompletecount(number));
   };
   const changeProductTypeHandler = () => {
     dispatch(changeProductType());
@@ -92,6 +94,7 @@ const GameScreen = () => {
     dispatch(changeStatus(PlayStatus.stop));
     dispatch(changeNowMoney(0));
     dispatch(changeCombo(0));
+    dispatch(resetCompletecount());
     navigation.navigate("Start");
   };
 
@@ -107,8 +110,8 @@ const GameScreen = () => {
         judgeHandler={judgeHandler}
         stateHandler={stateHandler}
         damageHandler={damageHandler}
-        recoveryHandler={recoveryHandler}
         changeComboHandler={changeComboHandler}
+        changeCompleteCount={changeCompleteCount}
         changeNowMoneyHandler={changeNowMoneyHandler}
         processCountHandler={processCountHandler}
         selectedPatternHandler={selectedPatternHandler}
@@ -136,6 +139,7 @@ const GameScreen = () => {
         <BgBlack />
         <Gameover
           offModal={offModalHandler}
+          completeCount={completeCount}
           nowMoney={nowMoney}
           maxMoney={maxMoney}
           name={name}

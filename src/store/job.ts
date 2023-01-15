@@ -85,6 +85,12 @@ const JobRedux = createSlice({
         state.play.combo = 0;
       }
     },
+    changeCompletecount: (state, action: PayloadAction<number>) => {
+      state.play.completeCount = state.play.completeCount + action.payload
+    },
+    resetCompletecount: (state) => {
+      state.play.completeCount = 0
+    },
     changeNowMoney: (state, action: PayloadAction<number>) => {
       let bonus = 1.0;
       if (state.user.productType === "bonus") {
@@ -146,15 +152,6 @@ const JobRedux = createSlice({
     staminaDecrese: (state, action: PayloadAction<number>) => {
       state.play.stamina = state.play.stamina - action.payload;
     },
-    staminaIncrese: (state) => {
-      if (state.play.combo <= 4) {
-        state.play.stamina = state.play.stamina + 0;
-      } else if (state.play.combo <= 6) {
-        state.play.stamina = state.play.stamina + 25;
-      } else {
-        state.play.stamina = state.play.stamina + 50;
-      }
-    },
     staminaReset: (state, action: PayloadAction<number>) => {
       state.play.stamina = 380 - 80 * action.payload;
     },
@@ -186,6 +183,8 @@ export const changeUser = JobRedux.actions.changeUser;
 export const changePreviewIcon = JobRedux.actions.changePreviewIcon;
 export const changeNowMoney = JobRedux.actions.changeNowMoney;
 export const changeCombo = JobRedux.actions.changeCombo;
+export const changeCompletecount = JobRedux.actions.changeCompletecount;
+export const resetCompletecount = JobRedux.actions.resetCompletecount;
 export const changeJobRecord = JobRedux.actions.changeJobRecord;
 export const changeProductType = JobRedux.actions.changeProductType;
 export const changeNextProduct = JobRedux.actions.changeNextProduct;
@@ -193,7 +192,6 @@ export const changeCenterProduct = JobRedux.actions.changeCenterProduct;
 export const changeGachaStatus = JobRedux.actions.changeGachaStatus;
 export const changeUserNowJob = JobRedux.actions.changeUserNowJob;
 export const staminaDecrese = JobRedux.actions.staminaDecrese;
-export const staminaIncrese = JobRedux.actions.staminaIncrese;
 export const staminaReset = JobRedux.actions.staminaReset;
 export const userMoneyIncrease = JobRedux.actions.userMoneyIncrease;
 export const userPage = JobRedux.actions.userPage;

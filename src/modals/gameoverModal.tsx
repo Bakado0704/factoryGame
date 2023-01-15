@@ -10,12 +10,20 @@ import Title from "../components/modal/Title";
 type Props = {
   nowMoney: number;
   maxMoney: number;
+  completeCount: number;
   name: string;
   iconType: IconType;
   offModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
+const Gameover = ({
+  offModal,
+  nowMoney,
+  maxMoney,
+  name,
+  iconType,
+  completeCount,
+}: Props) => {
   return (
     <>
       <View style={styles.rootScreen}>
@@ -24,9 +32,14 @@ const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
           <Text style={styles.gameover}>GAMEOVER</Text>
         </View>
         <View style={styles.innerContainer}>
-          <Title title="記録"/>
-          <View style={{ marginBottom: -20 }}>
+          <Title title="記録" />
+          <View style={{marginBottom: -25,justifyContent: "center",alignItems: "center"}}>
             <ShadowText size={14} color="white">時給</ShadowText>
+            {nowMoney === maxMoney && (
+              <View style={{marginTop: -3}}>
+                <ShadowText size={16} color={Colors.textYellowColor}>新記録!</ShadowText>
+              </View>
+            )}
           </View>
           <View style={styles.resultOuterContainer}>
             <Image
@@ -45,7 +58,7 @@ const Gameover = ({ offModal, nowMoney, maxMoney, name, iconType }: Props) => {
           <View style={styles.resultDetailContainer}>
             <View style={styles.resultBackground} />
             <ShadowText size={18} color="white">成功回数:</ShadowText>
-            <ShadowText size={20} color="white"> 0</ShadowText>
+            <ShadowText size={20} color="white">{completeCount}</ShadowText>
           </View>
 
           <View style={styles.resultDetailContainer}>

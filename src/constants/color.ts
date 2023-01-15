@@ -1,6 +1,7 @@
 const Colors = {
   textMainColor: "#3e3a39",
-  
+  textYellowColor:"#faee00",
+
   stamina: "#77C392",
   modalHeadColor: "#595757",
   modalMainColor: "#7f7f7f",
