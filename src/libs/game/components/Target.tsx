@@ -71,7 +71,7 @@ const Target = ({
     if (translateX.some((value) => value <= -failureGap)) {
       damageHandler(100);
       judgeHandler(judgeStatus.failure);
-      console.log("ターゲットを押すのが遅すぎた");
+      // console.log("ターゲットを押すのが遅すぎた");
     }
   }, [translateX.some((value) => value <= -failureGap)]);
 
@@ -80,7 +80,7 @@ const Target = ({
     if (laps.length > playpattern.distance.length) {
       damageHandler(100);
       judgeHandler(judgeStatus.failure);
-      console.log("lapsの数がdistanceの数を超えても失敗");
+      // console.log("lapsの数がdistanceの数を超えても失敗");
     }
   }, [laps.length > playpattern.distance.length]);
 
