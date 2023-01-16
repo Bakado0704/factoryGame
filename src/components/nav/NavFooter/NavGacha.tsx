@@ -4,12 +4,12 @@ import ImageButton from "../../button/ImageButton";
 
 type Props = {
   onModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  startMove: (page: page) => void;
+  startMove: () => void;
 };
 
 const NavGacha = ({ onModal, startMove }: Props) => {
   const homeHandler = () => {
-    startMove(page.start);
+    startMove();
   };
 
   return (

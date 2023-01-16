@@ -10,9 +10,11 @@ import UserIcons from "../models/userIcons";
 import { RootState } from "../store/store";
 import {
   changeJob,
+  changeMute,
   changePreviewIcon,
   changeStatus,
   changeUser,
+  changeUsername,
   staminaReset,
   userDrink,
   userDrinkReset,
@@ -26,6 +28,7 @@ import {
   ParamListBase,
   useNavigation,
 } from "@react-navigation/native";
+import { Mute } from "../types/user";
 
 const StartScreen = () => {
   const Job = useSelector((state: RootState) => state.job.job);
@@ -36,6 +39,9 @@ const StartScreen = () => {
   const userIcons = useSelector((state: RootState) => state.job.UserIcons);
   const activeBoard = Job.boardImg;
   const userIcon = user.icon;
+  const userName = user.name;
+  const userId = user.id;
+  const mute = user.mute;
   const userMoney = user.money;
   const drink = user.drink;
   const drinkCost = user.drinkCost;
@@ -72,9 +78,16 @@ const StartScreen = () => {
     dispatch(changePreviewIcon(selectedIcon));
   };
 
+  const usernameChangeHandler = (name: string) => {
+    dispatch(changeUsername(name));
+  };
+
   const offUserModalHandler = () => {
     dispatch(changeUser(previewIcon));
     setUserModal(false);
+    if (!userName) {
+      dispatch(changeUsername(userId));
+    }
   };
 
   const staminaResetHandler = () => {
@@ -96,6 +109,10 @@ const StartScreen = () => {
 
   const userDrinkHandler = (number: number) => {
     dispatch(userDrink(number));
+  };
+
+  const changeMuteHandler = (mute: Mute) => {
+    dispatch(changeMute(mute));
   };
 
   const gachaMove = () => {
@@ -145,9 +162,14 @@ const StartScreen = () => {
       {userModal && (
         <UserModal
           offUserModal={offUserModalHandler}
-          user={userChangeHandler}
+          userChangeHandler={userChangeHandler}
+          usernameChangeHandler={usernameChangeHandler}
+          changeMuteHandler={changeMuteHandler}
           previewIcon={previewIcon}
           userIcons={userIcons}
+          userName={userName}
+          userId={userId}
+          mute={mute}
         />
       )}
     </View>

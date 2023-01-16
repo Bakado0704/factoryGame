@@ -13,6 +13,7 @@ import playpattern from "../models/playpattern";
 import { productType } from "../types/product";
 import { ImageSourcePropType } from "react-native";
 import UserIcons from "../models/userIcons";
+import { Mute } from "../types/user";
 
 export type state = {
   jobs: Job[];
@@ -637,6 +638,7 @@ const initialState: state = {
 
   user: {
     name: "user001",
+    id: "user001",
     money: 1000,
     icon: UserIconType.man1,
     nowJob: JobName.yamagawa,
@@ -647,6 +649,7 @@ const initialState: state = {
     gachaCost: 1000,
     drink: 0,
     drinkCost: 0,
+    mute: Mute.on,
   },
 
   previewJob: undefined,

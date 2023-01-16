@@ -9,6 +9,7 @@ import { productType } from "../types/product";
 import { page } from "../types/page";
 import { GachaStatus } from "../types/gacha";
 import { JobName } from "../types/job";
+import { Mute } from "../types/user";
 
 const JobRedux = createSlice({
   name: "JobRedux",
@@ -77,6 +78,9 @@ const JobRedux = createSlice({
     },
     changeUser: (state, action: PayloadAction<User | UserIcons>) => {
       state.user.icon = action.payload.icon;
+    },
+    changeUsername: (state, action: PayloadAction<string>) => {
+      state.user.name = action.payload;
     },
     changeCombo: (state, action: PayloadAction<number>) => {
       if (action.payload !== 0) {
@@ -169,6 +173,9 @@ const JobRedux = createSlice({
       state.user.drink = 0;
       state.user.drinkCost = 0;
     },
+    changeMute: (state, action: PayloadAction<Mute>) => {
+      state.user.mute = action.payload;
+    },
     changeStatus: (state, action: PayloadAction<PlayStatus>) => {
       state.play.status = action.payload;
     },
@@ -188,6 +195,7 @@ export const changeJob = JobRedux.actions.changeJob;
 export const changeUpdateJob = JobRedux.actions.changeUpdateJob;
 export const changePreviewJob = JobRedux.actions.changePreviewJob;
 export const changeUser = JobRedux.actions.changeUser;
+export const changeUsername = JobRedux.actions.changeUsername;
 export const changePreviewIcon = JobRedux.actions.changePreviewIcon;
 export const changeNowMoney = JobRedux.actions.changeNowMoney;
 export const changeCombo = JobRedux.actions.changeCombo;
@@ -206,6 +214,7 @@ export const userPage = JobRedux.actions.userPage;
 export const userDrink = JobRedux.actions.userDrink;
 export const userDrinkReset = JobRedux.actions.userDrinkReset;
 export const changeStatus = JobRedux.actions.changeStatus;
+export const changeMute = JobRedux.actions.changeMute;
 export const changeJudge = JobRedux.actions.changeJudge;
 export const changeProcessCount = JobRedux.actions.changeProcessCount;
 export const changeActivePattern = JobRedux.actions.changeActivePattern;

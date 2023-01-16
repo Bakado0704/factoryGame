@@ -13,9 +13,11 @@ import { Job as _Job } from "../types/job";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeJob,
+  changeMute,
   changePreviewIcon,
   changePreviewJob,
   changeUser,
+  changeUsername,
   userPage,
 } from "../store/job";
 import { useState } from "react";
@@ -24,6 +26,7 @@ import JobAddButton from "../components/animation/animationButton/JobAddButton";
 import JobReturnButton from "../components/animation/animationButton/JobReturnButton";
 import { RootState } from "../store/store";
 import { page } from "../types/page";
+import { Mute } from "../types/user";
 
 const JobChangeScreen = () => {
   const jobs = useSelector((state: RootState) => state.job.jobs);
@@ -32,6 +35,9 @@ const JobChangeScreen = () => {
   const user = useSelector((state: RootState) => state.job.user);
   const userIcons = useSelector((state: RootState) => state.job.UserIcons);
   const userIcon = user.icon;
+  const userName = user.name;
+  const userId = user.id;
+  const mute = user.mute;
   const userMoney = user.money;
 
   const [userModal, setUserModal] = useState(false);
@@ -52,6 +58,10 @@ const JobChangeScreen = () => {
     dispatch(changePreviewJob(job));
   };
 
+  const usernameChangeHandler = (name: string) => {
+    dispatch(changeUsername(name));
+  };
+
   const jobDecideHandler = () => {
     if (previewJob === undefined) {
       throw new Error("previewJobUndefined");
@@ -67,6 +77,10 @@ const JobChangeScreen = () => {
     setUserModal(true);
   };
 
+  const changeMuteHandler = (mute: Mute) => {
+    dispatch(changeMute(mute));
+  };
+
   const gachaMove = () => {
     dispatch(userPage("gacha"));
     navigation.navigate("Gacha");
@@ -79,6 +93,9 @@ const JobChangeScreen = () => {
   const offUserModalHandler = () => {
     dispatch(changeUser(previewIcon));
     setUserModal(false);
+    if (!userName) {
+      dispatch(changeUsername(userId));
+    }
   };
 
   return (
@@ -114,12 +131,17 @@ const JobChangeScreen = () => {
           />
         )}
         {userModal && (
-          <UserModal
-            offUserModal={offUserModalHandler}
-            user={userChangeHandler}
-            previewIcon={previewIcon}
-            userIcons={userIcons}
-          />
+        <UserModal
+        offUserModal={offUserModalHandler}
+        userChangeHandler={userChangeHandler}
+        usernameChangeHandler={usernameChangeHandler}
+        changeMuteHandler={changeMuteHandler}
+        previewIcon={previewIcon}
+        userIcons={userIcons}
+        userName={userName}
+        userId={userId}
+        mute={mute}
+      />
         )}
       </View>
     </View>

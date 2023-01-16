@@ -6,6 +6,7 @@ import { UserIconType } from "./userIcon";
 
 export interface User {
   name: string;
+  id: string;
   money: number;
   icon: UserIconType;
   nowJob: JobName;
@@ -16,4 +17,11 @@ export interface User {
   gachaCost: number;
   drink: number;
   drinkCost: number;
+  mute: Mute;
 }
+
+export const Mute = {
+  on: "on",
+  off: "off",
+} as const;
+export type Mute = typeof Mute[keyof typeof Mute];
