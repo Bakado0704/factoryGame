@@ -9,7 +9,6 @@ import StartScreen from "./src/screens/StartScreen";
 import JobChangeScreen from "./src/screens/JobChangeScreen";
 import GachaScreen from "./src/screens/GachaScreen";
 import GameScreen from "./src/screens/GameScreen";
-import TestingScreen from "./src/screens/TestingScreen";
 import ImageBg from "./src/components/background/ImageBg";
 import { store } from "./src/store/store";
 import RankingScreen from "./src/screens/RankingScreen";
