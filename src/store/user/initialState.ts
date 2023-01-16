@@ -3,6 +3,7 @@ import { JobType } from "../../types/job";
 import { UserIconType } from "../../types/userIcons";
 import { productType } from "../../types/product";
 import UserIcons from "../../models/userIcons";
+import { Mute } from "../../types/user";
 
 export type state = {
   previewIcon: UserIcons;
@@ -36,7 +37,8 @@ const initialState: state = {
 
   user: {
     name: "user001",
-    money: 10000,
+    id: "user001",
+    money: 1000,
     icon: UserIconType.man1,
     nowJob: JobType.yamagawa,
     gachaStandBy: false,
@@ -44,6 +46,9 @@ const initialState: state = {
     page: "start",
     gachaStatus: "stop",
     gachaCost: 1000,
+    drink: 0,
+    drinkCost: 0,
+    mute: Mute.on,
   },
 
   previewIcon: {

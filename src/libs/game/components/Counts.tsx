@@ -80,7 +80,7 @@ const Counts = ({
         playpattern[Math.floor(Math.random() * playpattern.length)]
       );
       selectedPatternHandler(selectedPlayPattern);
-      console.log("changed!");
+      // console.log("changed!");
     }
   }, [playState.judge === judgeStatus.waiting]);
 
@@ -104,9 +104,9 @@ const Counts = ({
       allGaps.every((value) => value <= playgap.frontGap)
     ) {
       judgeHandler(judgeStatus.success);
+      changeNextProductHandler(),
       changeNowMoneyHandler(perMoney);
       changeProductTypeHandler(),
-      changeNextProductHandler(),
       changeComboHandler(1);
       changeCompleteCount(1);
       setTimeout(() => {
@@ -125,7 +125,7 @@ const Counts = ({
     if (allGaps.some((value) => value >= 20)) {
       damageHandler(100);
       judgeHandler(judgeStatus.failure);
-      console.log("ターゲットを押すのが早すぎた");
+      // console.log("ターゲットを押すのが早すぎた");
     }
   }, [allGaps.some((value) => value >= 20)]);
 

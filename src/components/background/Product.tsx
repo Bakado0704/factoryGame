@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React, { useEffect, useRef } from "react";
 import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
+import ConveyorLine from "./ConveyorLine";
 export type Props = {
   playState: Play;
   activeProductLength: number;
@@ -35,24 +36,25 @@ const Product = ({
     outputRange: [0, 0, width],
   });
 
-  //judgeがsuccessかfailureになったときアニメーション動かす
+  //successかfailureになったときアニメーション動かす
   useEffect(() => {
-    Animated.timing(TargetAnim, {
-      toValue: 200,
-      duration: 800,
-      useNativeDriver: false,
-    }).start();
+    if (playState.judge === judgeStatus.success ||
+      playState.judge === judgeStatus.failure) {
+      Animated.timing(TargetAnim, {
+        toValue: 200,
+        duration: 800,
+        useNativeDriver: false,
+      }).start();
+    }
   }, [
     playState.judge === judgeStatus.success ||
-      playState.judge === judgeStatus.failure,
+      playState.judge === judgeStatus.failure
   ]);
 
-  //アニメーションが終わったら元に戻す
+  //waitingの時元に戻す
   useEffect(() => {
     if (playState.judge === judgeStatus.waiting) {
-      setTimeout(() => {
-        TargetAnim.setValue(0);
-      }, 100);
+      TargetAnim.setValue(0);
     }
   }, [playState.judge === judgeStatus.waiting]);
 
@@ -63,98 +65,7 @@ const Product = ({
         { transform: [{ translateX: targeTranslateX }] },
       ]}
     >
-      <View style={styles.cvContainer}>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-        <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-          <Image
-            source={require("../../assets/conveyor/cvLine.png")}
-            style={styles.cvLine}
-          />
-        </View>
-      </View>
+      <ConveyorLine width={width} />
       <View style={styles.ImageContainer}>
         <Image
           source={NEXTPRODUCT}
