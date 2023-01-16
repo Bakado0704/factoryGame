@@ -4,7 +4,7 @@ import { BoardType } from "./board";
 import { IconType } from "./icon";
 import { Outline } from "./outline";
 
-export const JobName = {
+export const JobType = {
   yamagawa: "山川製作所",
   souzuki: "蒼月",
   ashBerry: "アッシュベリーInc",
@@ -16,12 +16,12 @@ export const JobName = {
   ozasa: "小篠建設",
   tanabe: "タナベ建設",
 } as const;
-export type JobName = typeof JobName[keyof typeof JobName];
+export type JobType = typeof JobType[keyof typeof JobType];
 
 export interface Job {
   id: string;
   icon: IconType;
-  name: JobName;
+  name: JobType;
   isActive: boolean;
   level: number;
   maxNumber: number;

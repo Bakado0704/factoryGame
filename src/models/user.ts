@@ -1,5 +1,5 @@
 import { GachaStatus } from "../types/gacha";
-import { JobName } from "../types/job";
+import { JobType} from "../types/job";
 import { page } from "../types/page";
 import { productType } from "../types/product";
 import { Mute, User as _User } from "../types/user";
@@ -11,7 +11,7 @@ export default class User implements User {
     public id: string,
     public money: number,
     public icon: UserIconType,
-    public nowJob: JobName,
+    public nowJob: JobType,
     public gachaStandBy: boolean,
     public productType: productType,
     public page: page,

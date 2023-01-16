@@ -1,5 +1,5 @@
 import User from "../../models/user";
-import { JobName } from "../../types/job";
+import { JobType } from "../../types/job";
 import { UserIconType } from "../../types/userIcons";
 import { productType } from "../../types/product";
 import UserIcons from "../../models/userIcons";
@@ -38,7 +38,7 @@ const initialState: state = {
     name: "user001",
     money: 10000,
     icon: UserIconType.man1,
-    nowJob: JobName.yamagawa,
+    nowJob: JobType.yamagawa,
     gachaStandBy: false,
     productType: productType.default,
     page: "start",

@@ -1,5 +1,5 @@
 import { GachaStatus } from "./gacha";
-import { JobName } from "./job";
+import { JobType } from "./job";
 import { page } from "./page";
 import { productType } from "./product";
 import { UserIconType } from "./userIcons";
@@ -9,7 +9,7 @@ export interface User {
   id: string;
   money: number;
   icon: UserIconType;
-  nowJob: JobName;
+  nowJob: JobType;
   gachaStandBy: boolean;
   productType: productType;
   page: page;

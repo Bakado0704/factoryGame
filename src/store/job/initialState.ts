@@ -3,7 +3,7 @@ import { IconType } from "../../types/icon";
 import Job from "../../models/job";
 import Outline from "../../models/outline";
 import { BoardType } from "../../types/board";
-import { JobName } from "../../types/job";
+import { JobType } from "../../types/job";
 import { ImageSourcePropType } from "react-native";
 
 export type state = {
@@ -21,7 +21,7 @@ const initialState: state = {
     new Job(
       "c1",
       IconType.yamagawa,
-      JobName.yamagawa,
+      JobType.yamagawa,
       true,
       1,
       0,
@@ -64,7 +64,7 @@ const initialState: state = {
     new Job(
       "c2",
       IconType.souzuki,
-      JobName.souzuki,
+      JobType.souzuki,
       false,
       1,
       0,
@@ -108,7 +108,7 @@ const initialState: state = {
     new Job(
       "c3",
       IconType.ashBerry,
-      JobName.ashBerry,
+      JobType.ashBerry,
       false,
       1,
       0,
@@ -151,7 +151,7 @@ const initialState: state = {
     new Job(
       "c4",
       IconType.bentaro,
-      JobName.bentaro,
+      JobType.bentaro,
       false,
       1,
       0,
@@ -198,7 +198,7 @@ const initialState: state = {
     new Job(
       "c5",
       IconType.aguron,
-      JobName.aguron,
+      JobType.aguron,
       false,
       1,
       0,
@@ -241,7 +241,7 @@ const initialState: state = {
     new Job(
       "c6",
       IconType.starFoods,
-      JobName.starFoods,
+      JobType.starFoods,
       false,
       1,
       0,
@@ -288,7 +288,7 @@ const initialState: state = {
     new Job(
       "c7",
       IconType.sikaga,
-      JobName.sikaga,
+      JobType.sikaga,
       false,
       1,
       0,
@@ -331,7 +331,7 @@ const initialState: state = {
     new Job(
       "c8",
       IconType.tamazu,
-      JobName.tamazu,
+      JobType.tamazu,
       false,
       1,
       0,
@@ -378,7 +378,7 @@ const initialState: state = {
     new Job(
       "c9",
       IconType.ozasa,
-      JobName.ozasa,
+      JobType.ozasa,
       false,
       1,
       0,
@@ -421,7 +421,7 @@ const initialState: state = {
     new Job(
       "c10",
       IconType.tanabe,
-      JobName.tanabe,
+      JobType.tanabe,
       false,
       1,
       0,
@@ -470,7 +470,7 @@ const initialState: state = {
   job: {
     id: "c1",
     icon: IconType.yamagawa,
-    name: JobName.yamagawa,
+    name: JobType.yamagawa,
     isActive: true,
     level: 1,
     maxNumber: 0,
@@ -512,7 +512,7 @@ const initialState: state = {
   nextJob: {
     id: "c1",
     icon: IconType.yamagawa,
-    name: JobName.yamagawa,
+    name: JobType.yamagawa,
     isActive: true,
     level: 1,
     maxNumber: 0,
@@ -554,7 +554,7 @@ const initialState: state = {
   prevJob: {
     id: "c1",
     icon: IconType.yamagawa,
-    name: JobName.yamagawa,
+    name: JobType.yamagawa,
     isActive: true,
     level: 1,
     maxNumber: 0,
