@@ -9,6 +9,7 @@ import ImageButton from "../../../components/button/ImageButton";
 type Props = {
   playpattern: PlayPattern;
   playgap: PlayGap;
+  drink: number;
   count: number;
   isRunning: boolean;
   allGaps: number[];
@@ -24,6 +25,7 @@ type Props = {
 const Targets = ({
   playpattern,
   playgap,
+  drink,
   count,
   isRunning,
   allGaps,
@@ -80,14 +82,13 @@ const Targets = ({
         <Target
           playpattern={playpattern}
           playgap={playgap}
-          playState={playState}
+          drink={drink}
           laps={laps}
           opacities={opacities}
           color={color}
           count={count}
           allGaps={allGaps}
           setAllGaps={setAllGaps}
-          stateHandler={stateHandler}
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}
         />

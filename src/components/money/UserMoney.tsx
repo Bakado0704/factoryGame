@@ -21,7 +21,11 @@ const UserMoney = ({ userMoney }: Props) => {
               source={require("../../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <Text style={styles.money}>{new Intl.NumberFormat().format(userMoney)}</Text>
+            <View style={styles.numberContainer}>
+              <Text style={styles.money}>
+                {new Intl.NumberFormat().format(userMoney)}
+              </Text>
+            </View>
             <ImageButton
               source={require("../../assets/ui/plusButton.png")}
               onPress={pressHandler}
@@ -68,10 +72,15 @@ const styles = StyleSheet.create({
     height: 28,
     transform: [{ translateX: 12 }],
   },
+  numberContainer: {
+    width: 70,
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    transform: [{ translateX: 10 }],
+  },
   money: {
     fontSize: 14,
     fontFamily: "MochiyPop",
     color: "#fff",
-    transform: [{ translateX: 20 }],
   },
 });

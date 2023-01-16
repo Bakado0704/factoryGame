@@ -7,19 +7,25 @@ import Setting from "../modals/SettingModal";
 import UserModal from "../modals/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import UserIcons from "../models/userIcons";
-import { RootState } from '../store/store';
+import { RootState } from "../store/store";
 import {
   changeJob,
   changePreviewIcon,
   changeStatus,
   changeUser,
   staminaReset,
+  userDrink,
+  userDrinkReset,
+  userMoneyIncrease,
   userPage,
 } from "../store/job";
 import { PlayStatus } from "../types/play";
 import { Job } from "../types/job";
-import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
-import { page } from "../types/page";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 
 const StartScreen = () => {
   const Job = useSelector((state: RootState) => state.job.job);
@@ -31,10 +37,13 @@ const StartScreen = () => {
   const activeBoard = Job.boardImg;
   const userIcon = user.icon;
   const userMoney = user.money;
+  const drink = user.drink;
+  const drinkCost = user.drinkCost;
+  const perMoney = Job.outline.basicMoney;
   const page = user.page;
   const maxMoney = Job.maxMoney;
   const dispatch = useDispatch();
-  const navigation:NavigationProp<ParamListBase> = useNavigation();
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
 
   // useEffect(() => {
   //   const unsubscribe = navigation.addListener("focus", () => {
@@ -69,15 +78,24 @@ const StartScreen = () => {
   };
 
   const staminaResetHandler = () => {
-    dispatch(staminaReset(1.0));
+    if (userMoney <= drinkCost) {
+      dispatch(userDrinkReset());
+      dispatch(staminaReset(0));
+    } else {
+      dispatch(userMoneyIncrease(-drinkCost));
+      dispatch(staminaReset(drink));
+    }
   };
-
   const playingStatusHandler = () => {
     dispatch(changeStatus(PlayStatus.playing));
   };
 
   const jobDecideHandler = (job: Job) => {
     dispatch(changeJob(job));
+  };
+
+  const userDrinkHandler = (number: number) => {
+    dispatch(userDrink(number));
   };
 
   const gachaMove = () => {
@@ -115,7 +133,15 @@ const StartScreen = () => {
           playingStatusHandler={playingStatusHandler}
         />
       </View>
-      {setting && <Setting offSetting={offSettingModalHandler} />}
+      {setting && (
+        <Setting
+          drink={drink}
+          drinkCost={drinkCost}
+          offSetting={offSettingModalHandler}
+          userDrinkHandler={userDrinkHandler}
+          perMoney={perMoney}
+        />
+      )}
       {userModal && (
         <UserModal
           offUserModal={offUserModalHandler}

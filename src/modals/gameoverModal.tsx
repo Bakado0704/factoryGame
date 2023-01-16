@@ -24,6 +24,7 @@ const Gameover = ({
   iconType,
   completeCount,
 }: Props) => {
+
   return (
     <>
       <View style={styles.rootScreen}>
@@ -32,20 +33,22 @@ const Gameover = ({
           <Text style={styles.gameover}>GAMEOVER</Text>
         </View>
         <View style={styles.innerContainer}>
-          <Title title="記録" />
-          <View style={{marginBottom: -25,justifyContent: "center",alignItems: "center"}}>
-            <ShadowText size={14} color="white">時給</ShadowText>
-            {nowMoney === maxMoney && (
-              <View style={{marginTop: -3}}>
-                <ShadowText size={16} color={Colors.textYellowColor}>新記録!</ShadowText>
-              </View>
-            )}
-          </View>
+          <Title title="記録" margintop={-20} />
           <View style={styles.resultOuterContainer}>
             <Image
               source={require("../assets/ui/modalBackgroundLight.png")}
-              style={styles.modalBackgroundLight}
+              style={[styles.modalBackgroundLight]}
             />
+
+            <View style={{ justifyContent: "center", alignItems: "center", height: 40, marginBottom: -15}}>
+              <ShadowText size={14} color="white">時給</ShadowText>
+              {nowMoney === maxMoney && nowMoney > 0 && (
+                <View style={{marginTop: -3}}>
+                  <ShadowText size={16} color={Colors.textYellowColor}>新記録!</ShadowText>
+                </View>
+              )}
+            </View>
+            
             <View style={styles.resultInnerContainer}>
               <Image
                 source={require("../assets/ui/money1.png")}
@@ -58,7 +61,7 @@ const Gameover = ({
           <View style={styles.resultDetailContainer}>
             <View style={styles.resultBackground} />
             <ShadowText size={18} color="white">成功回数:</ShadowText>
-            <ShadowText size={20} color="white">{completeCount}</ShadowText>
+            <ShadowText size={20} color="white"> {completeCount}</ShadowText>
           </View>
 
           <View style={styles.resultDetailContainer}>
@@ -100,13 +103,6 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
-  modalTitleContanier: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: 260,
-    height: 37,
-    marginTop: -30,
-  },
   modalTitleImg: {
     position: "absolute",
     width: "100%",
@@ -126,9 +122,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.modalMainColor,
     width: "100%",
-    marginTop: 20,
-    padding: 10,
-    paddingTop: 15,
+    marginTop: 25,
+    paddingHorizontal: 10,
     paddingBottom: 35,
     borderWidth: 3,
     borderColor: Colors.modalEdgeColor,
@@ -139,8 +134,7 @@ const styles = StyleSheet.create({
   },
   resultOuterContainer: {
     width: 260,
-    height: 106,
-    marginVertical: 5,
+    height: 126,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -151,8 +145,10 @@ const styles = StyleSheet.create({
   },
   modalBackgroundLight: {
     position: "absolute",
-    width: "100%",
-    height: "100%",
+    width: 260,
+    height: 106,
+    opacity: 0.7,
+    transform: [{ translateY: 10}]
   },
   resultDetailContainer: {
     width: "100%",

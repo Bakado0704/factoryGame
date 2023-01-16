@@ -11,6 +11,7 @@ import NowMoney from "../../components/money/NowMoney";
 type Props = {
   type: BackgroundType;
   playState: Play;
+  drink: number;
   perMoney: number;
   nowMoney: number;
   judgeHandler: (judge: judgeStatus) => void;
@@ -29,6 +30,7 @@ type Props = {
 const Game = ({
   type,
   playState,
+  drink,
   perMoney,
   nowMoney,
   judgeHandler,
@@ -96,6 +98,7 @@ const Game = ({
         <Counts
           playpattern={playpattern}
           playgap={playgap}
+          drink={drink}
           playState={playState}
           judgeHandler={judgeHandler}
           stateHandler={stateHandler}

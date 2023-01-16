@@ -5,11 +5,12 @@ import Colors from "../../constants/color";
 
 export interface Props {
   title: string;
+  margintop: number;
 }
 
-const Title = ({ title }: Props) => {
+const Title = ({ title, margintop }: Props) => {
   return (
-    <View style={styles.modalTitleContanier}>
+    <View style={[styles.modalTitleContanier, { marginTop: margintop }]}>
       <View style={styles.modalTitleTop} />
       <View style={{ transform: [{ translateY: -2 }] }}>
         <ShadowText size={20} color="white">
@@ -30,11 +31,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 260,
     height: 37,
-    marginTop: -30,
     backgroundColor: Colors.modalHeadColor,
     borderColor: Colors.modalEdgeColor,
     borderWidth: 1,
-    transform: [{ translateY: -5 }],
+    
   },
   modalTitleTop: {
     width: "100%",

@@ -18,7 +18,7 @@ type Props = {
   rankingMove: () => void;
 };
 
-const NavBody = ({
+const NavSelect = ({
   maxMoney,
   activeBoard,
   prevJob,
@@ -62,7 +62,7 @@ const NavBody = ({
   );
 };
 
-export default NavBody;
+export default NavSelect;
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -80,14 +80,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginVertical: 6,
-  },
-  prevButton: {
-    width: 25,
-    height: 70,
-  },
-  nextButton: {
-    width: 25,
-    height: 70,
   },
   coron: {
     width: 7,

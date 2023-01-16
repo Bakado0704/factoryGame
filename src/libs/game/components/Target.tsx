@@ -7,14 +7,13 @@ import { judgeStatus, Play, PlayStatus } from "../../../types/play";
 type Props = {
   playpattern: PlayPattern;
   playgap: PlayGap;
+  drink: number;
   laps: number[];
   opacities: number[];
   color: string;
   count: number;
   allGaps: number[];
-  playState: Play;
   setAllGaps: (number: number[]) => void;
-  stateHandler: (state: PlayStatus) => void;
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
 };
@@ -22,19 +21,18 @@ type Props = {
 const Target = ({
   playgap,
   playpattern,
+  drink,
   laps,
   count,
   allGaps,
   opacities,
   color,
-  playState,
   setAllGaps,
-  stateHandler,
   damageHandler,
   judgeHandler,
 }: Props) => {
   //指定するパラメーター
-  let velocity: number = playpattern.target.velocity;
+  let velocity: number = playpattern.target.velocity * (1 + 0.1 * drink);
   let distance: number[] = playpattern.distance;
   const direction = playpattern.direction; //方向
   let allowGap = playgap.frontGap; //中心からここまで成功範囲

@@ -6,7 +6,6 @@ import CompanyImg from "../components/background/CompanyImg";
 import Comment from "../components/modal/Comment";
 import Colors from "../constants/color";
 import { ShadowText } from "../components/text/ShadowText";
-import Title from "../components/modal/Title";
 import JobTitle from "../components/modal/JobTitle";
 
 type Props = {

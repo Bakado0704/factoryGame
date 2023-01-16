@@ -32,18 +32,19 @@ const GameScreen = () => {
   const playState = useSelector((state: RootState) => state.job.play);
   //現在のjob
   const Job: Job = useSelector((state: RootState) => state.job.job);
+  //現在のuser
+  const user = useSelector((state: RootState) => state.job.user);
   //changeJobRecordに渡すための現在のJob
   const nowJob = useSelector((state: RootState) => state.job.jobs).find((job: Job) => job.id === Job.id);
 
   const nowMoney = playState.money;
   const completeCount = playState.completeCount;
+  const drink = user.drink;
   const maxMoney = Job.maxMoney;
   const perMoney = Job.outline.basicMoney;
   const jobName = Job.name;
   const name = Job.owner.name;
   const iconType = Job.icon;
-
-  console.log(completeCount)
 
   //dispatch関数の宣言
   const judgeHandler = (judge: judgeStatus) => {
@@ -105,6 +106,7 @@ const GameScreen = () => {
       <Game
         type={jobName}
         playState={playState}
+        drink={drink}
         nowMoney={nowMoney}
         perMoney={perMoney}
         judgeHandler={judgeHandler}

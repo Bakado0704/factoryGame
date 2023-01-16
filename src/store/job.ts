@@ -97,15 +97,15 @@ const JobRedux = createSlice({
         bonus = 2.0;
       }
       if (action.payload !== 0) {
-        let plusMoney = Math.floor(action.payload) * bonus;
+        let plusMoney = Math.floor(action.payload) * bonus * (1 + state.user.drink * 0.2);
         if (state.play.combo <= 2) {
-          plusMoney = Math.floor(action.payload) * bonus;
+          plusMoney = Math.floor(action.payload) * bonus * (1 + state.user.drink * 0.2);
         } else if (state.play.combo <= 4) {
-          plusMoney = Math.floor(action.payload * 1.2) * bonus;
+          plusMoney = Math.floor(action.payload * 1.2) * bonus * (1 + state.user.drink * 0.2);
         } else if (state.play.combo <= 6) {
-          plusMoney = Math.floor(action.payload * 1.6) * bonus;
+          plusMoney = Math.floor(action.payload * 1.6) * bonus * (1 + state.user.drink * 0.2);
         } else {
-          plusMoney = Math.floor(action.payload * 2.0) * bonus;
+          plusMoney = Math.floor(action.payload * 2.0) * bonus * (1 + state.user.drink * 0.2);
         }
 
         state.play.money = state.play.money + plusMoney;
@@ -153,13 +153,21 @@ const JobRedux = createSlice({
       state.play.stamina = state.play.stamina - action.payload;
     },
     staminaReset: (state, action: PayloadAction<number>) => {
-      state.play.stamina = 380 - 80 * action.payload;
+      state.play.stamina = 300 - 50 * action.payload;
     },
     userMoneyIncrease: (state, action: PayloadAction<number>) => {
       state.user.money = state.user.money + action.payload;
     },
     userPage: (state, action: PayloadAction<page>) => {
       state.user.page = action.payload;
+    },
+    userDrink: (state, action: PayloadAction<number>) => {
+      state.user.drink = state.user.drink + action.payload;
+      state.user.drinkCost = 80 * state.user.drink;
+    },
+    userDrinkReset: (state) => {
+      state.user.drink = 0;
+      state.user.drinkCost = 0;
     },
     changeStatus: (state, action: PayloadAction<PlayStatus>) => {
       state.play.status = action.payload;
@@ -195,6 +203,8 @@ export const staminaDecrese = JobRedux.actions.staminaDecrese;
 export const staminaReset = JobRedux.actions.staminaReset;
 export const userMoneyIncrease = JobRedux.actions.userMoneyIncrease;
 export const userPage = JobRedux.actions.userPage;
+export const userDrink = JobRedux.actions.userDrink;
+export const userDrinkReset = JobRedux.actions.userDrinkReset;
 export const changeStatus = JobRedux.actions.changeStatus;
 export const changeJudge = JobRedux.actions.changeJudge;
 export const changeProcessCount = JobRedux.actions.changeProcessCount;

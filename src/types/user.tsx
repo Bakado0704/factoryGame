@@ -14,4 +14,6 @@ export interface User {
   page: page;
   gachaStatus: GachaStatus;
   gachaCost: number;
+  drink: number;
+  drinkCost: number;
 }

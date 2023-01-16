@@ -16,6 +16,8 @@ export default class User implements User {
     public page: page,
     public gachaStatus: GachaStatus,
     public gachaCost: number,
+    public drink: number,
+    public drinkCost: number,
   ) {
     this.name = name;
     this.money = money;
@@ -26,5 +28,7 @@ export default class User implements User {
     this.page = page;
     this.gachaStatus = gachaStatus;
     this.gachaCost = gachaCost;
+    this.drink = drink;
+    this.drinkCost = drinkCost;
   }
 }

@@ -10,6 +10,7 @@ type Props = {
   playpattern: PlayPattern[][];
   playgap: PlayGap;
   playState: Play;
+  drink: number;
   perMoney: number;
   judgeHandler: (judge: judgeStatus) => void;
   stateHandler: (state: PlayStatus) => void;
@@ -28,6 +29,7 @@ const Counts = ({
   playpattern,
   playgap,
   playState,
+  drink,
   perMoney,
   judgeHandler,
   stateHandler,
@@ -90,10 +92,13 @@ const Counts = ({
     }
   }
 
+  useEffect(() => {
+    processCountHandler(allGaps.length);
+  }, [allGaps]);
+
   //すべてのgapsがdistanceと同じ数になる && gapsがすべて範囲内の時、成功にする
   //judgeが成功の時,isRunnningをfalseにし、waitingにもどす
   useEffect(() => {
-    processCountHandler(allGaps.length);
     if (
       allDistance.length === allGaps.length &&
       allGaps.every((value) => value <= playgap.frontGap)
@@ -112,7 +117,8 @@ const Counts = ({
         judgeHandler(judgeStatus.waiting);
       }, 800);
     }
-  }, [allGaps]);
+  }, [allDistance.length === allGaps.length &&
+    allGaps.every((value) => value <= playgap.frontGap)]);
 
   //ターゲットを押すのが早すぎた
   useEffect(() => {
@@ -146,6 +152,7 @@ const Counts = ({
         playpattern={selectedPlayPattern[i]}
         playgap={playgap}
         count={count}
+        drink={drink}
         isRunning={isRunning}
         allGaps={allGaps}
         playState={playState}
