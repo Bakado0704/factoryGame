@@ -1,6 +1,6 @@
 import { StyleSheet, Animated, Image } from "react-native";
 import React, { useRef } from "react";
-import { UserIconType } from "../../types/userIcon";
+import { UserIconType } from "../../types/userIcons";
 
 type Props = {
   icon: UserIconType;

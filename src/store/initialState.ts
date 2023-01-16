@@ -5,7 +5,7 @@ import Outline from "../models/outline";
 import { BoardType } from "../types/board";
 import User from "../models/user";
 import { JobName } from "../types/job";
-import { UserIconType } from "../types/userIcon";
+import { UserIconType } from "../types/userIcons";
 import { Play, PlayColor } from "../types/play";
 import PlayPattern from "../models/playpattern";
 import PlayTarget from "../models/playtarget";

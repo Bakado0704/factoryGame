@@ -1,7 +1,7 @@
 import { View, StyleSheet, Animated, Pressable } from "react-native";
 import UserMoney from "../../money/UserMoney";
 import ImageButton from "../../button/ImageButton";
-import { UserIconType } from "../../../types/userIcon";
+import { UserIconType } from "../../../types/userIcons";
 import UserIcon from "../../face/UserIcon";
 import { useRef } from "react";
 import { page } from "../../../types/page";

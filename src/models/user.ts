@@ -3,7 +3,7 @@ import { JobName } from "../types/job";
 import { page } from "../types/page";
 import { productType } from "../types/product";
 import { Mute, User as _User } from "../types/user";
-import { UserIconType } from "../types/userIcon";
+import { UserIconType } from "../types/userIcons";
 
 export default class User implements User {
   constructor(

@@ -2,7 +2,7 @@ import { GachaStatus } from "./gacha";
 import { JobName } from "./job";
 import { page } from "./page";
 import { productType } from "./product";
-import { UserIconType } from "./userIcon";
+import { UserIconType } from "./userIcons";
 
 export interface User {
   name: string;

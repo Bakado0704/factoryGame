@@ -1,6 +1,6 @@
 import { JobName } from "../types/job";
 import { UserIcons as _UserIcons } from "../types/userIcons";
-import { UserIconType } from "../types/userIcon";
+import { UserIconType } from "../types/userIcons";
 
 export default class UserIcons implements UserIcons {
   constructor(

@@ -1,6 +1,6 @@
 import User from "../../models/user";
 import { JobName } from "../../types/job";
-import { UserIconType } from "../../types/userIcon";
+import { UserIconType } from "../../types/userIcons";
 import { productType } from "../../types/product";
 import UserIcons from "../../models/userIcons";
 
