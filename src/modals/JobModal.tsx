@@ -10,7 +10,7 @@ import React, { useRef } from "react";
 import ImageButton from "../components/button/ImageButton";
 import { Outline } from "../types/outline";
 import FaceIcon from "../components/face/FaceIcon";
-import { IconType } from "../types/icon";
+import { JobType } from "../types/job";
 
 type Props = {
   offModal: () => void;
@@ -20,7 +20,7 @@ type Props = {
     name: string;
     message: string;
   };
-  icon: IconType;
+  icon: JobType;
 };
 
 const JobModal = ({

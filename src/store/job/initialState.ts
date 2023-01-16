@@ -1,8 +1,5 @@
-import { BackgroundType } from "../../types/background";
-import { IconType } from "../../types/icon";
 import Job from "../../models/job";
 import Outline from "../../models/outline";
-import { BoardType } from "../../types/board";
 import { JobType } from "../../types/job";
 import { ImageSourcePropType } from "react-native";
 
@@ -20,15 +17,15 @@ const initialState: state = {
   jobs: [
     new Job(
       "c1",
-      IconType.yamagawa,
+      JobType.yamagawa,
       JobType.yamagawa,
       true,
       1,
       0,
       0,
       15,
-      BackgroundType.yamagawa,
-      BoardType.yamagawa,
+      JobType.yamagawa,
+      JobType.yamagawa,
       {
         default: [
           { before: require("../../assets/product/product1-normal-first.png") },
@@ -63,15 +60,15 @@ const initialState: state = {
     ),
     new Job(
       "c2",
-      IconType.souzuki,
+      JobType.souzuki,
       JobType.souzuki,
       false,
       1,
       0,
       0,
       12,
-      BackgroundType.souzuki,
-      BoardType.souzuki,
+      JobType.souzuki,
+      JobType.souzuki,
       {
         default: [
           { before: require("../../assets/product/product2-normal-first.png") },
@@ -107,15 +104,15 @@ const initialState: state = {
 
     new Job(
       "c3",
-      IconType.ashBerry,
+      JobType.ashBerry,
       JobType.ashBerry,
       false,
       1,
       0,
       0,
       20,
-      BackgroundType.ashBerry,
-      BoardType.ashBerry,
+      JobType.ashBerry,
+      JobType.ashBerry,
       {
         default: [
           { before: require("../../assets/product/product3-normal-first.png") },
@@ -150,15 +147,15 @@ const initialState: state = {
     ),
     new Job(
       "c4",
-      IconType.bentaro,
+      JobType.bentaro,
       JobType.bentaro,
       false,
       1,
       0,
       0,
       18,
-      BackgroundType.bentaro,
-      BoardType.bentaro,
+      JobType.bentaro,
+      JobType.bentaro,
       {
         default: [
           { before: require("../../assets/product/product4-normal-first.png") },
@@ -197,15 +194,15 @@ const initialState: state = {
     ),
     new Job(
       "c5",
-      IconType.aguron,
+      JobType.aguron,
       JobType.aguron,
       false,
       1,
       0,
       0,
       25,
-      BackgroundType.aguron,
-      BoardType.aguron,
+      JobType.aguron,
+      JobType.aguron,
       {
         default: [
           { before: require("../../assets/product/product5-normal-first.png") },
@@ -240,15 +237,15 @@ const initialState: state = {
     ),
     new Job(
       "c6",
-      IconType.starFoods,
+      JobType.starFoods,
       JobType.starFoods,
       false,
       1,
       0,
       0,
       20,
-      BackgroundType.starFoods,
-      BoardType.starFoods,
+      JobType.starFoods,
+      JobType.starFoods,
       {
         default: [
           { before: require("../../assets/product/product6-normal-first.png") },
@@ -287,15 +284,15 @@ const initialState: state = {
     ),
     new Job(
       "c7",
-      IconType.sikaga,
+      JobType.sikaga,
       JobType.sikaga,
       false,
       1,
       0,
       0,
       27,
-      BackgroundType.sikaga,
-      BoardType.sikaga,
+      JobType.sikaga,
+      JobType.sikaga,
       {
         default: [
           { before: require("../../assets/product/product7-normal-first.png") },
@@ -330,15 +327,15 @@ const initialState: state = {
     ),
     new Job(
       "c8",
-      IconType.tamazu,
+      JobType.tamazu,
       JobType.tamazu,
       false,
       1,
       0,
       0,
       18,
-      BackgroundType.tamazu,
-      BoardType.tamazu,
+      JobType.tamazu,
+      JobType.tamazu,
       {
         default: [
           { before: require("../../assets/product/product8-normal-first.png") },
@@ -377,15 +374,15 @@ const initialState: state = {
     ),
     new Job(
       "c9",
-      IconType.ozasa,
+      JobType.ozasa,
       JobType.ozasa,
       false,
       1,
       0,
       0,
       10,
-      BackgroundType.ozasa,
-      BoardType.ozasa,
+      JobType.ozasa,
+      JobType.ozasa,
       {
         default: [
           { before: require("../../assets/product/product9-normal-first.png") },
@@ -420,15 +417,15 @@ const initialState: state = {
     ),
     new Job(
       "c10",
-      IconType.tanabe,
+      JobType.tanabe,
       JobType.tanabe,
       false,
       1,
       0,
       0,
       10,
-      BackgroundType.tanabe,
-      BoardType.tanabe,
+      JobType.tanabe,
+      JobType.tanabe,
       {
         default: [
           {
@@ -469,15 +466,15 @@ const initialState: state = {
 
   job: {
     id: "c1",
-    icon: IconType.yamagawa,
+    icon: JobType.yamagawa,
     name: JobType.yamagawa,
     isActive: true,
     level: 1,
     maxNumber: 0,
     maxMoney: 0,
     perMoney: 15,
-    backgroundImg: BackgroundType.yamagawa,
-    boardImg: BoardType.yamagawa,
+    backgroundImg: JobType.yamagawa,
+    boardImg: JobType.yamagawa,
     product: {
       default: [
         { before: require("../../assets/product/product1-normal-first.png") },
@@ -511,15 +508,15 @@ const initialState: state = {
 
   nextJob: {
     id: "c1",
-    icon: IconType.yamagawa,
+    icon: JobType.yamagawa,
     name: JobType.yamagawa,
     isActive: true,
     level: 1,
     maxNumber: 0,
     maxMoney: 0,
     perMoney: 15,
-    backgroundImg: BackgroundType.yamagawa,
-    boardImg: BoardType.yamagawa,
+    backgroundImg: JobType.yamagawa,
+    boardImg: JobType.yamagawa,
     product: {
       default: [
         { before: require("../../assets/product/product1-normal-first.png") },
@@ -553,15 +550,15 @@ const initialState: state = {
 
   prevJob: {
     id: "c1",
-    icon: IconType.yamagawa,
+    icon: JobType.yamagawa,
     name: JobType.yamagawa,
     isActive: true,
     level: 1,
     maxNumber: 0,
     maxMoney: 0,
     perMoney: 15,
-    backgroundImg: BackgroundType.yamagawa,
-    boardImg: BoardType.yamagawa,
+    backgroundImg: JobType.yamagawa,
+    boardImg: JobType.yamagawa,
     product: {
       default: [
         { before: require("../../assets/product/product1-normal-first.png") },

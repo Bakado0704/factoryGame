@@ -3,14 +3,13 @@ import BoardImg from "../../background/BoardImg";
 import RankingButton from "../../animation/animationButton/RankingButton";
 import NextButton from "../../animation/animationButton/NextButton";
 import PrevButton from "../../animation/animationButton/PrevButton";
-import { BoardType } from "../../../types/board";
-import { Job } from "../../../types/job";
+import { Job, JobType } from "../../../types/job";
 import { page } from "../../../types/page";
 import { ShadowText } from "../../text/ShadowText";
 
 type Props = {
   maxMoney: number;
-  activeBoard: BoardType;
+  activeBoard: JobType;
   page: page;
   prevJob: Job;
   nextJob: Job;

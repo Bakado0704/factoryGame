@@ -1,21 +1,18 @@
-import { BackgroundType } from "../types/background";
-import { BoardType } from "../types/board";
-import { IconType } from "../types/icon";
 import { JobProduct, Job as _Job, JobType } from "../types/job";
 import { Outline } from "../types/outline";
 
 export default class job implements _Job {
   constructor(
     public id: string,
-    public icon: IconType,
+    public icon: JobType,
     public name: JobType,
     public isActive : boolean,
     public level : number,
     public maxMoney : number,
     public maxNumber : number,
     public perMoney : number[],
-    public backgroundImg : BackgroundType,
-    public boardImg : BoardType,
+    public backgroundImg : JobType,
+    public boardImg : JobType,
     public product: JobProduct,
     public owner: {
       name: string;

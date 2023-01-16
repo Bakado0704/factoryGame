@@ -1,9 +1,9 @@
 import { StyleSheet, ImageBackground } from "react-native";
 import React from "react";
-import { BackgroundType } from "../../types/background";
+import { JobType } from "../../types/job";
 
 type Props = {
-  type: BackgroundType;
+  type: JobType;
   children: React.ReactNode;
 };
 

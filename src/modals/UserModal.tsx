@@ -192,7 +192,8 @@ const styles = StyleSheet.create({
     width: 210,
     top: 0,
     height: 25,
-  },
+    borderRadius: 2,
+   },
   textInput: {
     fontSize: 15,
     fontFamily: "MochiyPop",
@@ -225,6 +226,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: Colors.modalEdgeColor,
     opacity: 0.5,
+    borderRadius: 2,
   },
   userIcon: {
     position: "relative",
@@ -269,6 +271,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: Colors.modalEdgeColor,
     opacity: 0.5,
+    borderRadius: 2,
   },
   textSound: {
     fontSize: 15,

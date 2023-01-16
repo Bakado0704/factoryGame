@@ -1,18 +1,18 @@
 import { View, StyleSheet, Image, Text, Animated } from "react-native";
 import React from "react";
 import ImageButton from "../components/button/ImageButton";
-import { IconType } from "../types/icon";
 import Colors from "../constants/color";
 import { ShadowText } from "../components/text/ShadowText";
 import Comment from "../components/modal/Comment";
 import Title from "../components/modal/Title";
+import { JobType } from "../types/job";
 
 type Props = {
   nowMoney: number;
   maxMoney: number;
   completeCount: number;
   name: string;
-  iconType: IconType;
+  iconType: JobType;
   offModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 

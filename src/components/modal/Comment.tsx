@@ -2,12 +2,12 @@ import { Animated, Image, Pressable, StyleSheet, Text, View } from "react-native
 import React, { useRef } from "react";
 import FaceIcon from "../face/FaceIcon";
 import Colors from "../../constants/color";
-import { IconType } from "../../types/icon";
+import { JobType } from "../../types/job";
 
 export interface Props {
   comment: string;
   name: string;
-  iconType: IconType;
+  iconType: JobType;
 }
 
 const Comment = ({ comment, name, iconType }: Props) => {

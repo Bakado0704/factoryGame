@@ -1,9 +1,9 @@
 import { StyleSheet, Image } from "react-native";
 import React from "react";
-import { BoardType } from "../../types/board";
+import { JobType } from "../../types/job";
 
 type Props = {
-  type: BoardType;
+  type: JobType;
 };
 
 const BoardImg = ({ type }: Props) => {

@@ -1,7 +1,4 @@
 import { ImageSourcePropType } from "react-native";
-import { BackgroundType } from "./background";
-import { BoardType } from "./board";
-import { IconType } from "./icon";
 import { Outline } from "./outline";
 
 export const JobType = {
@@ -20,15 +17,15 @@ export type JobType = typeof JobType[keyof typeof JobType];
 
 export interface Job {
   id: string;
-  icon: IconType;
+  icon: JobType;
   name: JobType;
   isActive: boolean;
   level: number;
   maxNumber: number;
   maxMoney: number;
   perMoney: number[];
-  backgroundImg: BackgroundType;
-  boardImg: BoardType;
+  backgroundImg: JobType;
+  boardImg: JobType;
   product: JobProduct;
   owner: {
     name: string;

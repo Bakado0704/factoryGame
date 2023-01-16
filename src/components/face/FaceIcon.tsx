@@ -1,9 +1,9 @@
 import { StyleSheet, Image} from "react-native";
 import React from "react";
-import { IconType } from "../../types/icon";
+import { JobType } from "../../types/job";
 
 type Props = {
-  type: IconType;
+  type: JobType;
   width: number;
   height: number;
 };
