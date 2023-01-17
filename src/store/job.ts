@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Job from "../models/job";
 import User from "../models/user";
-import { UserIcons } from "../types/userIcons";
-import { judgeStatus, PlayStatus } from "../types/play";
 import playpattern from "../models/playpattern";
 import initialState from "./initialState";
+import { UserIcons } from "../types/userIcons";
+import { judgeStatus, PlayStatus } from "../types/play";
 import { productType } from "../types/product";
 import { page } from "../types/page";
 import { GachaStatus } from "../types/gacha";
@@ -143,8 +143,10 @@ const JobRedux = createSlice({
     changeCenterProduct: (state) => {
       if (state.user.productType === "bonus") {
         state.centerProduct = state.job.product.bonus;
+        state.failureProduct = state.job.product.bonusFailure;
       } else {
         state.centerProduct = state.job.product.default;
+        state.failureProduct = state.job.product.defaultFailure;
       }
     },
     changeUserNowJob: (state, action: PayloadAction<JobType>) => {

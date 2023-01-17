@@ -38,7 +38,13 @@ export interface JobProduct {
   default: {
     before: ImageSourcePropType;
   }[];
+  defaultFailure: {
+    before: ImageSourcePropType;
+  }[];
   bonus: {
+    before: ImageSourcePropType;
+  }[];
+  bonusFailure: {
     before: ImageSourcePropType;
   }[];
   style: { width: number; height: number };

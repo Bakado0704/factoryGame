@@ -19,6 +19,7 @@ export type state = {
   prevJob: Job;
   nextProduct: { before: ImageSourcePropType }[];
   centerProduct: { before: ImageSourcePropType }[];
+  failureProduct: { before: ImageSourcePropType }[];
   previewJob?: Job;
   previewIcon: UserIcons;
   user: User;
@@ -48,10 +49,16 @@ const initialState: state = {
           },
           { before: require("../assets/product/product1-normal-third.png") },
         ],
+        defaultFailure: [
+          { before: require("../assets/product/product1-normal-failure.png") },
+        ],
         bonus: [
           { before: require("../assets/product/product1-gold-first.png") },
           { before: require("../assets/product/product1-gold-second.png") },
           { before: require("../assets/product/product1-gold-third.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product1-gold-failure.png") },
         ],
         style: { width: 200, height: 80 },
       },
@@ -91,10 +98,16 @@ const initialState: state = {
           },
           { before: require("../assets/product/product2-normal-third.png") },
         ],
+        defaultFailure: [
+          { before: require("../assets/product/product2-normal-failure.png") },
+        ],
         bonus: [
           { before: require("../assets/product/product2-gold-first.png") },
           { before: require("../assets/product/product2-gold-second.png") },
           { before: require("../assets/product/product2-gold-third.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product2-gold-failure.png") },
         ],
         style: { width: 270, height: 207 },
       },
@@ -135,10 +148,16 @@ const initialState: state = {
           },
           { before: require("../assets/product/product3-normal-third.png") },
         ],
+        defaultFailure: [
+          { before: require("../assets/product/product3-normal-failure.png") },
+        ],
         bonus: [
           { before: require("../assets/product/product3-gold-first.png") },
           { before: require("../assets/product/product3-gold-second.png") },
           { before: require("../assets/product/product3-gold-third.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product3-gold-failure.png") },
         ],
         style: { width: 202, height: 89 },
       },
@@ -179,11 +198,17 @@ const initialState: state = {
           { before: require("../assets/product/product4-normal-third.png") },
           { before: require("../assets/product/product4-normal-fourth.png") },
         ],
+        defaultFailure: [
+          { before: require("../assets/product/product4-normal-failure.png") },
+        ],
         bonus: [
           { before: require("../assets/product/product4-gold-first.png") },
           { before: require("../assets/product/product4-gold-second.png") },
           { before: require("../assets/product/product4-gold-third.png") },
           { before: require("../assets/product/product4-gold-fourth.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product4-gold-failure.png") },
         ],
         style: { width: 200, height: 130 },
       },
@@ -223,10 +248,16 @@ const initialState: state = {
           },
           { before: require("../assets/product/product5-normal-third.png") },
         ],
+        defaultFailure: [
+          { before: require("../assets/product/product5-normal-failure.png") },
+        ],
         bonus: [
           { before: require("../assets/product/product5-gold-first.png") },
           { before: require("../assets/product/product5-gold-second.png") },
           { before: require("../assets/product/product5-gold-third.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product5-gold-failure.png") },
         ],
         style: { width: 200, height: 172 },
       },
@@ -267,11 +298,17 @@ const initialState: state = {
           { before: require("../assets/product/product6-normal-third.png") },
           { before: require("../assets/product/product6-normal-fourth.png") },
         ],
+        defaultFailure: [
+          { before: require("../assets/product/product6-normal-failure.png") },
+        ],
         bonus: [
           { before: require("../assets/product/product6-gold-first.png") },
           { before: require("../assets/product/product6-gold-second.png") },
           { before: require("../assets/product/product6-gold-third.png") },
           { before: require("../assets/product/product6-gold-fourth.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product6-gold-failure.png") },
         ],
         style: { width: 200, height: 150 },
       },
@@ -311,10 +348,16 @@ const initialState: state = {
           },
           { before: require("../assets/product/product7-normal-third.png") },
         ],
+        defaultFailure: [
+          { before: require("../assets/product/product7-normal-failure.png") },
+        ],
         bonus: [
           { before: require("../assets/product/product7-normal-first.png") },
           { before: require("../assets/product/product7-gold-second.png") },
           { before: require("../assets/product/product7-gold-third.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product7-gold-failure.png") },
         ],
         style: { width: 252, height: 82 },
       },
@@ -355,11 +398,17 @@ const initialState: state = {
           { before: require("../assets/product/product8-normal-third.png") },
           { before: require("../assets/product/product8-normal-fourth.png") },
         ],
+        defaultFailure: [
+          { before: require("../assets/product/product8-normal-failure.png") },
+        ],
         bonus: [
           { before: require("../assets/product/product8-gold-first.png") },
           { before: require("../assets/product/product8-gold-second.png") },
           { before: require("../assets/product/product8-gold-third.png") },
           { before: require("../assets/product/product8-gold-fourth.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product8-gold-failure.png") },
         ],
         style: { width: 138, height: 222 },
       },
@@ -399,10 +448,16 @@ const initialState: state = {
           },
           { before: require("../assets/product/product9-normal-third.png") },
         ],
+        defaultFailure: [
+          { before: require("../assets/product/product9-normal-failure.png") },
+        ],
         bonus: [
           { before: require("../assets/product/product9-gold-first.png") },
           { before: require("../assets/product/product9-gold-second.png") },
           { before: require("../assets/product/product9-gold-third.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product9-gold-failure.png") },
         ],
         style: { width: 300, height: 145 },
       },
@@ -446,10 +501,16 @@ const initialState: state = {
             before: require("../assets/product/product10-normal-third.png"),
           },
         ],
+        defaultFailure: [
+          { before: require("../assets/product/product10-normal-failure.png") },
+        ],
         bonus: [
           { before: require("../assets/product/product10-gold-first.png") },
           { before: require("../assets/product/product10-gold-second.png") },
           { before: require("../assets/product/product10-gold-third.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product10-gold-failure.png") },
         ],
         style: { width: 280, height: 105 },
       },
@@ -489,10 +550,16 @@ const initialState: state = {
         { before: require("../assets/product/product1-normal-second.png") },
         { before: require("../assets/product/product1-normal-third.png") },
       ],
+      defaultFailure: [
+        { before: require("../assets/product/product1-normal-failure.png") },
+      ],
       bonus: [
         { before: require("../assets/product/product1-gold-first.png") },
         { before: require("../assets/product/product1-gold-second.png") },
         { before: require("../assets/product/product1-gold-third.png") },
+      ],
+      bonusFailure: [
+        { before: require("../assets/product/product1-gold-failure.png") },
       ],
       style: { width: 200, height: 80 },
     },
@@ -531,10 +598,16 @@ const initialState: state = {
         { before: require("../assets/product/product1-normal-second.png") },
         { before: require("../assets/product/product1-normal-third.png") },
       ],
+      defaultFailure: [
+        { before: require("../assets/product/product1-normal-failure.png") },
+      ],
       bonus: [
         { before: require("../assets/product/product1-gold-first.png") },
         { before: require("../assets/product/product1-gold-second.png") },
         { before: require("../assets/product/product1-gold-third.png") },
+      ],
+      bonusFailure: [
+        { before: require("../assets/product/product1-gold-failure.png") },
       ],
       style: { width: 200, height: 80 },
     },
@@ -573,10 +646,16 @@ const initialState: state = {
         { before: require("../assets/product/product1-normal-second.png") },
         { before: require("../assets/product/product1-normal-third.png") },
       ],
+      defaultFailure: [
+        { before: require("../assets/product/product1-normal-failure.png") },
+      ],
       bonus: [
         { before: require("../assets/product/product1-gold-first.png") },
         { before: require("../assets/product/product1-gold-second.png") },
         { before: require("../assets/product/product1-gold-third.png") },
+      ],
+      bonusFailure: [
+        { before: require("../assets/product/product1-normal-failure.png") },
       ],
       style: { width: 200, height: 80 },
     },
@@ -608,6 +687,10 @@ const initialState: state = {
     { before: require("../assets/product/product1-normal-first.png") },
     { before: require("../assets/product/product1-normal-second.png") },
     { before: require("../assets/product/product1-normal-third.png") },
+  ],
+
+  failureProduct: [
+    { before: require("../assets/product/product1-normal-failure.png") },
   ],
 
   UserIcons: [

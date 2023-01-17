@@ -10,6 +10,7 @@ import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
 import ConveyorLine from "./ConveyorLine";
 import Light from "./Light";
 import { JobType } from "../../types/job";
+import Explosion from "./Explostion";
 export type Props = {
   playState: Play;
   activeProductLength: number;
@@ -20,6 +21,7 @@ export type Props = {
   width: number;
   NEXTPRODUCT: ImageSourcePropType;
   CENTERPRODUCT: ImageSourcePropType;
+  FAILUREPRODUCT: ImageSourcePropType;
   jobType: JobType;
 };
 
@@ -30,6 +32,7 @@ const Product = ({
   width,
   NEXTPRODUCT,
   CENTERPRODUCT,
+  FAILUREPRODUCT,
   jobType,
 }: Props) => {
   //画像を動かす
@@ -57,6 +60,37 @@ const Product = ({
       playState.judge === judgeStatus.failure,
   ]);
 
+  //次の画像
+  var nextImage = (
+    <View style={styles.ImageContainer}>
+      <Image
+        source={NEXTPRODUCT}
+        style={{ width: activeProductWidth, height: activeProductHeight }}
+      />
+    </View>
+  );
+
+  //中央の画像
+  var centerImage = (
+    <View style={styles.ImageContainer}>
+      <Image
+        source={CENTERPRODUCT}
+        style={{ width: activeProductWidth, height: activeProductHeight }}
+      />
+    </View>
+  );
+
+  if (playState.judge === judgeStatus.failure) {
+    centerImage = (
+      <View style={styles.ImageContainer}>
+        <Image
+          source={FAILUREPRODUCT}
+          style={{ width: activeProductWidth, height: activeProductHeight }}
+        />
+      </View>
+    );
+  }
+
   //waitingの時元に戻す
   useEffect(() => {
     if (playState.judge === judgeStatus.waiting) {
@@ -75,26 +109,12 @@ const Product = ({
         ]}
       >
         <ConveyorLine width={width} />
-        <View style={styles.ImageContainer}>
-          <Image
-            source={NEXTPRODUCT}
-            style={{ width: activeProductWidth, height: activeProductHeight }}
-          />
-        </View>
-        <View style={styles.ImageContainer}>
-          <Image
-            source={CENTERPRODUCT}
-            style={{ width: activeProductWidth, height: activeProductHeight }}
-          />
-        </View>
-        <View style={styles.ImageContainer}>
-          <Image
-            source={CENTERPRODUCT}
-            style={{ width: activeProductWidth, height: activeProductHeight }}
-          />
-        </View>
+        {nextImage}
+        {centerImage}
+        {centerImage}
       </Animated.View>
-      <Light playState={playState} jobType={jobType}/>
+      <Light playState={playState} jobType={jobType} />
+      <Explosion playState={playState}/>
     </>
   );
 };
