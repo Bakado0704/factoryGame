@@ -99,6 +99,19 @@ const GameScreen = () => {
     navigation.navigate("Start");
   };
 
+  const youdeadMessage = [
+    "倒れてしまった…",
+    "メンタルがやられてしまった...",
+    "やる気が失せてしまった...",
+    "意識を失った...",
+    "目が昇天した...",
+    "疲労で動けなくなった...",
+    "目の前が真っ暗になった...",
+    "気を失ってしまった...",
+  ];
+
+  const messageNumber = Math.floor((Math.random())* youdeadMessage.length)
+
   //statusがplayingの場合Gameを出す
   let game;
   if (playState.status === PlayStatus.playing) {
@@ -142,6 +155,7 @@ const GameScreen = () => {
         <Gameover
           offModal={offModalHandler}
           completeCount={completeCount}
+          message={youdeadMessage[messageNumber]}
           nowMoney={nowMoney}
           maxMoney={maxMoney}
           name={name}

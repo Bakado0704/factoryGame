@@ -130,7 +130,13 @@ const userModal = ({
 
           <View style={styles.soundContainer}>
             <View style={styles.soundBackground} />
-            <Text style={styles.textSound}>効果音</Text>
+            <View style={styles.soundImg}>
+              <Image
+                source={require("../assets/ui/sound.png")}
+                style={styles.sound}
+              />
+              <Text style={styles.textSound}>効果音</Text>
+            </View>
             <ImageButton
               source={soundSource}
               onPress={soundChange}
@@ -193,7 +199,7 @@ const styles = StyleSheet.create({
     top: 0,
     height: 25,
     borderRadius: 2,
-   },
+  },
   textInput: {
     fontSize: 15,
     fontFamily: "MochiyPop",
@@ -277,7 +283,18 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: "MochiyPop",
     color: "white",
-    padding: 8,
+    paddingVertical: 8,
+  },
+  sound: {
+    height: 16,
+    width: 19,
+    marginLeft: 8,
+    marginRight: 4,
+  },
+  soundImg: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
   soundButton: {
     width: 64,

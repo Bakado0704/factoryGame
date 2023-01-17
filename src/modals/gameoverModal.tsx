@@ -13,6 +13,7 @@ type Props = {
   completeCount: number;
   name: string;
   iconType: JobType;
+  message: string;
   offModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -22,14 +23,16 @@ const Gameover = ({
   maxMoney,
   name,
   iconType,
+  message,
   completeCount,
 }: Props) => {
+
 
   return (
     <>
       <View style={styles.rootScreen}>
         <View style={styles.titleContainer}>
-          <Text style={styles.youdead}>倒れてしまった…</Text>
+          <Text style={styles.youdead}>{message}</Text>
           <Text style={styles.gameover}>GAMEOVER</Text>
         </View>
         <View style={styles.innerContainer}>
@@ -40,38 +43,60 @@ const Gameover = ({
               style={[styles.modalBackgroundLight]}
             />
 
-            <View style={{ justifyContent: "center", alignItems: "center", height: 40, marginBottom: -15}}>
-              <ShadowText size={14} color="white">時給</ShadowText>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                height: 40,
+                marginBottom: -15,
+              }}
+            >
+              <ShadowText size={14} color="white">
+                時給
+              </ShadowText>
               {nowMoney === maxMoney && nowMoney > 0 && (
-                <View style={{marginTop: -3}}>
-                  <ShadowText size={16} color={Colors.textYellowColor}>新記録!</ShadowText>
+                <View style={{ marginTop: -3 }}>
+                  <ShadowText size={16} color={Colors.textYellowColor}>
+                    新記録!
+                  </ShadowText>
                 </View>
               )}
             </View>
-            
+
             <View style={styles.resultInnerContainer}>
               <Image
                 source={require("../assets/ui/money1.png")}
                 style={styles.moneyBigImg}
               />
-              <ShadowText size={60} color="white">{nowMoney}</ShadowText>
+              <ShadowText size={50} color="white">
+                {nowMoney}
+              </ShadowText>
             </View>
           </View>
 
           <View style={styles.resultDetailContainer}>
             <View style={styles.resultBackground} />
-            <ShadowText size={18} color="white">成功回数:</ShadowText>
-            <ShadowText size={20} color="white"> {completeCount}</ShadowText>
+            <ShadowText size={18} color="white">
+              成功回数:
+            </ShadowText>
+            <ShadowText size={20} color="white">
+              {" "}
+              {completeCount}
+            </ShadowText>
           </View>
 
           <View style={styles.resultDetailContainer}>
             <View style={styles.resultBackground} />
-            <ShadowText size={18} color="white">最高記録:</ShadowText>
+            <ShadowText size={18} color="white">
+              最高記録:
+            </ShadowText>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <ShadowText size={20} color="white">{maxMoney}</ShadowText>
+            <ShadowText size={20} color="white">
+              {maxMoney}
+            </ShadowText>
           </View>
         </View>
         <Comment name={name} comment="あーあって感じ" iconType={iconType} />
@@ -109,7 +134,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   youdead: {
-    fontSize: 30,
+    fontSize: 22,
     color: "white",
     fontFamily: "MochiyPop",
   },
@@ -148,7 +173,7 @@ const styles = StyleSheet.create({
     width: 260,
     height: 106,
     opacity: 0.7,
-    transform: [{ translateY: 10}]
+    transform: [{ translateY: 10 }],
   },
   resultDetailContainer: {
     width: "100%",
@@ -193,8 +218,8 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   moneyBigImg: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     marginLeft: 8,
     marginRight: 4,
   },
