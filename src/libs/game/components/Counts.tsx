@@ -104,9 +104,9 @@ const Counts = ({
       allGaps.every((value) => value <= playgap.frontGap)
     ) {
       judgeHandler(judgeStatus.success);
+      changeNowMoneyHandler(perMoney);
       changeProductTypeHandler(),
       changeNextProductHandler(),
-      changeNowMoneyHandler(perMoney);
       changeComboHandler(1);
       changeCompleteCount(1);
       setTimeout(() => {

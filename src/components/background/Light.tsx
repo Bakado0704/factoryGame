@@ -85,7 +85,7 @@ const Light = ({
 
   const lightOpacity = LightAnim.interpolate({
     inputRange: [0, 1, 200],
-    outputRange: [1, 1, 0],
+    outputRange: [0, 1, 0],
   });
 
   useEffect(() => {

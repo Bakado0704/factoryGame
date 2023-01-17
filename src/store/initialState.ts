@@ -96,7 +96,7 @@ const initialState: state = {
           { before: require("../assets/product/product2-gold-second.png") },
           { before: require("../assets/product/product2-gold-third.png") },
         ],
-        style: { width: 270, height: 180 },
+        style: { width: 270, height: 207 },
       },
       {
         name: "新盛 晋(50)",
@@ -120,7 +120,7 @@ const initialState: state = {
       "c3",
       JobType.ashBerry,
       JobType.ashBerry,
-      false,
+      true,
       1,
       0,
       0,
@@ -140,7 +140,7 @@ const initialState: state = {
           { before: require("../assets/product/product3-gold-second.png") },
           { before: require("../assets/product/product3-gold-third.png") },
         ],
-        style: { width: 202, height: 77 },
+        style: { width: 202, height: 89 },
       },
       {
         name: "宮古 洋平(56)",
@@ -185,7 +185,7 @@ const initialState: state = {
           { before: require("../assets/product/product4-gold-third.png") },
           { before: require("../assets/product/product4-gold-fourth.png") },
         ],
-        style: { width: 200, height: 86 },
+        style: { width: 200, height: 130 },
       },
       {
         name: "辻 踏弥(48)",
@@ -273,7 +273,7 @@ const initialState: state = {
           { before: require("../assets/product/product6-gold-third.png") },
           { before: require("../assets/product/product6-gold-fourth.png") },
         ],
-        style: { width: 200, height: 130 },
+        style: { width: 200, height: 150 },
       },
       {
         name: "竹内 ゲンノシン(47)",
@@ -316,7 +316,7 @@ const initialState: state = {
           { before: require("../assets/product/product7-gold-second.png") },
           { before: require("../assets/product/product7-gold-third.png") },
         ],
-        style: { width: 252, height: 80 },
+        style: { width: 252, height: 82 },
       },
       {
         name: "黒口 隆(51)",
@@ -339,7 +339,7 @@ const initialState: state = {
       "c8",
       JobType.tamazu,
       JobType.tamazu,
-      false,
+      true,
       1,
       0,
       0,
@@ -361,7 +361,7 @@ const initialState: state = {
           { before: require("../assets/product/product8-gold-third.png") },
           { before: require("../assets/product/product8-gold-fourth.png") },
         ],
-        style: { width: 120, height: 222 },
+        style: { width: 138, height: 222 },
       },
       {
         name: "山下 五郎(55)",
