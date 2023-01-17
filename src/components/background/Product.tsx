@@ -8,6 +8,8 @@ import {
 import React, { useEffect, useRef } from "react";
 import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
 import ConveyorLine from "./ConveyorLine";
+import Light from "./Light";
+import { JobType } from "../../types/job";
 export type Props = {
   playState: Play;
   activeProductLength: number;
@@ -18,6 +20,7 @@ export type Props = {
   width: number;
   NEXTPRODUCT: ImageSourcePropType;
   CENTERPRODUCT: ImageSourcePropType;
+  jobType: JobType;
 };
 
 const Product = ({
@@ -27,19 +30,14 @@ const Product = ({
   width,
   NEXTPRODUCT,
   CENTERPRODUCT,
+  jobType,
 }: Props) => {
   //画像を動かす
   let TargetAnim = useRef(new Animated.Value(0)).current;
-  let LightAnim = useRef(new Animated.Value(0)).current;
 
   const targeTranslateX = TargetAnim.interpolate({
     inputRange: [0, 80, 200],
     outputRange: [0, 0, width],
-  });
-
-  const lightOpacity = LightAnim.interpolate({
-    inputRange: [0, 1, 200],
-    outputRange: [0, 1, 0],
   });
 
   //successかfailureになったときアニメーション動かす
@@ -58,17 +56,6 @@ const Product = ({
     playState.judge === judgeStatus.success ||
       playState.judge === judgeStatus.failure,
   ]);
-
-  useEffect(() => {
-    if (playState.judge === judgeStatus.success)
-    {
-      Animated.timing(LightAnim, {
-        toValue: 200,
-        duration: 600,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [playState.judge === judgeStatus.success]);
 
   //waitingの時元に戻す
   useEffect(() => {
@@ -107,12 +94,7 @@ const Product = ({
           />
         </View>
       </Animated.View>
-      <Animated.View style={[styles.light, { opacity: lightOpacity }]}>
-        <Image
-          source={require("../../assets/product/productLightPlate.png")}
-          style={{ width: 200, height: 519 }}
-        />
-      </Animated.View>
+      <Light playState={playState} jobType={jobType}/>
     </>
   );
 };

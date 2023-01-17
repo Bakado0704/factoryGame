@@ -13,6 +13,7 @@ export interface Props {
 const ImageBg = ({ children }: Props) => {
   //useSelectorの宣言
   const job = useSelector((state: RootState) => state.job.job);
+  const user = useSelector((state: RootState) => state.job.user);
   const activeType = useSelector((state: RootState) => state.job.job.icon);
   const playState = useSelector((state: RootState) => state.job.play);
   const nextProduct = useSelector((state: RootState) => state.job.nextProduct);
@@ -20,6 +21,7 @@ const ImageBg = ({ children }: Props) => {
   const selectedPlayPattern = useSelector(
     (state: RootState) => state.job.activePlayPattern
   );
+  const jobType = user.nowJob;
   const activeProductLength = job.product.default.length;
   const activeProductWidth = job.product.style.width;
   const activeProductHeight = job.product.style.height;
@@ -55,6 +57,7 @@ const ImageBg = ({ children }: Props) => {
         width={width}
         NEXTPRODUCT={NEXTPRODUCT}
         CENTERPRODUCT={CENTERPRODUCT}
+        jobType={jobType}
       />
       {children}
     </BackgroundImg>

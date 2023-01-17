@@ -96,7 +96,7 @@ const initialState: state = {
           { before: require("../assets/product/product2-gold-second.png") },
           { before: require("../assets/product/product2-gold-third.png") },
         ],
-        style: { width: 260, height: 180 },
+        style: { width: 270, height: 180 },
       },
       {
         name: "新盛 晋(50)",
@@ -316,7 +316,7 @@ const initialState: state = {
           { before: require("../assets/product/product7-gold-second.png") },
           { before: require("../assets/product/product7-gold-third.png") },
         ],
-        style: { width: 232, height: 80 },
+        style: { width: 252, height: 80 },
       },
       {
         name: "黒口 隆(51)",
@@ -361,7 +361,7 @@ const initialState: state = {
           { before: require("../assets/product/product8-gold-third.png") },
           { before: require("../assets/product/product8-gold-fourth.png") },
         ],
-        style: { width: 120, height: 207 },
+        style: { width: 120, height: 222 },
       },
       {
         name: "山下 五郎(55)",
@@ -404,7 +404,7 @@ const initialState: state = {
           { before: require("../assets/product/product9-gold-second.png") },
           { before: require("../assets/product/product9-gold-third.png") },
         ],
-        style: { width: 300, height: 130 },
+        style: { width: 300, height: 145 },
       },
       {
         name: "小篠 隆生(65)",
@@ -451,7 +451,7 @@ const initialState: state = {
           { before: require("../assets/product/product10-gold-second.png") },
           { before: require("../assets/product/product10-gold-third.png") },
         ],
-        style: { width: 280, height: 90 },
+        style: { width: 280, height: 105 },
       },
       {
         name: "鴨林 勇太(43)",
