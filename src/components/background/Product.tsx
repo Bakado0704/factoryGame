@@ -39,7 +39,7 @@ const Product = ({
   let TargetAnim = useRef(new Animated.Value(0)).current;
 
   const targeTranslateX = TargetAnim.interpolate({
-    inputRange: [0, 80, 200],
+    inputRange: [0, 120, 200],
     outputRange: [0, 0, width],
   });
 

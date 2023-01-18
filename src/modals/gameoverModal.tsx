@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   },
   moneyBigImg: {
     width: 50,
-    height: 50,
+    height: 0,
     marginLeft: 8,
     marginRight: 4,
   },
