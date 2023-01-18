@@ -22,7 +22,7 @@ const Explosion = ({ playState }: Props) => {
         }
       };
 
-      counterData = setInterval(countUp, 20);
+      counterData = setInterval(countUp, 30);
     }
   }, [playState.judge === judgeStatus.failure]);
 
@@ -61,7 +61,7 @@ const Explosion = ({ playState }: Props) => {
 
   return (
     <>
-      {playState.judge === judgeStatus.failure  && <Image source={explosionImages[number]} style={styles.explosion} />}
+      {number !== 0  && <Image source={explosionImages[number]} style={styles.explosion} />}
     </>
   );
 };
