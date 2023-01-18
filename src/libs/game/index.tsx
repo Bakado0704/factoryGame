@@ -7,6 +7,7 @@ import PlayGap from "../../models/playgap";
 import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
 import NowMoney from "../../components/money/NowMoney";
 import { JobType } from "../../types/job";
+import Coin from "../../components/animation/Coin";
 
 type Props = {
   type: JobType;
@@ -94,7 +95,8 @@ const Game = ({
   return (
     <>
       <View style={styles.rootContainer}>
-      <NowMoney nowMoney={nowMoney} perMoney={perMoney}/>
+        <NowMoney nowMoney={nowMoney} perMoney={perMoney} />
+        <Coin playState={playState}/>
         <Counts
           playpattern={playpattern}
           playgap={playgap}
@@ -127,24 +129,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  innerContainer: {
-    flex: 1,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  moneyContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    transform: [{ translateY: -120 }],
-  },
-  moneyImg: {
-    width: 70,
-    height: 70,
-  },
-  moneyText: {
-    fontSize: 60,
-    fontFamily: "MochiyPop",
-    color: "black",
-  },
+
 });

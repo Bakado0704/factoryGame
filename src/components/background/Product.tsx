@@ -6,7 +6,7 @@ import {
   ImageSourcePropType,
 } from "react-native";
 import React, { useEffect, useRef } from "react";
-import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
+import { judgeStatus, Play, PlayPattern } from "../../types/play";
 import ConveyorLine from "./ConveyorLine";
 import Light from "./Light";
 import { JobType } from "../../types/job";
@@ -55,6 +55,11 @@ const Product = ({
     outputRange: [0, -6, 4, -4, 4, -6, -2, 0, 0],
   });
 
+  const successTranslateY = TargetAnim.interpolate({
+    inputRange: [0, 10, 20, 30,  200],
+    outputRange: [0, 5, -5, 0, 0],
+  });
+
   let NEXTPRODUCT = nextProduct[0].before;
   let CENTERPRODUCT = centerProduct[productNumber].before;
   let FAILUREPRODUCT = failureProduct[0].before;
@@ -100,7 +105,14 @@ const Product = ({
 
   //中央の画像
   var centerImage = (
-    <View style={[styles.ImageContainer]}>
+    <Animated.View
+      style={[
+        styles.ImageContainer,
+        {
+          transform: [{ translateY: successTranslateY }],
+        },
+      ]}
+    >
       <Image
         source={CENTERPRODUCT}
         style={{
@@ -108,7 +120,7 @@ const Product = ({
           height: activeProductHeight,
         }}
       />
-    </View>
+    </Animated.View>
   );
 
   if (playState.judge === judgeStatus.failure) {
@@ -116,7 +128,12 @@ const Product = ({
       <Animated.View
         style={[
           styles.ImageContainer,
-          { transform: [{ translateX: shakeTranslateX }, {translateY: shakeTranslateY}] },
+          {
+            transform: [
+              { translateX: shakeTranslateX },
+              { translateY: shakeTranslateY },
+            ],
+          },
         ]}
       >
         <Image

@@ -11,7 +11,6 @@ const NowMoney = ({ nowMoney, perMoney }: Props) => {
     <View style={styles.innerContainer}>
       <View style={styles.moneyContainer}>
         <Count
-          style={styles.moneyText}
           targetNum={nowMoney}
           diffNum={perMoney}
         />
@@ -37,11 +36,5 @@ const styles = StyleSheet.create({
   moneyImg: {
     width: 50,
     height: 50,
-  },
-  moneyText: {
-    fontSize: 50,
-    fontFamily: "MochiyPop",
-    color: "black",
-    marginLeft: 8,
   },
 });
