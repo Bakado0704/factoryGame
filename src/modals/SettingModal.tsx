@@ -52,7 +52,7 @@ const Setting = ({ drink, drinkCost, offSetting, perMoney, userDrinkHandler }: P
       <BgBlack />
       <View style={styles.rootScreen}>
         <View style={[styles.innerContainer, {backgroundColor: Colors.modalMainColor, borderColor: Colors.modalEdgeColor}]}>
-          <Title title="ドリンクの購入" margintop={-40} />
+          <Title title="集中力増強ドリンク" margintop={-40} />
           <NavDrink drink={drink} userDrinkHandler={userDrinkHandler}/>
           {attention}
           <View style={styles.CostContainer}>

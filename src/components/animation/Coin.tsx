@@ -109,7 +109,7 @@ export default Coin;
 const styles = StyleSheet.create({
   coinContainer: {
     position: "absolute",
-    bottom: 270,
+    bottom: 280,
     justifyContent: "center",
     alignItems: "center",
   },

@@ -22,9 +22,11 @@ const JobRedux = createSlice({
       if (state.user.productType === "bonus") {
         state.nextProduct = action.payload.product.bonus;
         state.centerProduct = action.payload.product.bonus;
+        state.failureProduct = action.payload.product.bonusFailure;
       } else {
         state.nextProduct = action.payload.product.default;
         state.centerProduct = action.payload.product.default;
+        state.failureProduct = action.payload.product.defaultFailure;
       }
 
       //このタイミングでprevJobとnextJobを更新させる

@@ -97,13 +97,13 @@ const JobGet = ({ offModal, job }: Props) => {
         {!isActive && (
           <View style={styles.titleContainer}>
             <Text style={styles.youdead}>新しい勤務先をアンロックしました</Text>
-            <Text style={styles.gameover}>You got a new work place!</Text>
+            <Text style={styles.gameover}>You've got a new work place!</Text>
           </View>
         )}
         {isActive && (
           <View style={styles.titleContainer}>
             <Text style={styles.youdead}>熟練度が上がりました</Text>
-            <Text style={styles.gameover}>You got a new skill!</Text>
+            <Text style={styles.gameover}>You've got a new skill!</Text>
           </View>
         )}
         <View style={[styles.innerContainer, {backgroundColor: mainColor, borderColor: borderColor}]}>
@@ -128,7 +128,7 @@ const JobGet = ({ offModal, job }: Props) => {
                 />
               )}
               {isActive && (
-                <ShadowText size={18} color="red">
+                <ShadowText size={18} color={Colors.textYellowColor}>
                   {" "}
                   Lv{level}
                 </ShadowText>
@@ -161,7 +161,7 @@ const JobGet = ({ offModal, job }: Props) => {
                 />
               )}
               {isActive && (
-                <ShadowText size={20} color="red">
+                <ShadowText size={20} color={Colors.textYellowColor}>
                   {perMoney}
                 </ShadowText>
               )}
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   youdead: {
-    fontSize: 20,
+    fontSize: 22,
     color: "white",
     fontFamily: "MochiyPop",
   },
