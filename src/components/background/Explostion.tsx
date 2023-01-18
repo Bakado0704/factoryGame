@@ -1,5 +1,5 @@
-import { StyleSheet, Animated, Image } from "react-native";
-import React, { useRef, useEffect, useState } from "react";
+import { StyleSheet, Image } from "react-native";
+import React, { useEffect, useState } from "react";
 import { judgeStatus, Play } from "../../types/play";
 export type Props = {
   playState: Play;
@@ -16,17 +16,18 @@ const Explosion = ({ playState }: Props) => {
       const countUp = () => {
         countNum = countNum + 1;
         setNumber(countNum);
-        if (countNum >= 29) {
+        if (countNum >= 30) {
           setNumber(0);
           clearInterval(counterData);
         }
       };
 
-      counterData = setInterval(countUp, 40);
+      counterData = setInterval(countUp, 20);
     }
   }, [playState.judge === judgeStatus.failure]);
 
   const explosionImages = [
+    require("../../assets/explosion/explosion0.png"),
     require("../../assets/explosion/explosion1.png"),
     require("../../assets/explosion/explosion2.png"),
     require("../../assets/explosion/explosion3.png"),
@@ -60,7 +61,7 @@ const Explosion = ({ playState }: Props) => {
 
   return (
     <>
-      {number !== 0  && <Image source={explosionImages[number]} style={styles.explosion} />}
+      {playState.judge === judgeStatus.failure  && <Image source={explosionImages[number]} style={styles.explosion} />}
     </>
   );
 };
