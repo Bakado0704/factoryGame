@@ -16,9 +16,15 @@ const ImageBg = ({ children }: Props) => {
   const user = useSelector((state: RootState) => state.job.user);
   const playState = useSelector((state: RootState) => state.job.play);
   const nextProduct = useSelector((state: RootState) => state.job.nextProduct);
-  const centerProduct = useSelector((state: RootState) => state.job.centerProduct);
-  const failureProduct = useSelector((state: RootState) => state.job.failureProduct);
-  const selectedPlayPattern = useSelector((state: RootState) => state.job.activePlayPattern);
+  const centerProduct = useSelector(
+    (state: RootState) => state.job.centerProduct
+  );
+  const failureProduct = useSelector(
+    (state: RootState) => state.job.failureProduct
+  );
+  const selectedPlayPattern = useSelector(
+    (state: RootState) => state.job.activePlayPattern
+  );
 
   const activeType = job.icon;
   const jobType = user.nowJob;
@@ -41,10 +47,6 @@ const ImageBg = ({ children }: Props) => {
     ((activeProductLength - 1) * proccessCount) / allDistance.length
   );
 
-  let NEXTPRODUCT = nextProduct[0].before;
-  let CENTERPRODUCT = centerProduct[productNumber].before;
-  let FAILUREPRODUCT = failureProduct[0].before
-
   return (
     <BackgroundImg type={activeType}>
       <Conveyor type={activeType} />
@@ -56,9 +58,10 @@ const ImageBg = ({ children }: Props) => {
         activeProductWidth={activeProductWidth}
         activeProductHeight={activeProductHeight}
         width={width}
-        NEXTPRODUCT={NEXTPRODUCT}
-        CENTERPRODUCT={CENTERPRODUCT}
-        FAILUREPRODUCT={FAILUREPRODUCT}
+        productNumber={productNumber}
+        nextProduct={nextProduct}
+        centerProduct={centerProduct}
+        failureProduct={failureProduct}
         jobType={jobType}
       />
       {children}
