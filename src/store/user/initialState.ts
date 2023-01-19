@@ -41,7 +41,6 @@ const initialState: state = {
     money: 1000,
     icon: UserIconType.man1,
     nowJob: JobType.yamagawa,
-    gachaStandBy: false,
     prevProductType: productType.default,
     nextProductType: productType.default,
     page: "start",

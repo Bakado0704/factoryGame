@@ -19,15 +19,17 @@ import {
   changeNextProduct,
   changeNowMoney,
   changeProcessCount,
-  changeProductType,
+  changeNextProductType,
   changeStatus,
   resetCompletecount,
   staminaDecrese,
   userMoneyIncrease,
+  changePrevProductType,
 } from "../store/job";
 import { judgeStatus, PlayPattern, PlayStatus } from "../types/play";
 import { Job } from "../types/job";
 import { RootState } from "../store/store";
+import { productType } from "../types/product";
 
 const GameScreen = () => {
   const dispatch = useDispatch();
@@ -46,16 +48,19 @@ const GameScreen = () => {
   const nowMoney = playState.money;
   const combo = playState.combo;
   const completeCount = playState.completeCount;
-  const drink = user.drink;
   const maxMoney = Job.maxMoney;
   const perMoney = Job.outline.basicMoney;
   const jobName = Job.name;
   const name = Job.owner.name;
   const iconType = Job.icon;
-  const productType = user.prevProductType;
+  const bonusProduct = Job.product.bonus;
+  const defaultProduct = Job.product.default;
+  const prevProductType = user.prevProductType;
+  const nextProductType = user.nextProductType;
+  const drink = user.drink;
 
   let bonus = 1.0;
-  if (productType === "bonus") {
+  if (prevProductType === "bonus") {
     bonus = 2.0;
   }
 
@@ -96,13 +101,28 @@ const GameScreen = () => {
     dispatch(changeCompletecount(number));
   };
   const changeProductTypeHandler = () => {
-    dispatch(changeProductType());
+    let r = Math.random() * 10;
+    if (r > 7) {
+      dispatch(changeNextProductType(productType.bonus));
+    } else {
+      dispatch(changeNextProductType(productType.default));
+    }
   };
   const changeNextProductHandler = () => {
-    dispatch(changeNextProduct());
+    if (nextProductType === "bonus") {
+      dispatch(changeNextProduct(bonusProduct));
+    } else {
+      dispatch(changeNextProduct(defaultProduct));
+    }
   };
   const changeCenterProductHandler = () => {
-    dispatch(changeCenterProduct());
+    if (nextProductType === "bonus") {
+      dispatch(changeCenterProduct(bonusProduct));
+      dispatch(changePrevProductType(productType.bonus));
+    } else {
+      dispatch(changeCenterProduct(defaultProduct));
+      dispatch(changePrevProductType(productType.default));
+    }
   };
 
   //スタミナが0になるとゲームオーバー
@@ -147,7 +167,7 @@ const GameScreen = () => {
         combo={combo}
         nowMoney={nowMoney}
         plusMoney={plusMoney}
-        productType={productType}
+        productType={prevProductType}
         judgeHandler={judgeHandler}
         stateHandler={stateHandler}
         damageHandler={damageHandler}

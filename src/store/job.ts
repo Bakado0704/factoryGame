@@ -10,6 +10,7 @@ import { page } from "../types/page";
 import { GachaStatus } from "../types/gacha";
 import { JobType } from "../types/job";
 import { Mute } from "../types/user";
+import { ImageSourcePropType } from "react-native";
 
 const JobRedux = createSlice({
   name: "JobRedux",
@@ -92,14 +93,14 @@ const JobRedux = createSlice({
       }
     },
     changeCompletecount: (state, action: PayloadAction<number>) => {
-      state.play.completeCount = state.play.completeCount + action.payload
+      state.play.completeCount = state.play.completeCount + action.payload;
     },
     resetCompletecount: (state) => {
-      state.play.completeCount = 0
+      state.play.completeCount = 0;
     },
     changeNowMoney: (state, action: PayloadAction<number>) => {
       if (action.payload !== 0) {
-         state.play.money = state.play.money + action.payload;
+        state.play.money = state.play.money + action.payload;
       } else {
         state.play.money = 0;
       }
@@ -112,31 +113,17 @@ const JobRedux = createSlice({
         state.job.maxMoney = state.play.money;
       }
     },
-    changeProductType: (state) => {
-      let r = Math.random() * 10;
-      if (r > 7) {
-        state.user.nextProductType = productType.bonus;
-      } else {
-        state.user.nextProductType = productType.default;
-      }
+    changeNextProductType: (state, action: PayloadAction<productType>) => {
+      state.user.nextProductType = action.payload;
     },
-    changeNextProduct: (state) => {
-      if (state.user.nextProductType === "bonus") {
-        state.nextProduct = state.job.product.bonus;
-      } else {
-        state.nextProduct = state.job.product.default;
-      }
+    changePrevProductType: (state, action: PayloadAction<productType>) => {
+      state.user.prevProductType = action.payload;
     },
-    changeCenterProduct: (state) => {
-      if (state.user.nextProductType === "bonus") {
-        state.centerProduct = state.job.product.bonus;
-        state.failureProduct = state.job.product.bonusFailure;
-        state.user.prevProductType = state.user.nextProductType;
-      } else {
-        state.centerProduct = state.job.product.default;
-        state.failureProduct = state.job.product.defaultFailure;
-        state.user.prevProductType = state.user.nextProductType;
-      }
+    changeNextProduct: (state, action: PayloadAction<{before: ImageSourcePropType}[]>) => {
+      state.nextProduct = action.payload;
+    },
+    changeCenterProduct: (state, action: PayloadAction<{before: ImageSourcePropType}[]>) => {
+      state.centerProduct = action.payload;
     },
     changeUserNowJob: (state, action: PayloadAction<JobType>) => {
       state.user.nowJob = action.payload;
@@ -196,7 +183,8 @@ export const changeCombo = JobRedux.actions.changeCombo;
 export const changeCompletecount = JobRedux.actions.changeCompletecount;
 export const resetCompletecount = JobRedux.actions.resetCompletecount;
 export const changeJobRecord = JobRedux.actions.changeJobRecord;
-export const changeProductType = JobRedux.actions.changeProductType;
+export const changeNextProductType = JobRedux.actions.changeNextProductType;
+export const changePrevProductType = JobRedux.actions.changePrevProductType;
 export const changeNextProduct = JobRedux.actions.changeNextProduct;
 export const changeCenterProduct = JobRedux.actions.changeCenterProduct;
 export const changeGachaStatus = JobRedux.actions.changeGachaStatus;
