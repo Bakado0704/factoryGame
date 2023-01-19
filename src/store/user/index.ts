@@ -20,9 +20,9 @@ const UserRedux = createSlice({
     changeProductType: (state) => {
       let r = Math.random() * 10;
       if (r > 7) {
-        state.user.productType = productType.bonus;
+        state.user.prevProductType = productType.bonus;
       } else {
-        state.user.productType = productType.default;
+        state.user.prevProductType = productType.default;
       }
     },
 

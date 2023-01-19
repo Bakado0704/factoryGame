@@ -6,12 +6,14 @@ import JobGet from "../modals/JobGetModal";
 import UserModal from "../modals/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeGachaCost,
   changeGachaStatus,
   changeMute,
   changePreviewIcon,
   changeUpdateJob,
   changeUser,
   changeUsername,
+  userMoneyIncrease,
   userPage,
 } from "../store/job";
 import UserIcons from "../models/userIcons";
@@ -37,19 +39,35 @@ function GachaScreen() {
   const userMoney = user.money;
   const userName = user.name;
   const userId = user.id;
+  const gachaCost = user.gachaCost;
   const mute = user.mute;
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   const dispatch = useDispatch();
 
   const [userModal, setUserModal] = useState(false);
 
+  let gachaPlusMoney = 300;
+  if (gachaCost >= 800) {
+    gachaPlusMoney = 500;
+  } else if (gachaCost >= 2500) {
+    gachaPlusMoney = 650;
+  } else if (gachaCost >= 5000) {
+    gachaPlusMoney = 800;
+  } else if (gachaCost >= 7500) {
+    gachaPlusMoney = 1000;
+  }
+
   const offModalHandler = () => {
     dispatch(changeGachaStatus(GachaStatus.stop));
     dispatch(changeUpdateJob(randomJob));
+    dispatch(changeGachaCost(gachaPlusMoney));
   };
 
   const modalSettingHandler = () => {
-    dispatch(changeGachaStatus(GachaStatus.closed));
+    if (userMoney > gachaCost) {
+      dispatch(changeGachaStatus(GachaStatus.closed));
+      dispatch(userMoneyIncrease(-gachaCost));
+    }
   };
 
   const envelopeOpenHandler = () => {
@@ -138,7 +156,11 @@ function GachaScreen() {
             gachaMove={gachaMove}
             user={user}
           />
-          <NavGacha onModal={modalSettingHandler} startMove={startMove} />
+          <NavGacha
+            onModal={modalSettingHandler}
+            startMove={startMove}
+            gachaCost={gachaCost}
+          />
           <ZimuPerson />
         </View>
         {envelope}

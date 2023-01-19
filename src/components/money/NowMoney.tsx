@@ -3,16 +3,16 @@ import Count from "../animation/Count";
 
 type Props = {
   nowMoney: number;
-  perMoney: number;
+  plusMoney: number;
 };
 
-const NowMoney = ({ nowMoney, perMoney }: Props) => {
+const NowMoney = ({ nowMoney, plusMoney }: Props) => {
   return (
     <View style={styles.innerContainer}>
       <View style={styles.moneyContainer}>
         <Count
           targetNum={nowMoney}
-          diffNum={perMoney}
+          diffNum={plusMoney}
         />
       </View>
     </View>

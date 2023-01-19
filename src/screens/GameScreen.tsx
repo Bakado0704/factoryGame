@@ -1,6 +1,10 @@
 import { View, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
-import { useNavigation, NavigationProp, ParamListBase } from "@react-navigation/native";
+import {
+  useNavigation,
+  NavigationProp,
+  ParamListBase,
+} from "@react-navigation/native";
 import Gameover from "../modals/GameoverModal";
 import BgBlack from "../components/background/BgBlack";
 import Game from "../libs/game";
@@ -35,7 +39,9 @@ const GameScreen = () => {
   //現在のuser
   const user = useSelector((state: RootState) => state.job.user);
   //changeJobRecordに渡すための現在のJob
-  const nowJob = useSelector((state: RootState) => state.job.jobs).find((job: Job) => job.id === Job.id);
+  const nowJob = useSelector((state: RootState) => state.job.jobs).find(
+    (job: Job) => job.id === Job.id
+  );
 
   const nowMoney = playState.money;
   const combo = playState.combo;
@@ -46,6 +52,23 @@ const GameScreen = () => {
   const jobName = Job.name;
   const name = Job.owner.name;
   const iconType = Job.icon;
+  const productType = user.prevProductType;
+
+  let bonus = 1.0;
+  if (productType === "bonus") {
+    bonus = 2.0;
+  }
+
+  let plusMoney = Math.floor(perMoney) * bonus * (1 + drink * 0.2);
+  if (combo <= 2) {
+    plusMoney = Math.floor(perMoney) * bonus * (1 + drink * 0.2);
+  } else if (combo <= 4) {
+    plusMoney = Math.floor(perMoney * 1.2) * bonus * (1 + drink * 0.2);
+  } else if (combo <= 6) {
+    plusMoney = Math.floor(perMoney * 1.6) * bonus * (1 + drink * 0.2);
+  } else {
+    plusMoney = Math.floor(perMoney * 2.0) * bonus * (1 + drink * 0.2);
+  }
 
   //dispatch関数の宣言
   const judgeHandler = (judge: judgeStatus) => {
@@ -64,7 +87,7 @@ const GameScreen = () => {
     dispatch(changeActivePattern(pattern));
   };
   const changeNowMoneyHandler = (number: number) => {
-    dispatch(changeNowMoney(number))
+    dispatch(changeNowMoney(number));
   };
   const changeComboHandler = (number: number) => {
     dispatch(changeCombo(number));
@@ -111,7 +134,7 @@ const GameScreen = () => {
     "気を失ってしまった...",
   ];
 
-  const messageNumber = Math.floor((Math.random())* youdeadMessage.length)
+  const messageNumber = Math.floor(Math.random() * youdeadMessage.length);
 
   //statusがplayingの場合Gameを出す
   let game;
@@ -123,7 +146,8 @@ const GameScreen = () => {
         drink={drink}
         combo={combo}
         nowMoney={nowMoney}
-        perMoney={perMoney}
+        plusMoney={plusMoney}
+        productType={productType}
         judgeHandler={judgeHandler}
         stateHandler={stateHandler}
         damageHandler={damageHandler}

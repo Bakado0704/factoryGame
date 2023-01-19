@@ -16,7 +16,7 @@ const JobsRedux = createSlice({
       state.job = action.payload;
       dispatch(changeUserNowJob(action.payload.name));
 
-      if (userInitialState.user.productType === "bonus") {
+      if (userInitialState.user.nextProductType === "bonus") {
         state.nextProduct = action.payload.product.bonus;
         state.centerProduct = action.payload.product.bonus;
       } else {
@@ -60,8 +60,8 @@ const JobsRedux = createSlice({
     changeUpdateJob: (state, action: PayloadAction<Job>) => {
       //もしすでにそのJOBをアンロックしていたら
       if (state.jobs[state.jobs.indexOf(action.payload)].isActive === true) {
-        state.jobs[state.jobs.indexOf(action.payload)].perMoney =
-          action.payload.perMoney + 1;
+        state.jobs[state.jobs.indexOf(action.payload)].perMoney[0] =
+          action.payload.perMoney[0] + 1;
         state.jobs[state.jobs.indexOf(action.payload)].outline.basicMoney =
           action.payload.outline.basicMoney;
         state.jobs[state.jobs.indexOf(action.payload)].level =
@@ -81,14 +81,14 @@ const JobsRedux = createSlice({
       }
     },
     changeNextProduct: (state) => {
-      if (userInitialState.user.productType === "bonus") {
+      if (userInitialState.user.nextProductType === "bonus") {
         state.nextProduct = state.job.product.bonus;
       } else {
         state.nextProduct = state.job.product.default;
       }
     },
     changeCenterProduct: (state) => {
-      if (userInitialState.user.productType === "bonus") {
+      if (userInitialState.user.nextProductType === "bonus") {
         state.centerProduct = state.job.product.bonus;
       } else {
         state.centerProduct = state.job.product.default;

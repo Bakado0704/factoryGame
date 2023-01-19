@@ -65,7 +65,7 @@ const Coin = ({ playState, delay, combo, allowCombo }: Props) => {
       ]).start();
       setTimeout(() => {
         CoinAnim.setValue(0);
-      }, 600+delay);
+      }, 600 + delay);
     }
   }, [playState.judge === judgeStatus.success]);
 

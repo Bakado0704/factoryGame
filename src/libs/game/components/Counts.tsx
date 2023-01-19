@@ -10,7 +10,7 @@ type Props = {
   playgap: PlayGap;
   playState: Play;
   drink: number;
-  perMoney: number;
+  plusMoney: number;
   judgeHandler: (judge: judgeStatus) => void;
   stateHandler: (state: PlayStatus) => void;
   damageHandler: (number: number) => void;
@@ -29,7 +29,7 @@ const Counts = ({
   playgap,
   playState,
   drink,
-  perMoney,
+  plusMoney,
   judgeHandler,
   stateHandler,
   damageHandler,
@@ -103,7 +103,7 @@ const Counts = ({
       allGaps.every((value) => value <= playgap.frontGap)
     ) {
       judgeHandler(judgeStatus.success);
-      changeNowMoneyHandler(perMoney);
+      changeNowMoneyHandler(plusMoney);
       changeProductTypeHandler(),
       changeNextProductHandler(),
       changeComboHandler(1);

@@ -19,7 +19,7 @@ const JobRedux = createSlice({
       state.job = action.payload;
       state.user.nowJob = action.payload.name;
 
-      if (state.user.productType === "bonus") {
+      if (state.user.nextProductType === "bonus") {
         state.nextProduct = action.payload.product.bonus;
         state.centerProduct = action.payload.product.bonus;
         state.failureProduct = action.payload.product.bonusFailure;
@@ -98,23 +98,8 @@ const JobRedux = createSlice({
       state.play.completeCount = 0
     },
     changeNowMoney: (state, action: PayloadAction<number>) => {
-      let bonus = 1.0;
-      if (state.user.productType === "bonus") {
-        bonus = 2.0;
-      }
       if (action.payload !== 0) {
-        let plusMoney = Math.floor(action.payload) * bonus * (1 + state.user.drink * 0.2);
-        if (state.play.combo <= 2) {
-          plusMoney = Math.floor(action.payload) * bonus * (1 + state.user.drink * 0.2);
-        } else if (state.play.combo <= 4) {
-          plusMoney = Math.floor(action.payload * 1.2) * bonus * (1 + state.user.drink * 0.2);
-        } else if (state.play.combo <= 6) {
-          plusMoney = Math.floor(action.payload * 1.6) * bonus * (1 + state.user.drink * 0.2);
-        } else {
-          plusMoney = Math.floor(action.payload * 2.0) * bonus * (1 + state.user.drink * 0.2);
-        }
-
-        state.play.money = state.play.money + plusMoney;
+         state.play.money = state.play.money + action.payload;
       } else {
         state.play.money = 0;
       }
@@ -130,25 +115,27 @@ const JobRedux = createSlice({
     changeProductType: (state) => {
       let r = Math.random() * 10;
       if (r > 7) {
-        state.user.productType = productType.bonus;
+        state.user.nextProductType = productType.bonus;
       } else {
-        state.user.productType = productType.default;
+        state.user.nextProductType = productType.default;
       }
     },
     changeNextProduct: (state) => {
-      if (state.user.productType === "bonus") {
+      if (state.user.nextProductType === "bonus") {
         state.nextProduct = state.job.product.bonus;
       } else {
         state.nextProduct = state.job.product.default;
       }
     },
     changeCenterProduct: (state) => {
-      if (state.user.productType === "bonus") {
+      if (state.user.nextProductType === "bonus") {
         state.centerProduct = state.job.product.bonus;
         state.failureProduct = state.job.product.bonusFailure;
+        state.user.prevProductType = state.user.nextProductType;
       } else {
         state.centerProduct = state.job.product.default;
         state.failureProduct = state.job.product.defaultFailure;
+        state.user.prevProductType = state.user.nextProductType;
       }
     },
     changeUserNowJob: (state, action: PayloadAction<JobType>) => {
@@ -192,6 +179,9 @@ const JobRedux = createSlice({
     changeActivePattern: (state, action: PayloadAction<playpattern[]>) => {
       state.activePlayPattern = action.payload;
     },
+    changeGachaCost: (state, action: PayloadAction<number>) => {
+      state.user.gachaCost = state.user.gachaCost + action.payload;
+    },
   },
 });
 
@@ -222,4 +212,5 @@ export const changeMute = JobRedux.actions.changeMute;
 export const changeJudge = JobRedux.actions.changeJudge;
 export const changeProcessCount = JobRedux.actions.changeProcessCount;
 export const changeActivePattern = JobRedux.actions.changeActivePattern;
+export const changeGachaCost = JobRedux.actions.changeGachaCost;
 export default JobRedux.reducer;

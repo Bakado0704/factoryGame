@@ -11,7 +11,8 @@ export interface User {
   icon: UserIconType;
   nowJob: JobType;
   gachaStandBy: boolean;
-  productType: productType;
+  prevProductType: productType;
+  nextProductType: productType;
   page: page;
   gachaStatus: GachaStatus;
   gachaCost: number;

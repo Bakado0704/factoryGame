@@ -7,15 +7,17 @@ import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
 import NowMoney from "../../components/money/NowMoney";
 import { JobType } from "../../types/job";
 import Coins from "../../components/animation/Coins";
-import PerMoney from "../../components/animation/Permoney";
+import PlusMoney from "../../components/animation/PlusMoney";
+import { productType } from "../../types/product";
 
 type Props = {
   type: JobType;
   playState: Play;
   combo: number;
   drink: number;
-  perMoney: number;
+  plusMoney: number;
   nowMoney: number;
+  productType: productType;
   judgeHandler: (judge: judgeStatus) => void;
   stateHandler: (state: PlayStatus) => void;
   damageHandler: (number: number) => void;
@@ -34,7 +36,8 @@ const Game = ({
   playState,
   drink,
   combo,
-  perMoney,
+  productType,
+  plusMoney,
   nowMoney,
   judgeHandler,
   stateHandler,
@@ -97,9 +100,9 @@ const Game = ({
   return (
     <>
       <View style={styles.rootContainer}>
-        <NowMoney nowMoney={nowMoney} perMoney={perMoney} />
+        <NowMoney nowMoney={nowMoney} plusMoney={plusMoney} />
         <Coins playState={playState} combo={combo} />
-        <PerMoney playState={playState} perMoney={perMoney} />
+        <PlusMoney playState={playState} plusMoney={plusMoney} productType={productType} />
         <Counts
           playpattern={playpattern}
           playgap={playgap}
@@ -113,7 +116,7 @@ const Game = ({
           changeNowMoneyHandler={changeNowMoneyHandler}
           processCountHandler={processCountHandler}
           selectedPatternHandler={selectedPatternHandler}
-          perMoney={perMoney}
+          plusMoney={plusMoney}
           changeProductTypeHandler={changeProductTypeHandler}
           changeNextProductHandler={changeNextProductHandler}
           changeCenterProductHandler={changeCenterProductHandler}

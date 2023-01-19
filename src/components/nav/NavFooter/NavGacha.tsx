@@ -1,13 +1,13 @@
-import { View, StyleSheet } from "react-native";
-import { page } from "../../../types/page";
+import { View, StyleSheet, Pressable, Image, Text } from "react-native";
 import ImageButton from "../../button/ImageButton";
 
 type Props = {
   onModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
   startMove: () => void;
+  gachaCost: number;
 };
 
-const NavGacha = ({ onModal, startMove }: Props) => {
+const NavGacha = ({ onModal, startMove, gachaCost }: Props) => {
   const homeHandler = () => {
     startMove();
   };
@@ -19,11 +19,26 @@ const NavGacha = ({ onModal, startMove }: Props) => {
         onPress={homeHandler}
         style={styles.homeButton}
       />
-      <ImageButton
-        source={require("../../../assets/ui/submitButton.png")}
-        onPress={onModal}
-        style={styles.submitButton}
-      />
+      <View style={styles.submitButtonContainer}>
+        <Pressable
+          onPress={onModal}
+          style={({ pressed }) => pressed && styles.pressed}
+          android_ripple={{ color: "#ccc" }}
+        >
+          <Image
+            style={styles.submitButton}
+            source={require("../../../assets/ui/submitButton.png")}
+          />
+          <View style={styles.gachaContainer}>
+            <Image
+              style={styles.moneyImg}
+              source={require("../../../assets/ui/money1.png")}
+            />
+            <Text style={styles.gachaCost}>{new Intl.NumberFormat().format(gachaCost)}</Text>
+          </View>
+        </Pressable>
+      </View>
+
       <View style={styles.space}></View>
     </View>
   );
@@ -38,23 +53,48 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     width: "100%",
-    padding: 10,
+    marginBottom: 5,
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    transform: [{ translateX: -8 }],
   },
   homeButton: {
     width: 66,
     height: 67,
   },
-  submitButton: {
+  submitButtonContainer: {
     width: 210,
     height: 99,
     marginHorizontal: 8,
   },
+  gachaContainer: {
+    position: "absolute",
+    width: 210,
+    height: 99,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    transform: [{ translateY: 12 }],
+  },
+  submitButton: {
+    width: 210,
+    height: 99,
+  },
   space: {
     width: 66,
     height: 67,
+  },
+  moneyImg: {
+    width: 35,
+    height: 35,
+    marginRight: 10,
+  },
+  gachaCost: {
+    fontSize: 20,
+    fontFamily: "MochiyPop",
+    color: "white",
+  },
+  pressed: {
+    opacity: 0.75,
   },
 });

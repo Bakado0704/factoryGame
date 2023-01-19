@@ -1,25 +1,33 @@
 import { useRef, useEffect } from "react";
 import { StyleSheet, Animated } from "react-native";
+import Colors from "../../constants/color";
 import { judgeStatus, Play } from "../../types/play";
+import { productType } from "../../types/product";
 import { ShadowText } from "../text/ShadowText";
 
 type Props = {
   playState: Play;
-  perMoney: number;
+  plusMoney: number;
+  productType: productType;
 };
 
-const PerMoney = ({ playState, perMoney }: Props) => {
+const PlusMoney = ({ playState, plusMoney, productType }: Props) => {
   const MoneyAnim = useRef(new Animated.Value(0)).current;
 
   const moneyTranslateY = MoneyAnim.interpolate({
     inputRange: [0, 200],
-    outputRange: [0, -100],
+    outputRange: [0, -20],
   });
 
   const moneyOpacity = MoneyAnim.interpolate({
-    inputRange: [0, 30, 170, 200],
+    inputRange: [0, 20, 180, 200],
     outputRange: [0, 1, 1, 0],
   });
+
+  let textColor = "white";
+  if (productType === "bonus") {
+    textColor = Colors.textYellowColor;
+  }
 
   //successかfailureになったときアニメーション動かす
   useEffect(() => {
@@ -27,13 +35,13 @@ const PerMoney = ({ playState, perMoney }: Props) => {
       Animated.sequence([
         Animated.timing(MoneyAnim, {
           toValue: 200,
-          duration: 600,
+          duration: 800,
           useNativeDriver: false,
         }),
       ]).start();
       setTimeout(() => {
         MoneyAnim.setValue(0);
-      }, 600);
+      }, 800);
     }
   }, [playState.judge === judgeStatus.success]);
 
@@ -45,19 +53,19 @@ const PerMoney = ({ playState, perMoney }: Props) => {
         { opacity: moneyOpacity },
       ]}
     >
-      <ShadowText color="white" size={24}>
-        +{perMoney}
+      <ShadowText color={textColor} size={20}>
+        +{plusMoney}
       </ShadowText>
     </Animated.View>
   );
 };
 
-export default PerMoney;
+export default PlusMoney;
 
 const styles = StyleSheet.create({
   moneyContainer: {
     position: "absolute",
-    bottom: 350,
+    bottom: 400,
     justifyContent: "center",
     alignItems: "center",
   },
