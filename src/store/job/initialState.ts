@@ -1,7 +1,6 @@
 import Job from "../../models/job";
 import Outline from "../../models/outline";
 import { JobType } from "../../types/job";
-import { ImageSourcePropType } from "react-native";
 
 export type state = {
   jobs: Job[];
@@ -9,8 +8,6 @@ export type state = {
   nextJob: Job;
   prevJob: Job;
   previewJob?: Job;
-  nextProduct: { before: ImageSourcePropType }[];
-  centerProduct: { before: ImageSourcePropType }[];
 };
 
 const initialState: state = {
@@ -23,21 +20,27 @@ const initialState: state = {
       1,
       0,
       0,
-      15,
+      [15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
       JobType.yamagawa,
       JobType.yamagawa,
       {
         default: [
-          { before: require("../../assets/product/product1-normal-first.png") },
+          { before: require("../assets/product/product1-normal-first.png") },
           {
-            before: require("../../assets/product/product1-normal-second.png"),
+            before: require("../assets/product/product1-normal-second.png"),
           },
-          { before: require("../../assets/product/product1-normal-third.png") },
+          { before: require("../assets/product/product1-normal-third.png") },
+        ],
+        defaultFailure: [
+          { before: require("../assets/product/product1-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product1-gold-first.png") },
-          { before: require("../../assets/product/product1-gold-second.png") },
-          { before: require("../../assets/product/product1-gold-third.png") },
+          { before: require("../assets/product/product1-gold-first.png") },
+          { before: require("../assets/product/product1-gold-second.png") },
+          { before: require("../assets/product/product1-gold-third.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product1-gold-failure.png") },
         ],
         style: { width: 200, height: 80 },
       },
@@ -54,8 +57,8 @@ const initialState: state = {
         "完全週休一日制",
         "90%",
         "鳥取県",
-        require("../../assets/outline/outlineBgYamagawa.png"),
-        require("../../assets/outline/outlineButtonYamagawa.png")
+        require("../assets/outline/outlineBgYamagawa.png"),
+        require("../assets/outline/outlineButtonYamagawa.png")
       )
     ),
     new Job(
@@ -66,23 +69,29 @@ const initialState: state = {
       1,
       0,
       0,
-      12,
+      [12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
       JobType.souzuki,
       JobType.souzuki,
       {
         default: [
-          { before: require("../../assets/product/product2-normal-first.png") },
+          { before: require("../assets/product/product2-normal-first.png") },
           {
-            before: require("../../assets/product/product2-normal-second.png"),
+            before: require("../assets/product/product2-normal-second.png"),
           },
-          { before: require("../../assets/product/product2-normal-third.png") },
+          { before: require("../assets/product/product2-normal-third.png") },
+        ],
+        defaultFailure: [
+          { before: require("../assets/product/product2-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product2-gold-first.png") },
-          { before: require("../../assets/product/product2-gold-second.png") },
-          { before: require("../../assets/product/product2-gold-third.png") },
+          { before: require("../assets/product/product2-gold-first.png") },
+          { before: require("../assets/product/product2-gold-second.png") },
+          { before: require("../assets/product/product2-gold-third.png") },
         ],
-        style: { width: 260, height: 180 },
+        bonusFailure: [
+          { before: require("../assets/product/product2-gold-failure.png") },
+        ],
+        style: { width: 270, height: 207 },
       },
       {
         name: "新盛 晋(50)",
@@ -97,8 +106,8 @@ const initialState: state = {
         "週休2日制",
         "72%",
         "北海道",
-        require("../../assets/outline/outlineBgNiimori.png"),
-        require("../../assets/outline/outlineButtonNiimori.png")
+        require("../assets/outline/outlineBgNiimori.png"),
+        require("../assets/outline/outlineButtonNiimori.png")
       )
     ),
 
@@ -110,23 +119,29 @@ const initialState: state = {
       1,
       0,
       0,
-      20,
+      [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
       JobType.ashBerry,
       JobType.ashBerry,
       {
         default: [
-          { before: require("../../assets/product/product3-normal-first.png") },
+          { before: require("../assets/product/product3-normal-first.png") },
           {
-            before: require("../../assets/product/product3-normal-second.png"),
+            before: require("../assets/product/product3-normal-second.png"),
           },
-          { before: require("../../assets/product/product3-normal-third.png") },
+          { before: require("../assets/product/product3-normal-third.png") },
+        ],
+        defaultFailure: [
+          { before: require("../assets/product/product3-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product3-gold-first.png") },
-          { before: require("../../assets/product/product3-gold-second.png") },
-          { before: require("../../assets/product/product3-gold-third.png") },
+          { before: require("../assets/product/product3-gold-first.png") },
+          { before: require("../assets/product/product3-gold-second.png") },
+          { before: require("../assets/product/product3-gold-third.png") },
         ],
-        style: { width: 202, height: 77 },
+        bonusFailure: [
+          { before: require("../assets/product/product3-gold-failure.png") },
+        ],
+        style: { width: 202, height: 89 },
       },
       {
         name: "宮古 洋平(56)",
@@ -141,8 +156,8 @@ const initialState: state = {
         "完全週休一日制",
         "51%",
         "東京都",
-        require("../../assets/outline/outlineBgMiyako.png"),
-        require("../../assets/outline/outlineButtonMiyako.png")
+        require("../assets/outline/outlineBgMiyako.png"),
+        require("../assets/outline/outlineButtonMiyako.png")
       )
     ),
     new Job(
@@ -153,27 +168,31 @@ const initialState: state = {
       1,
       0,
       0,
-      18,
+      [18, 19, 20, 21, 22, 23, 24, 25, 26, 27],
       JobType.bentaro,
       JobType.bentaro,
       {
         default: [
-          { before: require("../../assets/product/product4-normal-first.png") },
+          { before: require("../assets/product/product4-normal-first.png") },
           {
-            before: require("../../assets/product/product4-normal-second.png"),
+            before: require("../assets/product/product4-normal-second.png"),
           },
-          { before: require("../../assets/product/product4-normal-third.png") },
-          {
-            before: require("../../assets/product/product4-normal-fourth.png"),
-          },
+          { before: require("../assets/product/product4-normal-third.png") },
+          { before: require("../assets/product/product4-normal-fourth.png") },
+        ],
+        defaultFailure: [
+          { before: require("../assets/product/product4-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product4-gold-first.png") },
-          { before: require("../../assets/product/product4-gold-second.png") },
-          { before: require("../../assets/product/product4-gold-third.png") },
-          { before: require("../../assets/product/product4-gold-fourth.png") },
+          { before: require("../assets/product/product4-gold-first.png") },
+          { before: require("../assets/product/product4-gold-second.png") },
+          { before: require("../assets/product/product4-gold-third.png") },
+          { before: require("../assets/product/product4-gold-fourth.png") },
         ],
-        style: { width: 200, height: 86 },
+        bonusFailure: [
+          { before: require("../assets/product/product4-gold-failure.png") },
+        ],
+        style: { width: 200, height: 130 },
       },
       {
         name: "辻 踏弥(48)",
@@ -188,8 +207,8 @@ const initialState: state = {
         "週休一日制",
         "80%",
         "埼玉県",
-        require("../../assets/outline/outlineBgTsuji.png"),
-        require("../../assets/outline/outlineButtonTsuji.png")
+        require("../assets/outline/outlineBgTsuji.png"),
+        require("../assets/outline/outlineButtonTsuji.png")
       )
     ),
     new Job(
@@ -200,21 +219,27 @@ const initialState: state = {
       1,
       0,
       0,
-      25,
+      [27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
       JobType.aguron,
       JobType.aguron,
       {
         default: [
-          { before: require("../../assets/product/product5-normal-first.png") },
+          { before: require("../assets/product/product5-normal-first.png") },
           {
-            before: require("../../assets/product/product5-normal-second.png"),
+            before: require("../assets/product/product5-normal-second.png"),
           },
-          { before: require("../../assets/product/product5-normal-third.png") },
+          { before: require("../assets/product/product5-normal-third.png") },
+        ],
+        defaultFailure: [
+          { before: require("../assets/product/product5-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product5-gold-first.png") },
-          { before: require("../../assets/product/product5-gold-second.png") },
-          { before: require("../../assets/product/product5-gold-third.png") },
+          { before: require("../assets/product/product5-gold-first.png") },
+          { before: require("../assets/product/product5-gold-second.png") },
+          { before: require("../assets/product/product5-gold-third.png") },
+        ],
+        bonusFailure: [
+          { before: require("../assets/product/product5-gold-failure.png") },
         ],
         style: { width: 200, height: 172 },
       },
@@ -231,8 +256,8 @@ const initialState: state = {
         "祝日のみ",
         "87%",
         "埼玉県",
-        require("../../assets/outline/outlineBgLie.png"),
-        require("../../assets/outline/outlineButtonLie.png")
+        require("../assets/outline/outlineBgLie.png"),
+        require("../assets/outline/outlineButtonLie.png")
       )
     ),
     new Job(
@@ -243,27 +268,31 @@ const initialState: state = {
       1,
       0,
       0,
-      20,
+      [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
       JobType.starFoods,
       JobType.starFoods,
       {
         default: [
-          { before: require("../../assets/product/product6-normal-first.png") },
+          { before: require("../assets/product/product6-normal-first.png") },
           {
-            before: require("../../assets/product/product6-normal-second.png"),
+            before: require("../assets/product/product6-normal-second.png"),
           },
-          { before: require("../../assets/product/product6-normal-third.png") },
-          {
-            before: require("../../assets/product/product6-normal-fourth.png"),
-          },
+          { before: require("../assets/product/product6-normal-third.png") },
+          { before: require("../assets/product/product6-normal-fourth.png") },
+        ],
+        defaultFailure: [
+          { before: require("../assets/product/product6-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product6-gold-first.png") },
-          { before: require("../../assets/product/product6-gold-second.png") },
-          { before: require("../../assets/product/product6-gold-third.png") },
-          { before: require("../../assets/product/product6-gold-fourth.png") },
+          { before: require("../assets/product/product6-gold-first.png") },
+          { before: require("../assets/product/product6-gold-second.png") },
+          { before: require("../assets/product/product6-gold-third.png") },
+          { before: require("../assets/product/product6-gold-fourth.png") },
         ],
-        style: { width: 200, height: 130 },
+        bonusFailure: [
+          { before: require("../assets/product/product6-gold-failure.png") },
+        ],
+        style: { width: 200, height: 150 },
       },
       {
         name: "竹内 ゲンノシン(47)",
@@ -278,8 +307,8 @@ const initialState: state = {
         "完全週休一日制",
         "65%",
         "福井県",
-        require("../../assets/outline/outlineBgTakeuchi.png"),
-        require("../../assets/outline/outlineButtonTakeuchi.png")
+        require("../assets/outline/outlineBgTakeuchi.png"),
+        require("../assets/outline/outlineButtonTakeuchi.png")
       )
     ),
     new Job(
@@ -290,23 +319,29 @@ const initialState: state = {
       1,
       0,
       0,
-      27,
+      [27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
       JobType.sikaga,
       JobType.sikaga,
       {
         default: [
-          { before: require("../../assets/product/product7-normal-first.png") },
+          { before: require("../assets/product/product7-normal-first.png") },
           {
-            before: require("../../assets/product/product7-normal-second.png"),
+            before: require("../assets/product/product7-normal-second.png"),
           },
-          { before: require("../../assets/product/product7-normal-third.png") },
+          { before: require("../assets/product/product7-normal-third.png") },
+        ],
+        defaultFailure: [
+          { before: require("../assets/product/product7-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product7-normal-first.png") },
-          { before: require("../../assets/product/product7-gold-second.png") },
-          { before: require("../../assets/product/product7-gold-third.png") },
+          { before: require("../assets/product/product7-normal-first.png") },
+          { before: require("../assets/product/product7-gold-second.png") },
+          { before: require("../assets/product/product7-gold-third.png") },
         ],
-        style: { width: 232, height: 80 },
+        bonusFailure: [
+          { before: require("../assets/product/product7-gold-failure.png") },
+        ],
+        style: { width: 252, height: 82 },
       },
       {
         name: "黒口 隆(51)",
@@ -321,8 +356,8 @@ const initialState: state = {
         "祝日のみ",
         "71%",
         "山形県",
-        require("../../assets/outline/outlineBgKuroguchi.png"),
-        require("../../assets/outline/outlineButtonKuroguchi.png")
+        require("../assets/outline/outlineBgKuroguchi.png"),
+        require("../assets/outline/outlineButtonKuroguchi.png")
       )
     ),
     new Job(
@@ -333,27 +368,31 @@ const initialState: state = {
       1,
       0,
       0,
-      18,
+      [18, 19, 20, 21, 22, 23, 24, 25, 26, 27],
       JobType.tamazu,
       JobType.tamazu,
       {
         default: [
-          { before: require("../../assets/product/product8-normal-first.png") },
+          { before: require("../assets/product/product8-normal-first.png") },
           {
-            before: require("../../assets/product/product8-normal-second.png"),
+            before: require("../assets/product/product8-normal-second.png"),
           },
-          { before: require("../../assets/product/product8-normal-third.png") },
-          {
-            before: require("../../assets/product/product8-normal-fourth.png"),
-          },
+          { before: require("../assets/product/product8-normal-third.png") },
+          { before: require("../assets/product/product8-normal-fourth.png") },
+        ],
+        defaultFailure: [
+          { before: require("../assets/product/product8-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product8-gold-first.png") },
-          { before: require("../../assets/product/product8-gold-second.png") },
-          { before: require("../../assets/product/product8-gold-third.png") },
-          { before: require("../../assets/product/product8-gold-fourth.png") },
+          { before: require("../assets/product/product8-gold-first.png") },
+          { before: require("../assets/product/product8-gold-second.png") },
+          { before: require("../assets/product/product8-gold-third.png") },
+          { before: require("../assets/product/product8-gold-fourth.png") },
         ],
-        style: { width: 120, height: 207 },
+        bonusFailure: [
+          { before: require("../assets/product/product8-gold-failure.png") },
+        ],
+        style: { width: 138, height: 222 },
       },
       {
         name: "山下 五郎(55)",
@@ -368,8 +407,8 @@ const initialState: state = {
         "完全週休一日制",
         "61%",
         "青森県",
-        require("../../assets/outline/outlineBgYamashita.png"),
-        require("../../assets/outline/outlineButtonYamashita.png")
+        require("../assets/outline/outlineBgYamashita.png"),
+        require("../assets/outline/outlineButtonYamashita.png")
       )
     ),
     new Job(
@@ -380,23 +419,29 @@ const initialState: state = {
       1,
       0,
       0,
-      10,
+      [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
       JobType.ozasa,
       JobType.ozasa,
       {
         default: [
-          { before: require("../../assets/product/product9-normal-first.png") },
+          { before: require("../assets/product/product9-normal-first.png") },
           {
-            before: require("../../assets/product/product9-normal-second.png"),
+            before: require("../assets/product/product9-normal-second.png"),
           },
-          { before: require("../../assets/product/product9-normal-third.png") },
+          { before: require("../assets/product/product9-normal-third.png") },
+        ],
+        defaultFailure: [
+          { before: require("../assets/product/product9-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product9-gold-first.png") },
-          { before: require("../../assets/product/product9-gold-second.png") },
-          { before: require("../../assets/product/product9-gold-third.png") },
+          { before: require("../assets/product/product9-gold-first.png") },
+          { before: require("../assets/product/product9-gold-second.png") },
+          { before: require("../assets/product/product9-gold-third.png") },
         ],
-        style: { width: 300, height: 130 },
+        bonusFailure: [
+          { before: require("../assets/product/product9-gold-failure.png") },
+        ],
+        style: { width: 300, height: 145 },
       },
       {
         name: "小篠 隆生(65)",
@@ -411,8 +456,8 @@ const initialState: state = {
         "無し",
         "98%",
         "北海道",
-        require("../../assets/outline/outlineBgOzasa.png"),
-        require("../../assets/outline/outlineButtonOzasa.png")
+        require("../assets/outline/outlineBgOzasa.png"),
+        require("../assets/outline/outlineButtonOzasa.png")
       )
     ),
     new Job(
@@ -423,27 +468,33 @@ const initialState: state = {
       1,
       0,
       0,
-      10,
+      [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
       JobType.tanabe,
       JobType.tanabe,
       {
         default: [
           {
-            before: require("../../assets/product/product10-normal-first.png"),
+            before: require("../assets/product/product10-normal-first.png"),
           },
           {
-            before: require("../../assets/product/product10-normal-second.png"),
+            before: require("../assets/product/product10-normal-second.png"),
           },
           {
-            before: require("../../assets/product/product10-normal-third.png"),
+            before: require("../assets/product/product10-normal-third.png"),
           },
+        ],
+        defaultFailure: [
+          { before: require("../assets/product/product10-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product10-gold-first.png") },
-          { before: require("../../assets/product/product10-gold-second.png") },
-          { before: require("../../assets/product/product10-gold-third.png") },
+          { before: require("../assets/product/product10-gold-first.png") },
+          { before: require("../assets/product/product10-gold-second.png") },
+          { before: require("../assets/product/product10-gold-third.png") },
         ],
-        style: { width: 280, height: 90 },
+        bonusFailure: [
+          { before: require("../assets/product/product10-gold-failure.png") },
+        ],
+        style: { width: 280, height: 105 },
       },
       {
         name: "鴨林 勇太(43)",
@@ -458,8 +509,8 @@ const initialState: state = {
         "無し",
         "99%",
         "東京都",
-        require("../../assets/outline/outlineBgKamobayashi.png"),
-        require("../../assets/outline/outlineButtonKamobayashi.png")
+        require("../assets/outline/outlineBgKamobayashi.png"),
+        require("../assets/outline/outlineButtonKamobayashi.png")
       )
     ),
   ],
@@ -472,19 +523,25 @@ const initialState: state = {
     level: 1,
     maxNumber: 0,
     maxMoney: 0,
-    perMoney: 15,
+    perMoney: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
     backgroundImg: JobType.yamagawa,
     boardImg: JobType.yamagawa,
     product: {
       default: [
-        { before: require("../../assets/product/product1-normal-first.png") },
-        { before: require("../../assets/product/product1-normal-second.png") },
-        { before: require("../../assets/product/product1-normal-third.png") },
+        { before: require("../assets/product/product1-normal-first.png") },
+        { before: require("../assets/product/product1-normal-second.png") },
+        { before: require("../assets/product/product1-normal-third.png") },
+      ],
+      defaultFailure: [
+        { before: require("../assets/product/product1-normal-failure.png") },
       ],
       bonus: [
-        { before: require("../../assets/product/product1-gold-first.png") },
-        { before: require("../../assets/product/product1-gold-second.png") },
-        { before: require("../../assets/product/product1-gold-third.png") },
+        { before: require("../assets/product/product1-gold-first.png") },
+        { before: require("../assets/product/product1-gold-second.png") },
+        { before: require("../assets/product/product1-gold-third.png") },
+      ],
+      bonusFailure: [
+        { before: require("../assets/product/product1-gold-failure.png") },
       ],
       style: { width: 200, height: 80 },
     },
@@ -501,8 +558,8 @@ const initialState: state = {
       holiday: "完全週休一日制",
       retirement: "90%",
       workplace: "鳥取県",
-      background: require("../../assets/outline/outlineBgYamagawa.png"),
-      button: require("../../assets/outline/outlineButtonYamagawa.png"),
+      background: require("../assets/outline/outlineBgYamagawa.png"),
+      button: require("../assets/outline/outlineButtonYamagawa.png"),
     },
   },
 
@@ -514,19 +571,25 @@ const initialState: state = {
     level: 1,
     maxNumber: 0,
     maxMoney: 0,
-    perMoney: 15,
+    perMoney: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
     backgroundImg: JobType.yamagawa,
     boardImg: JobType.yamagawa,
     product: {
       default: [
-        { before: require("../../assets/product/product1-normal-first.png") },
-        { before: require("../../assets/product/product1-normal-second.png") },
-        { before: require("../../assets/product/product1-normal-third.png") },
+        { before: require("../assets/product/product1-normal-first.png") },
+        { before: require("../assets/product/product1-normal-second.png") },
+        { before: require("../assets/product/product1-normal-third.png") },
+      ],
+      defaultFailure: [
+        { before: require("../assets/product/product1-normal-failure.png") },
       ],
       bonus: [
-        { before: require("../../assets/product/product1-gold-first.png") },
-        { before: require("../../assets/product/product1-gold-second.png") },
-        { before: require("../../assets/product/product1-gold-third.png") },
+        { before: require("../assets/product/product1-gold-first.png") },
+        { before: require("../assets/product/product1-gold-second.png") },
+        { before: require("../assets/product/product1-gold-third.png") },
+      ],
+      bonusFailure: [
+        { before: require("../assets/product/product1-gold-failure.png") },
       ],
       style: { width: 200, height: 80 },
     },
@@ -543,8 +606,8 @@ const initialState: state = {
       holiday: "完全週休一日制",
       retirement: "90%",
       workplace: "鳥取県",
-      background: require("../../assets/outline/outlineBgYamagawa.png"),
-      button: require("../../assets/outline/outlineButtonYamagawa.png"),
+      background: require("../assets/outline/outlineBgYamagawa.png"),
+      button: require("../assets/outline/outlineButtonYamagawa.png"),
     },
   },
 
@@ -556,19 +619,25 @@ const initialState: state = {
     level: 1,
     maxNumber: 0,
     maxMoney: 0,
-    perMoney: 15,
+    perMoney: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
     backgroundImg: JobType.yamagawa,
     boardImg: JobType.yamagawa,
     product: {
       default: [
-        { before: require("../../assets/product/product1-normal-first.png") },
-        { before: require("../../assets/product/product1-normal-second.png") },
-        { before: require("../../assets/product/product1-normal-third.png") },
+        { before: require("../assets/product/product1-normal-first.png") },
+        { before: require("../assets/product/product1-normal-second.png") },
+        { before: require("../assets/product/product1-normal-third.png") },
+      ],
+      defaultFailure: [
+        { before: require("../assets/product/product1-normal-failure.png") },
       ],
       bonus: [
-        { before: require("../../assets/product/product1-gold-first.png") },
-        { before: require("../../assets/product/product1-gold-second.png") },
-        { before: require("../../assets/product/product1-gold-third.png") },
+        { before: require("../assets/product/product1-gold-first.png") },
+        { before: require("../assets/product/product1-gold-second.png") },
+        { before: require("../assets/product/product1-gold-third.png") },
+      ],
+      bonusFailure: [
+        { before: require("../assets/product/product1-normal-failure.png") },
       ],
       style: { width: 200, height: 80 },
     },
@@ -585,22 +654,10 @@ const initialState: state = {
       holiday: "完全週休一日制",
       retirement: "90%",
       workplace: "鳥取県",
-      background: require("../../assets/outline/outlineBgYamagawa.png"),
-      button: require("../../assets/outline/outlineButtonYamagawa.png"),
+      background: require("../assets/outline/outlineBgYamagawa.png"),
+      button: require("../assets/outline/outlineButtonYamagawa.png"),
     },
   },
-
-  nextProduct: [
-    { before: require("../../assets/product/product1-normal-first.png") },
-    { before: require("../../assets/product/product1-normal-second.png") },
-    { before: require("../../assets/product/product1-normal-third.png") },
-  ],
-
-  centerProduct: [
-    { before: require("../../assets/product/product1-normal-first.png") },
-    { before: require("../../assets/product/product1-normal-second.png") },
-    { before: require("../../assets/product/product1-normal-third.png") },
-  ],
 
   previewJob: undefined,
 };

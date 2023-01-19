@@ -1,38 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Job from "../../models/job";
 import initialState from "./initialState";
-import userInitialState from "../user/initialState";
-import playInitialState from "../play/initialState";
-import { useDispatch } from "react-redux";
-import { changeUserNowJob } from "../job";
 
-const dispatch = useDispatch();
-
-const JobsRedux = createSlice({
-  name: "jobRedux",
+const JobRedux = createSlice({
+  name: "JobRedux",
   initialState,
   reducers: {
     changeJob: (state, action: PayloadAction<Job>) => {
       state.job = action.payload;
-      dispatch(changeUserNowJob(action.payload.name));
-
-      if (userInitialState.user.nextProductType === "bonus") {
-        state.nextProduct = action.payload.product.bonus;
-        state.centerProduct = action.payload.product.bonus;
-      } else {
-        state.nextProduct = action.payload.product.default;
-        state.centerProduct = action.payload.product.default;
-      }
 
       //このタイミングでprevJobとnextJobを更新させる
       const activeJobs = state.jobs.filter(function (element) {
         return element.isActive === true;
       });
-
-      // console.log(activeJobs[0]);
-      // console.log(action.payload);
-      // console.log(activeJobs.findIndex((job) => job === action.payload));
-      // console.log(activeJobs.indexOf(action.payload));
 
       state.nextJob = activeJobs[activeJobs.indexOf(state.job) + 1];
       state.prevJob = activeJobs[activeJobs.indexOf(state.job) - 1];
@@ -49,58 +29,31 @@ const JobsRedux = createSlice({
         state.nextJob = activeJobs[activeJobs.length - 1];
         state.prevJob = activeJobs[activeJobs.length - 1];
       }
-
-      // console.log(activeJobs);
-      // console.log(state.nextJob)
-      // console.log(state.prevJob)
     },
     changePreviewJob: (state, action: PayloadAction<Job | undefined>) => {
       state.previewJob = action.payload;
     },
-    changeUpdateJob: (state, action: PayloadAction<Job>) => {
-      //もしすでにそのJOBをアンロックしていたら
-      if (state.jobs[state.jobs.indexOf(action.payload)].isActive === true) {
-        state.jobs[state.jobs.indexOf(action.payload)].perMoney[0] =
-          action.payload.perMoney[0] + 1;
-        state.jobs[state.jobs.indexOf(action.payload)].outline.basicMoney =
-          action.payload.outline.basicMoney;
-        state.jobs[state.jobs.indexOf(action.payload)].level =
-          action.payload.level + 1;
-        state.jobs[state.jobs.indexOf(action.payload)].outline.level =
-          action.payload.outline.level + 1;
-      }
-      //もしそのJOBをアンロックしていなかったら
+    updateJob: (state, action: PayloadAction<Job>) => {
+      state.jobs[state.jobs.indexOf(action.payload)].level = action.payload.level + 1;
+      state.jobs[state.jobs.indexOf(action.payload)].outline.level = action.payload.outline.level + 1;
+      state.jobs[state.jobs.indexOf(action.payload)].outline.basicMoney = action.payload.perMoney[action.payload.level - 1];
+    },
+    unlockJob: (state, action: PayloadAction<Job>) => {
       state.jobs[state.jobs.indexOf(action.payload)].isActive = true;
     },
-    changeJobRecord: (state, action: PayloadAction<Job>) => {
-      if (state.job.maxMoney <= playInitialState.play.money) {
-        //jobsの方のmaxMoneyとjobの方のmaxMoneyを変える
-        state.jobs[state.jobs.indexOf(action.payload)].maxMoney =
-          playInitialState.play.money;
-        state.job.maxMoney = playInitialState.play.money;
-      }
+    changeJobMaxMoney: (state, action: PayloadAction<Job>) => {
+      state.jobs[state.jobs.indexOf(action.payload)].maxMoney = state.job.maxMoney;
     },
-    changeNextProduct: (state) => {
-      if (userInitialState.user.nextProductType === "bonus") {
-        state.nextProduct = state.job.product.bonus;
-      } else {
-        state.nextProduct = state.job.product.default;
-      }
-    },
-    changeCenterProduct: (state) => {
-      if (userInitialState.user.nextProductType === "bonus") {
-        state.centerProduct = state.job.product.bonus;
-      } else {
-        state.centerProduct = state.job.product.default;
-      }
-    },
+    changeJobRecord: (state, action: PayloadAction<number>) => {
+      state.job.maxMoney = action.payload;
+    }
   },
 });
 
-export const changeJob = JobsRedux.actions.changeJob;
-export const changeUpdateJob = JobsRedux.actions.changeUpdateJob;
-export const changePreviewJob = JobsRedux.actions.changePreviewJob;
-export const changeJobRecord = JobsRedux.actions.changeJobRecord;
-export const changeNextProduct = JobsRedux.actions.changeNextProduct;
-export const changeCenterProduct = JobsRedux.actions.changeCenterProduct;
-export default JobsRedux.reducer;
+export const changeJob = JobRedux.actions.changeJob;
+export const updateJob = JobRedux.actions.updateJob;
+export const unlockJob = JobRedux.actions.unlockJob;
+export const changePreviewJob = JobRedux.actions.changePreviewJob;
+export const changeJobRecord = JobRedux.actions.changeJobRecord;
+export const changeJobMaxMoney = JobRedux.actions.changeJobMaxMoney;
+export default JobRedux.reducer;

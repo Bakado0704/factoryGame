@@ -1,8 +1,8 @@
 import User from "../../models/user";
+import UserIcons from "../../models/userIcons";
 import { JobType } from "../../types/job";
 import { UserIconType } from "../../types/userIcons";
 import { productType } from "../../types/product";
-import UserIcons from "../../models/userIcons";
 import { Mute } from "../../types/user";
 
 export type state = {
@@ -38,14 +38,14 @@ const initialState: state = {
   user: {
     name: "user001",
     id: "user001",
-    money: 1000,
+    money: 5000,
     icon: UserIconType.man1,
     nowJob: JobType.yamagawa,
     prevProductType: productType.default,
     nextProductType: productType.default,
     page: "start",
     gachaStatus: "stop",
-    gachaCost: 1000,
+    gachaCost: 500,
     drink: 0,
     drinkCost: 0,
     mute: Mute.on,
@@ -54,7 +54,7 @@ const initialState: state = {
   previewIcon: {
     id: "man1",
     icon: UserIconType.man1,
-  },
+  }
 };
 
 export default initialState;
