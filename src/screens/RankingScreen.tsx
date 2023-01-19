@@ -2,7 +2,6 @@ import { View, ImageBackground, StyleSheet, SafeAreaView } from "react-native";
 import React from "react";
 import ImageButton from "../components/button/ImageButton";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCenterProduct, changeFailureProduct, changeJob, changeNextProduct, changeUserNowJob, userPage } from "../store/job";
 import {
   NavigationProp,
   ParamListBase,
@@ -11,12 +10,15 @@ import {
 import NavSelect from "../components/nav/NavMiddle/NavSelect";
 import { RootState } from "../store/store";
 import { Job } from "../types/job";
+import { changeUserNowJob, userPage } from "../store/user";
+import { changeJob } from "../store/job";
+import { changeCenterProduct, changeFailureProduct, changeNextProduct } from "../store/product";
 
 function RankingScreen() {
   const Job = useSelector((state: RootState) => state.job.job);
   const nextJob = useSelector((state: RootState) => state.job.nextJob);
   const prevJob = useSelector((state: RootState) => state.job.prevJob);
-  const user = useSelector((state: RootState) => state.job.user);
+  const user = useSelector((state: RootState) => state.user.user);
   
   const activeBoard = Job.boardImg;
   const maxMoney = Job.maxMoney;

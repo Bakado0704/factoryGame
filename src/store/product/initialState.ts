@@ -8,19 +8,19 @@ export type state = {
 
 const initialState: state = {
   nextProduct: [
-    { before: require("../assets/product/product1-normal-first.png") },
-    { before: require("../assets/product/product1-normal-second.png") },
-    { before: require("../assets/product/product1-normal-third.png") },
+    { before: require("../../assets/product/product1-normal-first.png") },
+    { before: require("../../assets/product/product1-normal-second.png") },
+    { before: require("../../assets/product/product1-normal-third.png") },
   ],
 
   centerProduct: [
-    { before: require("../assets/product/product1-normal-first.png") },
-    { before: require("../assets/product/product1-normal-second.png") },
-    { before: require("../assets/product/product1-normal-third.png") },
+    { before: require("../../assets/product/product1-normal-first.png") },
+    { before: require("../../assets/product/product1-normal-second.png") },
+    { before: require("../../assets/product/product1-normal-third.png") },
   ],
 
   failureProduct: [
-    { before: require("../assets/product/product1-normal-failure.png") },
+    { before: require("../../assets/product/product1-normal-failure.png") },
   ]
 };
 

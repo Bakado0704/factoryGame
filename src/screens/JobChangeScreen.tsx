@@ -11,19 +11,6 @@ import UserModal from "../modals/UserModal";
 import Job from "../models/job";
 import { Job as _Job } from "../types/job";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeCenterProduct,
-  changeFailureProduct,
-  changeJob,
-  changeMute,
-  changeNextProduct,
-  changePreviewIcon,
-  changePreviewJob,
-  changeUser,
-  changeUsername,
-  changeUserNowJob,
-  userPage,
-} from "../store/job";
 import { useState } from "react";
 import UserIcons from "../models/userIcons";
 import JobAddButton from "../components/animation/animationButton/JobAddButton";
@@ -31,14 +18,17 @@ import JobReturnButton from "../components/animation/animationButton/JobReturnBu
 import { RootState } from "../store/store";
 import { page } from "../types/page";
 import { Mute } from "../types/user";
+import { changeMute, changePreviewIcon, changeUser, changeUsername, changeUserNowJob, userPage } from "../store/user";
+import { changeJob, changePreviewJob } from "../store/job";
+import { changeCenterProduct, changeFailureProduct, changeNextProduct } from "../store/product";
 
 const JobChangeScreen = () => {
   const jobs = useSelector((state: RootState) => state.job.jobs);
   const Job = useSelector((state: RootState) => state.job.job);
   const previewJob = useSelector((state: RootState) => state.job.previewJob);
-  const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
-  const user = useSelector((state: RootState) => state.job.user);
-  const userIcons = useSelector((state: RootState) => state.job.UserIcons);
+  const previewIcon = useSelector((state: RootState) => state.user.previewIcon);
+  const user = useSelector((state: RootState) => state.user.user);
+  const userIcons = useSelector((state: RootState) => state.user.UserIcons);
   const userIcon = user.icon;
   const userName = user.name;
   const userId = user.id;

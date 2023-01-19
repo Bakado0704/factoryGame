@@ -5,18 +5,6 @@ import NavHead from "../components/nav/NavHeader/NavHead";
 import JobGet from "../modals/JobGetModal";
 import UserModal from "../modals/UserModal";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeGachaCost,
-  changeGachaStatus,
-  changeMute,
-  changePreviewIcon,
-  updateJob,
-  changeUser,
-  changeUsername,
-  userMoneyIncrease,
-  userPage,
-  unlockJob,
-} from "../store/job";
 import UserIcons from "../models/userIcons";
 import ZimuPerson from "../components/animation/ZimuPerson";
 import Envelope from "../components/animation/Envelope";
@@ -29,14 +17,17 @@ import {
 } from "@react-navigation/native";
 import { GachaStatus } from "../types/gacha";
 import { Mute } from "../types/user";
+import { changeGachaCost, changeGachaStatus, changeMute, changePreviewIcon, changeUser, changeUsername, userMoneyIncrease, userPage } from "../store/user";
+import { unlockJob, updateJob } from "../store/job";
 
 function GachaScreen() {
-  const userIcon = useSelector((state: RootState) => state.job.user.icon);
-  const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
+  const user = useSelector((state: RootState) => state.user.user);
+  const previewIcon = useSelector((state: RootState) => state.user.previewIcon);
+  const userIcons = useSelector((state: RootState) => state.user.UserIcons);
   const jobs = useSelector((state: RootState) => state.job.jobs);
-  const userIcons = useSelector((state: RootState) => state.job.UserIcons);
   const randomJob = jobs[Math.floor(Math.random() * jobs.length)];
-  const user = useSelector((state: RootState) => state.job.user);
+
+  const userIcon = user.icon;
   const userMoney = user.money;
   const userName = user.name;
   const userId = user.id;

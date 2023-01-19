@@ -9,38 +9,24 @@ import Gameover from "../modals/GameoverModal";
 import BgBlack from "../components/background/BgBlack";
 import Game from "../libs/game";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeActivePattern,
-  changeCenterProduct,
-  changeCombo,
-  changeCompletecount,
-  changeJobRecord,
-  changeJudge,
-  changeNextProduct,
-  changeNowMoney,
-  changeProcessCount,
-  changeNextProductType,
-  changeStatus,
-  resetCompletecount,
-  staminaDecrese,
-  userMoneyIncrease,
-  changePrevProductType,
-  changeJobMaxMoney,
-} from "../store/job";
 import { judgeStatus, PlayPattern, PlayStatus } from "../types/play";
 import { Job } from "../types/job";
 import { RootState } from "../store/store";
 import { productType } from "../types/product";
+import { changeActivePattern, changeCombo, changeCompletecount, changeJudge, changeNowMoney, changeProcessCount, changeStatus, resetCompletecount, staminaDecrese } from "../store/play";
+import { changeNextProductType, changePrevProductType, userMoneyIncrease } from "../store/user";
+import { changeCenterProduct, changeNextProduct } from "../store/product";
+import { changeJobMaxMoney, changeJobRecord } from "../store/job";
 
 const GameScreen = () => {
   const dispatch = useDispatch();
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   //現在のplay状態
-  const playState = useSelector((state: RootState) => state.job.play);
+  const playState = useSelector((state: RootState) => state.play.play);
   //現在のjob
   const Job: Job = useSelector((state: RootState) => state.job.job);
   //現在のuser
-  const user = useSelector((state: RootState) => state.job.user);
+  const user = useSelector((state: RootState) => state.user.user);
   //changeJobRecordに渡すための現在のJob
   const nowJob = useSelector((state: RootState) => state.job.jobs).find(
     (job: Job) => job.id === Job.id
@@ -67,13 +53,13 @@ const GameScreen = () => {
 
   let plusMoney = Math.floor(perMoney) * bonus * (1 + drink * 0.2);
   if (combo <= 2) {
-    plusMoney = Math.floor(perMoney) * bonus * (1 + drink * 0.2);
+    plusMoney = Math.floor(perMoney * bonus * (1 + drink * 0.2));
   } else if (combo <= 4) {
-    plusMoney = Math.floor(perMoney * 1.2) * bonus * (1 + drink * 0.2);
+    plusMoney = Math.floor(perMoney * 1.2 * bonus * (1 + drink * 0.2));
   } else if (combo <= 6) {
-    plusMoney = Math.floor(perMoney * 1.6) * bonus * (1 + drink * 0.2);
+    plusMoney = Math.floor(perMoney * 1.6 * bonus * (1 + drink * 0.2));
   } else {
-    plusMoney = Math.floor(perMoney * 2.0) * bonus * (1 + drink * 0.2);
+    plusMoney = Math.floor(perMoney * 2.0 * bonus * (1 + drink * 0.2));
   }
 
   //dispatch関数の宣言

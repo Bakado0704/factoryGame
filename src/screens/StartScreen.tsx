@@ -8,23 +8,6 @@ import UserModal from "../modals/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import UserIcons from "../models/userIcons";
 import { RootState } from "../store/store";
-import {
-  changeCenterProduct,
-  changeFailureProduct,
-  changeJob,
-  changeMute,
-  changeNextProduct,
-  changePreviewIcon,
-  changeStatus,
-  changeUser,
-  changeUsername,
-  changeUserNowJob,
-  staminaReset,
-  userDrink,
-  userDrinkReset,
-  userMoneyIncrease,
-  userPage,
-} from "../store/job";
 import { PlayStatus } from "../types/play";
 import { Job } from "../types/job";
 import {
@@ -33,14 +16,18 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import { Mute } from "../types/user";
+import { changeMute, changePreviewIcon, changeUser, changeUsername, changeUserNowJob, userDrink, userDrinkReset, userMoneyIncrease, userPage } from "../store/user";
+import { changeStatus, staminaReset } from "../store/play";
+import { changeJob } from "../store/job";
+import { changeCenterProduct, changeFailureProduct, changeNextProduct } from "../store/product";
 
 const StartScreen = () => {
   const Job = useSelector((state: RootState) => state.job.job);
   const nextJob = useSelector((state: RootState) => state.job.nextJob);
   const prevJob = useSelector((state: RootState) => state.job.prevJob);
-  const user = useSelector((state: RootState) => state.job.user);
-  const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
-  const userIcons = useSelector((state: RootState) => state.job.UserIcons);
+  const user = useSelector((state: RootState) => state.user.user);
+  const previewIcon = useSelector((state: RootState) => state.user.previewIcon);
+  const userIcons = useSelector((state: RootState) => state.user.UserIcons);
   
   const activeBoard = Job.boardImg;
   const perMoney = Job.outline.basicMoney;

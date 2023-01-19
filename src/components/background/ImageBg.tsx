@@ -13,17 +13,17 @@ export interface Props {
 const ImageBg = ({ children }: Props) => {
   //useSelectorの宣言
   const job = useSelector((state: RootState) => state.job.job);
-  const user = useSelector((state: RootState) => state.job.user);
-  const playState = useSelector((state: RootState) => state.job.play);
-  const nextProduct = useSelector((state: RootState) => state.job.nextProduct);
+  const user = useSelector((state: RootState) => state.user.user);
+  const playState = useSelector((state: RootState) => state.play.play);
+  const nextProduct = useSelector((state: RootState) => state.product.nextProduct);
   const centerProduct = useSelector(
-    (state: RootState) => state.job.centerProduct
+    (state: RootState) => state.product.centerProduct
   );
   const failureProduct = useSelector(
-    (state: RootState) => state.job.failureProduct
+    (state: RootState) => state.product.failureProduct
   );
   const selectedPlayPattern = useSelector(
-    (state: RootState) => state.job.activePlayPattern
+    (state: RootState) => state.play.activePlayPattern
   );
 
   const activeType = job.icon;
