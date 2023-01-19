@@ -56,8 +56,8 @@ const Product = ({
   });
 
   const successTranslateY = TargetAnim.interpolate({
-    inputRange: [0, 10, 20, 30,  200],
-    outputRange: [0, 5, -5, 0, 0],
+    inputRange: [0, 10, 20, 30, 200],
+    outputRange: [0, 8, -8, 0, 0],
   });
 
   let NEXTPRODUCT = nextProduct[0].before;

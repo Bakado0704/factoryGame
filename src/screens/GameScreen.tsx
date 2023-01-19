@@ -38,6 +38,7 @@ const GameScreen = () => {
   const nowJob = useSelector((state: RootState) => state.job.jobs).find((job: Job) => job.id === Job.id);
 
   const nowMoney = playState.money;
+  const combo = playState.combo;
   const completeCount = playState.completeCount;
   const drink = user.drink;
   const maxMoney = Job.maxMoney;
@@ -120,6 +121,7 @@ const GameScreen = () => {
         type={jobName}
         playState={playState}
         drink={drink}
+        combo={combo}
         nowMoney={nowMoney}
         perMoney={perMoney}
         judgeHandler={judgeHandler}

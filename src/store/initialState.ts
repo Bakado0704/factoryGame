@@ -726,7 +726,7 @@ const initialState: state = {
     productType: productType.default,
     page: "start",
     gachaStatus: "stop",
-    gachaCost: 1000,
+    gachaCost: 500,
     drink: 0,
     drinkCost: 0,
     mute: Mute.on,

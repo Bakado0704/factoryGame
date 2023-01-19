@@ -1,17 +1,18 @@
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
-
 import Counts from "./components/Counts";
 import { PATTERN_DATES } from "./datas/dates";
 import PlayGap from "../../models/playgap";
 import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
 import NowMoney from "../../components/money/NowMoney";
 import { JobType } from "../../types/job";
-import Coin from "../../components/animation/Coin";
+import Coins from "../../components/animation/Coins";
+import PerMoney from "../../components/animation/Permoney";
 
 type Props = {
   type: JobType;
   playState: Play;
+  combo: number;
   drink: number;
   perMoney: number;
   nowMoney: number;
@@ -32,6 +33,7 @@ const Game = ({
   type,
   playState,
   drink,
+  combo,
   perMoney,
   nowMoney,
   judgeHandler,
@@ -96,7 +98,8 @@ const Game = ({
     <>
       <View style={styles.rootContainer}>
         <NowMoney nowMoney={nowMoney} perMoney={perMoney} />
-        <Coin playState={playState}/>
+        <Coins playState={playState} combo={combo} />
+        <PerMoney playState={playState} perMoney={perMoney} />
         <Counts
           playpattern={playpattern}
           playgap={playgap}
@@ -129,5 +132,4 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-
 });

@@ -4,14 +4,17 @@ import { judgeStatus, Play } from "../../types/play";
 
 type Props = {
   playState: Play;
+  delay: number;
+  combo:number;
+  allowCombo: number;
 };
 
-const Coin = ({ playState }: Props) => {
+const Coin = ({ playState, delay, combo, allowCombo }: Props) => {
   const CoinAnim = useRef(new Animated.Value(0)).current;
 
   const coinTranslateY = CoinAnim.interpolate({
-    inputRange: [0, 160, 180, 200],
-    outputRange: [0, -100, -100, -80],
+    inputRange: [0, 50, 75, 100, 125, 150, 175, 200],
+    outputRange: [0, -100, -110, -116, -114, -108, -92, -55],
   });
 
   const coinOpacity1 = CoinAnim.interpolate({
@@ -23,7 +26,9 @@ const Coin = ({ playState }: Props) => {
     outputRange: [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
   });
   const coinOpacity3 = CoinAnim.interpolate({
-    inputRange: [0, 20, 21, 30, 31, 100, 101, 110, 111, 180, 181, 190, 191, 200],
+    inputRange: [
+      0, 20, 21, 30, 31, 100, 101, 110, 111, 180, 181, 190, 191, 200,
+    ],
     outputRange: [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
   });
   const coinOpacity4 = CoinAnim.interpolate({
@@ -49,15 +54,18 @@ const Coin = ({ playState }: Props) => {
 
   //successかfailureになったときアニメーション動かす
   useEffect(() => {
-    if (playState.judge === judgeStatus.success) {
-      Animated.timing(CoinAnim, {
-        toValue: 200,
-        duration: 500,
-        useNativeDriver: false,
-      }).start();
+    if (playState.judge === judgeStatus.success && combo >= allowCombo) {
+      Animated.sequence([
+        Animated.delay(delay),
+        Animated.timing(CoinAnim, {
+          toValue: 200,
+          duration: 600,
+          useNativeDriver: false,
+        }),
+      ]).start();
       setTimeout(() => {
         CoinAnim.setValue(0);
-      }, 500);
+      }, 600+delay);
     }
   }, [playState.judge === judgeStatus.success]);
 
