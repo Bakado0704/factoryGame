@@ -9,12 +9,16 @@ import { useDispatch, useSelector } from "react-redux";
 import UserIcons from "../models/userIcons";
 import { RootState } from "../store/store";
 import {
+  changeCenterProduct,
+  changeFailureProduct,
   changeJob,
   changeMute,
+  changeNextProduct,
   changePreviewIcon,
   changeStatus,
   changeUser,
   changeUsername,
+  changeUserNowJob,
   staminaReset,
   userDrink,
   userDrinkReset,
@@ -37,7 +41,11 @@ const StartScreen = () => {
   const user = useSelector((state: RootState) => state.job.user);
   const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
   const userIcons = useSelector((state: RootState) => state.job.UserIcons);
+  
   const activeBoard = Job.boardImg;
+  const perMoney = Job.outline.basicMoney;
+  const maxMoney = Job.maxMoney;
+  const page = user.page;
   const userIcon = user.icon;
   const userName = user.name;
   const userId = user.id;
@@ -45,9 +53,8 @@ const StartScreen = () => {
   const userMoney = user.money;
   const drink = user.drink;
   const drinkCost = user.drinkCost;
-  const perMoney = Job.outline.basicMoney;
-  const page = user.page;
-  const maxMoney = Job.maxMoney;
+  const nextProductType = user.nextProductType;
+
   const dispatch = useDispatch();
   const navigation: NavigationProp<ParamListBase> = useNavigation();
 
@@ -105,6 +112,16 @@ const StartScreen = () => {
 
   const jobDecideHandler = (job: Job) => {
     dispatch(changeJob(job));
+    dispatch(changeUserNowJob(job.name));
+    if (nextProductType === "bonus") {
+      dispatch(changeNextProduct(job.product.bonus));
+      dispatch(changeCenterProduct(job.product.bonus));
+      dispatch(changeFailureProduct(job.product.bonusFailure));
+    } else {
+      dispatch(changeNextProduct(job.product.default));
+      dispatch(changeCenterProduct(job.product.default));
+      dispatch(changeFailureProduct(job.product.defaultFailure));
+    }
   };
 
   const userDrinkHandler = (number: number) => {

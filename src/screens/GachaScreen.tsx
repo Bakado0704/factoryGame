@@ -10,11 +10,12 @@ import {
   changeGachaStatus,
   changeMute,
   changePreviewIcon,
-  changeUpdateJob,
+  updateJob,
   changeUser,
   changeUsername,
   userMoneyIncrease,
   userPage,
+  unlockJob,
 } from "../store/job";
 import UserIcons from "../models/userIcons";
 import ZimuPerson from "../components/animation/ZimuPerson";
@@ -59,8 +60,12 @@ function GachaScreen() {
 
   const offModalHandler = () => {
     dispatch(changeGachaStatus(GachaStatus.stop));
-    dispatch(changeUpdateJob(randomJob));
     dispatch(changeGachaCost(gachaPlusMoney));
+    if (jobs[jobs.indexOf(randomJob)].isActive === true) {
+      dispatch(updateJob(randomJob));
+    } else {
+      dispatch(unlockJob(randomJob));
+    }
   };
 
   const modalSettingHandler = () => {

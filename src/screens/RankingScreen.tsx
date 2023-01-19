@@ -2,7 +2,7 @@ import { View, ImageBackground, StyleSheet, SafeAreaView } from "react-native";
 import React from "react";
 import ImageButton from "../components/button/ImageButton";
 import { useDispatch, useSelector } from "react-redux";
-import { changeJob, userPage } from "../store/job";
+import { changeCenterProduct, changeFailureProduct, changeJob, changeNextProduct, changeUserNowJob, userPage } from "../store/job";
 import {
   NavigationProp,
   ParamListBase,
@@ -17,9 +17,12 @@ function RankingScreen() {
   const nextJob = useSelector((state: RootState) => state.job.nextJob);
   const prevJob = useSelector((state: RootState) => state.job.prevJob);
   const user = useSelector((state: RootState) => state.job.user);
+  
   const activeBoard = Job.boardImg;
-  const page = user.page;
   const maxMoney = Job.maxMoney;
+  const page = user.page;
+  const nextProductType = user.nextProductType;
+
   const dispatch = useDispatch();
   const navigation: NavigationProp<ParamListBase> = useNavigation();
 
@@ -30,6 +33,16 @@ function RankingScreen() {
 
   const jobDecideHandler = (job: Job) => {
     dispatch(changeJob(job));
+    dispatch(changeUserNowJob(job.name));
+    if (nextProductType === "bonus") {
+      dispatch(changeNextProduct(job.product.bonus));
+      dispatch(changeCenterProduct(job.product.bonus));
+      dispatch(changeFailureProduct(job.product.bonusFailure));
+    } else {
+      dispatch(changeNextProduct(job.product.default));
+      dispatch(changeCenterProduct(job.product.default));
+      dispatch(changeFailureProduct(job.product.defaultFailure));
+    }
   };
 
   const rankingMove = () => {

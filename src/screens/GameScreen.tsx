@@ -25,6 +25,7 @@ import {
   staminaDecrese,
   userMoneyIncrease,
   changePrevProductType,
+  changeJobMaxMoney,
 } from "../store/job";
 import { judgeStatus, PlayPattern, PlayStatus } from "../types/play";
 import { Job } from "../types/job";
@@ -129,8 +130,11 @@ const GameScreen = () => {
   useEffect(() => {
     if (playState.stamina <= 0 && nowJob) {
       dispatch(changeStatus(PlayStatus.gameover));
-      dispatch(changeJobRecord(nowJob));
       dispatch(userMoneyIncrease(nowMoney));
+      if (maxMoney <= nowMoney) {
+        dispatch(changeJobRecord(nowMoney));
+        dispatch(changeJobMaxMoney(nowJob));
+      }
     }
   }, [playState.stamina <= 0 && nowJob]);
 

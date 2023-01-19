@@ -18,27 +18,11 @@ const JobRedux = createSlice({
   reducers: {
     changeJob: (state, action: PayloadAction<Job>) => {
       state.job = action.payload;
-      state.user.nowJob = action.payload.name;
-
-      if (state.user.nextProductType === "bonus") {
-        state.nextProduct = action.payload.product.bonus;
-        state.centerProduct = action.payload.product.bonus;
-        state.failureProduct = action.payload.product.bonusFailure;
-      } else {
-        state.nextProduct = action.payload.product.default;
-        state.centerProduct = action.payload.product.default;
-        state.failureProduct = action.payload.product.defaultFailure;
-      }
 
       //このタイミングでprevJobとnextJobを更新させる
       const activeJobs = state.jobs.filter(function (element) {
         return element.isActive === true;
       });
-
-      // console.log(activeJobs[0]);
-      // console.log(action.payload);
-      // console.log(activeJobs.findIndex((job) => job === action.payload));
-      // console.log(activeJobs.indexOf(action.payload));
 
       state.nextJob = activeJobs[activeJobs.indexOf(state.job) + 1];
       state.prevJob = activeJobs[activeJobs.indexOf(state.job) - 1];
@@ -55,25 +39,16 @@ const JobRedux = createSlice({
         state.nextJob = activeJobs[activeJobs.length - 1];
         state.prevJob = activeJobs[activeJobs.length - 1];
       }
-
-      // console.log(activeJobs);
-      // console.log(state.nextJob)
-      // console.log(state.prevJob)
     },
     changePreviewJob: (state, action: PayloadAction<Job | undefined>) => {
       state.previewJob = action.payload;
     },
-    changeUpdateJob: (state, action: PayloadAction<Job>) => {
-      //もしすでにそのJOBをアンロックしていたら
-      if (state.jobs[state.jobs.indexOf(action.payload)].isActive === true) {
-        state.jobs[state.jobs.indexOf(action.payload)].level =
-          action.payload.level + 1;
-        state.jobs[state.jobs.indexOf(action.payload)].outline.level =
-          action.payload.outline.level + 1;
-        state.jobs[state.jobs.indexOf(action.payload)].outline.basicMoney =
-          action.payload.perMoney[action.payload.level - 1];
-      }
-      //もしそのJOBをアンロックしていなかったら
+    updateJob: (state, action: PayloadAction<Job>) => {
+      state.jobs[state.jobs.indexOf(action.payload)].level = action.payload.level + 1;
+      state.jobs[state.jobs.indexOf(action.payload)].outline.level = action.payload.outline.level + 1;
+      state.jobs[state.jobs.indexOf(action.payload)].outline.basicMoney = action.payload.perMoney[action.payload.level - 1];
+    },
+    unlockJob: (state, action: PayloadAction<Job>) => {
       state.jobs[state.jobs.indexOf(action.payload)].isActive = true;
     },
     changePreviewIcon: (state, action: PayloadAction<UserIcons>) => {
@@ -105,13 +80,11 @@ const JobRedux = createSlice({
         state.play.money = 0;
       }
     },
-    changeJobRecord: (state, action: PayloadAction<Job>) => {
-      if (state.job.maxMoney <= state.play.money) {
-        //jobsの方のmaxMoneyとjobの方のmaxMoneyを変える
-        state.jobs[state.jobs.indexOf(action.payload)].maxMoney =
-          state.play.money;
-        state.job.maxMoney = state.play.money;
-      }
+    changeJobMaxMoney: (state, action: PayloadAction<Job>) => {
+      state.jobs[state.jobs.indexOf(action.payload)].maxMoney = state.job.maxMoney;
+    },
+    changeJobRecord: (state, action: PayloadAction<number>) => {
+      state.job.maxMoney = action.payload;
     },
     changeNextProductType: (state, action: PayloadAction<productType>) => {
       state.user.nextProductType = action.payload;
@@ -124,6 +97,9 @@ const JobRedux = createSlice({
     },
     changeCenterProduct: (state, action: PayloadAction<{before: ImageSourcePropType}[]>) => {
       state.centerProduct = action.payload;
+    },
+    changeFailureProduct: (state, action: PayloadAction<{before: ImageSourcePropType}[]>) => {
+      state.failureProduct = action.payload;
     },
     changeUserNowJob: (state, action: PayloadAction<JobType>) => {
       state.user.nowJob = action.payload;
@@ -173,7 +149,8 @@ const JobRedux = createSlice({
 });
 
 export const changeJob = JobRedux.actions.changeJob;
-export const changeUpdateJob = JobRedux.actions.changeUpdateJob;
+export const updateJob = JobRedux.actions.updateJob;
+export const unlockJob = JobRedux.actions.unlockJob;
 export const changePreviewJob = JobRedux.actions.changePreviewJob;
 export const changeUser = JobRedux.actions.changeUser;
 export const changeUsername = JobRedux.actions.changeUsername;
@@ -183,10 +160,12 @@ export const changeCombo = JobRedux.actions.changeCombo;
 export const changeCompletecount = JobRedux.actions.changeCompletecount;
 export const resetCompletecount = JobRedux.actions.resetCompletecount;
 export const changeJobRecord = JobRedux.actions.changeJobRecord;
+export const changeJobMaxMoney = JobRedux.actions.changeJobMaxMoney;
 export const changeNextProductType = JobRedux.actions.changeNextProductType;
 export const changePrevProductType = JobRedux.actions.changePrevProductType;
 export const changeNextProduct = JobRedux.actions.changeNextProduct;
 export const changeCenterProduct = JobRedux.actions.changeCenterProduct;
+export const changeFailureProduct = JobRedux.actions.changeFailureProduct;
 export const changeGachaStatus = JobRedux.actions.changeGachaStatus;
 export const changeUserNowJob = JobRedux.actions.changeUserNowJob;
 export const staminaDecrese = JobRedux.actions.staminaDecrese;

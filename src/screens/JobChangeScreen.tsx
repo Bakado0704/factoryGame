@@ -12,12 +12,16 @@ import Job from "../models/job";
 import { Job as _Job } from "../types/job";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeCenterProduct,
+  changeFailureProduct,
   changeJob,
   changeMute,
+  changeNextProduct,
   changePreviewIcon,
   changePreviewJob,
   changeUser,
   changeUsername,
+  changeUserNowJob,
   userPage,
 } from "../store/job";
 import { useState } from "react";
@@ -30,6 +34,7 @@ import { Mute } from "../types/user";
 
 const JobChangeScreen = () => {
   const jobs = useSelector((state: RootState) => state.job.jobs);
+  const Job = useSelector((state: RootState) => state.job.job);
   const previewJob = useSelector((state: RootState) => state.job.previewJob);
   const previewIcon = useSelector((state: RootState) => state.job.previewIcon);
   const user = useSelector((state: RootState) => state.job.user);
@@ -39,6 +44,7 @@ const JobChangeScreen = () => {
   const userId = user.id;
   const mute = user.mute;
   const userMoney = user.money;
+  const nextProductType = user.nextProductType;
 
   const [userModal, setUserModal] = useState(false);
   const navigation: NavigationProp<ParamListBase> = useNavigation();
@@ -67,6 +73,16 @@ const JobChangeScreen = () => {
       throw new Error("previewJobUndefined");
     }
     dispatch(changeJob(previewJob));
+    dispatch(changeUserNowJob(previewJob.name));
+    if (nextProductType === "bonus") {
+      dispatch(changeNextProduct(previewJob.product.bonus));
+      dispatch(changeCenterProduct(previewJob.product.bonus));
+      dispatch(changeFailureProduct(previewJob.product.bonusFailure));
+    } else {
+      dispatch(changeNextProduct(previewJob.product.default));
+      dispatch(changeCenterProduct(previewJob.product.default));
+      dispatch(changeFailureProduct(previewJob.product.defaultFailure));
+    }
   };
 
   const jobModalOffHandler = () => {
