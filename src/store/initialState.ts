@@ -719,10 +719,9 @@ const initialState: state = {
   user: {
     name: "user001",
     id: "user001",
-    money: 1000,
+    money: 0,
     icon: UserIconType.man1,
     nowJob: JobType.yamagawa,
-    gachaStandBy: false,
     prevProductType: productType.default,
     nextProductType: productType.default,
     page: "start",

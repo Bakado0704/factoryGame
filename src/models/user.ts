@@ -12,7 +12,6 @@ export default class User implements User {
     public money: number,
     public icon: UserIconType,
     public nowJob: JobType,
-    public gachaStandBy: boolean,
     public prevProductType: productType,
     public nextProductType: productType,
     public page: page,
@@ -27,7 +26,6 @@ export default class User implements User {
     this.money = money;
     this.icon = icon;
     this.nowJob = nowJob;
-    this.gachaStandBy = gachaStandBy;
     this.prevProductType = prevProductType;
     this.nextProductType = nextProductType;
     this.page = page;

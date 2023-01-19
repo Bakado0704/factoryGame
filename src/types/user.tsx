@@ -10,7 +10,6 @@ export interface User {
   money: number;
   icon: UserIconType;
   nowJob: JobType;
-  gachaStandBy: boolean;
   prevProductType: productType;
   nextProductType: productType;
   page: page;
