@@ -24,11 +24,11 @@ import { changeCenterProduct, changeFailureProduct, changeNextProduct } from "..
 
 const JobChangeScreen = () => {
   const jobs = useSelector((state: RootState) => state.job.jobs);
-  const Job = useSelector((state: RootState) => state.job.job);
   const previewJob = useSelector((state: RootState) => state.job.previewJob);
   const previewIcon = useSelector((state: RootState) => state.user.previewIcon);
   const user = useSelector((state: RootState) => state.user.user);
   const userIcons = useSelector((state: RootState) => state.user.UserIcons);
+  
   const userIcon = user.icon;
   const userName = user.name;
   const userId = user.id;

@@ -50,8 +50,10 @@ export default JobReturnButton;
 
 const styles = StyleSheet.create({
   jobReturnButtonContainer: {
-    width: 100,
-    height: 32,
+    width: 105,
+    height: 37,
+    paddinRight: 5,
+    paddingTop: 5,
   },
   jobReturnButton: {
     width: "100%",
@@ -59,8 +61,8 @@ const styles = StyleSheet.create({
   },
   jobReturnButtonActive: {
     position: "absolute",
-    top: 0,
-    left: 0,
+    top: 5,
+    right: 0,
     width: "100%",
     height: "100%",
   },

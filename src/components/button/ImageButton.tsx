@@ -4,15 +4,16 @@ import React from "react";
 export interface Props {
   onPress: (event: React.ChangeEvent<HTMLInputElement>) => void;
   style: object;
+  padding: number;
   source: ImageSourcePropType;
 }
 
-const ImageButton= ({ source, onPress, style }: Props) => {
+const ImageButton= ({ source, onPress, style, padding }: Props) => {
   return (
     <View>
       <Pressable
         onPress={onPress}
-        style={({ pressed }) => pressed && styles.pressed}
+        style={({ pressed }) => [pressed && styles.pressed, {padding: padding}]}
         android_ripple={{ color: "#ccc" }}
       >
         <Image style={style} source={source} />

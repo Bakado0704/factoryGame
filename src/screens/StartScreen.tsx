@@ -23,6 +23,7 @@ import { changeCenterProduct, changeFailureProduct, changeNextProduct } from "..
 
 const StartScreen = () => {
   const Job = useSelector((state: RootState) => state.job.job);
+  const jobs = useSelector((state: RootState) => state.job.jobs);
   const nextJob = useSelector((state: RootState) => state.job.nextJob);
   const prevJob = useSelector((state: RootState) => state.job.prevJob);
   const user = useSelector((state: RootState) => state.user.user);
@@ -41,17 +42,13 @@ const StartScreen = () => {
   const drink = user.drink;
   const drinkCost = user.drinkCost;
   const nextProductType = user.nextProductType;
+  const activeJobs = jobs.filter(function (element) {
+    return element.isActive === true;
+  });
+  const activeJobsLength = activeJobs.length;
 
   const dispatch = useDispatch();
   const navigation: NavigationProp<ParamListBase> = useNavigation();
-
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener("focus", () => {
-  //     dispatch(changeJob(Job));
-  //   });
-
-  //   return unsubscribe;
-  // }, []);
 
   const [setting, setSetting] = useState(false);
   const [userModal, setUserModal] = useState(false);
@@ -145,6 +142,7 @@ const StartScreen = () => {
           page={page}
           jobDecideHandler={jobDecideHandler}
           rankingMove={rankingMove}
+          activeJobsLength={activeJobsLength}
           prevJob={prevJob}
           nextJob={nextJob}
         />

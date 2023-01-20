@@ -12,14 +12,24 @@ import { RootState } from "../store/store";
 import { Job } from "../types/job";
 import { changeUserNowJob, userPage } from "../store/user";
 import { changeJob } from "../store/job";
-import { changeCenterProduct, changeFailureProduct, changeNextProduct } from "../store/product";
+import {
+  changeCenterProduct,
+  changeFailureProduct,
+  changeNextProduct,
+} from "../store/product";
 
 function RankingScreen() {
   const Job = useSelector((state: RootState) => state.job.job);
+  const jobs = useSelector((state: RootState) => state.job.jobs);
   const nextJob = useSelector((state: RootState) => state.job.nextJob);
   const prevJob = useSelector((state: RootState) => state.job.prevJob);
   const user = useSelector((state: RootState) => state.user.user);
-  
+
+  const activeJobs = jobs.filter(function (element) {
+    return element.isActive === true;
+  });
+  const activeJobsLength = activeJobs.length;
+
   const activeBoard = Job.boardImg;
   const maxMoney = Job.maxMoney;
   const page = user.page;
@@ -65,6 +75,7 @@ function RankingScreen() {
             maxMoney={maxMoney}
             activeBoard={activeBoard}
             page={page}
+            activeJobsLength={activeJobsLength}
             jobDecideHandler={jobDecideHandler}
             rankingMove={rankingMove}
             prevJob={prevJob}
@@ -75,6 +86,7 @@ function RankingScreen() {
               source={require("../assets/ui/returnButton.png")}
               onPress={returnHandler}
               style={styles.returnButton}
+              padding={5}
             />
           </View>
         </View>
@@ -88,12 +100,12 @@ export default RankingScreen;
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
+    padding: 8,
     position: "relative",
   },
   innerContainer: {
     flex: 1,
     justifyContent: "space-between",
-    padding: 8,
   },
   iconContainer: {
     position: "absolute",
@@ -106,14 +118,13 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   buttonContainer: {
-    flex: 4,
     alignItems: "flex-end",
     justifyContent: "center",
     flexDirection: "row",
+    flex: 4,
   },
   returnButton: {
     width: 143,
     height: 52,
-    marginBottom: 10
   },
 });

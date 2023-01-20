@@ -13,6 +13,7 @@ type Props = {
   page: page;
   prevJob: Job;
   nextJob: Job;
+  activeJobsLength: number;
   jobDecideHandler: (job: Job) => void;
   rankingMove: () => void;
 };
@@ -23,6 +24,7 @@ const NavSelect = ({
   prevJob,
   nextJob,
   page,
+  activeJobsLength,
   jobDecideHandler,
   rankingMove,
 }: Props) => {
@@ -41,22 +43,38 @@ const NavSelect = ({
   return (
     <View style={styles.rootContainer}>
       <View style={styles.containerTop}>
-        <PrevButton pressHandler={prevHandler} />
+        {activeJobsLength === 1 && (
+          <Image
+            source={require("../../../assets/ui/prevButtonStop.png")}
+            style={styles.button}
+          />
+        )}
+        {activeJobsLength !== 1 && <PrevButton pressHandler={prevHandler} />}
         <BoardImg type={activeBoard} />
-        <NextButton pressHandler={nextHandler} />
+        {activeJobsLength !== 1 && <NextButton pressHandler={nextHandler} />}
+        {activeJobsLength === 1 &&
+          <Image
+            source={require("../../../assets/ui/nextButtonStop.png")}
+            style={styles.button}
+          />
+        }
       </View>
-      {page !== "ranking" && <View style={styles.containerBottom}>
-        <RankingButton pressHandler={pressHandler} />
-        <Image
-          source={require("../../../assets/ui/rankingCoron.png")}
-          style={styles.coron}
-        />
-        <Image
-          source={require("../../../assets/ui/money1.png")}
-          style={styles.moneyImg}
-        />
-        <ShadowText size={20} color="white">{new Intl.NumberFormat().format(maxMoney)}</ShadowText>
-      </View>}
+      {page !== "ranking" && (
+        <View style={styles.containerBottom}>
+          <RankingButton pressHandler={pressHandler} />
+          <Image
+            source={require("../../../assets/ui/rankingCoron.png")}
+            style={styles.coron}
+          />
+          <Image
+            source={require("../../../assets/ui/money1.png")}
+            style={styles.moneyImg}
+          />
+          <ShadowText size={20} color="white">
+            {new Intl.NumberFormat().format(maxMoney)}
+          </ShadowText>
+        </View>
+      )}
     </View>
   );
 };
@@ -68,6 +86,7 @@ const styles = StyleSheet.create({
     flex: 4,
     justifyContent: "flex-start",
     alignItems: "center",
+    transform: [{ translateY: -10 }],
   },
   containerTop: {
     flexDirection: "row",
@@ -78,16 +97,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 6,
   },
   coron: {
     width: 7,
     height: 25,
+    marginHorizontal: 5,
+  },
+  button: {
+    width: 25,
+    height: 70,
+    marginVertical: 5,
     marginHorizontal: 10,
   },
   moneyImg: {
     width: 33,
     height: 33,
-    marginRight: 5,
+    marginHorizontal: 5,
   },
 });

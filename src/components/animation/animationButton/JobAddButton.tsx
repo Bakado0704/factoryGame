@@ -50,8 +50,10 @@ export default JobAddButton;
 
 const styles = StyleSheet.create({
   jobAddButtonContainer: {
-    width: 100,
-    height: 32,
+    width: 105,
+    height: 37,
+    paddingLeft: 5,
+    paddingTop: 5,
   },
   jobAddButton: {
     width: "100%",
@@ -59,8 +61,8 @@ const styles = StyleSheet.create({
   },
   jobAddButtonActive: {
     position: "absolute",
-    top: 0,
-    left: 0,
+    top: 5,
+    left: 5,
     width: "100%",
     height: "100%",
   },

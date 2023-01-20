@@ -120,6 +120,7 @@ const Setting = ({ drink, drinkCost, offSetting, perMoney, userDrinkHandler }: P
             source={require("../assets/ui/okButton.png")}
             onPress={offSetting}
             style={styles.okButton}
+            padding={5}
           />
         </View>
       </View>

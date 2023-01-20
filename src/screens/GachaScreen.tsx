@@ -17,7 +17,16 @@ import {
 } from "@react-navigation/native";
 import { GachaStatus } from "../types/gacha";
 import { Mute } from "../types/user";
-import { changeGachaCost, changeGachaStatus, changeMute, changePreviewIcon, changeUser, changeUsername, userMoneyIncrease, userPage } from "../store/user";
+import {
+  changeGachaCost,
+  changeGachaStatus,
+  changeMute,
+  changePreviewIcon,
+  changeUser,
+  changeUsername,
+  userMoneyIncrease,
+  userPage,
+} from "../store/user";
 import { unlockJob, updateJob } from "../store/job";
 
 function GachaScreen() {
@@ -144,6 +153,7 @@ function GachaScreen() {
         resizeMode="cover"
         style={styles.rootScreen}
       >
+        <ZimuPerson />
         <View style={styles.innerContainer}>
           <NavHead
             icon={userIcon}
@@ -157,7 +167,6 @@ function GachaScreen() {
             startMove={startMove}
             gachaCost={gachaCost}
           />
-          <ZimuPerson />
         </View>
         {envelope}
         {result}

@@ -36,7 +36,11 @@ const JobRedux = createSlice({
     updateJob: (state, action: PayloadAction<Job>) => {
       state.jobs[state.jobs.indexOf(action.payload)].level = action.payload.level + 1;
       state.jobs[state.jobs.indexOf(action.payload)].outline.level = action.payload.outline.level + 1;
-      state.jobs[state.jobs.indexOf(action.payload)].outline.basicMoney = action.payload.perMoney[action.payload.level - 1];
+      if (action.payload.level <= 10) {
+        state.jobs[state.jobs.indexOf(action.payload)].outline.basicMoney = action.payload.perMoney[action.payload.level - 1];
+      } else if (action.payload.level >= 11) {
+        state.jobs[state.jobs.indexOf(action.payload)].outline.basicMoney = action.payload.perMoney[9] + action.payload.level - 10;
+      }
     },
     unlockJob: (state, action: PayloadAction<Job>) => {
       state.jobs[state.jobs.indexOf(action.payload)].isActive = true;

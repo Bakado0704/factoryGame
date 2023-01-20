@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
+    transform: [{ translateY: 5 }],
   },
   outerContainer: {
     width: 71,

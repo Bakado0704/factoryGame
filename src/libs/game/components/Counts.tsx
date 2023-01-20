@@ -12,7 +12,6 @@ type Props = {
   drink: number;
   plusMoney: number;
   judgeHandler: (judge: judgeStatus) => void;
-  stateHandler: (state: PlayStatus) => void;
   damageHandler: (number: number) => void;
   changeComboHandler: (number: number) => void;
   changeCompleteCount: (number: number) => void;
@@ -31,7 +30,6 @@ const Counts = ({
   drink,
   plusMoney,
   judgeHandler,
-  stateHandler,
   damageHandler,
   changeComboHandler,
   changeCompleteCount,
@@ -156,7 +154,6 @@ const Counts = ({
         allGaps={allGaps}
         playState={playState}
         setAllGaps={setAllGaps}
-        stateHandler={stateHandler}
         setCount={setCount}
         setIsRunning={setIsRunning}
         judgeHandler={judgeHandler}

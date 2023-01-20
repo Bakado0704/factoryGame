@@ -26,8 +26,6 @@ const Gameover = ({
   message,
   completeCount,
 }: Props) => {
-
-
   return (
     <>
       <View style={styles.rootScreen}>
@@ -69,7 +67,7 @@ const Gameover = ({
                 style={styles.moneyBigImg}
               />
               <ShadowText size={50} color="white">
-                {nowMoney}
+                {new Intl.NumberFormat().format(nowMoney)}
               </ShadowText>
             </View>
           </View>
@@ -95,7 +93,7 @@ const Gameover = ({
               style={styles.moneyImg}
             />
             <ShadowText size={20} color="white">
-              {maxMoney}
+            {new Intl.NumberFormat().format(maxMoney)}
             </ShadowText>
           </View>
         </View>
@@ -105,6 +103,7 @@ const Gameover = ({
             source={require("../assets/ui/okButton.png")}
             onPress={offModal}
             style={styles.okButton}
+            padding={5}
           />
         </View>
       </View>
@@ -235,6 +234,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: "center",
     alignItems: "center",
+    marginTop: -5,
   },
   okButton: {
     width: 322,

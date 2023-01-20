@@ -11,6 +11,7 @@ import ConveyorLine from "./ConveyorLine";
 import Light from "./Light";
 import { JobType } from "../../types/job";
 import Explosion from "./Explostion";
+import Star from "./Star";
 export type Props = {
   playState: Play;
   activeProductLength: number;
@@ -100,6 +101,10 @@ const Product = ({
           height: activeProductHeight,
         }}
       />
+      <Star
+        activeProductWidth={activeProductWidth}
+        activeProductHeight={activeProductHeight}
+      />
     </View>
   );
 
@@ -119,6 +124,10 @@ const Product = ({
           width: activeProductWidth,
           height: activeProductHeight,
         }}
+      />
+      <Star
+        activeProductWidth={activeProductWidth}
+        activeProductHeight={activeProductHeight}
       />
     </Animated.View>
   );
@@ -142,6 +151,10 @@ const Product = ({
             width: activeProductWidth,
             height: activeProductHeight,
           }}
+        />
+        <Star
+          activeProductWidth={activeProductWidth}
+          activeProductHeight={activeProductHeight}
         />
       </Animated.View>
     );

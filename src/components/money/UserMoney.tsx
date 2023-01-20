@@ -10,7 +10,7 @@ const UserMoney = ({ userMoney }: Props) => {
 
   return (
     <View style={styles.rootScreen}>
-      <View style={styles.outerContainer}>
+      <View style={{}}>
         <ImageBackground
           source={require("../../assets/ui/bgMoney.png")}
           imageStyle={styles.backgroundImage}
@@ -30,6 +30,7 @@ const UserMoney = ({ userMoney }: Props) => {
               source={require("../../assets/ui/plusButton.png")}
               onPress={pressHandler}
               style={styles.plusButton}
+              padding={7}
             />
           </View>
         </ImageBackground>
@@ -42,26 +43,23 @@ export default UserMoney;
 
 const styles = StyleSheet.create({
   rootScreen: {
-    flex: 1,
-    position: "relative",
-  },
-  outerContainer: {
-    position: "absolute",
-    top: 0,
-    left: -20,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    transform: [{ translateX: -20 }],
   },
   backgroundImage: {
+    position: "absolute",
     width: 171,
     height: 38,
+    top: 0,
+
   },
   innerContainer: {
-    flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    flexDirection: "row",
     width: 171,
     height: 38,
-    position: "relative",
-    paddingHorizontal: 6,
   },
   plusButton: {
     width: 30,
@@ -70,17 +68,17 @@ const styles = StyleSheet.create({
   moneyImg: {
     width: 28,
     height: 28,
-    transform: [{ translateX: 12 }],
+    transform: [{ translateX: 20 }],
   },
   numberContainer: {
     width: 70,
     justifyContent: "flex-end",
     alignItems: "flex-end",
-    transform: [{ translateX: 10 }],
   },
   money: {
     fontSize: 14,
     fontFamily: "MochiyPop",
     color: "#fff",
+    transform: [{ translateX: 18 }],
   },
 });

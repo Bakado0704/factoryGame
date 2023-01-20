@@ -19,7 +19,6 @@ type Props = {
   nowMoney: number;
   productType: productType;
   judgeHandler: (judge: judgeStatus) => void;
-  stateHandler: (state: PlayStatus) => void;
   damageHandler: (number: number) => void;
   changeComboHandler: (number: number) => void;
   changeCompleteCount: (number: number) => void;
@@ -40,7 +39,6 @@ const Game = ({
   plusMoney,
   nowMoney,
   judgeHandler,
-  stateHandler,
   damageHandler,
   changeComboHandler,
   changeCompleteCount,
@@ -109,7 +107,6 @@ const Game = ({
           drink={drink}
           playState={playState}
           judgeHandler={judgeHandler}
-          stateHandler={stateHandler}
           damageHandler={damageHandler}
           changeComboHandler={changeComboHandler}
           changeCompleteCount={changeCompleteCount}

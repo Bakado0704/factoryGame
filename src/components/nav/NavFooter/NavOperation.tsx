@@ -1,8 +1,4 @@
-import {
-  View,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import React from "react";
 import {
   NavigationProp,
@@ -37,15 +33,15 @@ const NavOperation = ({
   return (
     <>
       <View style={styles.rootConteiner}>
-          <Image
-            source={require("../../../assets/ui/operationBoard.png")}
-            style={styles.operationBoard}
-          />
-          <StartButtons
-            gameHandler={gameHandler}
-            onSetting={onSetting}
-            pressHandler={pressHandler}
-          />
+        <Image
+          source={require("../../../assets/ui/operationBoard.png")}
+          style={styles.operationBoard}
+        />
+        <StartButtons
+          gameHandler={gameHandler}
+          onSetting={onSetting}
+          pressHandler={pressHandler}
+        />
       </View>
     </>
   );
@@ -58,6 +54,7 @@ const styles = StyleSheet.create({
     flex: 4,
     justifyContent: "flex-end",
     alignItems: "center",
+    transform: [{ translateY: -5 }],
   },
   innerContainer: {
     flexDirection: "row",

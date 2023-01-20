@@ -8,7 +8,7 @@ import {
   Text,
   Image,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import ImageButton from "../components/button/ImageButton";
 import UserIcons from "../models/userIcons";
 import UserIcon from "../components/face/UserIcon";
@@ -141,6 +141,7 @@ const userModal = ({
               source={soundSource}
               onPress={soundChange}
               style={styles.soundButton}
+              padding={8}
             />
           </View>
         </View>
@@ -149,6 +150,7 @@ const userModal = ({
             source={require("../assets/ui/okButton.png")}
             onPress={offUserModal}
             style={styles.okButton}
+            padding={5}
           />
         </View>
       </View>
@@ -299,7 +301,6 @@ const styles = StyleSheet.create({
   soundButton: {
     width: 64,
     height: 24,
-    marginRight: 8,
   },
   buttonContainer: {
     justifyContent: "center",
@@ -309,6 +310,7 @@ const styles = StyleSheet.create({
   okButton: {
     width: 322,
     height: 52,
+    marginTop: -5,
   },
   pressed: {
     opacity: 0.75,

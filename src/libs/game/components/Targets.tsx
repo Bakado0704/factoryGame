@@ -15,7 +15,6 @@ type Props = {
   allGaps: number[];
   playState: Play;
   setAllGaps: (number: number[]) => void;
-  stateHandler: (state: PlayStatus) => void;
   setIsRunning: (state: boolean) => void;
   setCount: (number: number) => void;
   judgeHandler: (judge: judgeStatus) => void;
@@ -31,7 +30,6 @@ const Targets = ({
   allGaps,
   playState,
   setAllGaps,
-  stateHandler,
   setIsRunning,
   setCount,
   judgeHandler,
@@ -108,6 +106,7 @@ const Targets = ({
         source={playpattern.target.ImageSource}
         style={styles.button}
         onPress={lapHandler}
+        padding={8}
       />
     </>
   );
@@ -132,9 +131,7 @@ const styles = StyleSheet.create({
     opacity: 0.02,
   },
   button: {
-    marginTop: 72,
-    marginBottom: 8,
-    marginHorizontal: 10,
+    marginTop: 64,
     width: 59,
     height: 64,
   },

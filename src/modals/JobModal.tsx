@@ -147,6 +147,7 @@ const JobModal = ({
                 source={button}
                 onPress={jobDecide}
                 style={styles.jobDecideButton}
+                padding={5}
               />
             </View>
           </View>
@@ -154,6 +155,7 @@ const JobModal = ({
             source={require("../assets/ui/closeButton.png")}
             onPress={offModal}
             style={styles.closeButton}
+            padding={0}
           />
         </View>
       </View>
@@ -219,7 +221,7 @@ const styles = StyleSheet.create({
     height: 55,
     top: 0,
     right: 0,
-    transform: [{ translateX: 20 }, { translateY: -550 }],
+    transform: [{ translateX: 20 }, { translateY: -555 }],
     elevation: 10,
   },
   ButtonContainer: {

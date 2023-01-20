@@ -63,6 +63,5 @@ const styles = StyleSheet.create({
   board: {
     width: 222,
     height: 60,
-    marginHorizontal: 10,
   },
 });

@@ -18,26 +18,28 @@ const NavGacha = ({ onModal, startMove, gachaCost }: Props) => {
         source={require("../../../assets/ui/homeButton.png")}
         onPress={homeHandler}
         style={styles.homeButton}
+        padding={5}
       />
-      <View style={styles.submitButtonContainer}>
-        <Pressable
-          onPress={onModal}
-          style={({ pressed }) => pressed && styles.pressed}
-          android_ripple={{ color: "#ccc" }}
-        >
+
+      <Pressable
+        onPress={onModal}
+        style={({ pressed }) => [pressed && styles.pressed, { padding: 5 }]}
+        android_ripple={{ color: "#ccc" }}
+      >
+        <Image
+          style={styles.submitButton}
+          source={require("../../../assets/ui/submitButton.png")}
+        />
+        <View style={styles.gachaContainer}>
           <Image
-            style={styles.submitButton}
-            source={require("../../../assets/ui/submitButton.png")}
+            style={styles.moneyImg}
+            source={require("../../../assets/ui/money1.png")}
           />
-          <View style={styles.gachaContainer}>
-            <Image
-              style={styles.moneyImg}
-              source={require("../../../assets/ui/money1.png")}
-            />
-            <Text style={styles.gachaCost}>{new Intl.NumberFormat().format(gachaCost)}</Text>
-          </View>
-        </Pressable>
-      </View>
+          <Text style={styles.gachaCost}>
+            {new Intl.NumberFormat().format(gachaCost)}
+          </Text>
+        </View>
+      </Pressable>
 
       <View style={styles.space}></View>
     </View>
@@ -65,7 +67,6 @@ const styles = StyleSheet.create({
   submitButtonContainer: {
     width: 210,
     height: 99,
-    marginHorizontal: 8,
   },
   gachaContainer: {
     position: "absolute",
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    transform: [{ translateY: 12 }],
+    transform: [{ translateY: 18 }],
   },
   submitButton: {
     width: 210,

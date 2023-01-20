@@ -17,16 +17,22 @@ const JobGet = ({ offModal, job }: Props) => {
   const name = job.name;
   const level = job.level + 1;
   const prevLevel = job.level;
-  const perMoney = job.perMoney[level - 1];
-  const prevPerMoney = job.perMoney[prevLevel - 1];
   const ownerName = job.owner.name;
   const icon = job.icon;
   const BackgroundImg = job.backgroundImg;
   const isActive = job.isActive;
 
+  let perMoney = job.perMoney[level - 1];
+  let prevPerMoney = job.perMoney[prevLevel - 1];
+  
   let headColor = Colors.yamagawaHeadColor;
   let mainColor = Colors.yamagawaMainColor;
   let borderColor = Colors.yamagawaBorderColor;
+
+  if (level >= 10) {
+    perMoney = job.perMoney[9] + level - 10;
+    prevPerMoney = job.perMoney[9] + prevLevel - 10;
+  }
 
   switch (name) {
     case "山川製作所": {
@@ -178,6 +184,7 @@ const JobGet = ({ offModal, job }: Props) => {
             source={require("../assets/ui/okButton.png")}
             onPress={offModal}
             style={styles.okButton}
+            padding={5}
           />
         </View>
       </View>
@@ -284,6 +291,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: "center",
     alignItems: "center",
+    marginTop: -5,
   },
   okButton: {
     width: 322,

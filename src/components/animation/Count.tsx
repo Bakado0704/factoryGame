@@ -12,7 +12,7 @@ const Count = ({ targetNum, diffNum }: Props) => {
     let startNumber = targetNum - diffNum;
     let countNum = 0;
     let counterData: number;
-    let speed: number = 10 / diffNum;
+    let speed: number = Math.floor(10 / diffNum);
     let sum: number;
 
     if (targetNum !== 0) {

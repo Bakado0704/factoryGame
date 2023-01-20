@@ -66,9 +66,6 @@ const GameScreen = () => {
   const judgeHandler = (judge: judgeStatus) => {
     dispatch(changeJudge(judge));
   };
-  const stateHandler = (state: PlayStatus) => {
-    dispatch(changeStatus(state));
-  };
   const damageHandler = (number: number) => {
     dispatch(staminaDecrese(number));
   };
@@ -159,7 +156,6 @@ const GameScreen = () => {
         plusMoney={plusMoney}
         productType={prevProductType}
         judgeHandler={judgeHandler}
-        stateHandler={stateHandler}
         damageHandler={damageHandler}
         changeComboHandler={changeComboHandler}
         changeCompleteCount={changeCompleteCount}

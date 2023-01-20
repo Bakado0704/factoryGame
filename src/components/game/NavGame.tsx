@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     height: 17,
     backgroundColor: Colors.stamina,
     position: "absolute",
-    bottom: 74,
+    bottom: 72,
     left: 235,
   },
 });

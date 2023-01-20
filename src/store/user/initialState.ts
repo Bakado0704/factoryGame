@@ -38,7 +38,7 @@ const initialState: state = {
   user: {
     name: "user001",
     id: "user001",
-    money: 0,
+    money: 100000,
     icon: UserIconType.man1,
     nowJob: JobType.yamagawa,
     prevProductType: productType.default,

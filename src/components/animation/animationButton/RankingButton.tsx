@@ -59,12 +59,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  containerBottom: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 6,
-  },
   prevButton: {
     width: 25,
     height: 70,
@@ -74,8 +68,9 @@ const styles = StyleSheet.create({
     height: 70,
   },
   rankingButtonContainer: {
-    width: 31,
-    height: 35,
+    width: 41,
+    height: 45,
+    padding: 5,
   },
   rankingButton: {
     width: "100%",
@@ -83,8 +78,8 @@ const styles = StyleSheet.create({
   },
   rankingButtonActive: {
     position: "absolute",
-    top: 0,
-    left: 0,
+    top: 5,
+    left: 5,
     width: "100%",
     height: "100%",
   },

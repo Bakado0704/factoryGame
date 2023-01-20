@@ -1,4 +1,4 @@
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, ImageBackground } from "react-native";
 import NextButton from "../../animation/animationButton/NextButton";
 import PrevButton from "../../animation/animationButton/PrevButton";
 
@@ -45,16 +45,15 @@ const NavDrink = ({ drink, userDrinkHandler }: Props) => {
 
   return (
     <View style={styles.rootContainer}>
-      <Image
+      <ImageBackground
         source={require("../../../assets/ui/modalBackgroundLight.png")}
         style={styles.drinkBackground}
-      />
-      <View style={styles.containerTop}>
+      >
         <PrevButton pressHandler={prevHandler} />
         {drinks}
         {emptyDrinks}
         <NextButton pressHandler={nextHandler} />
-      </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -67,14 +66,14 @@ const styles = StyleSheet.create({
     height: 106,
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 5,
-  },
-  containerTop: {
-    alignItems: "center",
     flexDirection: "row",
+    marginVertical: 10,
   },
   drinkBackground: {
     position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
     width: 260,
     height: 106,
   },
