@@ -8,7 +8,6 @@ const JobRedux = createSlice({
   reducers: {
     changeJob: (state, action: PayloadAction<Job>) => {
       state.job = action.payload;
-
       //このタイミングでprevJobとnextJobを更新させる
       const activeJobs = state.jobs.filter(function (element) {
         return element.isActive === true;

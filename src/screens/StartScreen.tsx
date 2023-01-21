@@ -6,6 +6,7 @@ import NavOperation from "../components/nav/NavFooter/NavOperation";
 import Setting from "../modals/SettingModal";
 import UserModal from "../modals/UserModal";
 import { useDispatch, useSelector } from "react-redux";
+import {useEffect} from "react";
 import UserIcons from "../models/userIcons";
 import { RootState } from "../store/store";
 import { PlayStatus } from "../types/play";
@@ -14,9 +15,20 @@ import {
   NavigationProp,
   ParamListBase,
   useNavigation,
+  useIsFocused,
 } from "@react-navigation/native";
 import { Mute } from "../types/user";
-import { changeMute, changePreviewIcon, changeUser, changeUsername, changeUserNowJob, userDrink, userDrinkReset, userMoneyIncrease, userPage } from "../store/user";
+import {
+  changeMute,
+  changePreviewIcon,
+  changeUser,
+  changeUsername,
+  changeUserNowJob,
+  userDrink,
+  userDrinkReset,
+  userMoneyIncrease,
+  userPage,
+} from "../store/user";
 import { changeStatus, staminaReset } from "../store/play";
 import { changeJob } from "../store/job";
 
@@ -28,10 +40,10 @@ const StartScreen = () => {
   const user = useSelector((state: RootState) => state.user.user);
   const previewIcon = useSelector((state: RootState) => state.user.previewIcon);
   const userIcons = useSelector((state: RootState) => state.user.UserIcons);
-  
+
   const activeBoard = Job.boardImg;
   const perMoney = Job.outline.basicMoney;
-  const maxMoney = Job.maxMoney;
+  let maxMoney = Job.maxMoney;
   const page = user.page;
   const userIcon = user.icon;
   const userName = user.name;
@@ -50,6 +62,12 @@ const StartScreen = () => {
 
   const [setting, setSetting] = useState(false);
   const [userModal, setUserModal] = useState(false);
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    maxMoney = Job.maxMoney;
+  }, [isFocused]);
 
   const onSettingHandler = () => {
     setSetting(true);
