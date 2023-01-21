@@ -70,42 +70,51 @@ const Envelope = ({ user, resultHandler, envelopeOpenHandler }: Props) => {
     animation();
   };
 
+  let closedOpacity = 0;
+  let openedOpacity = 0;
+
+  if (user.gachaStatus === GachaStatus.closed) {
+    closedOpacity = 1;
+    openedOpacity = 0;
+  }
+
+  if (user.gachaStatus === GachaStatus.opened) {
+    closedOpacity = 0;
+    openedOpacity = 1;
+  }
+
   return (
     <>
-      {user.gachaStatus === GachaStatus.closed && (
-        <View style={styles.envelopeContainer}>
-          <Animated.Text style={[styles.text, { opacity: envelopeText }]}>
-            タップして開封しよう !
-          </Animated.Text>
-          <Animated.View
-            style={[{ width: envelopeWidth }, { height: envelopeHeight }]}
-          >
-            <Pressable onPress={envelopeHandler}>
-              <Image
-                source={require("../../assets/ui/envelope.png")}
-                style={styles.envelopeOpen}
-              />
-            </Pressable>
-          </Animated.View>
-        </View>
-      )}
-      {user.gachaStatus === GachaStatus.opened && (
-        <View style={styles.envelopeContainer}>
-          <Image
-            source={require("../../assets/ui/envelopeOpen.png")}
-            style={styles.envelopeClosed}
-          />
-          {user.gachaStatus === GachaStatus.opened && (
-            <Animated.View
-              style={[
-                styles.sheet,
-                { transform: [{ translateY: sheetY }, { translateX: 0.5 }] },
-                { height: sheetHeight },
-              ]}
+      <View style={[styles.envelopeContainer, { opacity: openedOpacity }]}>
+        <Image
+          source={require("../../assets/ui/envelopeOpen.png")}
+          style={styles.envelopeClosed}
+        />
+
+        <Animated.View
+          style={[
+            styles.sheet,
+            { transform: [{ translateY: sheetY }, { translateX: 0.5 }] },
+            { height: sheetHeight },
+          ]}
+        />
+      </View>
+
+      <View style={[styles.envelopeContainer, { opacity: closedOpacity }]}>
+        <Animated.Text style={[styles.text, { opacity: envelopeText }]}>
+          タップして開封しよう !
+        </Animated.Text>
+        <Animated.View
+          style={[{ width: envelopeWidth }, { height: envelopeHeight }]}
+        >
+          <Pressable onPress={envelopeHandler}>
+            <Image
+              source={require("../../assets/ui/envelope.png")}
+              style={styles.envelopeOpen}
             />
-          )}
-        </View>
-      )}
+          </Pressable>
+        </Animated.View>
+      </View>
     </>
   );
 };

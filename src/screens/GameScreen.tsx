@@ -113,19 +113,19 @@ const GameScreen = () => {
 
   //スタミナが0になるとゲームオーバー
   useEffect(() => {
-    if (playState.stamina <= 0 && nowJob) {
+    if (playState.stamina <= 0) {
       dispatch(changeStatus(PlayStatus.gameover));
       dispatch(userMoneyIncrease(nowMoney));
-      if (maxMoney <= nowMoney) {
-        dispatch(changeJobRecord(nowMoney));
-        dispatch(changeJobMaxMoney(nowJob));
-      }
     }
-  }, [playState.stamina <= 0 && nowJob]);
+  }, [playState.stamina <= 0]);
 
   //結果を受け入れたとき,ステータスをstopに戻し、スタート画面に戻る
   const offModalHandler = () => {
     dispatch(changeStatus(PlayStatus.stop));
+    if (maxMoney <= nowMoney && nowJob) {
+      dispatch(changeJobRecord(nowMoney));
+      dispatch(changeJobMaxMoney(nowJob));
+    }
     dispatch(changeNowMoney(0));
     dispatch(changeCombo(0));
     dispatch(resetCompletecount());

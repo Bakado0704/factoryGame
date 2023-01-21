@@ -52,7 +52,7 @@ const Gameover = ({
               <ShadowText size={14} color="white">
                 時給
               </ShadowText>
-              {nowMoney === maxMoney && nowMoney > 0 && (
+              {nowMoney > maxMoney && nowMoney > 0 && (
                 <View style={{ marginTop: -3 }}>
                   <ShadowText size={16} color={Colors.textYellowColor}>
                     新記録!

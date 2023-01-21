@@ -103,6 +103,7 @@ const Game = ({
           playpattern={playpattern}
           playgap={playgap}
           drink={drink}
+          productType={productType}
           playState={playState}
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}

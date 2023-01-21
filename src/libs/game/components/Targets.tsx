@@ -5,6 +5,7 @@ import PlayPattern from "../../../models/playpattern";
 import Target from "./Target";
 import Animation from "./Animation";
 import ImageButton from "../../../components/button/ImageButton";
+import { productType } from "../../../types/product";
 
 type Props = {
   playpattern: PlayPattern;
@@ -14,6 +15,7 @@ type Props = {
   isRunning: boolean;
   allGaps: number[];
   playState: Play;
+  productType: productType;
   setAllGaps: (number: number[]) => void;
   setIsRunning: (state: boolean) => void;
   setCount: (number: number) => void;
@@ -29,6 +31,7 @@ const Targets = ({
   isRunning,
   allGaps,
   playState,
+  productType,
   setAllGaps,
   setIsRunning,
   setCount,
@@ -86,6 +89,7 @@ const Targets = ({
           color={color}
           count={count}
           allGaps={allGaps}
+          productType={productType}
           setAllGaps={setAllGaps}
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}

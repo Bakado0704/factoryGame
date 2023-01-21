@@ -69,7 +69,7 @@ const Product = ({
     outputRange: [0, 8, -8, 0, 0],
   });
 
-  //successかfailureになったときアニメーション動かす
+  //アニメーション
   useEffect(() => {
     if (
       playState.judge === judgeStatus.success ||
@@ -86,7 +86,6 @@ const Product = ({
       playState.judge === judgeStatus.failure,
   ]);
 
-  //waitingの時元に戻す
   useEffect(() => {
     if (playState.judge === judgeStatus.waiting) {
       setTimeout(() => {
@@ -95,16 +94,20 @@ const Product = ({
     }
   }, [playState.judge === judgeStatus.waiting]);
 
+  //opacityの設定
   let defaultOpacity = 1;
   let bonusOpacity = 0;
   let nextDefaultOpacity = 1;
   let nextBonusOpacity = 0;
-  let failureOpacity = 0;
+  let failureDefaultOpacity = 0;
+  let failureBonusOpacity = 0;
 
   if (prevProductType === "bonus") {
     defaultOpacity = 0;
     bonusOpacity = 1;
-    failureOpacity = 0;
+  }
+
+  if (nextProductType === "bonus") {
     nextDefaultOpacity = 0;
     nextBonusOpacity = 1;
   }
@@ -112,11 +115,15 @@ const Product = ({
   if (playState.judge === judgeStatus.failure) {
     defaultOpacity = 0;
     bonusOpacity = 0;
-    failureOpacity = 1;
+    if (prevProductType === "bonus") {
+      failureBonusOpacity = 1;
+    } else {
+      failureDefaultOpacity = 1;
+    }
   }
 
-  //ターゲットをfor文で表示
-  var CENTERPRODUCT = [];
+  //中心の画像
+  let CENTERPRODUCT = [];
   for (let i = 0; i < activeProductLength; i++) {
     let productOpacity = 0;
 
@@ -164,7 +171,16 @@ const Product = ({
           />
         </View>
 
-        <View style={{ opacity: failureOpacity, position: "absolute" }}>
+        <Animated.View
+          style={{
+            opacity: failureDefaultOpacity,
+            position: "absolute",
+            transform: [
+              { translateY: shakeTranslateY },
+              { translateX: shakeTranslateX },
+            ],
+          }}
+        >
           <Image
             source={defaultFailureProduct}
             style={{
@@ -172,15 +188,36 @@ const Product = ({
               height: activeProductHeight,
             }}
           />
-        </View>
+        </Animated.View>
+
+        <Animated.View
+          style={{
+            opacity: failureBonusOpacity,
+            position: "absolute",
+            transform: [
+              { translateY: shakeTranslateY },
+              { translateX: shakeTranslateX },
+            ],
+          }}
+        >
+          <Image
+            source={bonusFailureProduct}
+            style={{
+              width: activeProductWidth,
+              height: activeProductHeight,
+            }}
+          />
+        </Animated.View>
       </Animated.View>
     );
   }
 
-  // 次の画像
-  let NEXTPRODUCT = (
+  // 前後の画像
+  let BOTHSIDESPRODUCT = (
     <>
-      <View style={{ opacity: nextDefaultOpacity, position: "absolute", bottom: 0, }}>
+      <View
+        style={{ opacity: nextDefaultOpacity, position: "absolute", bottom: 0 }}
+      >
         <Image
           source={defaultProducts[0].before}
           style={{
@@ -189,7 +226,9 @@ const Product = ({
           }}
         />
       </View>
-      <View style={{ opacity: nextBonusOpacity, position: "absolute",bottom: 0, }}>
+      <View
+        style={{ opacity: nextBonusOpacity, position: "absolute", bottom: 0 }}
+      >
         <Image
           source={bonusProducts[0].before}
           style={{
@@ -210,9 +249,9 @@ const Product = ({
         ]}
       >
         <ConveyorLine width={width} />
-        <View style={styles.ImageContainer}>{NEXTPRODUCT}</View>
+        <View style={styles.ImageContainer}>{BOTHSIDESPRODUCT}</View>
         <View style={styles.ImageContainer}>{CENTERPRODUCT}</View>
-        <View style={styles.ImageContainer}>{NEXTPRODUCT}</View>
+        <View style={styles.ImageContainer}>{BOTHSIDESPRODUCT}</View>
       </Animated.View>
       <Light playState={playState} jobType={jobType} />
       <Explosion playState={playState} />

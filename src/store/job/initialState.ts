@@ -334,9 +334,9 @@ const initialState: state = {
           { before: require("../../assets/product/product7-normal-failure.png") },
         ],
         bonus: [
-          { before: require("../../assets/product/product7-normal-first.png") },
+          { before: require("../../assets/product/product7-gold-first.png") },
           { before: require("../../assets/product/product7-gold-second.png") },
-          { before: require("../../assets/product/product7-gold-third.png") },
+          { before: require("../../assets/product/product7-normal-third.png") },
         ],
         bonusFailure: [
           { before: require("../../assets/product/product7-gold-failure.png") },

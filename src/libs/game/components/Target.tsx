@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import PlayPattern from "../../../models/playpattern";
 import PlayGap from "../../../models/playgap";
 import { judgeStatus, Play, PlayStatus } from "../../../types/play";
+import user from "../../../store/user";
+import { productType } from "../../../types/product";
 
 type Props = {
   playpattern: PlayPattern;
@@ -13,6 +15,7 @@ type Props = {
   color: string;
   count: number;
   allGaps: number[];
+  productType: productType;
   setAllGaps: (number: number[]) => void;
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
@@ -27,16 +30,25 @@ const Target = ({
   allGaps,
   opacities,
   color,
+  productType,
   setAllGaps,
   damageHandler,
   judgeHandler,
 }: Props) => {
   //指定するパラメーター
-  let velocity: number = playpattern.target.velocity * (1 + 0.1 * drink);
+  let velocity: number = Math.floor(
+    playpattern.target.velocity * (1 + 0.1 * drink)
+  );
   let distance: number[] = playpattern.distance;
   const direction = playpattern.direction; //方向
   let allowGap = playgap.frontGap; //中心からここまで成功範囲
   let failureGap = playgap.passedGap; //これ以上行くと失敗
+
+  if (productType === "bonus") {
+    velocity = Math.floor(
+      playpattern.target.velocity * (1 + 0.1 * drink) * 1.5
+    );
+  }
 
   //各種宣言
   let gaps: number[] = [];
