@@ -4,11 +4,11 @@ import Counts from "./components/Counts";
 import { PATTERN_DATES } from "./datas/dates";
 import PlayGap from "../../models/playgap";
 import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
-import NowMoney from "../../components/money/NowMoney";
 import { JobType } from "../../types/job";
 import Coins from "../../components/animation/Coins";
 import PlusMoney from "../../components/animation/PlusMoney";
 import { productType } from "../../types/product";
+import { ShadowText } from "../../components/text/ShadowText";
 
 type Props = {
   type: JobType;
@@ -96,9 +96,17 @@ const Game = ({
   return (
     <>
       <View style={styles.rootContainer}>
-        <NowMoney nowMoney={nowMoney} plusMoney={plusMoney} />
+        <View style={{ marginTop: 100 }}>
+          <ShadowText size={50} color="white">
+            {new Intl.NumberFormat().format(nowMoney)}
+          </ShadowText>
+        </View>
         <Coins playState={playState} combo={combo} />
-        <PlusMoney playState={playState} plusMoney={plusMoney} productType={productType} />
+        <PlusMoney
+          playState={playState}
+          plusMoney={plusMoney}
+          productType={productType}
+        />
         <Counts
           playpattern={playpattern}
           playgap={playgap}
