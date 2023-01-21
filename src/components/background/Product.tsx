@@ -195,8 +195,8 @@ const Product = ({
       </Animated.View>
     );
   }
+  
   // 次の画像
-
   let NEXTPRODUCT = (
     <Image
       source={defaultProducts[0].before}
@@ -208,7 +208,6 @@ const Product = ({
   );
 
   if (nextProductType === "bonus") {
-    console.log("nextProductType")
     NEXTPRODUCT = (
       <Image
         source={bonusProducts[0].before}

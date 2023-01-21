@@ -12,11 +12,6 @@ import { RootState } from "../store/store";
 import { Job } from "../types/job";
 import { changeUserNowJob, userPage } from "../store/user";
 import { changeJob } from "../store/job";
-import {
-  changeCenterProduct,
-  changeFailureProduct,
-  changeNextProduct,
-} from "../store/product";
 
 function RankingScreen() {
   const Job = useSelector((state: RootState) => state.job.job);
@@ -33,7 +28,6 @@ function RankingScreen() {
   const activeBoard = Job.boardImg;
   const maxMoney = Job.maxMoney;
   const page = user.page;
-  const nextProductType = user.nextProductType;
 
   const dispatch = useDispatch();
   const navigation: NavigationProp<ParamListBase> = useNavigation();
@@ -46,15 +40,6 @@ function RankingScreen() {
   const jobDecideHandler = (job: Job) => {
     dispatch(changeJob(job));
     dispatch(changeUserNowJob(job.name));
-    if (nextProductType === "bonus") {
-      dispatch(changeNextProduct(job.product.bonus));
-      dispatch(changeCenterProduct(job.product.bonus));
-      dispatch(changeFailureProduct(job.product.bonusFailure));
-    } else {
-      dispatch(changeNextProduct(job.product.default));
-      dispatch(changeCenterProduct(job.product.default));
-      dispatch(changeFailureProduct(job.product.defaultFailure));
-    }
   };
 
   const rankingMove = () => {

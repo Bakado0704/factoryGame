@@ -13,8 +13,22 @@ import { judgeStatus, PlayPattern, PlayStatus } from "../types/play";
 import { Job } from "../types/job";
 import { RootState } from "../store/store";
 import { productType } from "../types/product";
-import { changeActivePattern, changeCombo, changeCompletecount, changeJudge, changeNowMoney, changeProcessCount, changeStatus, resetCompletecount, staminaDecrese } from "../store/play";
-import { changeNextProductType, changePrevProductType, userMoneyIncrease } from "../store/user";
+import {
+  changeActivePattern,
+  changeCombo,
+  changeCompletecount,
+  changeJudge,
+  changeNowMoney,
+  changeProcessCount,
+  changeStatus,
+  resetCompletecount,
+  staminaDecrese,
+} from "../store/play";
+import {
+  changeNextProductType,
+  changePrevProductType,
+  userMoneyIncrease,
+} from "../store/user";
 import { changeJobMaxMoney, changeJobRecord } from "../store/job";
 
 const GameScreen = () => {
@@ -40,7 +54,6 @@ const GameScreen = () => {
   const name = Job.owner.name;
   const iconType = Job.icon;
   const prevProductType = user.prevProductType;
-  const nextProductType = user.nextProductType;
   const drink = user.drink;
 
   let bonus = 1.0;
@@ -59,6 +72,8 @@ const GameScreen = () => {
     plusMoney = Math.floor(perMoney * 2.0 * bonus * (1 + drink * 0.2));
   }
 
+  let r = Math.random() * 10;
+  
   //dispatch関数の宣言
   const judgeHandler = (judge: judgeStatus) => {
     dispatch(changeJudge(judge));
@@ -82,7 +97,6 @@ const GameScreen = () => {
     dispatch(changeCompletecount(number));
   };
   const changeNextProductTypeHandler = () => {
-    let r = Math.random() * 10;
     if (r > 7) {
       dispatch(changeNextProductType(productType.bonus));
     } else {
@@ -90,7 +104,7 @@ const GameScreen = () => {
     }
   };
   const changePrevProductTypeHandler = () => {
-    if (nextProductType === "bonus") {
+    if (r > 7) {
       dispatch(changePrevProductType(productType.bonus));
     } else {
       dispatch(changePrevProductType(productType.default));

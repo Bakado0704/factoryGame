@@ -20,7 +20,6 @@ import { page } from "../types/page";
 import { Mute } from "../types/user";
 import { changeMute, changePreviewIcon, changeUser, changeUsername, changeUserNowJob, userPage } from "../store/user";
 import { changeJob, changePreviewJob } from "../store/job";
-import { changeCenterProduct, changeFailureProduct, changeNextProduct } from "../store/product";
 
 const JobChangeScreen = () => {
   const jobs = useSelector((state: RootState) => state.job.jobs);
@@ -34,7 +33,6 @@ const JobChangeScreen = () => {
   const userId = user.id;
   const mute = user.mute;
   const userMoney = user.money;
-  const nextProductType = user.nextProductType;
 
   const [userModal, setUserModal] = useState(false);
   const navigation: NavigationProp<ParamListBase> = useNavigation();
@@ -64,15 +62,6 @@ const JobChangeScreen = () => {
     }
     dispatch(changeJob(previewJob));
     dispatch(changeUserNowJob(previewJob.name));
-    if (nextProductType === "bonus") {
-      dispatch(changeNextProduct(previewJob.product.bonus));
-      dispatch(changeCenterProduct(previewJob.product.bonus));
-      dispatch(changeFailureProduct(previewJob.product.bonusFailure));
-    } else {
-      dispatch(changeNextProduct(previewJob.product.default));
-      dispatch(changeCenterProduct(previewJob.product.default));
-      dispatch(changeFailureProduct(previewJob.product.defaultFailure));
-    }
   };
 
   const jobModalOffHandler = () => {

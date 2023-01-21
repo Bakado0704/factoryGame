@@ -107,7 +107,7 @@ const Counts = ({
         setIsRunning(false);
       }, 200);
       setTimeout(() => {
-        changePrevProductTypeHandler(),
+        changePrevProductTypeHandler();
         judgeHandler(judgeStatus.waiting);
       }, 800);
     }
@@ -130,7 +130,9 @@ const Counts = ({
       setIsRunning(false);
       changeComboHandler(0);
       setTimeout(() => {
-        changePrevProductTypeHandler(),
+        changePrevProductTypeHandler();
+      }, 800);
+      setTimeout(() => {
         judgeHandler(judgeStatus.waiting);
       }, 1000);
     }

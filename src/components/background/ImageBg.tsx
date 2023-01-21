@@ -26,7 +26,7 @@ const ImageBg = ({ children }: Props) => {
   const activeType = job.icon;
   const jobType = user.nowJob;
   const prevProductType = user.prevProductType;
-  const nextProductType = user.prevProductType;
+  const nextProductType = user.nextProductType;
   const activeProductLength = job.product.default.length;
   const activeProductWidth = job.product.style.width;
   const activeProductHeight = job.product.style.height;
