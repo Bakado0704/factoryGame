@@ -12,6 +12,7 @@ import Light from "./Light";
 import { JobType } from "../../types/job";
 import Explosion from "./Explostion";
 import Star from "./Star";
+import { productType } from "../../types/product";
 export type Props = {
   playState: Play;
   activeProductLength: number;
@@ -25,18 +26,23 @@ export type Props = {
   centerProduct: { before: ImageSourcePropType }[];
   failureProduct: { before: ImageSourcePropType }[];
   jobType: JobType;
+  prevProductType: productType;
+  nextProductType: productType;
 };
 
 const Product = ({
   playState,
   activeProductWidth,
   activeProductHeight,
+  activeProductLength,
   width,
   productNumber,
   centerProduct,
   failureProduct,
   nextProduct,
   jobType,
+  prevProductType,
+  nextProductType,
 }: Props) => {
   //画像を動かす
   let TargetAnim = useRef(new Animated.Value(0)).current;
@@ -60,10 +66,6 @@ const Product = ({
     inputRange: [0, 10, 20, 30, 200],
     outputRange: [0, 8, -8, 0, 0],
   });
-
-  let NEXTPRODUCT = nextProduct[0].before;
-  let CENTERPRODUCT = centerProduct[productNumber].before;
-  let FAILUREPRODUCT = failureProduct[0].before;
 
   //successかfailureになったときアニメーション動かす
   useEffect(() => {
@@ -91,50 +93,52 @@ const Product = ({
     }
   }, [playState.judge === judgeStatus.waiting]);
 
-  //次の画像
-  var nextImage = (
-    <View style={styles.ImageContainer}>
-      <Image
-        source={NEXTPRODUCT}
-        style={{
-          width: activeProductWidth,
-          height: activeProductHeight,
-        }}
-      />
-      <Star
-        activeProductWidth={activeProductWidth}
-        activeProductHeight={activeProductHeight}
-      />
-    </View>
-  );
+  let FAILUREPRODUCT = failureProduct[0].before;
 
-  //中央の画像
-  var centerImage = (
-    <Animated.View
-      style={[
-        styles.ImageContainer,
-        {
-          transform: [{ translateY: successTranslateY }],
-        },
-      ]}
-    >
-      <Image
-        source={CENTERPRODUCT}
-        style={{
-          width: activeProductWidth,
-          height: activeProductHeight,
-        }}
-      />
-      <Star
-        activeProductWidth={activeProductWidth}
-        activeProductHeight={activeProductHeight}
-      />
-    </Animated.View>
-  );
+  //ターゲットをfor文で表示
+  var CENTERPRODUCT = [];
+  for (let i = 0; i < activeProductLength; i++) {
+    let productOpacity = 0;
+    if (i === productNumber) {
+      productOpacity = 1;
+    }
+
+    CENTERPRODUCT.push(
+      <Animated.View
+        key={i}
+        style={[
+          styles.ImageContainer,
+          {
+            transform: [{ translateY: successTranslateY }],
+            opacity: productOpacity,
+            position: "absolute",
+            width: activeProductWidth,
+            height: activeProductHeight,
+          },
+        ]}
+      >
+        <Image
+          source={centerProduct[i].before}
+          style={{
+            width: activeProductWidth,
+            height: activeProductHeight,
+          }}
+        />
+        {prevProductType === "bonus" && (
+          <Star
+            activeProductWidth={activeProductWidth}
+            activeProductHeight={activeProductHeight}
+            productType={prevProductType}
+          />
+        )}
+      </Animated.View>
+    );
+  }
 
   if (playState.judge === judgeStatus.failure) {
-    centerImage = (
+    CENTERPRODUCT.push(
       <Animated.View
+        key={10}
         style={[
           styles.ImageContainer,
           {
@@ -152,13 +156,27 @@ const Product = ({
             height: activeProductHeight,
           }}
         />
-        <Star
-          activeProductWidth={activeProductWidth}
-          activeProductHeight={activeProductHeight}
-        />
+        {prevProductType === "bonus" && (
+          <Star
+            activeProductWidth={activeProductWidth}
+            activeProductHeight={activeProductHeight}
+            productType={prevProductType}
+          />
+        )}
       </Animated.View>
     );
   }
+
+  // 次の画像
+  var NEXTPRODUCT = (
+    <Image
+      source={nextProduct[0].before}
+      style={{
+        width: activeProductWidth,
+        height: activeProductHeight,
+      }}
+    />
+  );
 
   return (
     <>
@@ -169,9 +187,9 @@ const Product = ({
         ]}
       >
         <ConveyorLine width={width} />
-        {nextImage}
-        {centerImage}
-        {centerImage}
+        <View style={styles.ImageContainer}>{NEXTPRODUCT}</View>
+        <View style={styles.ImageContainer}>{CENTERPRODUCT}</View>
+        <View style={styles.ImageContainer}>{NEXTPRODUCT}</View>
       </Animated.View>
       <Light playState={playState} jobType={jobType} />
       <Explosion playState={playState} />
