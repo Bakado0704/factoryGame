@@ -22,12 +22,13 @@ export type Props = {
   activeProductHeight: number;
   width: number;
   productNumber: number;
-  nextProduct: { before: ImageSourcePropType }[];
-  centerProduct: { before: ImageSourcePropType }[];
-  failureProduct: { before: ImageSourcePropType }[];
   jobType: JobType;
   prevProductType: productType;
   nextProductType: productType;
+  defaultProducts: { before: ImageSourcePropType }[];
+  bonusProducts: { before: ImageSourcePropType }[];
+  defaultFailureProduct: ImageSourcePropType;
+  bonusFailureProduct: ImageSourcePropType;
 };
 
 const Product = ({
@@ -37,12 +38,13 @@ const Product = ({
   activeProductLength,
   width,
   productNumber,
-  centerProduct,
-  failureProduct,
-  nextProduct,
   jobType,
   prevProductType,
   nextProductType,
+  defaultProducts,
+  bonusProducts,
+  defaultFailureProduct,
+  bonusFailureProduct,
 }: Props) => {
   //画像を動かす
   let TargetAnim = useRef(new Animated.Value(0)).current;
@@ -93,46 +95,69 @@ const Product = ({
     }
   }, [playState.judge === judgeStatus.waiting]);
 
-  let FAILUREPRODUCT = failureProduct[0].before;
-
   //ターゲットをfor文で表示
   var CENTERPRODUCT = [];
   for (let i = 0; i < activeProductLength; i++) {
     let productOpacity = 0;
+
     if (i === productNumber) {
       productOpacity = 1;
     }
 
-    CENTERPRODUCT.push(
-      <Animated.View
-        key={i}
-        style={[
-          styles.ImageContainer,
-          {
-            transform: [{ translateY: successTranslateY }],
-            opacity: productOpacity,
-            position: "absolute",
-            width: activeProductWidth,
-            height: activeProductHeight,
-          },
-        ]}
-      >
-        <Image
-          source={centerProduct[i].before}
-          style={{
-            width: activeProductWidth,
-            height: activeProductHeight,
-          }}
-        />
-        {prevProductType === "bonus" && (
+    if (prevProductType === "default") {
+      CENTERPRODUCT.push(
+        <Animated.View
+          key={i}
+          style={[
+            styles.ImageContainer,
+            {
+              transform: [{ translateY: successTranslateY }],
+              opacity: productOpacity,
+              position: "absolute",
+              width: activeProductWidth,
+              height: activeProductHeight,
+            },
+          ]}
+        >
+          <Image
+            source={defaultProducts[i].before}
+            style={{
+              width: activeProductWidth,
+              height: activeProductHeight,
+            }}
+          />
+        </Animated.View>
+      );
+    } else if (prevProductType === "bonus") {
+      CENTERPRODUCT.push(
+        <Animated.View
+          key={i}
+          style={[
+            styles.ImageContainer,
+            {
+              transform: [{ translateY: successTranslateY }],
+              opacity: productOpacity,
+              position: "absolute",
+              width: activeProductWidth,
+              height: activeProductHeight,
+            },
+          ]}
+        >
+          <Image
+            source={bonusProducts[i].before}
+            style={{
+              width: activeProductWidth,
+              height: activeProductHeight,
+            }}
+          />
           <Star
             activeProductWidth={activeProductWidth}
             activeProductHeight={activeProductHeight}
             productType={prevProductType}
           />
-        )}
-      </Animated.View>
-    );
+        </Animated.View>
+      );
+    }
   }
 
   if (playState.judge === judgeStatus.failure) {
@@ -149,34 +174,51 @@ const Product = ({
           },
         ]}
       >
-        <Image
-          source={FAILUREPRODUCT}
-          style={{
-            width: activeProductWidth,
-            height: activeProductHeight,
-          }}
-        />
+        {prevProductType === "default" && (
+          <Image
+            source={defaultFailureProduct}
+            style={{
+              width: activeProductWidth,
+              height: activeProductHeight,
+            }}
+          />
+        )}
         {prevProductType === "bonus" && (
-          <Star
-            activeProductWidth={activeProductWidth}
-            activeProductHeight={activeProductHeight}
-            productType={prevProductType}
+          <Image
+            source={bonusFailureProduct}
+            style={{
+              width: activeProductWidth,
+              height: activeProductHeight,
+            }}
           />
         )}
       </Animated.View>
     );
   }
-
   // 次の画像
-  var NEXTPRODUCT = (
+
+  let NEXTPRODUCT = (
     <Image
-      source={nextProduct[0].before}
+      source={defaultProducts[0].before}
       style={{
         width: activeProductWidth,
         height: activeProductHeight,
       }}
     />
   );
+
+  if (nextProductType === "bonus") {
+    console.log("nextProductType")
+    NEXTPRODUCT = (
+      <Image
+        source={bonusProducts[0].before}
+        style={{
+          width: activeProductWidth,
+          height: activeProductHeight,
+        }}
+      />
+    );
+  }
 
   return (
     <>

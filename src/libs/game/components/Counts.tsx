@@ -18,9 +18,8 @@ type Props = {
   changeNowMoneyHandler: (number: number) => void;
   processCountHandler: (number: number) => void;
   selectedPatternHandler: (pattern: PlayPattern[]) => void;
-  changeProductTypeHandler: () => void;
-  changeNextProductHandler: () => void;
-  changeCenterProductHandler: () => void;
+  changePrevProductTypeHandler: () => void;
+  changeNextProductTypeHandler: () => void;
 };
 
 const Counts = ({
@@ -36,9 +35,8 @@ const Counts = ({
   changeNowMoneyHandler,
   processCountHandler,
   selectedPatternHandler,
-  changeProductTypeHandler,
-  changeNextProductHandler,
-  changeCenterProductHandler,
+  changePrevProductTypeHandler,
+  changeNextProductTypeHandler,
 }: Props) => {
   //各種宣言
   const [count, setCount] = useState<number>(0); //アニメーションを動かす基盤の数
@@ -102,15 +100,14 @@ const Counts = ({
     ) {
       judgeHandler(judgeStatus.success);
       changeNowMoneyHandler(plusMoney);
-      changeProductTypeHandler(),
-      changeNextProductHandler(),
+      changeNextProductTypeHandler(),
       changeComboHandler(1);
       changeCompleteCount(1);
       setTimeout(() => {
         setIsRunning(false);
       }, 200);
       setTimeout(() => {
-        changeCenterProductHandler();
+        changePrevProductTypeHandler(),
         judgeHandler(judgeStatus.waiting);
       }, 800);
     }
@@ -129,12 +126,11 @@ const Counts = ({
   // judgeが失敗の時,isRunnningをfalse＋100ダメージ、waitingにもどす
   useEffect(() => {
     if (playState.judge === judgeStatus.failure) {
-      changeProductTypeHandler(),
-      changeNextProductHandler(),
+      changeNextProductTypeHandler(),
       setIsRunning(false);
       changeComboHandler(0);
       setTimeout(() => {
-        changeCenterProductHandler();
+        changePrevProductTypeHandler(),
         judgeHandler(judgeStatus.waiting);
       }, 1000);
     }

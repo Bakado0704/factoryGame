@@ -15,16 +15,9 @@ const ImageBg = ({ children }: Props) => {
   const job = useSelector((state: RootState) => state.job.job);
   const user = useSelector((state: RootState) => state.user.user);
   const playState = useSelector((state: RootState) => state.play.play);
-  const nextProduct = useSelector(
-    (state: RootState) => state.product.nextProduct
-  );
-  const centerProduct = useSelector(
-    (state: RootState) => state.product.centerProduct
-  );
-  const failureProduct = useSelector(
-    (state: RootState) => state.product.failureProduct
-  );
-  const defaultFailureProduct = job.product.bonusFailure[0].before;
+  const defaultProducts = job.product.default;
+  const bonusProducts = job.product.bonus;
+  const defaultFailureProduct = job.product.defaultFailure[0].before;
   const bonusFailureProduct = job.product.bonusFailure[0].before;
   const selectedPlayPattern = useSelector(
     (state: RootState) => state.play.activePlayPattern
@@ -65,12 +58,13 @@ const ImageBg = ({ children }: Props) => {
         activeProductHeight={activeProductHeight}
         width={width}
         productNumber={productNumber}
-        nextProduct={nextProduct}
-        centerProduct={centerProduct}
-        failureProduct={failureProduct}
         jobType={jobType}
         prevProductType={prevProductType}
         nextProductType={nextProductType}
+        defaultProducts={defaultProducts}
+        bonusProducts={bonusProducts}
+        defaultFailureProduct={defaultFailureProduct}
+        bonusFailureProduct={bonusFailureProduct}
       />
       {children}
     </BackgroundImg>

@@ -15,7 +15,6 @@ import { RootState } from "../store/store";
 import { productType } from "../types/product";
 import { changeActivePattern, changeCombo, changeCompletecount, changeJudge, changeNowMoney, changeProcessCount, changeStatus, resetCompletecount, staminaDecrese } from "../store/play";
 import { changeNextProductType, changePrevProductType, userMoneyIncrease } from "../store/user";
-import { changeCenterProduct, changeNextProduct } from "../store/product";
 import { changeJobMaxMoney, changeJobRecord } from "../store/job";
 
 const GameScreen = () => {
@@ -40,8 +39,6 @@ const GameScreen = () => {
   const jobName = Job.name;
   const name = Job.owner.name;
   const iconType = Job.icon;
-  const bonusProduct = Job.product.bonus;
-  const defaultProduct = Job.product.default;
   const prevProductType = user.prevProductType;
   const nextProductType = user.nextProductType;
   const drink = user.drink;
@@ -84,7 +81,7 @@ const GameScreen = () => {
   const changeCompleteCount = (number: number) => {
     dispatch(changeCompletecount(number));
   };
-  const changeProductTypeHandler = () => {
+  const changeNextProductTypeHandler = () => {
     let r = Math.random() * 10;
     if (r > 7) {
       dispatch(changeNextProductType(productType.bonus));
@@ -92,19 +89,10 @@ const GameScreen = () => {
       dispatch(changeNextProductType(productType.default));
     }
   };
-  const changeNextProductHandler = () => {
+  const changePrevProductTypeHandler = () => {
     if (nextProductType === "bonus") {
-      dispatch(changeNextProduct(bonusProduct));
-    } else {
-      dispatch(changeNextProduct(defaultProduct));
-    }
-  };
-  const changeCenterProductHandler = () => {
-    if (nextProductType === "bonus") {
-      dispatch(changeCenterProduct(bonusProduct));
       dispatch(changePrevProductType(productType.bonus));
     } else {
-      dispatch(changeCenterProduct(defaultProduct));
       dispatch(changePrevProductType(productType.default));
     }
   };
@@ -162,9 +150,8 @@ const GameScreen = () => {
         changeNowMoneyHandler={changeNowMoneyHandler}
         processCountHandler={processCountHandler}
         selectedPatternHandler={selectedPatternHandler}
-        changeProductTypeHandler={changeProductTypeHandler}
-        changeNextProductHandler={changeNextProductHandler}
-        changeCenterProductHandler={changeCenterProductHandler}
+        changePrevProductTypeHandler={changePrevProductTypeHandler}
+        changeNextProductTypeHandler={changeNextProductTypeHandler}
       />
     );
   }
