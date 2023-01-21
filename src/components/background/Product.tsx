@@ -88,9 +88,7 @@ const Product = ({
 
   useEffect(() => {
     if (playState.judge === judgeStatus.waiting) {
-      setTimeout(() => {
-        TargetAnim.setValue(0);
-      }, 200);
+      TargetAnim.setValue(0);
     }
   }, [playState.judge === judgeStatus.waiting]);
 

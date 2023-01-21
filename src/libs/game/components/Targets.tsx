@@ -15,7 +15,6 @@ type Props = {
   isRunning: boolean;
   allGaps: number[];
   playState: Play;
-  productType: productType;
   setAllGaps: (number: number[]) => void;
   setIsRunning: (state: boolean) => void;
   setCount: (number: number) => void;
@@ -31,7 +30,6 @@ const Targets = ({
   isRunning,
   allGaps,
   playState,
-  productType,
   setAllGaps,
   setIsRunning,
   setCount,
@@ -82,6 +80,7 @@ const Targets = ({
         <Animation color={color} laps={laps} isRunning={isRunning} />
         <Target
           playpattern={playpattern}
+          playState={playState}
           playgap={playgap}
           drink={drink}
           laps={laps}
@@ -89,7 +88,6 @@ const Targets = ({
           color={color}
           count={count}
           allGaps={allGaps}
-          productType={productType}
           setAllGaps={setAllGaps}
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}

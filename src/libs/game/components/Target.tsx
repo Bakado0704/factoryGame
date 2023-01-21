@@ -15,7 +15,7 @@ type Props = {
   color: string;
   count: number;
   allGaps: number[];
-  productType: productType;
+  playState: Play;
   setAllGaps: (number: number[]) => void;
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
@@ -30,7 +30,7 @@ const Target = ({
   allGaps,
   opacities,
   color,
-  productType,
+  playState,
   setAllGaps,
   damageHandler,
   judgeHandler,
@@ -43,12 +43,6 @@ const Target = ({
   const direction = playpattern.direction; //方向
   let allowGap = playgap.frontGap; //中心からここまで成功範囲
   let failureGap = playgap.passedGap; //これ以上行くと失敗
-
-  if (productType === "bonus") {
-    velocity = Math.floor(
-      playpattern.target.velocity * (1 + 0.1 * drink) * 1.5
-    );
-  }
 
   //各種宣言
   let gaps: number[] = [];
@@ -89,7 +83,7 @@ const Target = ({
 
   // lapsの数がdistanceの数を超えても失敗
   useEffect(() => {
-    if (laps.length > playpattern.distance.length) {
+    if (laps.length > playpattern.distance.length && playState.judge !== "success") {
       damageHandler(100);
       judgeHandler(judgeStatus.failure);
       // console.log("lapsの数がdistanceの数を超えても失敗");
