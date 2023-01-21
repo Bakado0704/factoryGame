@@ -95,6 +95,26 @@ const Product = ({
     }
   }, [playState.judge === judgeStatus.waiting]);
 
+  let defaultOpacity = 1;
+  let bonusOpacity = 0;
+  let nextDefaultOpacity = 1;
+  let nextBonusOpacity = 0;
+  let failureOpacity = 0;
+
+  if (prevProductType === "bonus") {
+    defaultOpacity = 0;
+    bonusOpacity = 1;
+    failureOpacity = 0;
+    nextDefaultOpacity = 0;
+    nextBonusOpacity = 1;
+  }
+
+  if (playState.judge === judgeStatus.failure) {
+    defaultOpacity = 0;
+    bonusOpacity = 0;
+    failureOpacity = 1;
+  }
+
   //ターゲットをfor文で表示
   var CENTERPRODUCT = [];
   for (let i = 0; i < activeProductLength; i++) {
@@ -104,21 +124,22 @@ const Product = ({
       productOpacity = 1;
     }
 
-    if (prevProductType === "default") {
-      CENTERPRODUCT.push(
-        <Animated.View
-          key={i}
-          style={[
-            styles.ImageContainer,
-            {
-              transform: [{ translateY: successTranslateY }],
-              opacity: productOpacity,
-              position: "absolute",
-              width: activeProductWidth,
-              height: activeProductHeight,
-            },
-          ]}
-        >
+    CENTERPRODUCT.push(
+      <Animated.View
+        key={i}
+        style={[
+          styles.ImageContainer,
+          {
+            transform: [{ translateY: successTranslateY }],
+            opacity: productOpacity,
+            position: "absolute",
+            bottom: 0,
+            width: activeProductWidth,
+            height: activeProductHeight,
+          },
+        ]}
+      >
+        <View style={{ opacity: defaultOpacity, position: "absolute" }}>
           <Image
             source={defaultProducts[i].before}
             style={{
@@ -126,23 +147,9 @@ const Product = ({
               height: activeProductHeight,
             }}
           />
-        </Animated.View>
-      );
-    } else if (prevProductType === "bonus") {
-      CENTERPRODUCT.push(
-        <Animated.View
-          key={i}
-          style={[
-            styles.ImageContainer,
-            {
-              transform: [{ translateY: successTranslateY }],
-              opacity: productOpacity,
-              position: "absolute",
-              width: activeProductWidth,
-              height: activeProductHeight,
-            },
-          ]}
-        >
+        </View>
+
+        <View style={{ opacity: bonusOpacity, position: "absolute" }}>
           <Image
             source={bonusProducts[i].before}
             style={{
@@ -155,26 +162,9 @@ const Product = ({
             activeProductHeight={activeProductHeight}
             productType={prevProductType}
           />
-        </Animated.View>
-      );
-    }
-  }
+        </View>
 
-  if (playState.judge === judgeStatus.failure) {
-    CENTERPRODUCT.push(
-      <Animated.View
-        key={10}
-        style={[
-          styles.ImageContainer,
-          {
-            transform: [
-              { translateX: shakeTranslateX },
-              { translateY: shakeTranslateY },
-            ],
-          },
-        ]}
-      >
-        {prevProductType === "default" && (
+        <View style={{ opacity: failureOpacity, position: "absolute" }}>
           <Image
             source={defaultFailureProduct}
             style={{
@@ -182,42 +172,34 @@ const Product = ({
               height: activeProductHeight,
             }}
           />
-        )}
-        {prevProductType === "bonus" && (
-          <Image
-            source={bonusFailureProduct}
-            style={{
-              width: activeProductWidth,
-              height: activeProductHeight,
-            }}
-          />
-        )}
+        </View>
       </Animated.View>
     );
   }
-  
+
   // 次の画像
   let NEXTPRODUCT = (
-    <Image
-      source={defaultProducts[0].before}
-      style={{
-        width: activeProductWidth,
-        height: activeProductHeight,
-      }}
-    />
+    <>
+      <View style={{ opacity: nextDefaultOpacity, position: "absolute", bottom: 0, }}>
+        <Image
+          source={defaultProducts[0].before}
+          style={{
+            width: activeProductWidth,
+            height: activeProductHeight,
+          }}
+        />
+      </View>
+      <View style={{ opacity: nextBonusOpacity, position: "absolute",bottom: 0, }}>
+        <Image
+          source={bonusProducts[0].before}
+          style={{
+            width: activeProductWidth,
+            height: activeProductHeight,
+          }}
+        />
+      </View>
+    </>
   );
-
-  if (nextProductType === "bonus") {
-    NEXTPRODUCT = (
-      <Image
-        source={bonusProducts[0].before}
-        style={{
-          width: activeProductWidth,
-          height: activeProductHeight,
-        }}
-      />
-    );
-  }
 
   return (
     <>

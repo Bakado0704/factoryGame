@@ -19,7 +19,6 @@ import { Mute } from "../types/user";
 import { changeMute, changePreviewIcon, changeUser, changeUsername, changeUserNowJob, userDrink, userDrinkReset, userMoneyIncrease, userPage } from "../store/user";
 import { changeStatus, staminaReset } from "../store/play";
 import { changeJob } from "../store/job";
-import { changeCenterProduct, changeFailureProduct, changeNextProduct } from "../store/product";
 
 const StartScreen = () => {
   const Job = useSelector((state: RootState) => state.job.job);
@@ -41,7 +40,6 @@ const StartScreen = () => {
   const userMoney = user.money;
   const drink = user.drink;
   const drinkCost = user.drinkCost;
-  const nextProductType = user.nextProductType;
   const activeJobs = jobs.filter(function (element) {
     return element.isActive === true;
   });
@@ -97,15 +95,6 @@ const StartScreen = () => {
   const jobDecideHandler = (job: Job) => {
     dispatch(changeJob(job));
     dispatch(changeUserNowJob(job.name));
-    if (nextProductType === "bonus") {
-      dispatch(changeNextProduct(job.product.bonus));
-      dispatch(changeCenterProduct(job.product.bonus));
-      dispatch(changeFailureProduct(job.product.bonusFailure));
-    } else {
-      dispatch(changeNextProduct(job.product.default));
-      dispatch(changeCenterProduct(job.product.default));
-      dispatch(changeFailureProduct(job.product.defaultFailure));
-    }
   };
 
   const userDrinkHandler = (number: number) => {
