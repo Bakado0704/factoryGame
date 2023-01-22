@@ -3,8 +3,6 @@ import React, { useEffect } from "react";
 import PlayPattern from "../../../models/playpattern";
 import PlayGap from "../../../models/playgap";
 import { judgeStatus, Play, PlayStatus } from "../../../types/play";
-import user from "../../../store/user";
-import { productType } from "../../../types/product";
 
 type Props = {
   playpattern: PlayPattern;
@@ -16,6 +14,7 @@ type Props = {
   count: number;
   allGaps: number[];
   playState: Play;
+  bonus: number;
   setAllGaps: (number: number[]) => void;
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
@@ -31,13 +30,14 @@ const Target = ({
   opacities,
   color,
   playState,
+  bonus,
   setAllGaps,
   damageHandler,
   judgeHandler,
 }: Props) => {
   //指定するパラメーター
   let velocity: number = Math.floor(
-    playpattern.target.velocity * (1 + 0.1 * drink)
+    playpattern.target.velocity * (1 + 0.1 * drink) * bonus
   );
   let distance: number[] = playpattern.distance;
   const direction = playpattern.direction; //方向
@@ -83,7 +83,10 @@ const Target = ({
 
   // lapsの数がdistanceの数を超えても失敗
   useEffect(() => {
-    if (laps.length > playpattern.distance.length && playState.judge !== "success") {
+    if (
+      laps.length > playpattern.distance.length &&
+      playState.judge !== "success"
+    ) {
       damageHandler(100);
       judgeHandler(judgeStatus.failure);
       // console.log("lapsの数がdistanceの数を超えても失敗");

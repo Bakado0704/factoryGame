@@ -55,6 +55,7 @@ export default function App() {
                   component={StartScreen}
                   options={{
                     headerShown: false,
+                    gestureEnabled: false
                   }}
                 />
                 <Stack.Screen
@@ -62,6 +63,7 @@ export default function App() {
                   component={GameScreen}
                   options={{
                     headerShown: false,
+                    gestureEnabled: false
                   }}
                 />
                 <Stack.Screen
@@ -69,6 +71,7 @@ export default function App() {
                   component={GachaScreen}
                   options={{
                     headerShown: false,
+                    gestureEnabled: false
                   }}
                 />
                 <Stack.Screen
@@ -76,6 +79,7 @@ export default function App() {
                   component={JobChangeScreen}
                   options={{
                     headerShown: false,
+                    gestureEnabled: false
                   }}
                 />
                 <Stack.Screen
@@ -83,6 +87,7 @@ export default function App() {
                   component={RankingScreen}
                   options={{
                     headerShown: false,
+                    gestureEnabled: false
                   }}
                 />
               </Stack.Navigator>

@@ -1,4 +1,4 @@
-import { View, StyleSheet, Pressable, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
 import { judgeStatus, Play, PlayGap, PlayStatus } from "../../../types/play";
 import PlayPattern from "../../../models/playpattern";
@@ -15,6 +15,7 @@ type Props = {
   isRunning: boolean;
   allGaps: number[];
   playState: Play;
+  productType: productType;
   setAllGaps: (number: number[]) => void;
   setIsRunning: (state: boolean) => void;
   setCount: (number: number) => void;
@@ -30,6 +31,7 @@ const Targets = ({
   isRunning,
   allGaps,
   playState,
+  productType,
   setAllGaps,
   setIsRunning,
   setCount,
@@ -43,6 +45,7 @@ const Targets = ({
   const [laps, setLaps] = useState<number[]>([]); //ボタンを押したときのカウント
   const [opacities, setOpacities] = useState<number[]>([]); //ターゲットそれぞれの透明度
   const [color, setColor] = useState<string>(themeColor); //ターゲットのそれぞれの色
+  const [bonus, setBonus] = useState<number>(1.0); //ターゲットのそれぞれの色
 
   //judgeがfailureになったとき赤くする
   useEffect(() => {
@@ -54,6 +57,7 @@ const Targets = ({
   //judgeがwaitingになったときリセットする
   useEffect(() => {
     if (playState.judge === judgeStatus.waiting) {
+      setBonus(1.0);
       setCount(0);
       setLaps([]);
       setOpacities([]);
@@ -62,6 +66,13 @@ const Targets = ({
       setIsRunning(true);
     }
   }, [playState.judge === judgeStatus.waiting]);
+
+  //もしproductTypeが"bonus"ならcountが0になってから1.5に
+  useEffect(() => {
+    if (productType === "bonus" && count === 0) {
+      setBonus(1.5);
+    }
+  }, [productType === "bonus" && count === 0]);
 
   //ボタンを押した時の処理
   const lapHandler = () => {
@@ -88,6 +99,7 @@ const Targets = ({
           color={color}
           count={count}
           allGaps={allGaps}
+          bonus={bonus}
           setAllGaps={setAllGaps}
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}

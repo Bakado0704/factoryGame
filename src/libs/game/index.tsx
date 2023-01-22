@@ -112,6 +112,7 @@ const Game = ({
           playgap={playgap}
           drink={drink}
           playState={playState}
+          productType={productType}
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}
           changeComboHandler={changeComboHandler}
