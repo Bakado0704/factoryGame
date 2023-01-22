@@ -31,7 +31,7 @@ const ImageBg = ({ children }: Props) => {
   const activeProductWidth = job.product.style.width;
   const activeProductHeight = job.product.style.height;
   const proccessCount = playState.processCount;
-  const { width } = Dimensions.get("window");
+  const { width, height } = Dimensions.get("window");
 
   // すべてのDitanceの宣言
   let allDistance = [];
@@ -57,6 +57,7 @@ const ImageBg = ({ children }: Props) => {
         activeProductWidth={activeProductWidth}
         activeProductHeight={activeProductHeight}
         width={width}
+        height={height}
         productNumber={productNumber}
         jobType={jobType}
         prevProductType={prevProductType}

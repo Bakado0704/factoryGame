@@ -21,6 +21,7 @@ export type Props = {
   activeProductWidth: number;
   activeProductHeight: number;
   width: number;
+  height: number;
   productNumber: number;
   jobType: JobType;
   prevProductType: productType;
@@ -37,6 +38,7 @@ const Product = ({
   activeProductHeight,
   activeProductLength,
   width,
+  height,
   productNumber,
   jobType,
   prevProductType,
@@ -246,7 +248,7 @@ const Product = ({
           { transform: [{ translateX: targetTranslateX }] },
         ]}
       >
-        <ConveyorLine width={width} />
+        <ConveyorLine width={width} height={height} />
         <View style={styles.ImageContainer}>{BOTHSIDESPRODUCT}</View>
         <View style={styles.ImageContainer}>{CENTERPRODUCT}</View>
         <View style={styles.ImageContainer}>{BOTHSIDESPRODUCT}</View>

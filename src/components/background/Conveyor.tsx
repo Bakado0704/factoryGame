@@ -60,7 +60,7 @@ export default Conveyor;
 const styles = StyleSheet.create({
   conveyor: {
     position: "absolute",
-    height: 282,
+    height: "42.2%",
     width: "100%",
     bottom: 0,
     left: 0,

@@ -3,96 +3,79 @@ import React from "react";
 
 export type Props = {
   width: number;
+  height: number;
 };
 
-const ConveyorLine = ({ width }: Props) => {
+const ConveyorLine = ({ width, height }: Props) => {
   return (
-    <View style={styles.cvContainer}>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+    <View style={[styles.cvContainer, {height: height / 8.8}]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4 }]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4}]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4}]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4}]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4}]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4}]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4}]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4}]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4}]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4}]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4}]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
         />
       </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-        <Image
-          source={require("../../assets/conveyor/cvLine.png")}
-          style={styles.cvLine}
-        />
-      </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-        <Image
-          source={require("../../assets/conveyor/cvLine.png")}
-          style={styles.cvLine}
-        />
-      </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
-        <Image
-          source={require("../../assets/conveyor/cvLine.png")}
-          style={styles.cvLine}
-        />
-      </View>
-      <View style={[styles.cvInnerContainer, { width: width / 5 }]}>
+      <View style={[styles.cvInnerContainer, { width: width / 4 }]}>
         <Image
           source={require("../../assets/conveyor/cvLine.png")}
           style={styles.cvLine}
@@ -116,10 +99,9 @@ const styles = StyleSheet.create({
   cvInnerContainer: {
     alignItems: "center",
     justifyContent: "center",
-    height: 78,
   },
   cvLine: {
-    width: 72,
-    height: 78,
+    width: "100%",
+    height: "100%",
   },
 });

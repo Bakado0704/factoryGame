@@ -51,8 +51,8 @@ function RankingScreen() {
     <SafeAreaView style={styles.rootScreen}>
       <ImageBackground
         source={require("../assets/background/bgRanking.png")}
-        resizeMode="cover"
-        style={styles.rootScreen}
+        resizeMode="stretch"
+        style={styles.bgScreen}
       >
         <View style={styles.innerContainer}>
           <View style={{ flex: 1 }} />
@@ -85,8 +85,11 @@ export default RankingScreen;
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
-    padding: 8,
     position: "relative",
+  },
+  bgScreen: {
+    flex: 1,
+    padding: 8,
   },
   innerContainer: {
     flex: 1,
