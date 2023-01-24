@@ -14,7 +14,7 @@ const ImageButton= ({ source, onPress, style, padding }: Props) => {
       <Pressable
         onPress={onPress}
         style={({ pressed }) => [pressed && styles.pressed, {padding: padding}]}
-        android_ripple={{ color: "#ccc" }}
+        // android_ripple={{ color: "#ccc" }}
       >
         <Image style={style} source={source} />
       </Pressable>

@@ -58,7 +58,7 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
               <Pressable
                 onPress={onUserModal}
                 style={({ pressed }) => pressed && styles.pressed}
-                android_ripple={{ color: "#ccc" }}
+                // android_ripple={{ color: "#ccc" }}
               >
                 <UserIcon icon={icon} width={50} height={50} />
               </Pressable>

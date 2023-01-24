@@ -1,46 +1,45 @@
 import { StyleSheet, Animated, Pressable, Image } from "react-native";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 type Props = {
-  pressHandler: () => void;
+  rankingPressHandler: () => void;
+  rankingPressInHandler: () => void;
+  rankingPressOutHandler: () => void;
+  rankingFlag: boolean;
+  ButtonAnim: Animated.Value;
 };
 
-const RankingButton = ({ pressHandler }: Props) => {
-  const ButtonAnim = useRef(new Animated.Value(0)).current;
-
+const RankingButton = ({
+  rankingPressHandler,
+  rankingPressInHandler,
+  rankingPressOutHandler,
+  rankingFlag,
+  ButtonAnim,
+}: Props) => {
   const ButtonImage = ButtonAnim.interpolate({
     inputRange: [0, 100, 101, 200],
     outputRange: [0, 1, 1, 0],
   });
 
-  Animated.loop(
-    Animated.timing(ButtonAnim, {
-      toValue: 200,
-      duration: 1200,
-      useNativeDriver: false,
-    })
-  ).start();
+  const rankingButtonOff = require("../../../assets/ui/rankingButtonOff.png");
+  const rankingButtonOn = require("../../../assets/ui/rankingButton.png");
+  const rankingButtonPressed = require("../../../assets/ui/rankingButtonPressed.png");
+
+  let imageOff = rankingFlag ? rankingButtonPressed : rankingButtonOff;
+  let imageOn = rankingFlag ? rankingButtonPressed : rankingButtonOn;
 
   return (
     <Pressable
-      android_ripple={{ color: "#ccc" }}
-      style={({ pressed }) => [
-        pressed && styles.pressed,
-        styles.rankingButtonContainer,
-      ]}
-      onPress={pressHandler}
+      style={styles.rankingButtonContainer}
+      onPress={rankingPressHandler}
+      onPressIn={rankingPressInHandler}
+      onPressOut={rankingPressOutHandler}
     >
-      <Image
-        source={require("../../../assets/ui/rankingButtonOff.png")}
-        style={styles.rankingButton}
-      />
+      <Image source={imageOff} style={styles.rankingButton} />
       <Animated.View
         style={[styles.rankingButtonActive, { opacity: ButtonImage }]}
       >
-        <Image
-          source={require("../../../assets/ui/rankingButton.png")}
-          style={styles.rankingButton}
-        />
+        <Image source={imageOn} style={styles.rankingButton} />
       </Animated.View>
     </Pressable>
   );
@@ -71,6 +70,7 @@ const styles = StyleSheet.create({
     width: 41,
     height: 45,
     padding: 5,
+    alignItems: "flex-start",
   },
   rankingButton: {
     width: "100%",

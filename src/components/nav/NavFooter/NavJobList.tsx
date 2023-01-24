@@ -37,7 +37,7 @@ const NavJobList = ({ onModal, jobs, user }: Props) => {
         {isActive && <Pressable
           onPress={pressHandler}
           style={({ pressed }) => pressed && styles.pressed}
-          android_ripple={{ color: "#ccc" }}
+          // android_ripple={{ color: "#ccc" }}
         >
           <ImageBackground
             source={iconBackground}

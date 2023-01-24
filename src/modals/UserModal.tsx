@@ -77,7 +77,7 @@ const userModal = ({
             pressed && styles.pressed,
             styles.iconContainer,
           ]}
-          android_ripple={{ color: "#ccc" }}
+          // android_ripple={{ color: "#ccc" }}
         >
           <ImageBackground source={source} style={styles.iconBackground}>
             <UserIcon icon={itemData.item.icon} width={54} height={54} />

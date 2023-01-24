@@ -1,12 +1,26 @@
-import { StyleSheet, Animated, Pressable, Image, Easing } from "react-native";
-import { useRef } from "react";
+import { StyleSheet, Animated, Pressable } from "react-native";
 
 type Props = {
   pressHandler: () => void;
+  prevPressInHandler: () => void;
+  prevPressOutHandler: () => void;
+  prevFlag: boolean;
+  ButtonAnim: Animated.Value;
+  PrevButtonAnim: Animated.Value;
 };
 
-const PrevButton = ({ pressHandler }: Props) => {
-  const ButtonAnim = useRef(new Animated.Value(0)).current;
+const PrevButton = ({
+  pressHandler,
+  prevPressInHandler,
+  prevPressOutHandler,
+  prevFlag,
+  ButtonAnim,
+  PrevButtonAnim,
+}: Props) => {
+  const prevButtonOff = require("../../../assets/ui/prevButtonOff.png");
+  const prevButtonOn = require("../../../assets/ui/prevButton.png");
+
+  let imageSource = prevFlag ? prevButtonOn : prevButtonOff;
 
   const ButtonImage = ButtonAnim.interpolate({
     inputRange: [0, 80, 100, 150, 200, 220, 350, 400],
@@ -18,37 +32,36 @@ const PrevButton = ({ pressHandler }: Props) => {
     outputRange: [0, 1, 1, 0],
   });
 
-  Animated.loop(
-    Animated.timing(ButtonAnim, {
-      toValue: 400,
-      duration: 2000,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    })
-  ).start();
+  const ButtonWidth = PrevButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [25, 27],
+  });
+
+  const ButtonHeight = PrevButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [70, 78],
+  });
 
   return (
     <Pressable
-      android_ripple={{ color: "#ccc" }}
-      style={({ pressed }) => [
-        pressed && styles.pressed,
-        styles.prevButtonContainer,
-      ]}
+      style={styles.prevButtonContainer}
       onPress={pressHandler}
+      onPressIn={prevPressInHandler}
+      onPressOut={prevPressOutHandler}
     >
-      <Animated.View
-        style={[
-          styles.prevButton,
-          { transform: [{ translateX: ButtonImage }] },
-        ]}
-      >
-        <Image
-          source={require("../../../assets/ui/prevButtonOff.png")}
-          style={styles.prevButtonOff}
-        />
+      <Animated.View style={{ transform: [{ translateX: ButtonImage }] }}>
         <Animated.Image
           source={require("../../../assets/ui/prevButton.png")}
-          style={[styles.prevButton, { opacity: ButtonOpacity }]}
+          style={{ width: ButtonWidth, height: ButtonHeight }}
+        />
+        <Animated.Image
+          source={imageSource}
+          style={{
+            opacity: ButtonOpacity,
+            position: "absolute",
+            width: ButtonWidth,
+            height: ButtonHeight,
+          }}
         />
       </Animated.View>
     </Pressable>
@@ -61,19 +74,7 @@ const styles = StyleSheet.create({
   prevButtonContainer: {
     width: 45,
     height: 80,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
-  prevButton: {
-    width: 25,
-    height: 70,
-  },
-  prevButtonOff: {
-    position: "absolute",
-    width: 25,
-    height: 70,
-  },
-  pressed: {
-    opacity: 0.75,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

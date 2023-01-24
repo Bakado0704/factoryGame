@@ -1,13 +1,40 @@
-import { View, Image, Text, StyleSheet, ImageBackground } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  ImageBackground,
+  Animated,
+} from "react-native";
 import NextButton from "../../animation/animationButton/NextButton";
 import PrevButton from "../../animation/animationButton/PrevButton";
 
 type Props = {
   drink: number;
+  nextFlag: boolean;
+  prevFlag: boolean;
+  ButtonAnim: Animated.Value;
+  PrevButtonAnim: Animated.Value;
+  NextButtonAnim: Animated.Value;
   userDrinkHandler: (number: number) => void;
+  prevPressInHandler: () => void;
+  prevPressOutHandler: () => void;
+  nextPressInHandler: () => void;
+  nextPressOutHandler: () => void;
 };
 
-const NavDrink = ({ drink, userDrinkHandler }: Props) => {
+const NavDrink = ({
+  drink,
+  prevFlag,
+  nextFlag,
+  ButtonAnim,
+  userDrinkHandler,
+  prevPressInHandler,
+  prevPressOutHandler,
+  nextPressInHandler,
+  nextPressOutHandler,
+  PrevButtonAnim,
+  NextButtonAnim,
+}: Props) => {
   const prevHandler = () => {
     if (drink !== 0) {
       userDrinkHandler(-1);
@@ -49,10 +76,24 @@ const NavDrink = ({ drink, userDrinkHandler }: Props) => {
         source={require("../../../assets/ui/modalBackgroundLight.png")}
         style={styles.drinkBackground}
       >
-        <PrevButton pressHandler={prevHandler} />
+        <PrevButton
+          pressHandler={prevHandler}
+          prevFlag={prevFlag}
+          prevPressInHandler={prevPressInHandler}
+          prevPressOutHandler={prevPressOutHandler}
+          ButtonAnim={ButtonAnim}
+          PrevButtonAnim={PrevButtonAnim}
+        />
         {drinks}
         {emptyDrinks}
-        <NextButton pressHandler={nextHandler} />
+        <NextButton
+          pressHandler={nextHandler}
+          nextFlag={nextFlag}
+          nextPressInHandler={nextPressInHandler}
+          nextPressOutHandler={nextPressOutHandler}
+          ButtonAnim={ButtonAnim}
+          NextButtonAnim={NextButtonAnim}
+        />
       </ImageBackground>
     </View>
   );

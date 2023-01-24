@@ -1,12 +1,26 @@
-import { StyleSheet, Animated, Pressable, Image, Easing } from "react-native";
-import { useRef } from "react";
+import { StyleSheet, Animated, Pressable } from "react-native";
 
 type Props = {
   pressHandler: () => void;
+  nextPressInHandler: () => void;
+  nextPressOutHandler: () => void;
+  nextFlag: boolean;
+  ButtonAnim: Animated.Value;
+  NextButtonAnim: Animated.Value;
 };
 
-const NextButton = ({ pressHandler }: Props) => {
-  const ButtonAnim = useRef(new Animated.Value(0)).current;
+const NextButton = ({
+  pressHandler,
+  nextPressInHandler,
+  nextPressOutHandler,
+  nextFlag,
+  ButtonAnim,
+  NextButtonAnim,
+}: Props) => {
+  const prevButtonOff = require("../../../assets/ui/nextButtonOff.png");
+  const prevButtonOn = require("../../../assets/ui/nextButton.png");
+
+  let imageSource = nextFlag ? prevButtonOn : prevButtonOff;
 
   const ButtonImage = ButtonAnim.interpolate({
     inputRange: [0, 80, 100, 150, 200, 220, 350, 400],
@@ -18,37 +32,36 @@ const NextButton = ({ pressHandler }: Props) => {
     outputRange: [0, 1, 1, 0],
   });
 
-  Animated.loop(
-    Animated.timing(ButtonAnim, {
-      toValue: 400,
-      duration: 2000,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    })
-  ).start();
+  const ButtonWidth = NextButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [25, 27],
+  });
+
+  const ButtonHeight = NextButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [70, 78],
+  });
 
   return (
     <Pressable
-      android_ripple={{ color: "#ccc" }}
-      style={({ pressed }) => [
-        pressed && styles.pressed,
-        styles.nextButtonContainer,
-      ]}
+      style={[styles.nextButtonContainer]}
       onPress={pressHandler}
+      onPressIn={nextPressInHandler}
+      onPressOut={nextPressOutHandler}
     >
-      <Animated.View
-        style={[
-          styles.nextButton,
-          { transform: [{ translateX: ButtonImage }] },
-        ]}
-      >
-        <Image
-          source={require("../../../assets/ui/nextButtonOff.png")}
-          style={styles.nextButtonOff}
-        />
+      <Animated.View style={{ transform: [{ translateX: ButtonImage }] }}>
         <Animated.Image
           source={require("../../../assets/ui/nextButton.png")}
-          style={[styles.nextButton, {opacity: ButtonOpacity }]}
+          style={{ width: ButtonWidth, height: ButtonHeight }}
+        />
+        <Animated.Image
+          source={imageSource}
+          style={{
+            opacity: ButtonOpacity,
+            position: "absolute",
+            width: ButtonWidth,
+            height: ButtonHeight,
+          }}
         />
       </Animated.View>
     </Pressable>
@@ -61,19 +74,7 @@ const styles = StyleSheet.create({
   nextButtonContainer: {
     width: 45,
     height: 80,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
-  nextButton: {
-    width: 25,
-    height: 70,
-  },
-  nextButtonOff: {
-    position: "absolute",
-    width: 25,
-    height: 70,
-  },
-  pressed: {
-    opacity: 0.75,
-  },
+    justifyContent: "center",
+    alignItems: "center",
+  }
 });

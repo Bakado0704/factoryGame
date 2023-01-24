@@ -24,7 +24,7 @@ const NavGacha = ({ onModal, startMove, gachaCost }: Props) => {
       <Pressable
         onPress={onModal}
         style={({ pressed }) => [pressed && styles.pressed, { padding: 5 }]}
-        android_ripple={{ color: "#ccc" }}
+        // android_ripple={{ color: "#ccc" }}
       >
         <Image
           style={styles.submitButton}

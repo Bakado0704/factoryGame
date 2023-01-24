@@ -23,7 +23,7 @@ const JobAddButton = ({ jobAddHandler }: Props) => {
 
   return (
     <Pressable
-      android_ripple={{ color: "#ccc" }}
+      // android_ripple={{ color: "#ccc" }}
       style={({ pressed }) => [
         pressed && styles.pressed,
         styles.jobAddButtonContainer,

@@ -26,7 +26,7 @@ const StartButtons = ({ gameHandler, onSetting, pressHandler }: Props) => {
   return (
     <View style={styles.innerContainer}>
       <Pressable
-        android_ripple={{ color: "#ccc" }}
+      // android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => [
           pressed && styles.pressed,
           styles.settingButtonContainer,
@@ -47,7 +47,7 @@ const StartButtons = ({ gameHandler, onSetting, pressHandler }: Props) => {
         </Animated.View>
       </Pressable>
       <Pressable
-        android_ripple={{ color: "#ccc" }}
+        // android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => [
           pressed && styles.pressed,
           styles.startButtonContainer,
@@ -68,7 +68,7 @@ const StartButtons = ({ gameHandler, onSetting, pressHandler }: Props) => {
         </Animated.View>
       </Pressable>
       <Pressable
-        android_ripple={{ color: "#ccc" }}
+        // android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => [
           pressed && styles.pressed,
           styles.jobChangeButtonContainer,

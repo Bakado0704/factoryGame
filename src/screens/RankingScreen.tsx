@@ -1,5 +1,12 @@
-import { View, ImageBackground, StyleSheet, SafeAreaView } from "react-native";
-import React from "react";
+import {
+  View,
+  ImageBackground,
+  StyleSheet,
+  SafeAreaView,
+  Animated,
+  Easing,
+} from "react-native";
+import React, { useState, useRef } from "react";
 import ImageButton from "../components/button/ImageButton";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -29,6 +36,10 @@ function RankingScreen() {
   const maxMoney = Job.maxMoney;
   const page = user.page;
 
+  const [rankingFlag, setRankingFlag] = useState(false);
+  const [nextFlag, setNextFlag] = useState(false);
+  const [prevFlag, setPrevFlag] = useState(false);
+
   const dispatch = useDispatch();
   const navigation: NavigationProp<ParamListBase> = useNavigation();
 
@@ -42,6 +53,54 @@ function RankingScreen() {
     dispatch(changeUserNowJob(job.name));
   };
 
+  const prevJobHandler = () => {
+    jobDecideHandler(prevJob);
+  };
+
+  const nextJobHandler = () => {
+    jobDecideHandler(nextJob);
+  };
+
+  const rankingPressInHandler = () => {
+    setRankingFlag(true);
+  };
+
+  const rankingPressOutHandler = () => {
+    setRankingFlag(false);
+  };
+
+  const PrevButtonAnim = useRef(new Animated.Value(0)).current;
+  const NextButtonAnim = useRef(new Animated.Value(0)).current;
+
+  const nextPressInHandler = () => {
+    setNextFlag(true);
+    Animated.timing(NextButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const nextPressOutHandler = () => {
+    setNextFlag(false);
+    NextButtonAnim.setValue(0);
+  };
+
+  const prevPressInHandler = () => {
+    setPrevFlag(true);
+    Animated.timing(PrevButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const prevPressOutHandler = () => {
+    setPrevFlag(false);
+    PrevButtonAnim.setValue(0);
+  };
   const rankingMove = () => {
     dispatch(userPage("ranking"));
     navigation.navigate("Ranking");
@@ -60,11 +119,21 @@ function RankingScreen() {
             maxMoney={maxMoney}
             activeBoard={activeBoard}
             page={page}
-            activeJobsLength={activeJobsLength}
-            jobDecideHandler={jobDecideHandler}
             rankingMove={rankingMove}
-            prevJob={prevJob}
-            nextJob={nextJob}
+            activeJobsLength={activeJobsLength}
+            rankingFlag={rankingFlag}
+            nextFlag={nextFlag}
+            prevFlag={prevFlag}
+            prevJobHandler={prevJobHandler}
+            nextJobHandler={nextJobHandler}
+            rankingPressInHandler={rankingPressInHandler}
+            rankingPressOutHandler={rankingPressOutHandler}
+            prevPressInHandler={prevPressInHandler}
+            prevPressOutHandler={prevPressOutHandler}
+            nextPressInHandler={nextPressInHandler}
+            nextPressOutHandler={nextPressOutHandler}
+            PrevButtonAnim={PrevButtonAnim}
+            NextButtonAnim={NextButtonAnim}
           />
           <View style={styles.buttonContainer}>
             <ImageButton

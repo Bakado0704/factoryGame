@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Animated, Easing } from "react-native";
 import NavHead from "../components/nav/NavHeader/NavHead";
 import { useState } from "react";
 import NavSelect from "../components/nav/NavMiddle/NavSelect";
@@ -6,7 +6,7 @@ import NavOperation from "../components/nav/NavFooter/NavOperation";
 import Setting from "../modals/SettingModal";
 import UserModal from "../modals/UserModal";
 import { useDispatch, useSelector } from "react-redux";
-import {useEffect} from "react";
+import { useEffect, useRef } from "react";
 import UserIcons from "../models/userIcons";
 import { RootState } from "../store/store";
 import { PlayStatus } from "../types/play";
@@ -64,10 +64,78 @@ const StartScreen = () => {
   const [userModal, setUserModal] = useState(false);
 
   const isFocused = useIsFocused();
+  //ボタンのtrue,false
+  const [rankingFlag, setRankingFlag] = useState(false);
+  const [nextFlag, setNextFlag] = useState(false);
+  const [prevFlag, setPrevFlag] = useState(false);
+  const [nextDrinkFlag, setNextDrinkFlag] = useState(false);
+  const [prevDrinkFlag, setPrevDrinkFlag] = useState(false);
+  const [drinkFlag, setDrinkFlag] = useState(false);
+  const [startFlag, setStartFlag] = useState(false);
+  const [jobFlag, setJobFlag] = useState(false);
+  const [gachaFlag, setGachaFlag] = useState(false);
+  const [userFlag, setUserFlag] = useState(false);
 
   useEffect(() => {
     maxMoney = Job.maxMoney;
+    setRankingFlag(false);
+    setStartFlag(false);
+    setDrinkFlag(false);
+    setJobFlag(false);
   }, [isFocused]);
+
+  const PrevButtonAnim = useRef(new Animated.Value(0)).current;
+  const NextButtonAnim = useRef(new Animated.Value(0)).current;
+  const PrevDrinkButtonAnim = useRef(new Animated.Value(0)).current;
+  const NextDrinkButtonAnim = useRef(new Animated.Value(0)).current;
+
+  const nextPressInHandler = () => {
+    setNextFlag(true);
+    Animated.timing(NextButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const nextPressOutHandler = () => {
+    setNextFlag(false);
+    NextButtonAnim.setValue(0);
+  };
+
+  const prevPressInHandler = () => {
+    setPrevFlag(true);
+    Animated.timing(PrevButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const prevPressOutHandler = () => {
+    setPrevFlag(false);
+    PrevButtonAnim.setValue(0);
+  };
+
+  const rankingPressInHandler = () => {
+    setRankingFlag(true);
+  };
+
+  const rankingPressOutHandler = () => {
+    setRankingFlag(false);
+  };
+
+  const prevJobHandler = () => {
+    dispatch(changeJob(prevJob));
+    dispatch(changeUserNowJob(prevJob.name));
+  };
+
+  const nextJobHandler = () => {
+    dispatch(changeJob(nextJob));
+    dispatch(changeUserNowJob(nextJob.name));
+  };
 
   const onSettingHandler = () => {
     setSetting(true);
@@ -106,14 +174,48 @@ const StartScreen = () => {
       dispatch(staminaReset(drink));
     }
   };
+
   const playingStatusHandler = () => {
     dispatch(changeStatus(PlayStatus.playing));
   };
 
-  const jobDecideHandler = (job: Job) => {
-    dispatch(changeJob(job));
-    dispatch(changeUserNowJob(job.name));
-  };
+  const drinkNextPressInHandler = () => {
+    setNextDrinkFlag(true);
+    Animated.timing(NextDrinkButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  }
+
+  const drinkNextPressOutHandler = () => {
+    setNextDrinkFlag(false);
+    NextDrinkButtonAnim.setValue(0);
+  }
+
+  const drinkPrevPressInHandler = () => {
+    setPrevDrinkFlag(true);
+    Animated.timing(PrevDrinkButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  }
+
+  const drinkPrevPressOutHandler = () => {
+    setPrevDrinkFlag(false);
+    PrevDrinkButtonAnim.setValue(0);
+  }
+
+  const startPressInHandler = () => {}
+
+  const startPressOutHandler = () => {}
+
+  const jobPressInHandler = () => {}
+
+  const jobPressOutHandler = () => {}
 
   const userDrinkHandler = (number: number) => {
     dispatch(userDrink(number));
@@ -147,11 +249,21 @@ const StartScreen = () => {
           maxMoney={maxMoney}
           activeBoard={activeBoard}
           page={page}
-          jobDecideHandler={jobDecideHandler}
           rankingMove={rankingMove}
           activeJobsLength={activeJobsLength}
-          prevJob={prevJob}
-          nextJob={nextJob}
+          rankingFlag={rankingFlag}
+          nextFlag={nextFlag}
+          prevFlag={prevFlag}
+          prevJobHandler={prevJobHandler}
+          nextJobHandler={nextJobHandler}
+          rankingPressInHandler={rankingPressInHandler}
+          rankingPressOutHandler={rankingPressOutHandler}
+          prevPressInHandler={prevPressInHandler}
+          prevPressOutHandler={prevPressOutHandler}
+          nextPressInHandler={nextPressInHandler}
+          nextPressOutHandler={nextPressOutHandler}
+          PrevButtonAnim={PrevButtonAnim}
+          NextButtonAnim={NextButtonAnim}
         />
         <NavOperation
           onSetting={onSettingHandler}
@@ -166,6 +278,14 @@ const StartScreen = () => {
           offSetting={offSettingModalHandler}
           userDrinkHandler={userDrinkHandler}
           perMoney={perMoney}
+          nextFlag={nextDrinkFlag}
+          prevFlag={prevDrinkFlag}
+          PrevButtonAnim={PrevDrinkButtonAnim}
+          NextButtonAnim={PrevDrinkButtonAnim}
+          prevPressInHandler={drinkPrevPressInHandler}
+          prevPressOutHandler={drinkPrevPressOutHandler}
+          nextPressInHandler={drinkNextPressInHandler}
+          nextPressOutHandler={drinkNextPressOutHandler}
         />
       )}
       {userModal && (
@@ -195,9 +315,5 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     padding: 8,
-  },
-  okButton: {
-    width: 100,
-    height: 100,
-  },
+  }
 });

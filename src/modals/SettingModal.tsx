@@ -1,5 +1,5 @@
-import { View, StyleSheet, Image, Animated } from "react-native";
-import React, { useRef } from "react";
+import { View, StyleSheet, Image, Animated, Easing } from "react-native";
+import React, { useEffect, useRef } from "react";
 import ImageButton from "../components/button/ImageButton";
 import { ShadowText } from "../components/text/ShadowText";
 import Colors from "../constants/color";
@@ -12,21 +12,65 @@ type Props = {
   drink: number;
   drinkCost: number;
   perMoney: number;
+  nextFlag: boolean;
+  prevFlag: boolean;
   offSetting: () => void;
   userDrinkHandler: (number: number) => void;
-}
+  NextButtonAnim: Animated.Value;
+  PrevButtonAnim: Animated.Value;
+  prevPressInHandler: () => void;
+  prevPressOutHandler: () => void;
+  nextPressInHandler: () => void;
+  nextPressOutHandler: () => void;
+};
 
-const Setting = ({ drink, drinkCost, offSetting, perMoney, userDrinkHandler }: Props ) => {
+const Setting = ({
+  drink,
+  drinkCost,
+  offSetting,
+  perMoney,
+  nextFlag,
+  prevFlag,
+  NextButtonAnim, 
+  PrevButtonAnim,
+  userDrinkHandler,
+  prevPressInHandler,
+  prevPressOutHandler,
+  nextPressInHandler,
+  nextPressOutHandler,
+}: Props) => {
   const nextVelocity = (drink * 0.1 + 1).toFixed(1);
-  const nextBasicmoney = Math.floor((drink * 0.2 + 1) * perMoney)
-  const nextStamina = 300 - drink * 50
+  const nextBasicmoney = Math.floor((drink * 0.2 + 1) * perMoney);
+  const nextStamina = 300 - drink * 50;
 
+  const ButtonAnim = useRef(new Animated.Value(0)).current;
   const TextAnim = useRef(new Animated.Value(0)).current;
 
   const TextOpacity = TextAnim.interpolate({
     inputRange: [0, 60, 160, 200],
     outputRange: [0, 1, 1, 0],
   });
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(ButtonAnim, {
+        toValue: 400,
+        duration: 2000,
+        easing: Easing.ease,
+        useNativeDriver: false,
+      })
+    ).start();
+  }, []);
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(TextAnim, {
+        toValue: 200,
+        duration: 1800,
+        useNativeDriver: false,
+      })
+    ).start();
+  }, []);
 
   Animated.loop(
     Animated.timing(TextAnim, {
@@ -40,53 +84,105 @@ const Setting = ({ drink, drinkCost, offSetting, perMoney, userDrinkHandler }: P
   let attentionColor = "white";
   if (drink > 0) {
     attention = (
-      <Animated.View style={{opacity: TextOpacity}}>
-        <ShadowText size={12} color="white">注意:ゲーム開始時に毎回払います</ShadowText>
+      <Animated.View style={{ opacity: TextOpacity }}>
+        <ShadowText size={12} color="white">
+          注意:ゲーム開始時に毎回払います
+        </ShadowText>
       </Animated.View>
-    )
-    attentionColor = Colors.textYellowColor
+    );
+    attentionColor = Colors.textYellowColor;
   }
 
   return (
     <>
       <BgBlack />
       <View style={styles.rootScreen}>
-        <View style={[styles.innerContainer, {backgroundColor: Colors.modalMainColor, borderColor: Colors.modalEdgeColor}]}>
+        <View
+          style={[
+            styles.innerContainer,
+            {
+              backgroundColor: Colors.modalMainColor,
+              borderColor: Colors.modalEdgeColor,
+            },
+          ]}
+        >
           <Title title="集中力増強ドリンク" margintop={-40} />
-          <NavDrink drink={drink} userDrinkHandler={userDrinkHandler}/>
+          <NavDrink
+            drink={drink}
+            userDrinkHandler={userDrinkHandler}
+            prevPressInHandler={prevPressInHandler}
+            prevPressOutHandler={prevPressOutHandler}
+            nextPressInHandler={nextPressInHandler}
+            nextPressOutHandler={nextPressOutHandler}
+            ButtonAnim={ButtonAnim}
+            PrevButtonAnim={PrevButtonAnim}
+            NextButtonAnim={NextButtonAnim}
+            nextFlag={nextFlag}
+            prevFlag={prevFlag}
+          />
           {attention}
           <View style={styles.CostContainer}>
-            <View style={[styles.detailBackground, {backgroundColor: Colors.modalEdgeColor}]} />
-            <ShadowText size={27} color="white">費用:</ShadowText>
-            <Image
-                source={require("../assets/ui/money1.png")}
-                style={styles.moneyCostImg}
+            <View
+              style={[
+                styles.detailBackground,
+                { backgroundColor: Colors.modalEdgeColor },
+              ]}
             />
-            <ShadowText size={30} color={attentionColor}>{drinkCost}</ShadowText>
+            <ShadowText size={27} color="white">
+              費用:
+            </ShadowText>
+            <Image
+              source={require("../assets/ui/money1.png")}
+              style={styles.moneyCostImg}
+            />
+            <ShadowText size={30} color={attentionColor}>
+              {drinkCost}
+            </ShadowText>
           </View>
 
           <View style={styles.detailContainer}>
-            <View style={[styles.detailBackground, {backgroundColor: Colors.modalEdgeColor}]} />
-            <ShadowText size={18} color="white">ゲージの速度:
+            <View
+              style={[
+                styles.detailBackground,
+                { backgroundColor: Colors.modalEdgeColor },
+              ]}
+            />
+            <ShadowText size={18} color="white">
+              ゲージの速度:
             </ShadowText>
             <View style={styles.textInnerContainer}>
-              <ShadowText size={18} color="white"> ×1.0</ShadowText>
+              <ShadowText size={18} color="white">
+                {" "}
+                ×1.0
+              </ShadowText>
               <Image
                 source={require("../assets/ui/arrow.png")}
                 style={styles.arrowImg}
               />
-              <ShadowText size={18} color={Colors.textYellowColor}> ×{nextVelocity}</ShadowText>
+              <ShadowText size={18} color={Colors.textYellowColor}>
+                {" "}
+                ×{nextVelocity}
+              </ShadowText>
             </View>
           </View>
 
           <View style={styles.detailContainer}>
-            <View style={[styles.detailBackground, {backgroundColor: Colors.modalEdgeColor}]} />
-            <ShadowText size={18} color="white">基本給:</ShadowText>
+            <View
+              style={[
+                styles.detailBackground,
+                { backgroundColor: Colors.modalEdgeColor },
+              ]}
+            />
+            <ShadowText size={18} color="white">
+              基本給:
+            </ShadowText>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <ShadowText size={20} color="white">{perMoney}</ShadowText>
+            <ShadowText size={20} color="white">
+              {perMoney}
+            </ShadowText>
             <View style={styles.textInnerContainer}>
               <Image
                 source={require("../assets/ui/arrow.png")}
@@ -96,24 +192,37 @@ const Setting = ({ drink, drinkCost, offSetting, perMoney, userDrinkHandler }: P
                 source={require("../assets/ui/money1.png")}
                 style={styles.moneyImg}
               />
-              <ShadowText size={20} color={Colors.textYellowColor}>{nextBasicmoney}</ShadowText>   
+              <ShadowText size={20} color={Colors.textYellowColor}>
+                {nextBasicmoney}
+              </ShadowText>
             </View>
           </View>
 
           <View style={styles.detailContainer}>
-            <View style={[styles.detailBackground, {backgroundColor: Colors.modalEdgeColor}]} />
-            <ShadowText size={18} color="white">メンタル:</ShadowText>
-            <Stamina drink={drink}/>
-            <ShadowText size={20} color="white">300</ShadowText>
+            <View
+              style={[
+                styles.detailBackground,
+                { backgroundColor: Colors.modalEdgeColor },
+              ]}
+            />
+            <ShadowText size={18} color="white">
+              メンタル:
+            </ShadowText>
+            <Stamina drink={drink} />
+            <ShadowText size={20} color="white">
+              300
+            </ShadowText>
             <View style={styles.textInnerContainer}>
               <Image
                 source={require("../assets/ui/arrow.png")}
                 style={styles.arrowImg}
               />
-              <ShadowText size={20} color={Colors.textYellowColor}> {nextStamina}</ShadowText>
+              <ShadowText size={20} color={Colors.textYellowColor}>
+                {" "}
+                {nextStamina}
+              </ShadowText>
             </View>
           </View>
-
         </View>
         <View style={styles.buttonContainer}>
           <ImageButton

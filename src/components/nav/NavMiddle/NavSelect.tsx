@@ -1,44 +1,66 @@
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Animated, Easing } from "react-native";
 import BoardImg from "../../background/BoardImg";
 import RankingButton from "../../animation/animationButton/RankingButton";
 import NextButton from "../../animation/animationButton/NextButton";
 import PrevButton from "../../animation/animationButton/PrevButton";
-import { Job, JobType } from "../../../types/job";
+import { JobType } from "../../../types/job";
 import { page } from "../../../types/page";
 import { ShadowText } from "../../text/ShadowText";
+import { useRef, useEffect } from "react";
 
 type Props = {
   maxMoney: number;
   activeBoard: JobType;
   page: page;
-  prevJob: Job;
-  nextJob: Job;
   activeJobsLength: number;
-  jobDecideHandler: (job: Job) => void;
+  rankingFlag: boolean;
+  nextFlag: boolean;
+  prevFlag: boolean;
+  PrevButtonAnim: Animated.Value;
+  NextButtonAnim: Animated.Value;
+  prevJobHandler: () => void;
+  nextJobHandler: () => void;
   rankingMove: () => void;
+  rankingPressInHandler: () => void;
+  rankingPressOutHandler: () => void;
+  prevPressInHandler: () => void;
+  prevPressOutHandler: () => void;
+  nextPressInHandler: () => void;
+  nextPressOutHandler: () => void;
 };
 
 const NavSelect = ({
   maxMoney,
   activeBoard,
-  prevJob,
-  nextJob,
   page,
   activeJobsLength,
-  jobDecideHandler,
+  rankingFlag,
+  nextFlag,
+  prevFlag,
+  PrevButtonAnim,
+  NextButtonAnim,
+  prevJobHandler,
+  nextJobHandler,
   rankingMove,
+  rankingPressInHandler,
+  rankingPressOutHandler,
+  prevPressInHandler,
+  prevPressOutHandler,
+  nextPressInHandler,
+  nextPressOutHandler,
 }: Props) => {
-  const prevHandler = () => {
-    jobDecideHandler(prevJob);
-  };
+  const ButtonAnim = useRef(new Animated.Value(0)).current;
 
-  const nextHandler = () => {
-    jobDecideHandler(nextJob);
-  };
-
-  const pressHandler = () => {
-    rankingMove();
-  };
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(ButtonAnim, {
+        toValue: 400,
+        duration: 2000,
+        easing: Easing.ease,
+        useNativeDriver: false,
+      })
+    ).start();
+  }, []);
 
   return (
     <View style={styles.rootContainer}>
@@ -49,19 +71,43 @@ const NavSelect = ({
             style={styles.button}
           />
         )}
-        {activeJobsLength !== 1 && <PrevButton pressHandler={prevHandler} />}
+        {activeJobsLength !== 1 && (
+          <PrevButton
+            pressHandler={prevJobHandler}
+            prevFlag={prevFlag}
+            prevPressInHandler={prevPressInHandler}
+            prevPressOutHandler={prevPressOutHandler}
+            ButtonAnim={ButtonAnim}
+            PrevButtonAnim={PrevButtonAnim}
+          />
+        )}
         <BoardImg type={activeBoard} />
-        {activeJobsLength !== 1 && <NextButton pressHandler={nextHandler} />}
-        {activeJobsLength === 1 &&
+        {activeJobsLength !== 1 && (
+          <NextButton
+            pressHandler={nextJobHandler}
+            nextFlag={nextFlag}
+            nextPressInHandler={nextPressInHandler}
+            nextPressOutHandler={nextPressOutHandler}
+            ButtonAnim={ButtonAnim}
+            NextButtonAnim={NextButtonAnim}
+          />
+        )}
+        {activeJobsLength === 1 && (
           <Image
             source={require("../../../assets/ui/nextButtonStop.png")}
             style={styles.button}
           />
-        }
+        )}
       </View>
       {page !== "ranking" && (
         <View style={styles.containerBottom}>
-          <RankingButton pressHandler={pressHandler} />
+          <RankingButton
+            rankingPressHandler={rankingMove}
+            rankingPressInHandler={rankingPressInHandler}
+            rankingPressOutHandler={rankingPressOutHandler}
+            rankingFlag={rankingFlag}
+            ButtonAnim={ButtonAnim}
+          />
           <Image
             source={require("../../../assets/ui/rankingCoron.png")}
             style={styles.coron}
