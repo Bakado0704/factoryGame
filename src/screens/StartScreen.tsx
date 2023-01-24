@@ -187,12 +187,12 @@ const StartScreen = () => {
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();
-  }
+  };
 
   const drinkNextPressOutHandler = () => {
     setNextDrinkFlag(false);
     NextDrinkButtonAnim.setValue(0);
-  }
+  };
 
   const drinkPrevPressInHandler = () => {
     setPrevDrinkFlag(true);
@@ -202,20 +202,36 @@ const StartScreen = () => {
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();
-  }
+  };
 
   const drinkPrevPressOutHandler = () => {
     setPrevDrinkFlag(false);
     PrevDrinkButtonAnim.setValue(0);
-  }
+  };
 
-  const startPressInHandler = () => {}
+  const drinkPressInHandler = () => {
+    setDrinkFlag(true);
+  };
 
-  const startPressOutHandler = () => {}
+  const drinkPressOutHandler = () => {
+    setDrinkFlag(false);
+  };
 
-  const jobPressInHandler = () => {}
+  const startPressInHandler = () => {
+    setStartFlag(true);
+  };
 
-  const jobPressOutHandler = () => {}
+  const startPressOutHandler = () => {
+    setStartFlag(false);
+  };
+
+  const jobPressInHandler = () => {
+    setJobFlag(true);
+  };
+
+  const jobPressOutHandler = () => {
+    setJobFlag(false);
+  };
 
   const userDrinkHandler = (number: number) => {
     dispatch(userDrink(number));
@@ -269,6 +285,15 @@ const StartScreen = () => {
           onSetting={onSettingHandler}
           staminaResetHandler={staminaResetHandler}
           playingStatusHandler={playingStatusHandler}
+          startPressInHandler={startPressInHandler}
+          startPressOutHandler={startPressOutHandler}
+          jobPressInHandler={jobPressInHandler}
+          jobPressOutHandler={jobPressOutHandler}
+          drinkPressInHandler={drinkPressInHandler}
+          drinkPressOutHandler={drinkPressOutHandler}
+          drinkFlag={drinkFlag}
+          startFlag={startFlag}
+          jobFlag={jobFlag}
         />
       </View>
       {setting && (
@@ -281,7 +306,7 @@ const StartScreen = () => {
           nextFlag={nextDrinkFlag}
           prevFlag={prevDrinkFlag}
           PrevButtonAnim={PrevDrinkButtonAnim}
-          NextButtonAnim={PrevDrinkButtonAnim}
+          NextButtonAnim={NextDrinkButtonAnim}
           prevPressInHandler={drinkPrevPressInHandler}
           prevPressOutHandler={drinkPrevPressOutHandler}
           nextPressInHandler={drinkNextPressInHandler}
@@ -315,5 +340,5 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     padding: 8,
-  }
+  },
 });

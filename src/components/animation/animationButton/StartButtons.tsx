@@ -5,87 +5,94 @@ type Props = {
   gameHandler: () => void;
   onSetting: () => void;
   pressHandler: () => void;
+  startPressInHandler: () => void;
+  startPressOutHandler: () => void;
+  drinkPressInHandler: () => void;
+  drinkPressOutHandler: () => void;
+  jobPressInHandler: () => void;
+  jobPressOutHandler: () => void;
+  drinkFlag: boolean;
+  startFlag: boolean;
+  jobFlag: boolean;
+  StartButtonsAnim: Animated.Value;
 };
 
-const StartButtons = ({ gameHandler, onSetting, pressHandler }: Props) => {
-  const ButtonAnim = useRef(new Animated.Value(0)).current;
-
-  const ButtonImage = ButtonAnim.interpolate({
+const StartButtons = ({
+  gameHandler,
+  onSetting,
+  pressHandler,
+  startPressInHandler,
+  startPressOutHandler,
+  drinkPressInHandler,
+  drinkPressOutHandler,
+  jobPressInHandler,
+  jobPressOutHandler,
+  drinkFlag,
+  startFlag,
+  jobFlag,
+  StartButtonsAnim,
+}: Props) => {
+  const ButtonImage = StartButtonsAnim.interpolate({
     inputRange: [0, 100, 101, 200],
     outputRange: [0, 1, 1, 0],
   });
 
-  Animated.loop(
-    Animated.timing(ButtonAnim, {
-      toValue: 200,
-      duration: 1200,
-      useNativeDriver: false,
-    })
-  ).start();
+  const drinkButtonOff = require("../../../assets/ui/settingButtonOff.png");
+  const drinkButtonOn = require("../../../assets/ui/settingButton.png");
+  const drinkButtonPressed = require("../../../assets/ui/settingButtonPressed.png");
+  const startButtonOff = require("../../../assets/ui/startButtonOff.png");
+  const startButtonOn = require("../../../assets/ui/startButton.png");
+  const startButtonPressed = require("../../../assets/ui/startButtonPressed.png");
+  const jobButtonOff = require("../../../assets/ui/jobChangeButtonOff.png");
+  const jobButtonOn = require("../../../assets/ui/jobChangeButton.png");
+  const jobButtonPressed = require("../../../assets/ui/jobChangeButtonPressed.png");
+
+  let drinkImageOff = drinkFlag ? drinkButtonPressed : drinkButtonOff;
+  let drinkImageOn = drinkFlag ? drinkButtonPressed : drinkButtonOn;
+  let startImageOff = startFlag ? startButtonPressed : startButtonOff;
+  let startImageOn = startFlag ? startButtonPressed : startButtonOn;
+  let jobImageOff = jobFlag ? jobButtonPressed : jobButtonOff;
+  let jobImageOn = jobFlag ? jobButtonPressed : jobButtonOn;
 
   return (
     <View style={styles.innerContainer}>
       <Pressable
-      // android_ripple={{ color: "#ccc" }}
-        style={({ pressed }) => [
-          pressed && styles.pressed,
-          styles.settingButtonContainer,
-        ]}
+        style={styles.settingButtonContainer}
         onPress={onSetting}
+        onPressIn={drinkPressInHandler}
+        onPressOut={drinkPressOutHandler}
       >
-        <Image
-          source={require("../../../assets/ui/settingButtonOff.png")}
-          style={styles.settingButton}
-        />
+        <Animated.Image source={drinkImageOff} style={styles.settingButton} />
         <Animated.View
           style={[styles.settingButtonActive, { opacity: ButtonImage }]}
         >
-          <Image
-            source={require("../../../assets/ui/settingButton.png")}
-            style={styles.settingButton}
-          />
+          <Image source={drinkImageOn} style={styles.settingButton} />
         </Animated.View>
       </Pressable>
       <Pressable
-        // android_ripple={{ color: "#ccc" }}
-        style={({ pressed }) => [
-          pressed && styles.pressed,
-          styles.startButtonContainer,
-        ]}
+        style={styles.startButtonContainer}
         onPress={gameHandler}
+        onPressIn={startPressInHandler}
+        onPressOut={startPressOutHandler}
       >
-        <Image
-          source={require("../../../assets/ui/startButtonOff.png")}
-          style={styles.startButton}
-        />
+        <Image source={startImageOff} style={styles.startButton} />
         <Animated.View
           style={[styles.startButtonActive, { opacity: ButtonImage }]}
         >
-          <Image
-            source={require("../../../assets/ui/startButton.png")}
-            style={styles.startButton}
-          />
+          <Image source={startImageOn} style={styles.startButton} />
         </Animated.View>
       </Pressable>
       <Pressable
-        // android_ripple={{ color: "#ccc" }}
-        style={({ pressed }) => [
-          pressed && styles.pressed,
-          styles.jobChangeButtonContainer,
-        ]}
+        style={styles.jobChangeButtonContainer}
         onPress={pressHandler}
+        onPressIn={jobPressInHandler}
+        onPressOut={jobPressOutHandler}
       >
-        <Image
-          source={require("../../../assets/ui/jobChangeButtonOff.png")}
-          style={styles.jobChangeButton}
-        />
+        <Image source={jobImageOff} style={styles.jobChangeButton} />
         <Animated.View
           style={[styles.jobChangeButtonActive, { opacity: ButtonImage }]}
         >
-          <Image
-            source={require("../../../assets/ui/jobChangeButton.png")}
-            style={styles.jobChangeButton}
-          />
+          <Image source={jobImageOn} style={styles.jobChangeButton} />
         </Animated.View>
       </Pressable>
     </View>
@@ -154,8 +161,5 @@ const styles = StyleSheet.create({
     left: 5,
     width: "100%",
     height: "100%",
-  },
-  pressed: {
-    opacity: 0.75,
-  },
+  }
 });

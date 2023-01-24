@@ -1,4 +1,11 @@
-import { View, ImageBackground, StyleSheet, SafeAreaView } from "react-native";
+import {
+  View,
+  ImageBackground,
+  StyleSheet,
+  SafeAreaView,
+  Animated,
+  Easing,
+} from "react-native";
 import React, { useState } from "react";
 import NavGacha from "../components/nav/NavFooter/NavGacha";
 import NavHead from "../components/nav/NavHeader/NavHead";
@@ -15,6 +22,7 @@ import {
   ParamListBase,
   useNavigation,
 } from "@react-navigation/native";
+import { useRef } from "react";
 import { GachaStatus } from "../types/gacha";
 import { Mute } from "../types/user";
 import {
@@ -47,6 +55,9 @@ function GachaScreen() {
 
   const [userModal, setUserModal] = useState(false);
 
+  const HomeButtonAnim = useRef(new Animated.Value(0)).current;
+  const GachaButtonAnim = useRef(new Animated.Value(0)).current;
+
   let gachaPlusMoney = 300;
   if (gachaCost >= 800) {
     gachaPlusMoney = 500;
@@ -57,6 +68,32 @@ function GachaScreen() {
   } else if (gachaCost >= 7500) {
     gachaPlusMoney = 1000;
   }
+
+  const homePressInHandler = () => {
+    Animated.timing(HomeButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const homePressOutHandler = () => {
+    HomeButtonAnim.setValue(0);
+  };
+
+  const gachaPressInHandler = () => {
+    Animated.timing(GachaButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const gachaPressOutHandler = () => {
+    GachaButtonAnim.setValue(0);
+  };
 
   const offModalHandler = () => {
     dispatch(changeGachaStatus(GachaStatus.stop));
@@ -166,6 +203,12 @@ function GachaScreen() {
             onModal={modalSettingHandler}
             startMove={startMove}
             gachaCost={gachaCost}
+            HomeButtonAnim={HomeButtonAnim}
+            GachaButtonAnim={GachaButtonAnim}
+            homePressOutHandler={homePressOutHandler}
+            homePressInHandler={homePressInHandler}
+            gachaPressOutHandler={gachaPressOutHandler}
+            gachaPressInHandler={gachaPressInHandler}
           />
         </View>
         {envelope}

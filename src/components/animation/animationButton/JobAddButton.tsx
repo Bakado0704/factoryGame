@@ -23,11 +23,7 @@ const JobAddButton = ({ jobAddHandler }: Props) => {
 
   return (
     <Pressable
-      // android_ripple={{ color: "#ccc" }}
-      style={({ pressed }) => [
-        pressed && styles.pressed,
-        styles.jobAddButtonContainer,
-      ]}
+      style={styles.jobAddButtonContainer}
       onPress={jobAddHandler}
     >
       <Image
@@ -65,8 +61,5 @@ const styles = StyleSheet.create({
     left: 5,
     width: "100%",
     height: "100%",
-  },
-  pressed: {
-    opacity: 0.75,
-  },
+  }
 });

@@ -1,5 +1,5 @@
-import { View, StyleSheet, Image } from "react-native";
-import React from "react";
+import { View, StyleSheet, Image, Animated } from "react-native";
+import React, { useRef, useEffect } from "react";
 import {
   NavigationProp,
   ParamListBase,
@@ -11,12 +11,30 @@ type Props = {
   onSetting: () => void;
   staminaResetHandler: () => void;
   playingStatusHandler: () => void;
+  startPressInHandler: () => void;
+  startPressOutHandler: () => void;
+  drinkPressInHandler: () => void;
+  drinkPressOutHandler: () => void;
+  jobPressInHandler: () => void;
+  jobPressOutHandler: () => void;
+  drinkFlag: boolean;
+  startFlag: boolean;
+  jobFlag: boolean;
 };
 
 const NavOperation = ({
   onSetting,
   staminaResetHandler,
   playingStatusHandler,
+  startPressInHandler,
+  startPressOutHandler,
+  drinkPressInHandler,
+  drinkPressOutHandler,
+  jobPressInHandler,
+  jobPressOutHandler,
+  drinkFlag,
+  startFlag,
+  jobFlag,
 }: Props) => {
   const navigation: NavigationProp<ParamListBase> = useNavigation();
 
@@ -30,6 +48,18 @@ const NavOperation = ({
     playingStatusHandler();
   };
 
+  const StartButtonsAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(StartButtonsAnim, {
+        toValue: 200,
+        duration: 1200,
+        useNativeDriver: false,
+      })
+    ).start();
+  }, []);
+
   return (
     <>
       <View style={styles.rootConteiner}>
@@ -41,6 +71,16 @@ const NavOperation = ({
           gameHandler={gameHandler}
           onSetting={onSetting}
           pressHandler={pressHandler}
+          startPressInHandler={startPressInHandler}
+          startPressOutHandler={startPressOutHandler}
+          jobPressInHandler={jobPressInHandler}
+          jobPressOutHandler={jobPressOutHandler}
+          drinkPressInHandler={drinkPressInHandler}
+          drinkPressOutHandler={drinkPressOutHandler}
+          drinkFlag={drinkFlag}
+          startFlag={startFlag}
+          jobFlag={jobFlag}
+          StartButtonsAnim={StartButtonsAnim}
         />
       </View>
     </>

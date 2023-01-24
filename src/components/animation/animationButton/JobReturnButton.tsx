@@ -23,11 +23,7 @@ const JobReturnButton = ({ jobReturnHandler }: Props) => {
 
   return (
     <Pressable
-      // android_ripple={{ color: "#ccc" }}
-      style={({ pressed }) => [
-        pressed && styles.pressed,
-        styles.jobReturnButtonContainer,
-      ]}
+      style={styles.jobReturnButtonContainer}
       onPress={jobReturnHandler}
     >
       <Image

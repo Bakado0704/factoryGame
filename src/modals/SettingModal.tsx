@@ -62,16 +62,6 @@ const Setting = ({
     ).start();
   }, []);
 
-  useEffect(() => {
-    Animated.loop(
-      Animated.timing(TextAnim, {
-        toValue: 200,
-        duration: 1800,
-        useNativeDriver: false,
-      })
-    ).start();
-  }, []);
-
   Animated.loop(
     Animated.timing(TextAnim, {
       toValue: 200,

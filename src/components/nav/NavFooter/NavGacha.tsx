@@ -1,16 +1,59 @@
-import { View, StyleSheet, Pressable, Image, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Pressable,
+  Image,
+  Text,
+  Animated,
+} from "react-native";
 import ImageButton from "../../button/ImageButton";
 
 type Props = {
   onModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
   startMove: () => void;
   gachaCost: number;
+  GachaButtonAnim: Animated.Value;
+  HomeButtonAnim: Animated.Value;
+  homePressInHandler: () => void;
+  homePressOutHandler: () => void;
+  gachaPressInHandler: () => void;
+  gachaPressOutHandler: () => void;
 };
 
-const NavGacha = ({ onModal, startMove, gachaCost }: Props) => {
+const NavGacha = ({
+  onModal,
+  startMove,
+  gachaCost,
+  GachaButtonAnim,
+  HomeButtonAnim,
+  homePressInHandler,
+  homePressOutHandler,
+  gachaPressInHandler,
+  gachaPressOutHandler,
+}: Props) => {
   const homeHandler = () => {
     startMove();
   };
+
+  const GachaButtonWidth = GachaButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [210, 220],
+  });
+
+  const GachaButtonHeight = GachaButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [99, 104],
+  });
+
+  const HomeButtonWidth = HomeButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [66, 76],
+  });
+
+  const HomeButtonHeight = HomeButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [67, 77],
+  });
 
   return (
     <View style={styles.buttonsContainer}>
@@ -23,14 +66,15 @@ const NavGacha = ({ onModal, startMove, gachaCost }: Props) => {
 
       <Pressable
         onPress={onModal}
-        style={({ pressed }) => [pressed && styles.pressed, { padding: 5 }]}
-        // android_ripple={{ color: "#ccc" }}
+        onPressIn={gachaPressInHandler}
+        onPressOut={gachaPressOutHandler}
+        style={styles.submitButton}
       >
-        <Image
-          style={styles.submitButton}
+        <Animated.Image
+          style={{ width: GachaButtonWidth, height: GachaButtonHeight }}
           source={require("../../../assets/ui/submitButton.png")}
         />
-        <View style={styles.gachaContainer}>
+        <View style={[styles.gachaContainer, {}]}>
           <Image
             style={styles.moneyImg}
             source={require("../../../assets/ui/money1.png")}
@@ -64,10 +108,6 @@ const styles = StyleSheet.create({
     width: 66,
     height: 67,
   },
-  submitButtonContainer: {
-    width: 210,
-    height: 99,
-  },
   gachaContainer: {
     position: "absolute",
     width: 210,
@@ -75,11 +115,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    transform: [{ translateY: 18 }],
+    transform: [{ translateY: 12 }],
   },
   submitButton: {
-    width: 210,
-    height: 99,
+    width: 220,
+    height: 104,
+    alignItems: "center",
+    justifyContent: "center",
   },
   space: {
     width: 66,
@@ -94,8 +136,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "MochiyPop",
     color: "white",
-  },
-  pressed: {
-    opacity: 0.75,
-  },
+  }
 });
