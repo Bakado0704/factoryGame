@@ -1,10 +1,11 @@
 import {
   StyleSheet,
+  Image,
   Pressable,
   View,
   Text,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
 
 type Props = {
@@ -20,11 +21,6 @@ const GachaButton = ({ onModal, gachaCost }: Props) => {
     setFlag(false);
   }, [isFocused]);
 
-  let Image = require("../../assets/ui/submitButton.png");
-  let ImagePressed = require("../../assets/ui/submitButtonPressed.png");
-
-  let ImageSource = flag ? ImagePressed : Image;
-
   const pressInHandler = () => {
     setFlag(true);
   };
@@ -33,15 +29,25 @@ const GachaButton = ({ onModal, gachaCost }: Props) => {
     setFlag(false);
   };
 
+  let ImageOff = require("../../assets/ui/submitButton.png");
+  let ImagePressed = require("../../assets/ui/submitButtonPressed.png");
+  let ContainerY = flag ? 15 : 11;
+  let ImageSource = flag ? ImagePressed : ImageOff;
+
   return (
     <Pressable
       onPress={onModal}
       onPressIn={pressInHandler}
       onPressOut={pressOutHandler}
-      style={styles.submitButtonContainer}
+      style={styles.submitButton}
     >
-      <Image style={styles.submitButton} source={ImageSource} />
-      <View style={styles.gachaContainer}>
+      <Image style={{ width: 210, height: 99 }} source={ImageSource} />
+      <View
+        style={[
+          styles.gachaContainer,
+          { transform: [{ translateY: ContainerY }] },
+        ]}
+      >
         <Image
           style={styles.moneyImg}
           source={require("../../assets/ui/money1.png")}
@@ -64,17 +70,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    transform: [{ translateY: 12 }],
   },
-  submitButtonContainer: {
+  submitButton: {
     width: 220,
     height: 104,
     alignItems: "center",
     justifyContent: "center",
-  },
-  submitButton: {
-    width: 210,
-    height: 99,
   },
   moneyImg: {
     width: 35,
