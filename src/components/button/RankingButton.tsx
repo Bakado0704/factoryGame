@@ -1,29 +1,39 @@
 import { StyleSheet, Animated, Pressable, Image } from "react-native";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 
 type Props = {
   rankingPressHandler: () => void;
-  rankingPressInHandler: () => void;
-  rankingPressOutHandler: () => void;
-  rankingFlag: boolean;
   ButtonAnim: Animated.Value;
 };
 
+
 const RankingButton = ({
   rankingPressHandler,
-  rankingPressInHandler,
-  rankingPressOutHandler,
-  rankingFlag,
   ButtonAnim,
 }: Props) => {
   const ButtonImage = ButtonAnim.interpolate({
     inputRange: [0, 100, 101, 200],
     outputRange: [0, 1, 1, 0],
   });
+  const isFocused = useIsFocused();
+  const [rankingFlag, setRankingFlag] = useState(false);
+  
+  useEffect(() => {
+    setRankingFlag(false);
+  }, [isFocused]);
 
-  const rankingButtonOff = require("../../../assets/ui/rankingButtonOff.png");
-  const rankingButtonOn = require("../../../assets/ui/rankingButton.png");
-  const rankingButtonPressed = require("../../../assets/ui/rankingButtonPressed.png");
+  const rankingPressInHandler = () => {
+    setRankingFlag(true);
+  };
+
+  const rankingPressOutHandler = () => {
+    setRankingFlag(false);
+  };
+
+  const rankingButtonOff = require("../../assets/ui/rankingButtonOff.png");
+  const rankingButtonOn = require("../../assets/ui/rankingButton.png");
+  const rankingButtonPressed = require("../../assets/ui/rankingButtonPressed.png");
 
   let imageOff = rankingFlag ? rankingButtonPressed : rankingButtonOff;
   let imageOn = rankingFlag ? rankingButtonPressed : rankingButtonOn;

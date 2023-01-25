@@ -5,36 +5,18 @@ import {
   ParamListBase,
   useNavigation,
 } from "@react-navigation/native";
-import StartButtons from "../../animation/animationButton/StartButtons";
+import StartButtons from "../../button/StartButtons";
 
 type Props = {
   onSetting: () => void;
   staminaResetHandler: () => void;
   playingStatusHandler: () => void;
-  startPressInHandler: () => void;
-  startPressOutHandler: () => void;
-  drinkPressInHandler: () => void;
-  drinkPressOutHandler: () => void;
-  jobPressInHandler: () => void;
-  jobPressOutHandler: () => void;
-  drinkFlag: boolean;
-  startFlag: boolean;
-  jobFlag: boolean;
 };
 
 const NavOperation = ({
   onSetting,
   staminaResetHandler,
   playingStatusHandler,
-  startPressInHandler,
-  startPressOutHandler,
-  drinkPressInHandler,
-  drinkPressOutHandler,
-  jobPressInHandler,
-  jobPressOutHandler,
-  drinkFlag,
-  startFlag,
-  jobFlag,
 }: Props) => {
   const navigation: NavigationProp<ParamListBase> = useNavigation();
 
@@ -71,15 +53,6 @@ const NavOperation = ({
           gameHandler={gameHandler}
           onSetting={onSetting}
           pressHandler={pressHandler}
-          startPressInHandler={startPressInHandler}
-          startPressOutHandler={startPressOutHandler}
-          jobPressInHandler={jobPressInHandler}
-          jobPressOutHandler={jobPressOutHandler}
-          drinkPressInHandler={drinkPressInHandler}
-          drinkPressOutHandler={drinkPressOutHandler}
-          drinkFlag={drinkFlag}
-          startFlag={startFlag}
-          jobFlag={jobFlag}
           StartButtonsAnim={StartButtonsAnim}
         />
       </View>

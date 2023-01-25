@@ -1,19 +1,11 @@
 import { StyleSheet, Animated, View, Image, Pressable } from "react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 
 type Props = {
   gameHandler: () => void;
   onSetting: () => void;
   pressHandler: () => void;
-  startPressInHandler: () => void;
-  startPressOutHandler: () => void;
-  drinkPressInHandler: () => void;
-  drinkPressOutHandler: () => void;
-  jobPressInHandler: () => void;
-  jobPressOutHandler: () => void;
-  drinkFlag: boolean;
-  startFlag: boolean;
-  jobFlag: boolean;
   StartButtonsAnim: Animated.Value;
 };
 
@@ -21,15 +13,6 @@ const StartButtons = ({
   gameHandler,
   onSetting,
   pressHandler,
-  startPressInHandler,
-  startPressOutHandler,
-  drinkPressInHandler,
-  drinkPressOutHandler,
-  jobPressInHandler,
-  jobPressOutHandler,
-  drinkFlag,
-  startFlag,
-  jobFlag,
   StartButtonsAnim,
 }: Props) => {
   const ButtonImage = StartButtonsAnim.interpolate({
@@ -37,15 +20,51 @@ const StartButtons = ({
     outputRange: [0, 1, 1, 0],
   });
 
-  const drinkButtonOff = require("../../../assets/ui/settingButtonOff.png");
-  const drinkButtonOn = require("../../../assets/ui/settingButton.png");
-  const drinkButtonPressed = require("../../../assets/ui/settingButtonPressed.png");
-  const startButtonOff = require("../../../assets/ui/startButtonOff.png");
-  const startButtonOn = require("../../../assets/ui/startButton.png");
-  const startButtonPressed = require("../../../assets/ui/startButtonPressed.png");
-  const jobButtonOff = require("../../../assets/ui/jobChangeButtonOff.png");
-  const jobButtonOn = require("../../../assets/ui/jobChangeButton.png");
-  const jobButtonPressed = require("../../../assets/ui/jobChangeButtonPressed.png");
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    setStartFlag(false);
+    setDrinkFlag(false);
+    setJobFlag(false);
+  }, [isFocused]);
+
+  const [drinkFlag, setDrinkFlag] = useState(false);
+  const [startFlag, setStartFlag] = useState(false);
+  const [jobFlag, setJobFlag] = useState(false);
+
+  const drinkPressInHandler = () => {
+    setDrinkFlag(true);
+  };
+
+  const drinkPressOutHandler = () => {
+    setDrinkFlag(false);
+  };
+
+  const startPressInHandler = () => {
+    setStartFlag(true);
+  };
+
+  const startPressOutHandler = () => {
+    setStartFlag(false);
+  };
+
+  const jobPressInHandler = () => {
+    setJobFlag(true);
+  };
+
+  const jobPressOutHandler = () => {
+    setJobFlag(false);
+  };
+
+  const drinkButtonOff = require("../../assets/ui/settingButtonOff.png");
+  const drinkButtonOn = require("../../assets/ui/settingButton.png");
+  const drinkButtonPressed = require("../../assets/ui/settingButtonPressed.png");
+  const startButtonOff = require("../../assets/ui/startButtonOff.png");
+  const startButtonOn = require("../../assets/ui/startButton.png");
+  const startButtonPressed = require("../../assets/ui/startButtonPressed.png");
+  const jobButtonOff = require("../../assets/ui/jobChangeButtonOff.png");
+  const jobButtonOn = require("../../assets/ui/jobChangeButton.png");
+  const jobButtonPressed = require("../../assets/ui/jobChangeButtonPressed.png");
 
   let drinkImageOff = drinkFlag ? drinkButtonPressed : drinkButtonOff;
   let drinkImageOn = drinkFlag ? drinkButtonPressed : drinkButtonOn;

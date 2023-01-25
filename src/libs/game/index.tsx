@@ -5,8 +5,8 @@ import { PATTERN_DATES } from "./datas/dates";
 import PlayGap from "../../models/playgap";
 import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
 import { JobType } from "../../types/job";
-import Coins from "../../components/animation/Coins";
-import PlusMoney from "../../components/animation/PlusMoney";
+import Coins from "../../components/money/Coins";
+import PlusMoney from "../../components/money/PlusMoney";
 import { productType } from "../../types/product";
 import { ShadowText } from "../../components/text/ShadowText";
 

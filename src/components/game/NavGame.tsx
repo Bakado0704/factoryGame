@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { View, Image, StyleSheet } from "react-native";
 import Colors from "../../constants/color";
 import { judgeStatus, Play } from "../../types/play";
-import JudgeLightSuccess from "../animation/JudgeLightSuccess";
+import JudgeLightSuccess from "../background/JudgeLightSuccess";
 
 type Props = {
   playState: Play;

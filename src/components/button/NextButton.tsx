@@ -1,26 +1,39 @@
-import { StyleSheet, Animated, Pressable } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Animated, Pressable, Easing } from "react-native";
 
 type Props = {
   pressHandler: () => void;
-  nextPressInHandler: () => void;
-  nextPressOutHandler: () => void;
-  nextFlag: boolean;
   ButtonAnim: Animated.Value;
   NextButtonAnim: Animated.Value;
 };
 
 const NextButton = ({
   pressHandler,
-  nextPressInHandler,
-  nextPressOutHandler,
-  nextFlag,
   ButtonAnim,
   NextButtonAnim,
 }: Props) => {
-  const prevButtonOff = require("../../../assets/ui/nextButtonOff.png");
-  const prevButtonOn = require("../../../assets/ui/nextButton.png");
+  const [nextFlag, setNextFlag] = useState(false);
+
+  const prevButtonOff = require("../../assets/ui/nextButtonOff.png");
+  const prevButtonOn = require("../../assets/ui/nextButton.png");
+
 
   let imageSource = nextFlag ? prevButtonOn : prevButtonOff;
+
+  const nextPressInHandler = () => {
+    setNextFlag(true);
+    Animated.timing(NextButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const nextPressOutHandler = () => {
+    setNextFlag(false);
+    NextButtonAnim.setValue(0);
+  };
 
   const ButtonImage = ButtonAnim.interpolate({
     inputRange: [0, 80, 100, 150, 200, 220, 350, 400],
@@ -51,7 +64,7 @@ const NextButton = ({
     >
       <Animated.View style={{ transform: [{ translateX: ButtonImage }] }}>
         <Animated.Image
-          source={require("../../../assets/ui/nextButton.png")}
+          source={require("../../assets/ui/nextButton.png")}
           style={{ width: ButtonWidth, height: ButtonHeight }}
         />
         <Animated.Image

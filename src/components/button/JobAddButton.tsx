@@ -2,10 +2,10 @@ import { StyleSheet, Animated, Pressable, Image } from "react-native";
 import { useRef } from "react";
 
 type Props = {
-  jobReturnHandler: () => void;
+  jobAddHandler: () => void;
 };
 
-const JobReturnButton = ({ jobReturnHandler }: Props) => {
+const JobAddButton = ({ jobAddHandler }: Props) => {
   const ButtonAnim = useRef(new Animated.Value(0)).current;
 
   const ButtonImage = ButtonAnim.interpolate({
@@ -23,46 +23,43 @@ const JobReturnButton = ({ jobReturnHandler }: Props) => {
 
   return (
     <Pressable
-      style={styles.jobReturnButtonContainer}
-      onPress={jobReturnHandler}
+      style={styles.jobAddButtonContainer}
+      onPress={jobAddHandler}
     >
       <Image
-        source={require("../../../assets/ui/jobReturnButtonOff.png")}
-        style={styles.jobReturnButton}
+        source={require("../../assets/ui/jobAddButtonOff.png")}
+        style={styles.jobAddButton}
       />
       <Animated.View
-        style={[styles.jobReturnButtonActive, { opacity: ButtonImage }]}
+        style={[styles.jobAddButtonActive, { opacity: ButtonImage }]}
       >
         <Image
-          source={require("../../../assets/ui/jobReturnButton.png")}
-          style={styles.jobReturnButton}
+          source={require("../../assets/ui/jobAddButton.png")}
+          style={styles.jobAddButton}
         />
       </Animated.View>
     </Pressable>
   );
 };
 
-export default JobReturnButton;
+export default JobAddButton;
 
 const styles = StyleSheet.create({
-  jobReturnButtonContainer: {
+  jobAddButtonContainer: {
     width: 105,
     height: 37,
-    paddinRight: 5,
+    paddingLeft: 5,
     paddingTop: 5,
   },
-  jobReturnButton: {
+  jobAddButton: {
     width: "100%",
     height: "100%",
   },
-  jobReturnButtonActive: {
+  jobAddButtonActive: {
     position: "absolute",
     top: 5,
-    right: 0,
+    left: 5,
     width: "100%",
     height: "100%",
-  },
-  pressed: {
-    opacity: 0.75,
-  },
+  }
 });

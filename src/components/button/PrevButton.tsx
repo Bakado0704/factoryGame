@@ -1,24 +1,35 @@
-import { StyleSheet, Animated, Pressable } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Animated, Pressable, Easing } from "react-native";
 
 type Props = {
   pressHandler: () => void;
-  prevPressInHandler: () => void;
-  prevPressOutHandler: () => void;
-  prevFlag: boolean;
   ButtonAnim: Animated.Value;
   PrevButtonAnim: Animated.Value;
 };
 
 const PrevButton = ({
   pressHandler,
-  prevPressInHandler,
-  prevPressOutHandler,
-  prevFlag,
   ButtonAnim,
   PrevButtonAnim,
 }: Props) => {
-  const prevButtonOff = require("../../../assets/ui/prevButtonOff.png");
-  const prevButtonOn = require("../../../assets/ui/prevButton.png");
+  const [prevFlag, setPrevFlag] = useState(false);
+  const prevButtonOff = require("../../assets/ui/prevButtonOff.png");
+  const prevButtonOn = require("../../assets/ui/prevButton.png");
+
+  const prevPressInHandler = () => {
+    setPrevFlag(true);
+    Animated.timing(PrevButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const prevPressOutHandler = () => {
+    setPrevFlag(false);
+    PrevButtonAnim.setValue(0);
+  };
 
   let imageSource = prevFlag ? prevButtonOn : prevButtonOff;
 
@@ -51,7 +62,7 @@ const PrevButton = ({
     >
       <Animated.View style={{ transform: [{ translateX: ButtonImage }] }}>
         <Animated.Image
-          source={require("../../../assets/ui/prevButton.png")}
+          source={require("../../assets/ui/prevButton.png")}
           style={{ width: ButtonWidth, height: ButtonHeight }}
         />
         <Animated.Image

@@ -12,16 +12,10 @@ type Props = {
   drink: number;
   drinkCost: number;
   perMoney: number;
-  nextFlag: boolean;
-  prevFlag: boolean;
   offSetting: () => void;
   userDrinkHandler: (number: number) => void;
   NextButtonAnim: Animated.Value;
   PrevButtonAnim: Animated.Value;
-  prevPressInHandler: () => void;
-  prevPressOutHandler: () => void;
-  nextPressInHandler: () => void;
-  nextPressOutHandler: () => void;
 };
 
 const Setting = ({
@@ -29,15 +23,9 @@ const Setting = ({
   drinkCost,
   offSetting,
   perMoney,
-  nextFlag,
-  prevFlag,
   NextButtonAnim, 
   PrevButtonAnim,
   userDrinkHandler,
-  prevPressInHandler,
-  prevPressOutHandler,
-  nextPressInHandler,
-  nextPressOutHandler,
 }: Props) => {
   const nextVelocity = (drink * 0.1 + 1).toFixed(1);
   const nextBasicmoney = Math.floor((drink * 0.2 + 1) * perMoney);
@@ -100,15 +88,9 @@ const Setting = ({
           <NavDrink
             drink={drink}
             userDrinkHandler={userDrinkHandler}
-            prevPressInHandler={prevPressInHandler}
-            prevPressOutHandler={prevPressOutHandler}
-            nextPressInHandler={nextPressInHandler}
-            nextPressOutHandler={nextPressOutHandler}
             ButtonAnim={ButtonAnim}
             PrevButtonAnim={PrevButtonAnim}
             NextButtonAnim={NextButtonAnim}
-            nextFlag={nextFlag}
-            prevFlag={prevFlag}
           />
           {attention}
           <View style={styles.CostContainer}>

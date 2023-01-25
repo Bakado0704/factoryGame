@@ -1,6 +1,6 @@
 import React from "react";
 import { Play } from "../../types/play";
-import Coin from "../../components/animation/Coin";
+import Coin from "./Coin";
 
 type Props = {
   playState: Play;

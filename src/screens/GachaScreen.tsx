@@ -13,8 +13,8 @@ import JobGet from "../modals/JobGetModal";
 import UserModal from "../modals/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import UserIcons from "../models/userIcons";
-import ZimuPerson from "../components/animation/ZimuPerson";
-import Envelope from "../components/animation/Envelope";
+import ZimuPerson from "../components/face/ZimuPerson";
+import Envelope from "../components/gacha/Envelope";
 import BgBlack from "../components/background/BgBlack";
 import { RootState } from "../store/store";
 import {
@@ -72,7 +72,7 @@ function GachaScreen() {
   const homePressInHandler = () => {
     Animated.timing(HomeButtonAnim, {
       toValue: 100,
-      duration: 100,
+      duration: 50,
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();
@@ -85,7 +85,7 @@ function GachaScreen() {
   const gachaPressInHandler = () => {
     Animated.timing(GachaButtonAnim, {
       toValue: 100,
-      duration: 100,
+      duration: 50,
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();

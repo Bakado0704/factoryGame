@@ -65,67 +65,18 @@ const StartScreen = () => {
 
   const isFocused = useIsFocused();
   //ボタンのtrue,false
-  const [rankingFlag, setRankingFlag] = useState(false);
-  const [nextFlag, setNextFlag] = useState(false);
-  const [prevFlag, setPrevFlag] = useState(false);
-  const [nextDrinkFlag, setNextDrinkFlag] = useState(false);
-  const [prevDrinkFlag, setPrevDrinkFlag] = useState(false);
-  const [drinkFlag, setDrinkFlag] = useState(false);
-  const [startFlag, setStartFlag] = useState(false);
-  const [jobFlag, setJobFlag] = useState(false);
+
   const [gachaFlag, setGachaFlag] = useState(false);
   const [userFlag, setUserFlag] = useState(false);
 
   useEffect(() => {
     maxMoney = Job.maxMoney;
-    setRankingFlag(false);
-    setStartFlag(false);
-    setDrinkFlag(false);
-    setJobFlag(false);
   }, [isFocused]);
 
   const PrevButtonAnim = useRef(new Animated.Value(0)).current;
   const NextButtonAnim = useRef(new Animated.Value(0)).current;
   const PrevDrinkButtonAnim = useRef(new Animated.Value(0)).current;
   const NextDrinkButtonAnim = useRef(new Animated.Value(0)).current;
-
-  const nextPressInHandler = () => {
-    setNextFlag(true);
-    Animated.timing(NextButtonAnim, {
-      toValue: 100,
-      duration: 100,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const nextPressOutHandler = () => {
-    setNextFlag(false);
-    NextButtonAnim.setValue(0);
-  };
-
-  const prevPressInHandler = () => {
-    setPrevFlag(true);
-    Animated.timing(PrevButtonAnim, {
-      toValue: 100,
-      duration: 100,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const prevPressOutHandler = () => {
-    setPrevFlag(false);
-    PrevButtonAnim.setValue(0);
-  };
-
-  const rankingPressInHandler = () => {
-    setRankingFlag(true);
-  };
-
-  const rankingPressOutHandler = () => {
-    setRankingFlag(false);
-  };
 
   const prevJobHandler = () => {
     dispatch(changeJob(prevJob));
@@ -179,60 +130,6 @@ const StartScreen = () => {
     dispatch(changeStatus(PlayStatus.playing));
   };
 
-  const drinkNextPressInHandler = () => {
-    setNextDrinkFlag(true);
-    Animated.timing(NextDrinkButtonAnim, {
-      toValue: 100,
-      duration: 100,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const drinkNextPressOutHandler = () => {
-    setNextDrinkFlag(false);
-    NextDrinkButtonAnim.setValue(0);
-  };
-
-  const drinkPrevPressInHandler = () => {
-    setPrevDrinkFlag(true);
-    Animated.timing(PrevDrinkButtonAnim, {
-      toValue: 100,
-      duration: 100,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const drinkPrevPressOutHandler = () => {
-    setPrevDrinkFlag(false);
-    PrevDrinkButtonAnim.setValue(0);
-  };
-
-  const drinkPressInHandler = () => {
-    setDrinkFlag(true);
-  };
-
-  const drinkPressOutHandler = () => {
-    setDrinkFlag(false);
-  };
-
-  const startPressInHandler = () => {
-    setStartFlag(true);
-  };
-
-  const startPressOutHandler = () => {
-    setStartFlag(false);
-  };
-
-  const jobPressInHandler = () => {
-    setJobFlag(true);
-  };
-
-  const jobPressOutHandler = () => {
-    setJobFlag(false);
-  };
-
   const userDrinkHandler = (number: number) => {
     dispatch(userDrink(number));
   };
@@ -267,17 +164,8 @@ const StartScreen = () => {
           page={page}
           rankingMove={rankingMove}
           activeJobsLength={activeJobsLength}
-          rankingFlag={rankingFlag}
-          nextFlag={nextFlag}
-          prevFlag={prevFlag}
           prevJobHandler={prevJobHandler}
           nextJobHandler={nextJobHandler}
-          rankingPressInHandler={rankingPressInHandler}
-          rankingPressOutHandler={rankingPressOutHandler}
-          prevPressInHandler={prevPressInHandler}
-          prevPressOutHandler={prevPressOutHandler}
-          nextPressInHandler={nextPressInHandler}
-          nextPressOutHandler={nextPressOutHandler}
           PrevButtonAnim={PrevButtonAnim}
           NextButtonAnim={NextButtonAnim}
         />
@@ -285,15 +173,6 @@ const StartScreen = () => {
           onSetting={onSettingHandler}
           staminaResetHandler={staminaResetHandler}
           playingStatusHandler={playingStatusHandler}
-          startPressInHandler={startPressInHandler}
-          startPressOutHandler={startPressOutHandler}
-          jobPressInHandler={jobPressInHandler}
-          jobPressOutHandler={jobPressOutHandler}
-          drinkPressInHandler={drinkPressInHandler}
-          drinkPressOutHandler={drinkPressOutHandler}
-          drinkFlag={drinkFlag}
-          startFlag={startFlag}
-          jobFlag={jobFlag}
         />
       </View>
       {setting && (
@@ -303,14 +182,8 @@ const StartScreen = () => {
           offSetting={offSettingModalHandler}
           userDrinkHandler={userDrinkHandler}
           perMoney={perMoney}
-          nextFlag={nextDrinkFlag}
-          prevFlag={prevDrinkFlag}
           PrevButtonAnim={PrevDrinkButtonAnim}
           NextButtonAnim={NextDrinkButtonAnim}
-          prevPressInHandler={drinkPrevPressInHandler}
-          prevPressOutHandler={drinkPrevPressOutHandler}
-          nextPressInHandler={drinkNextPressInHandler}
-          nextPressOutHandler={drinkNextPressOutHandler}
         />
       )}
       {userModal && (

@@ -1,8 +1,8 @@
-import { View, Image, Text, StyleSheet, Animated, Easing } from "react-native";
+import { View, Image, StyleSheet, Animated, Easing } from "react-native";
 import BoardImg from "../../background/BoardImg";
-import RankingButton from "../../animation/animationButton/RankingButton";
-import NextButton from "../../animation/animationButton/NextButton";
-import PrevButton from "../../animation/animationButton/PrevButton";
+import RankingButton from "../../button/RankingButton";
+import NextButton from "../../button/NextButton";
+import PrevButton from "../../button/PrevButton";
 import { JobType } from "../../../types/job";
 import { page } from "../../../types/page";
 import { ShadowText } from "../../text/ShadowText";
@@ -13,20 +13,11 @@ type Props = {
   activeBoard: JobType;
   page: page;
   activeJobsLength: number;
-  rankingFlag: boolean;
-  nextFlag: boolean;
-  prevFlag: boolean;
   PrevButtonAnim: Animated.Value;
   NextButtonAnim: Animated.Value;
   prevJobHandler: () => void;
   nextJobHandler: () => void;
   rankingMove: () => void;
-  rankingPressInHandler: () => void;
-  rankingPressOutHandler: () => void;
-  prevPressInHandler: () => void;
-  prevPressOutHandler: () => void;
-  nextPressInHandler: () => void;
-  nextPressOutHandler: () => void;
 };
 
 const NavSelect = ({
@@ -34,20 +25,11 @@ const NavSelect = ({
   activeBoard,
   page,
   activeJobsLength,
-  rankingFlag,
-  nextFlag,
-  prevFlag,
   PrevButtonAnim,
   NextButtonAnim,
   prevJobHandler,
   nextJobHandler,
   rankingMove,
-  rankingPressInHandler,
-  rankingPressOutHandler,
-  prevPressInHandler,
-  prevPressOutHandler,
-  nextPressInHandler,
-  nextPressOutHandler,
 }: Props) => {
   const ButtonAnim = useRef(new Animated.Value(0)).current;
 
@@ -74,9 +56,6 @@ const NavSelect = ({
         {activeJobsLength !== 1 && (
           <PrevButton
             pressHandler={prevJobHandler}
-            prevFlag={prevFlag}
-            prevPressInHandler={prevPressInHandler}
-            prevPressOutHandler={prevPressOutHandler}
             ButtonAnim={ButtonAnim}
             PrevButtonAnim={PrevButtonAnim}
           />
@@ -85,9 +64,6 @@ const NavSelect = ({
         {activeJobsLength !== 1 && (
           <NextButton
             pressHandler={nextJobHandler}
-            nextFlag={nextFlag}
-            nextPressInHandler={nextPressInHandler}
-            nextPressOutHandler={nextPressOutHandler}
             ButtonAnim={ButtonAnim}
             NextButtonAnim={NextButtonAnim}
           />
@@ -103,9 +79,6 @@ const NavSelect = ({
         <View style={styles.containerBottom}>
           <RankingButton
             rankingPressHandler={rankingMove}
-            rankingPressInHandler={rankingPressInHandler}
-            rankingPressOutHandler={rankingPressOutHandler}
-            rankingFlag={rankingFlag}
             ButtonAnim={ButtonAnim}
           />
           <Image
