@@ -1,18 +1,19 @@
 import { StyleSheet, Animated, View, Image, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
+import OperationButton from "./operationButton";
 
 type Props = {
-  gameHandler: () => void;
+  jobChangeMove: () => void;
   onSetting: () => void;
-  pressHandler: () => void;
+  gameMove: () => void;
   StartButtonsAnim: Animated.Value;
 };
 
 const StartButtons = ({
-  gameHandler,
+  jobChangeMove,
   onSetting,
-  pressHandler,
+  gameMove,
   StartButtonsAnim,
 }: Props) => {
   const ButtonImage = StartButtonsAnim.interpolate({
@@ -24,21 +25,11 @@ const StartButtons = ({
 
   useEffect(() => {
     setStartFlag(false);
-    setDrinkFlag(false);
     setJobFlag(false);
   }, [isFocused]);
 
-  const [drinkFlag, setDrinkFlag] = useState(false);
   const [startFlag, setStartFlag] = useState(false);
   const [jobFlag, setJobFlag] = useState(false);
-
-  const drinkPressInHandler = () => {
-    setDrinkFlag(true);
-  };
-
-  const drinkPressOutHandler = () => {
-    setDrinkFlag(false);
-  };
 
   const startPressInHandler = () => {
     setStartFlag(true);
@@ -56,9 +47,6 @@ const StartButtons = ({
     setJobFlag(false);
   };
 
-  const drinkButtonOff = require("../../assets/ui/settingButtonOff.png");
-  const drinkButtonOn = require("../../assets/ui/settingButton.png");
-  const drinkButtonPressed = require("../../assets/ui/settingButtonPressed.png");
   const startButtonOff = require("../../assets/ui/startButtonOff.png");
   const startButtonOn = require("../../assets/ui/startButton.png");
   const startButtonPressed = require("../../assets/ui/startButtonPressed.png");
@@ -66,8 +54,6 @@ const StartButtons = ({
   const jobButtonOn = require("../../assets/ui/jobChangeButton.png");
   const jobButtonPressed = require("../../assets/ui/jobChangeButtonPressed.png");
 
-  let drinkImageOff = drinkFlag ? drinkButtonPressed : drinkButtonOff;
-  let drinkImageOn = drinkFlag ? drinkButtonPressed : drinkButtonOn;
   let startImageOff = startFlag ? startButtonPressed : startButtonOff;
   let startImageOn = startFlag ? startButtonPressed : startButtonOn;
   let jobImageOff = jobFlag ? jobButtonPressed : jobButtonOff;
@@ -75,22 +61,18 @@ const StartButtons = ({
 
   return (
     <View style={styles.innerContainer}>
-      <Pressable
-        style={styles.settingButtonContainer}
+      <OperationButton
         onPress={onSetting}
-        onPressIn={drinkPressInHandler}
-        onPressOut={drinkPressOutHandler}
-      >
-        <Animated.Image source={drinkImageOff} style={styles.settingButton} />
-        <Animated.View
-          style={[styles.settingButtonActive, { opacity: ButtonImage }]}
-        >
-          <Image source={drinkImageOn} style={styles.settingButton} />
-        </Animated.View>
-      </Pressable>
+        ButtonsAnim={StartButtonsAnim}
+        ImageOff={require("../../assets/ui/settingButtonOff.png")}
+        ImageOn={require("../../assets/ui/settingButton.png")}
+        ImagePressed={require("../../assets/ui/settingButtonPressed.png")}
+        width={64}
+        height={68}
+      />
       <Pressable
         style={styles.startButtonContainer}
-        onPress={gameHandler}
+        onPress={gameMove}
         onPressIn={startPressInHandler}
         onPressOut={startPressOutHandler}
       >
@@ -103,7 +85,7 @@ const StartButtons = ({
       </Pressable>
       <Pressable
         style={styles.jobChangeButtonContainer}
-        onPress={pressHandler}
+        onPress={jobChangeMove}
         onPressIn={jobPressInHandler}
         onPressOut={jobPressOutHandler}
       >
@@ -121,11 +103,6 @@ const StartButtons = ({
 export default StartButtons;
 
 const styles = StyleSheet.create({
-  rootConteiner: {
-    flex: 4,
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
   innerContainer: {
     flexDirection: "row",
     alignItems: "flex-end",
@@ -180,5 +157,5 @@ const styles = StyleSheet.create({
     left: 5,
     width: "100%",
     height: "100%",
-  }
+  },
 });

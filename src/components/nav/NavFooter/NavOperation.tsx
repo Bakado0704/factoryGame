@@ -9,27 +9,11 @@ import StartButtons from "../../button/StartButtons";
 
 type Props = {
   onSetting: () => void;
-  staminaResetHandler: () => void;
-  playingStatusHandler: () => void;
+  gameMove: () => void;
+  jobChangeMove: () => void;
 };
 
-const NavOperation = ({
-  onSetting,
-  staminaResetHandler,
-  playingStatusHandler,
-}: Props) => {
-  const navigation: NavigationProp<ParamListBase> = useNavigation();
-
-  const pressHandler = () => {
-    navigation.navigate("JobChange");
-  };
-
-  const gameHandler = () => {
-    navigation.navigate("Game");
-    staminaResetHandler();
-    playingStatusHandler();
-  };
-
+const NavOperation = ({ onSetting, gameMove, jobChangeMove }: Props) => {
   const StartButtonsAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -50,9 +34,9 @@ const NavOperation = ({
           style={styles.operationBoard}
         />
         <StartButtons
-          gameHandler={gameHandler}
+          gameMove={gameMove}
           onSetting={onSetting}
-          pressHandler={pressHandler}
+          jobChangeMove={jobChangeMove}
           StartButtonsAnim={StartButtonsAnim}
         />
       </View>

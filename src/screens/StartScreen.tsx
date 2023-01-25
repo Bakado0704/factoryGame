@@ -58,16 +58,11 @@ const StartScreen = () => {
   const activeJobsLength = activeJobs.length;
 
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
   const navigation: NavigationProp<ParamListBase> = useNavigation();
 
   const [setting, setSetting] = useState(false);
   const [userModal, setUserModal] = useState(false);
-
-  const isFocused = useIsFocused();
-  //ボタンのtrue,false
-
-  const [gachaFlag, setGachaFlag] = useState(false);
-  const [userFlag, setUserFlag] = useState(false);
 
   useEffect(() => {
     maxMoney = Job.maxMoney;
@@ -116,20 +111,6 @@ const StartScreen = () => {
     }
   };
 
-  const staminaResetHandler = () => {
-    if (userMoney <= drinkCost) {
-      dispatch(userDrinkReset());
-      dispatch(staminaReset(0));
-    } else {
-      dispatch(userMoneyIncrease(-drinkCost));
-      dispatch(staminaReset(drink));
-    }
-  };
-
-  const playingStatusHandler = () => {
-    dispatch(changeStatus(PlayStatus.playing));
-  };
-
   const userDrinkHandler = (number: number) => {
     dispatch(userDrink(number));
   };
@@ -138,6 +119,7 @@ const StartScreen = () => {
     dispatch(changeMute(mute));
   };
 
+  //画面遷移
   const gachaMove = () => {
     dispatch(userPage("gacha"));
     navigation.navigate("Gacha");
@@ -146,6 +128,22 @@ const StartScreen = () => {
   const rankingMove = () => {
     dispatch(userPage("ranking"));
     navigation.navigate("Ranking");
+  };
+
+  const jobChangeMove = () => {
+    navigation.navigate("JobChange");
+  };
+
+  const gameMove = () => {
+    dispatch(changeStatus(PlayStatus.playing));
+    if (userMoney <= drinkCost) {
+      dispatch(userDrinkReset());
+      dispatch(staminaReset(0));
+    } else {
+      dispatch(userMoneyIncrease(-drinkCost));
+      dispatch(staminaReset(drink));
+    }
+    navigation.navigate("Game");
   };
 
   return (
@@ -171,8 +169,8 @@ const StartScreen = () => {
         />
         <NavOperation
           onSetting={onSettingHandler}
-          staminaResetHandler={staminaResetHandler}
-          playingStatusHandler={playingStatusHandler}
+          jobChangeMove={jobChangeMove}
+          gameMove={gameMove}
         />
       </View>
       {setting && (
