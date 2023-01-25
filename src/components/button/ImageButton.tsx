@@ -1,31 +1,81 @@
-import { Image, ImageSourcePropType, Pressable, StyleSheet, View } from "react-native";
-import React from "react";
+import {
+  Animated,
+  Image,
+  ImageSourcePropType,
+  Pressable,
+  StyleSheet,
+} from "react-native";
+import React, { useRef } from "react";
 
 export interface Props {
-  onPress: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  style: object;
-  padding: number;
+  onPress: () => void;
   source: ImageSourcePropType;
+  width: number;
+  height: number;
+  diffWidth: number;
+  diffHeight: number;
+  padding: number;
 }
 
-const ImageButton= ({ source, onPress, style, padding }: Props) => {
+const ImageButton = ({
+  source,
+  onPress,
+  width,
+  height,
+  diffWidth,
+  diffHeight,
+  padding,
+}: Props) => {
+  const ButtonAnim = useRef(new Animated.Value(0)).current;
+  const ButtonWidth = ButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [width, width - diffWidth],
+  });
+
+  const ButtonHeight = ButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [height, height - diffHeight],
+  });
+
+  const pressInHandler = () => {
+    Animated.timing(ButtonAnim, {
+      toValue: 200,
+      duration: 1200,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const pressOutHandler = () => {
+    ButtonAnim.setValue(0);
+  };
+
   return (
-    <View>
-      <Pressable
-        onPress={onPress}
-        style={({ pressed }) => [pressed && styles.pressed, {padding: padding}]}
-        // android_ripple={{ color: "#ccc" }}
-      >
-        <Image style={style} source={source} />
-      </Pressable>
-    </View>
+    <Pressable
+      onPress={onPress}
+      onPressIn={pressInHandler}
+      onPressOut={pressOutHandler}
+      style={[
+        styles.imageContainer,
+        {
+          padding: padding,
+          width: width + padding * 2,
+          height: height + padding * 2,
+        },
+      ]}
+    >
+      <Animated.Image
+        style={{ width: ButtonWidth, height: ButtonHeight }}
+        source={source}
+      />
+    </Pressable>
   );
 };
 
 export default ImageButton;
 
 const styles = StyleSheet.create({
-  pressed: {
-    opacity: 0.75,
+  imageContainer: {
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

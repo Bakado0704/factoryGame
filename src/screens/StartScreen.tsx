@@ -1,23 +1,21 @@
-import { View, StyleSheet, Animated, Easing } from "react-native";
-import NavHead from "../components/nav/NavHeader/NavHead";
-import { useState } from "react";
-import NavSelect from "../components/nav/NavMiddle/NavSelect";
-import NavOperation from "../components/nav/NavFooter/NavOperation";
-import Setting from "../modals/SettingModal";
-import UserModal from "../modals/UserModal";
+import { View, StyleSheet, Animated } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
-import UserIcons from "../models/userIcons";
-import { RootState } from "../store/store";
-import { PlayStatus } from "../types/play";
-import { Job } from "../types/job";
+import { useState, useEffect, useRef } from "react";
 import {
   NavigationProp,
   ParamListBase,
   useNavigation,
   useIsFocused,
 } from "@react-navigation/native";
+import NavHead from "../components/nav/NavHeader/NavHead";
+import NavSelect from "../components/nav/NavMiddle/NavSelect";
+import NavOperation from "../components/nav/NavFooter/NavOperation";
+import Setting from "../modals/SettingModal";
+import UserModal from "../modals/UserModal";
+import UserIcons from "../models/userIcons";
+import { PlayStatus } from "../types/play";
 import { Mute } from "../types/user";
+import { RootState } from "../store/store";
 import {
   changeMute,
   changePreviewIcon,
@@ -151,21 +149,21 @@ const StartScreen = () => {
       <View style={styles.innerContainer}>
         <NavHead
           icon={userIcon}
-          onUserModal={onUserModalHandler}
           userMoney={userMoney}
           user={user}
+          onUserModal={onUserModalHandler}
           gachaMove={gachaMove}
         />
         <NavSelect
           maxMoney={maxMoney}
           activeBoard={activeBoard}
           page={page}
-          rankingMove={rankingMove}
           activeJobsLength={activeJobsLength}
-          prevJobHandler={prevJobHandler}
-          nextJobHandler={nextJobHandler}
           PrevButtonAnim={PrevButtonAnim}
           NextButtonAnim={NextButtonAnim}
+          rankingMove={rankingMove}
+          prevJobHandler={prevJobHandler}
+          nextJobHandler={nextJobHandler}
         />
         <NavOperation
           onSetting={onSettingHandler}
@@ -177,24 +175,24 @@ const StartScreen = () => {
         <Setting
           drink={drink}
           drinkCost={drinkCost}
-          offSetting={offSettingModalHandler}
-          userDrinkHandler={userDrinkHandler}
           perMoney={perMoney}
           PrevButtonAnim={PrevDrinkButtonAnim}
           NextButtonAnim={NextDrinkButtonAnim}
+          offSetting={offSettingModalHandler}
+          userDrinkHandler={userDrinkHandler}
         />
       )}
       {userModal && (
         <UserModal
-          offUserModal={offUserModalHandler}
-          userChangeHandler={userChangeHandler}
-          usernameChangeHandler={usernameChangeHandler}
-          changeMuteHandler={changeMuteHandler}
           previewIcon={previewIcon}
           userIcons={userIcons}
           userName={userName}
           userId={userId}
           mute={mute}
+          offUserModal={offUserModalHandler}
+          userChangeHandler={userChangeHandler}
+          usernameChangeHandler={usernameChangeHandler}
+          changeMuteHandler={changeMuteHandler}
         />
       )}
     </View>

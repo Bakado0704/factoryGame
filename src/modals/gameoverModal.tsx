@@ -14,7 +14,7 @@ type Props = {
   name: string;
   iconType: JobType;
   message: string;
-  offModal: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  offModal: () => void;
 };
 
 const Gameover = ({
@@ -93,7 +93,7 @@ const Gameover = ({
               style={styles.moneyImg}
             />
             <ShadowText size={20} color="white">
-            {new Intl.NumberFormat().format(maxMoney)}
+              {new Intl.NumberFormat().format(maxMoney)}
             </ShadowText>
           </View>
         </View>
@@ -102,7 +102,10 @@ const Gameover = ({
           <ImageButton
             source={require("../assets/ui/okButton.png")}
             onPress={offModal}
-            style={styles.okButton}
+            width={322}
+            height={52}
+            diffWidth={10}
+            diffHeight={1.6}
             padding={5}
           />
         </View>
@@ -235,9 +238,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: -5,
-  },
-  okButton: {
-    width: 322,
-    height: 52,
   },
 });

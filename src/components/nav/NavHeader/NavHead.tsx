@@ -45,7 +45,10 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
               <ImageButton
                 source={require("../../../assets/ui/gachaButton.png")}
                 onPress={gachaHandler}
-                style={styles.gachaButton}
+                width={47}
+                height={47}
+                diffWidth={5}
+                diffHeight={5}
                 padding={0}
               />
             )}
@@ -55,11 +58,7 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
                 transform: [{ translateY: iconY }],
               }}
             >
-              <Pressable
-                onPress={onUserModal}
-                style={({ pressed }) => pressed && styles.pressed}
-                // android_ripple={{ color: "#ccc" }}
-              >
+              <Pressable onPress={onUserModal}>
                 <UserIcon icon={icon} width={50} height={50} />
               </Pressable>
             </Animated.View>
@@ -87,12 +86,5 @@ const styles = StyleSheet.create({
   },
   settingContainer: {
     flexDirection: "row",
-  },
-  gachaButton: {
-    width: 47,
-    height: 47,
-  },
-  pressed: {
-    opacity: 0.75,
   },
 });

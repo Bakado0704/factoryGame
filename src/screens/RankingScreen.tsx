@@ -36,10 +36,6 @@ function RankingScreen() {
   const maxMoney = Job.maxMoney;
   const page = user.page;
 
-  const [rankingFlag, setRankingFlag] = useState(false);
-  const [nextFlag, setNextFlag] = useState(false);
-  const [prevFlag, setPrevFlag] = useState(false);
-
   const dispatch = useDispatch();
   const navigation: NavigationProp<ParamListBase> = useNavigation();
 
@@ -61,46 +57,9 @@ function RankingScreen() {
     jobDecideHandler(nextJob);
   };
 
-  const rankingPressInHandler = () => {
-    setRankingFlag(true);
-  };
-
-  const rankingPressOutHandler = () => {
-    setRankingFlag(false);
-  };
-
   const PrevButtonAnim = useRef(new Animated.Value(0)).current;
   const NextButtonAnim = useRef(new Animated.Value(0)).current;
 
-  const nextPressInHandler = () => {
-    setNextFlag(true);
-    Animated.timing(NextButtonAnim, {
-      toValue: 100,
-      duration: 100,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const nextPressOutHandler = () => {
-    setNextFlag(false);
-    NextButtonAnim.setValue(0);
-  };
-
-  const prevPressInHandler = () => {
-    setPrevFlag(true);
-    Animated.timing(PrevButtonAnim, {
-      toValue: 100,
-      duration: 100,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const prevPressOutHandler = () => {
-    setPrevFlag(false);
-    PrevButtonAnim.setValue(0);
-  };
   const rankingMove = () => {
     dispatch(userPage("ranking"));
     navigation.navigate("Ranking");
@@ -119,27 +78,21 @@ function RankingScreen() {
             maxMoney={maxMoney}
             activeBoard={activeBoard}
             page={page}
-            rankingMove={rankingMove}
             activeJobsLength={activeJobsLength}
-            rankingFlag={rankingFlag}
-            nextFlag={nextFlag}
-            prevFlag={prevFlag}
-            prevJobHandler={prevJobHandler}
-            nextJobHandler={nextJobHandler}
-            rankingPressInHandler={rankingPressInHandler}
-            rankingPressOutHandler={rankingPressOutHandler}
-            prevPressInHandler={prevPressInHandler}
-            prevPressOutHandler={prevPressOutHandler}
-            nextPressInHandler={nextPressInHandler}
-            nextPressOutHandler={nextPressOutHandler}
             PrevButtonAnim={PrevButtonAnim}
             NextButtonAnim={NextButtonAnim}
+            rankingMove={rankingMove}
+            prevJobHandler={prevJobHandler}
+            nextJobHandler={nextJobHandler}
           />
           <View style={styles.buttonContainer}>
             <ImageButton
               source={require("../assets/ui/returnButton.png")}
               onPress={returnHandler}
-              style={styles.returnButton}
+              width={143}
+              height={52}
+              diffWidth={10}
+              diffHeight={3.6}
               padding={5}
             />
           </View>
@@ -164,24 +117,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
   },
-  iconContainer: {
-    position: "absolute",
-    width: 74,
-    height: 61,
-    left: "16%",
-  },
-  iconImg: {
-    width: "100%",
-    height: "100%",
-  },
   buttonContainer: {
     alignItems: "flex-end",
     justifyContent: "center",
     flexDirection: "row",
     flex: 4,
-  },
-  returnButton: {
-    width: 143,
-    height: 52,
-  },
+  }
 });

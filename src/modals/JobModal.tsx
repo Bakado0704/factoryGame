@@ -23,13 +23,7 @@ type Props = {
   icon: JobType;
 };
 
-const JobModal = ({
-  offModal,
-  jobDecide,
-  outline,
-  owner,
-  icon,
-}: Props) => {
+const JobModal = ({ offModal, jobDecide, outline, owner, icon }: Props) => {
   const company = outline.company;
   const category = outline.category;
   const work = outline.work;
@@ -61,7 +55,7 @@ const JobModal = ({
 
   return (
     <>
-      <View style={styles.background}></View>
+      <View style={styles.background} />
       <View style={styles.rootScreen}>
         <View style={styles.outerContainer}>
           <View style={styles.innerContainer}>
@@ -144,19 +138,27 @@ const JobModal = ({
             </View>
             <View style={styles.ButtonContainer}>
               <ImageButton
-                source={button}
-                onPress={jobDecide}
-                style={styles.jobDecideButton}
-                padding={5}
+               source={button}
+               onPress={jobDecide}
+                width={290}
+                height={53}
+                diffWidth={10}
+                diffHeight={1.8}
+                padding={0}
               />
             </View>
           </View>
-          <ImageButton
-            source={require("../assets/ui/closeButton.png")}
-            onPress={offModal}
-            style={styles.closeButton}
-            padding={0}
-          />
+          <View style={styles.closeButton}>
+            <ImageButton
+              source={require("../assets/ui/closeButton.png")}
+              onPress={offModal}
+              width={55}
+              height={55}
+              diffWidth={5}
+              diffHeight={5}
+              padding={5}
+            />
+          </View>
         </View>
       </View>
     </>
@@ -228,10 +230,6 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     marginVertical: 10,
-  },
-  jobDecideButton: {
-    width: 290,
-    height: 53,
   },
   textContainer: {
     flexDirection: "row",

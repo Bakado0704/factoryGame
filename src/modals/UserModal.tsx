@@ -71,14 +71,7 @@ const userModal = ({
 
     return (
       <View style={styles.iconContainer}>
-        <Pressable
-          onPress={pressHandler}
-          style={({ pressed }) => [
-            pressed && styles.pressed,
-            styles.iconContainer,
-          ]}
-          // android_ripple={{ color: "#ccc" }}
-        >
+        <Pressable onPress={pressHandler} style={styles.iconContainer}>
           <ImageBackground source={source} style={styles.iconBackground}>
             <UserIcon icon={itemData.item.icon} width={54} height={54} />
           </ImageBackground>
@@ -140,7 +133,10 @@ const userModal = ({
             <ImageButton
               source={soundSource}
               onPress={soundChange}
-              style={styles.soundButton}
+              width={64}
+              height={24}
+              diffWidth={5}
+              diffHeight={1.9}
               padding={8}
             />
           </View>
@@ -149,7 +145,10 @@ const userModal = ({
           <ImageButton
             source={require("../assets/ui/okButton.png")}
             onPress={offUserModal}
-            style={styles.okButton}
+            width={322}
+            height={52}
+            diffWidth={10}
+            diffHeight={1.6}
             padding={5}
           />
         </View>
@@ -298,21 +297,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
-  soundButton: {
-    width: 64,
-    height: 24,
-  },
   buttonContainer: {
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
-  },
-  okButton: {
-    width: 322,
-    height: 52,
-    marginTop: -5,
-  },
-  pressed: {
-    opacity: 0.75,
+    marginBottom: -5,
   },
 });

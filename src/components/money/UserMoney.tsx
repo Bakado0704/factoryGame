@@ -29,8 +29,11 @@ const UserMoney = ({ userMoney }: Props) => {
             <ImageButton
               source={require("../../assets/ui/plusButton.png")}
               onPress={pressHandler}
-              style={styles.plusButton}
-              padding={7}
+              width={30}
+              height={30}
+              diffWidth={5}
+              diffHeight={5}
+              padding={5}
             />
           </View>
         </ImageBackground>
@@ -52,7 +55,6 @@ const styles = StyleSheet.create({
     width: 171,
     height: 38,
     top: 0,
-
   },
   innerContainer: {
     justifyContent: "space-between",
@@ -60,10 +62,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: 171,
     height: 38,
-  },
-  plusButton: {
-    width: 30,
-    height: 30,
   },
   moneyImg: {
     width: 28,

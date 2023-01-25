@@ -118,8 +118,11 @@ const Targets = ({
       </View>
       <ImageButton
         source={playpattern.target.ImageSource}
-        style={styles.button}
         onPress={lapHandler}
+        width={59}
+        height={64}
+        diffWidth={5}
+        diffHeight={5}
         padding={8}
       />
     </>

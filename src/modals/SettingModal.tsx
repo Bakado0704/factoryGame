@@ -23,7 +23,7 @@ const Setting = ({
   drinkCost,
   offSetting,
   perMoney,
-  NextButtonAnim, 
+  NextButtonAnim,
   PrevButtonAnim,
   userDrinkHandler,
 }: Props) => {
@@ -200,7 +200,10 @@ const Setting = ({
           <ImageButton
             source={require("../assets/ui/okButton.png")}
             onPress={offSetting}
-            style={styles.okButton}
+            width={322}
+            height={52}
+            diffWidth={10}
+            diffHeight={1.6}
             padding={5}
           />
         </View>
@@ -284,9 +287,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
-  },
-  okButton: {
-    width: 322,
-    height: 52,
-  },
+  }
 });

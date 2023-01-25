@@ -180,10 +180,13 @@ const JobGet = ({ offModal, job }: Props) => {
           iconType={icon}
         />
         <View style={styles.buttonContainer}>
-          <ImageButton
+        <ImageButton
             source={require("../assets/ui/okButton.png")}
             onPress={offModal}
-            style={styles.okButton}
+            width={322}
+            height={52}
+            diffWidth={10}
+            diffHeight={1.6}
             padding={5}
           />
         </View>
@@ -292,9 +295,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: -5,
-  },
-  okButton: {
-    width: 322,
-    height: 52,
-  },
+  }
 });
