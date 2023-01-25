@@ -39,8 +39,8 @@ const ImageButton = ({
 
   const pressInHandler = () => {
     Animated.timing(ButtonAnim, {
-      toValue: 200,
-      duration: 1200,
+      toValue: 100,
+      duration: 100,
       useNativeDriver: false,
     }).start();
   };

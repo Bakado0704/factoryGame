@@ -1,12 +1,11 @@
 import {
   StyleSheet,
-  Animated,
-  Image,
   Pressable,
   View,
   Text,
 } from "react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 
 type Props = {
   onModal: () => void;
@@ -14,27 +13,24 @@ type Props = {
 };
 
 const GachaButton = ({ onModal, gachaCost }: Props) => {
-  const ButtonAnim = useRef(new Animated.Value(0)).current;
-  const GachaButtonWidth = ButtonAnim.interpolate({
-    inputRange: [0, 100],
-    outputRange: [210, 200],
-  });
+  const isFocused = useIsFocused();
+  const [flag, setFlag] = useState(false);
 
-  const GachaButtonHeight = ButtonAnim.interpolate({
-    inputRange: [0, 100],
-    outputRange: [99, 95],
-  });
+  useEffect(() => {
+    setFlag(false);
+  }, [isFocused]);
+
+  let Image = require("../../assets/ui/submitButton.png");
+  let ImagePressed = require("../../assets/ui/submitButtonPressed.png");
+
+  let ImageSource = flag ? ImagePressed : Image;
 
   const pressInHandler = () => {
-    Animated.timing(ButtonAnim, {
-      toValue: 100,
-      duration: 100,
-      useNativeDriver: false,
-    }).start();
+    setFlag(true);
   };
 
   const pressOutHandler = () => {
-    ButtonAnim.setValue(0);
+    setFlag(false);
   };
 
   return (
@@ -42,12 +38,9 @@ const GachaButton = ({ onModal, gachaCost }: Props) => {
       onPress={onModal}
       onPressIn={pressInHandler}
       onPressOut={pressOutHandler}
-      style={styles.submitButton}
+      style={styles.submitButtonContainer}
     >
-      <Animated.Image
-        style={{ width: GachaButtonWidth, height: GachaButtonHeight }}
-        source={require("../../assets/ui/submitButton.png")}
-      />
+      <Image style={styles.submitButton} source={ImageSource} />
       <View style={styles.gachaContainer}>
         <Image
           style={styles.moneyImg}
@@ -73,11 +66,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     transform: [{ translateY: 12 }],
   },
-  submitButton: {
+  submitButtonContainer: {
     width: 220,
     height: 104,
     alignItems: "center",
     justifyContent: "center",
+  },
+  submitButton: {
+    width: 210,
+    height: 99,
   },
   moneyImg: {
     width: 35,

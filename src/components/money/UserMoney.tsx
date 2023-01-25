@@ -31,8 +31,8 @@ const UserMoney = ({ userMoney }: Props) => {
               onPress={pressHandler}
               width={30}
               height={30}
-              diffWidth={5}
-              diffHeight={5}
+              diffWidth={3}
+              diffHeight={3}
               padding={5}
             />
           </View>

@@ -15,7 +15,7 @@ const NavGacha = ({ onModal, startMove, gachaCost }: Props) => {
         source={require("../../../assets/ui/homeButton.png")}
         onPress={startMove}
         width={66}
-        height={67}
+        height={68}
         diffWidth={10}
         diffHeight={10}
         padding={5}
