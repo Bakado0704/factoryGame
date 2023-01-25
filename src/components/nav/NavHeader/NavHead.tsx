@@ -31,10 +31,6 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
     })
   ).start();
 
-  const gachaHandler = () => {
-    gachaMove();
-  };
-
   return (
     <>
       <View style={styles.rootContainer}>
@@ -44,7 +40,7 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
             {user.page !== page.gacha && (
               <ImageButton
                 source={require("../../../assets/ui/gachaButton.png")}
-                onPress={gachaHandler}
+                onPress={gachaMove}
                 width={47}
                 height={47}
                 diffWidth={5}

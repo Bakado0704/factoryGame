@@ -116,15 +116,17 @@ const Targets = ({
           ]}
         />
       </View>
-      <ImageButton
-        source={playpattern.target.ImageSource}
-        onPress={lapHandler}
-        width={59}
-        height={64}
-        diffWidth={5}
-        diffHeight={5}
-        padding={8}
-      />
+      <View style={{ marginTop: 64 }}>
+        <ImageButton
+          source={playpattern.target.ImageSource}
+          onPress={lapHandler}
+          width={59}
+          height={64}
+          diffWidth={5}
+          diffHeight={5}
+          padding={8}
+        />
+      </View>
     </>
   );
 };

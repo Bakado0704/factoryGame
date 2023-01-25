@@ -4,8 +4,10 @@ import {
   Pressable,
   View,
   Text,
+  Animated,
+  Easing,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useIsFocused } from "@react-navigation/native";
 
 type Props = {
@@ -15,24 +17,29 @@ type Props = {
 
 const GachaButton = ({ onModal, gachaCost }: Props) => {
   const isFocused = useIsFocused();
-  const [flag, setFlag] = useState(false);
+  const ButtonAnim = useRef(new Animated.Value(0)).current;
+
+  const ButtonOpacity = ButtonAnim.interpolate({
+    inputRange: [0, 1, 100],
+    outputRange: [1, 0, 0],
+  });
 
   useEffect(() => {
-    setFlag(false);
+    ButtonAnim.setValue(0);
   }, [isFocused]);
 
   const pressInHandler = () => {
-    setFlag(true);
+    Animated.timing(ButtonAnim, {
+      toValue: 100,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
   };
 
   const pressOutHandler = () => {
-    setFlag(false);
+    ButtonAnim.setValue(0);
   };
-
-  let ImageOff = require("../../assets/ui/submitButton.png");
-  let ImagePressed = require("../../assets/ui/submitButtonPressed.png");
-  let ContainerY = flag ? 15 : 11;
-  let ImageSource = flag ? ImagePressed : ImageOff;
 
   return (
     <Pressable
@@ -41,21 +48,42 @@ const GachaButton = ({ onModal, gachaCost }: Props) => {
       onPressOut={pressOutHandler}
       style={styles.submitButton}
     >
-      <Image style={{ width: 210, height: 99 }} source={ImageSource} />
-      <View
-        style={[
-          styles.gachaContainer,
-          { transform: [{ translateY: ContainerY }] },
-        ]}
+      <Animated.View>
+        <Image
+          style={{ width: 210, height: 99 }}
+          source={require("../../assets/ui/submitButtonPressed.png")}
+        />
+        <View
+          style={[styles.gachaContainer, { transform: [{ translateY: 15 }] }]}
+        >
+          <Image
+            style={styles.moneyImg}
+            source={require("../../assets/ui/money1.png")}
+          />
+          <Text style={styles.gachaCost}>
+            {new Intl.NumberFormat().format(gachaCost)}
+          </Text>
+        </View>
+      </Animated.View>
+      <Animated.View
+        style={{ position: "absolute", opacity: ButtonOpacity }}
       >
         <Image
-          style={styles.moneyImg}
-          source={require("../../assets/ui/money1.png")}
+          style={{ width: 210, height: 99 }}
+          source={require("../../assets/ui/submitButton.png")}
         />
-        <Text style={styles.gachaCost}>
-          {new Intl.NumberFormat().format(gachaCost)}
-        </Text>
-      </View>
+        <View
+          style={[styles.gachaContainer, { transform: [{ translateY: 11 }] }]}
+        >
+          <Image
+            style={styles.moneyImg}
+            source={require("../../assets/ui/money1.png")}
+          />
+          <Text style={styles.gachaCost}>
+            {new Intl.NumberFormat().format(gachaCost)}
+          </Text>
+        </View>
+      </Animated.View>
     </Pressable>
   );
 };
@@ -67,13 +95,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 210,
     height: 99,
+    bottom: 0,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
   },
   submitButton: {
     width: 220,
-    height: 104,
+    height: 109,
     alignItems: "center",
     justifyContent: "center",
   },

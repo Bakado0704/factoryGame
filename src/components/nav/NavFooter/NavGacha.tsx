@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import GachaButton from "../../button/GachaButton";
-import ImageButton from "../../button/ImageButton";
+import HomeButton from "../../button/HomeButton";
 
 type Props = {
   onModal: () => void;
@@ -11,15 +11,7 @@ type Props = {
 const NavGacha = ({ onModal, startMove, gachaCost }: Props) => {
   return (
     <View style={styles.buttonsContainer}>
-      <ImageButton
-        source={require("../../../assets/ui/homeButton.png")}
-        onPress={startMove}
-        width={66}
-        height={68}
-        diffWidth={10}
-        diffHeight={10}
-        padding={5}
-      />
+      <HomeButton onPress={startMove} />
       <GachaButton onModal={onModal} gachaCost={gachaCost} />
       <View style={styles.space} />
     </View>

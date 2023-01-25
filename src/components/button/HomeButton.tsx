@@ -26,8 +26,8 @@ const HomeButton = ({ onPress }: Props) => {
     setFlag(false);
   };
 
-  let ImageOff = require("../../../assets/ui/homeButton.png")
-  let ImagePressed = require("../../../assets/ui/homeButtonPressed.png")
+  let ImageOff = require("../../assets/ui/homeButton.png")
+  let ImagePressed = require("../../assets/ui/homeButtonPressed.png")
   let ImageSource = flag ? ImagePressed : ImageOff;
 
   return (
