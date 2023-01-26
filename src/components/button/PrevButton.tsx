@@ -20,7 +20,7 @@ const PrevButton = ({
     setPrevFlag(true);
     Animated.timing(PrevButtonAnim, {
       toValue: 100,
-      duration: 100,
+      duration: 50,
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();

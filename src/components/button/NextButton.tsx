@@ -24,7 +24,7 @@ const NextButton = ({
     setNextFlag(true);
     Animated.timing(NextButtonAnim, {
       toValue: 100,
-      duration: 100,
+      duration: 50,
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();
