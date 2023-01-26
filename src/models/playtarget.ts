@@ -5,10 +5,14 @@ export default class playtarget implements _PlayTarget {
   constructor(
     public velocity: number,
     public color: PlayColor,
-    public ImageSource: ImageSourcePropType,
+    public ImageSourceOn: ImageSourcePropType,
+    public ImageSourceOff: ImageSourcePropType,
+    public ImageSourcePressed: ImageSourcePropType
   ) {
     this.velocity = velocity;
     this.color = color;
-    this.ImageSource = ImageSource;
+    this.ImageSourceOn = ImageSourceOn;
+    this.ImageSourceOff = ImageSourceOff;
+    this.ImageSourcePressed = ImageSourcePressed;
   }
 }

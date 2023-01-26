@@ -138,6 +138,7 @@ const Counts = ({
     TargetSet.push(
       <Targets
         key={i}
+        order={i}
         playpattern={selectedPlayPattern[i]}
         playgap={playgap}
         count={count}

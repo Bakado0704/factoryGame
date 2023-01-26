@@ -25,7 +25,9 @@ const initialState: state = {
           new PlayTarget(
             100,
             PlayColor.Black,
-            require("../../assets/play/blackButton.png")
+            require("../../assets/play/blackButton.png"),
+            require("../../assets/play/blackButtonOff.png"),
+            require("../../assets/play/blackButtonPressed.png")
           )
         ),
         new PlayPattern(
@@ -34,7 +36,9 @@ const initialState: state = {
           new PlayTarget(
             80,
             PlayColor.Green,
-            require("../../assets/play/greenButton.png")
+            require("../../assets/play/greenButton.png"),
+            require("../../assets/play/greenButtonOff.png"),
+            require("../../assets/play/greenButtonPressed.png"),
           )
         ),
         new PlayPattern(
@@ -43,7 +47,9 @@ const initialState: state = {
           new PlayTarget(
             120,
             PlayColor.Yellow,
-            require("../../assets/play/yellowButton.png")
+            require("../../assets/play/yellowButton.png"),
+            require("../../assets/play/yellowButtonOff.png"),
+            require("../../assets/play/yellowButtonPressed.png"),
           )
         ),
       ],
@@ -54,7 +60,9 @@ const initialState: state = {
           new PlayTarget(
             100,
             PlayColor.Black,
-            require("../../assets/play/blackButton.png")
+            require("../../assets/play/blackButton.png"),
+            require("../../assets/play/blackButtonOff.png"),
+            require("../../assets/play/blackButtonPressed.png")
           )
         ),
         new PlayPattern(
@@ -63,7 +71,9 @@ const initialState: state = {
           new PlayTarget(
             80,
             PlayColor.Green,
-            require("../../assets/play/greenButton.png")
+            require("../../assets/play/greenButton.png"),
+            require("../../assets/play/greenButtonOff.png"),
+            require("../../assets/play/greenButtonPressed.png"),
           )
         ),
         new PlayPattern(
@@ -72,7 +82,9 @@ const initialState: state = {
           new PlayTarget(
             120,
             PlayColor.Yellow,
-            require("../../assets/play/yellowButton.png")
+            require("../../assets/play/yellowButton.png"),
+            require("../../assets/play/yellowButtonOff.png"),
+            require("../../assets/play/yellowButtonPressed.png"),
           )
         ),
       ],
@@ -83,7 +95,9 @@ const initialState: state = {
           new PlayTarget(
             100,
             PlayColor.Black,
-            require("../../assets/play/blackButton.png")
+            require("../../assets/play/blackButton.png"),
+            require("../../assets/play/blackButtonOff.png"),
+            require("../../assets/play/blackButtonPressed.png")
           )
         ),
         new PlayPattern(
@@ -92,7 +106,9 @@ const initialState: state = {
           new PlayTarget(
             80,
             PlayColor.Green,
-            require("../../assets/play/greenButton.png")
+            require("../../assets/play/greenButton.png"),
+            require("../../assets/play/greenButtonOff.png"),
+            require("../../assets/play/greenButtonPressed.png"),
           )
         ),
         new PlayPattern(
@@ -101,7 +117,9 @@ const initialState: state = {
           new PlayTarget(
             120,
             PlayColor.Yellow,
-            require("../../assets/play/yellowButton.png")
+            require("../../assets/play/yellowButton.png"),
+            require("../../assets/play/yellowButtonOff.png"),
+            require("../../assets/play/yellowButtonPressed.png"),
           )
         ),
       ],
@@ -110,17 +128,23 @@ const initialState: state = {
       new PlayTarget(
         100,
         PlayColor.Black,
-        require("../../assets/play/blackButton.png")
+        require("../../assets/play/blackButton.png"),
+        require("../../assets/play/blackButtonOff.png"),
+        require("../../assets/play/blackButtonPressed.png")
       ),
       new PlayTarget(
         80,
         PlayColor.Green,
-        require("../../assets/play/greenButton.png")
+        require("../../assets/play/greenButton.png"),
+        require("../../assets/play/greenButtonOff.png"),
+        require("../../assets/play/greenButtonPressed.png"),
       ),
       new PlayTarget(
         120,
         PlayColor.Yellow,
-        require("../../assets/play/yellowButton.png")
+        require("../../assets/play/yellowButton.png"),
+        require("../../assets/play/yellowButtonOff.png"),
+        require("../../assets/play/yellowButtonPressed.png"),
       ),
     ], // 押すボタンの種類
   },
@@ -132,7 +156,9 @@ const initialState: state = {
       new PlayTarget(
         100,
         PlayColor.Black,
-        require("../../assets/play/blackButton.png")
+        require("../../assets/play/blackButton.png"),
+        require("../../assets/play/blackButtonOff.png"),
+        require("../../assets/play/blackButtonPressed.png")
       )
     ),
     new PlayPattern(
@@ -141,7 +167,9 @@ const initialState: state = {
       new PlayTarget(
         80,
         PlayColor.Green,
-        require("../../assets/play/greenButton.png")
+        require("../../assets/play/greenButton.png"),
+        require("../../assets/play/greenButtonOff.png"),
+        require("../../assets/play/greenButtonPressed.png"),
       )
     ),
     new PlayPattern(
@@ -150,7 +178,9 @@ const initialState: state = {
       new PlayTarget(
         120,
         PlayColor.Yellow,
-        require("../../assets/play/yellowButton.png")
+        require("../../assets/play/yellowButton.png"),
+        require("../../assets/play/yellowButtonOff.png"),
+        require("../../assets/play/yellowButtonPressed.png"),
       )
     ),
   ],

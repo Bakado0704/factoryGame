@@ -1,11 +1,12 @@
 import { View, StyleSheet, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
-import { judgeStatus, Play, PlayGap, PlayStatus } from "../../../types/play";
+import { judgeStatus, Play, PlayGap } from "../../../types/play";
 import PlayPattern from "../../../models/playpattern";
 import Target from "./Target";
 import Animation from "./Animation";
 import ImageButton from "../../../components/button/ImageButton";
 import { productType } from "../../../types/product";
+import PlayButton from "../../../components/button/PlayButton";
 
 type Props = {
   playpattern: PlayPattern;
@@ -16,6 +17,7 @@ type Props = {
   allGaps: number[];
   playState: Play;
   productType: productType;
+  order: number;
   setAllGaps: (number: number[]) => void;
   setIsRunning: (state: boolean) => void;
   setCount: (number: number) => void;
@@ -32,6 +34,7 @@ const Targets = ({
   allGaps,
   playState,
   productType,
+  order,
   setAllGaps,
   setIsRunning,
   setCount,
@@ -46,6 +49,7 @@ const Targets = ({
   const [opacities, setOpacities] = useState<number[]>([]); //ターゲットそれぞれの透明度
   const [color, setColor] = useState<string>(themeColor); //ターゲットのそれぞれの色
   const [bonus, setBonus] = useState<number>(1.0); //ターゲットのそれぞれの色
+  const [failureOrder, setFailureOrder] = useState<number | undefined>(); //失敗した色の番号
 
   //judgeがfailureになったとき赤くする
   useEffect(() => {
@@ -62,6 +66,7 @@ const Targets = ({
       setLaps([]);
       setOpacities([]);
       setAllGaps([]);
+      setFailureOrder(undefined);
       setColor(themeColor);
       setIsRunning(true);
     }
@@ -82,7 +87,6 @@ const Targets = ({
   };
 
   const { width } = Dimensions.get("window");
-
   let transformX = width / 2;
 
   return (
@@ -100,6 +104,8 @@ const Targets = ({
           count={count}
           allGaps={allGaps}
           bonus={bonus}
+          order={order}
+          setFailureOrder={setFailureOrder}
           setAllGaps={setAllGaps}
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}
@@ -117,13 +123,16 @@ const Targets = ({
         />
       </View>
       <View style={{ marginTop: 64 }}>
-        <ImageButton
-          source={playpattern.target.ImageSource}
+        <PlayButton
+          sourceOn={playpattern.target.ImageSourceOn}
+          sourceOff={playpattern.target.ImageSourceOff}
+          sourcePressed={playpattern.target.ImageSourcePressed}
+          playState={playState}
+          order={order}
+          failureOrder={failureOrder}
           onPress={lapHandler}
           width={59}
           height={64}
-          diffWidth={5}
-          diffHeight={5}
           padding={8}
         />
       </View>

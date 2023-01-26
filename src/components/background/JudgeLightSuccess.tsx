@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Image, StyleSheet, Animated, View } from "react-native";
+import { Image, StyleSheet, Animated } from "react-native";
 
 const JudgeLightSuccess = () => {
   const lightAnim = useRef(new Animated.Value(0)).current;

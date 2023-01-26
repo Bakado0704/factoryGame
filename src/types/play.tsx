@@ -36,7 +36,9 @@ export interface PlayPattern {
 export interface PlayTarget {
   velocity: number;
   color: PlayColor;
-  ImageSource: ImageSourcePropType;
+  ImageSourceOn: ImageSourcePropType;
+  ImageSourceOff: ImageSourcePropType;
+  ImageSourcePressed: ImageSourcePropType;
 }
 
 export interface PlayGap {

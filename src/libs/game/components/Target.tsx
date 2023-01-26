@@ -2,7 +2,7 @@ import { View, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import PlayPattern from "../../../models/playpattern";
 import PlayGap from "../../../models/playgap";
-import { judgeStatus, Play, PlayStatus } from "../../../types/play";
+import { judgeStatus, Play, } from "../../../types/play";
 
 type Props = {
   playpattern: PlayPattern;
@@ -15,9 +15,11 @@ type Props = {
   allGaps: number[];
   playState: Play;
   bonus: number;
+  order: number;
   setAllGaps: (number: number[]) => void;
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
+  setFailureOrder: (number: number | undefined) => void;
 };
 
 const Target = ({
@@ -31,6 +33,8 @@ const Target = ({
   color,
   playState,
   bonus,
+  order,
+  setFailureOrder,
   setAllGaps,
   damageHandler,
   judgeHandler,
@@ -80,7 +84,9 @@ const Target = ({
     if (gap.some((value) => value >= 20)) {
       damageHandler(100);
       setGap([]);
+      setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
+
       // console.log("ターゲットを押すのが早すぎた");
     }
   }, [gap.some((value) => value >= 20)]);
@@ -89,6 +95,7 @@ const Target = ({
   useEffect(() => {
     if (translateX.some((value) => value <= -failureGap)) {
       damageHandler(100);
+      setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
       // console.log("ターゲットを押すのが遅すぎた");
     }
@@ -102,6 +109,7 @@ const Target = ({
       playState.judge !== "success"
     ) {
       damageHandler(100);
+      setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
       // console.log("lapsの数がdistanceの数を超えても失敗");
     }
