@@ -117,15 +117,6 @@ const Counts = ({
   }, [allDistance.length === allGaps.length &&
     allGaps.every((value) => value <= playgap.frontGap)]);
 
-  //ターゲットを押すのが早すぎた
-  useEffect(() => {
-    if (allGaps.some((value) => value >= 20)) {
-      damageHandler(100);
-      judgeHandler(judgeStatus.failure);
-      // console.log("ターゲットを押すのが早すぎた");
-    }
-  }, [allGaps.some((value) => value >= 20)]);
-
   // judgeが失敗の時,isRunnningをfalse＋100ダメージ、waitingにもどす
   useEffect(() => {
     if (playState.judge === judgeStatus.failure) {

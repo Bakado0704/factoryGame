@@ -12,7 +12,7 @@ export const PATTERN_DATES = [
         new PlayTarget(
           100,
           PlayColor.Black,
-          require("../../../assets/ui/blackButton.png")
+          require("../../../assets/play/blackButton.png")
         )
       ),
       new PlayPattern(
@@ -21,7 +21,7 @@ export const PATTERN_DATES = [
         new PlayTarget(
           80,
           PlayColor.Green,
-          require("../../../assets/ui/greenButton.png")
+          require("../../../assets/play/greenButton.png")
         )
       ),
       new PlayPattern(
@@ -30,7 +30,7 @@ export const PATTERN_DATES = [
         new PlayTarget(
           120,
           PlayColor.Yellow,
-          require("../../../assets/ui/yellowButton.png")
+          require("../../../assets/play/yellowButton.png")
         )
       ),
     ],
@@ -41,7 +41,7 @@ export const PATTERN_DATES = [
         new PlayTarget(
           100,
           PlayColor.Black,
-          require("../../../assets/ui/blackButton.png")
+          require("../../../assets/play/blackButton.png")
         )
       ),
       new PlayPattern(
@@ -50,7 +50,7 @@ export const PATTERN_DATES = [
         new PlayTarget(
           80,
           PlayColor.Green,
-          require("../../../assets/ui/greenButton.png")
+          require("../../../assets/play/greenButton.png")
         )
       ),
       new PlayPattern(
@@ -59,7 +59,7 @@ export const PATTERN_DATES = [
         new PlayTarget(
           120,
           PlayColor.Yellow,
-          require("../../../assets/ui/yellowButton.png")
+          require("../../../assets/play/yellowButton.png")
         )
       ),
     ],
@@ -70,7 +70,7 @@ export const PATTERN_DATES = [
         new PlayTarget(
           100,
           PlayColor.Black,
-          require("../../../assets/ui/blackButton.png")
+          require("../../../assets/play/blackButton.png")
         )
       ),
       new PlayPattern(
@@ -79,7 +79,7 @@ export const PATTERN_DATES = [
         new PlayTarget(
           80,
           PlayColor.Green,
-          require("../../../assets/ui/greenButton.png")
+          require("../../../assets/play/greenButton.png")
         )
       ),
       new PlayPattern(
@@ -88,7 +88,7 @@ export const PATTERN_DATES = [
         new PlayTarget(
           120,
           PlayColor.Yellow,
-          require("../../../assets/ui/yellowButton.png")
+          require("../../../assets/play/yellowButton.png")
         )
       ),
     ],

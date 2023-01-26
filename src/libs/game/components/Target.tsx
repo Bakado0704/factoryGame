@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PlayPattern from "../../../models/playpattern";
 import PlayGap from "../../../models/playgap";
 import { judgeStatus, Play, PlayStatus } from "../../../types/play";
@@ -45,6 +45,7 @@ const Target = ({
   let failureGap = playgap.passedGap; //これ以上行くと失敗
 
   //各種宣言
+  const [gap, setGap] = useState<number[]>([]);
   let gaps: number[] = [];
   let translateX: number[] = [];
 
@@ -53,10 +54,11 @@ const Target = ({
     translateX[i] = Math.floor(distance[i] - (velocity * count) / 100);
     gaps[i] = Math.floor(distance[i] - (velocity * laps[i]) / 100);
 
-    //もしgapsが設定されたら,移動量はそこになる
+    //もしgapsが設定されたら,translateXはそこ
     if (gaps[i] || gaps[i] === 0) {
       translateX[i] = gaps[i];
 
+      //かつallowGapから外れていた場合opecityは1のまま赤く
       if (gaps[i] <= allowGap) {
         opacities[i] = 0;
       } else {
@@ -64,13 +66,24 @@ const Target = ({
       }
     }
 
-    //もしGapsが設定されたら、allgapsに入れる
+    //もしGapsが設定されたら、allgaps,gapに入れる
     useEffect(() => {
       if (gaps[i] || gaps[i] === 0) {
         setAllGaps([...allGaps, gaps[i]]);
+        setGap([...gap, gaps[i]]);
       }
     }, [gaps[i] || gaps[i] === 0]);
   }
+
+  //ターゲットを押すのが早すぎた
+  useEffect(() => {
+    if (gap.some((value) => value >= 20)) {
+      damageHandler(100);
+      setGap([]);
+      judgeHandler(judgeStatus.failure);
+      // console.log("ターゲットを押すのが早すぎた");
+    }
+  }, [gap.some((value) => value >= 20)]);
 
   //ターゲットを押すのが遅すぎた
   useEffect(() => {
@@ -82,6 +95,7 @@ const Target = ({
   }, [translateX.some((value) => value <= -failureGap)]);
 
   // lapsの数がdistanceの数を超えても失敗
+  //success後にクリックしても発動しないように
   useEffect(() => {
     if (
       laps.length > playpattern.distance.length &&
