@@ -1,5 +1,6 @@
 import { StyleSheet, Animated, Pressable, Image } from "react-native";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 
 type Props = {
   jobReturnHandler: () => void;
@@ -21,20 +22,43 @@ const JobReturnButton = ({ jobReturnHandler }: Props) => {
     })
   ).start();
 
+  const isFocused = useIsFocused();
+  const [flag, setFlag] = useState(false);
+
+  useEffect(() => {
+    setFlag(false);
+  }, [isFocused]);
+
+  const pressInHandler = () => {
+    setFlag(true);
+  };
+
+  const pressOutHandler = () => {
+    setFlag(false);
+  };
+
+  let ImagePressed = require("../../assets/ui/jobReturnButtonPressed.png")
+  let ImageOn = require("../../assets/ui/jobReturnButton.png")
+  let ImageOff = require("../../assets/ui/jobReturnButtonOff.png")
+
+  let ImageSourceOff = flag ? ImagePressed : ImageOff;
+  let ImageSourceOn = flag ? ImagePressed : ImageOn;
   return (
     <Pressable
       style={styles.jobReturnButtonContainer}
       onPress={jobReturnHandler}
+      onPressIn={pressInHandler}
+      onPressOut={pressOutHandler}
     >
       <Image
-        source={require("../../assets/ui/jobReturnButtonOff.png")}
+        source={ImageSourceOff}
         style={styles.jobReturnButton}
       />
       <Animated.View
         style={[styles.jobReturnButtonActive, { opacity: ButtonImage }]}
       >
         <Image
-          source={require("../../assets/ui/jobReturnButton.png")}
+          source={ImageSourceOn}
           style={styles.jobReturnButton}
         />
       </Animated.View>

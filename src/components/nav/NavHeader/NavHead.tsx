@@ -31,6 +31,29 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
     })
   ).start();
 
+  const ButtonAnim = useRef(new Animated.Value(0)).current;
+  const ButtonWidth = ButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [50, 45],
+  });
+
+  const ButtonHeight = ButtonAnim.interpolate({
+    inputRange: [0, 100],
+    outputRange: [50, 45],
+  });
+
+  const pressInHandler = () => {
+    Animated.timing(ButtonAnim, {
+      toValue: 100,
+      duration: 50,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const pressOutHandler = () => {
+    ButtonAnim.setValue(0);
+  };
+
   return (
     <>
       <View style={styles.rootContainer}>
@@ -54,8 +77,17 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
                 transform: [{ translateY: iconY }],
               }}
             >
-              <Pressable onPress={onUserModal}>
-                <UserIcon icon={icon} width={50} height={50} />
+              <Pressable
+                onPress={onUserModal}
+                onPressIn={pressInHandler}
+                onPressOut={pressOutHandler}
+                style={styles.iconContainer}
+              >
+                <UserIcon
+                  icon={icon}
+                  width={ButtonWidth}
+                  height={ButtonHeight}
+                />
               </Pressable>
             </Animated.View>
           </View>
@@ -79,6 +111,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
+  },
+  iconContainer: {
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
   settingContainer: {
     flexDirection: "row",

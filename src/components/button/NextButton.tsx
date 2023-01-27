@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { StyleSheet, Animated, Pressable, Easing } from "react-native";
+import {
+  StyleSheet,
+  Animated,
+  Pressable,
+  Easing,
+  Dimensions,
+} from "react-native";
+const { width } = Dimensions.get("window");
 
 type Props = {
   pressHandler: () => void;
@@ -7,16 +14,11 @@ type Props = {
   NextButtonAnim: Animated.Value;
 };
 
-const NextButton = ({
-  pressHandler,
-  ButtonAnim,
-  NextButtonAnim,
-}: Props) => {
+const NextButton = ({ pressHandler, ButtonAnim, NextButtonAnim }: Props) => {
   const [nextFlag, setNextFlag] = useState(false);
 
   const prevButtonOff = require("../../assets/ui/nextButtonOff.png");
   const prevButtonOn = require("../../assets/ui/nextButton.png");
-
 
   let imageSource = nextFlag ? prevButtonOn : prevButtonOff;
 
@@ -37,7 +39,7 @@ const NextButton = ({
 
   const ButtonImage = ButtonAnim.interpolate({
     inputRange: [0, 80, 100, 150, 200, 220, 350, 400],
-    outputRange: [0, 1.8, 2, 2.2, 2, 1.8, 0.3, 0],
+    outputRange: [0, width * 0.005, width * 0.0053, width * 0.0058, width * 0.0053, width * 0.005, width * 0.001, 0],
   });
 
   const ButtonOpacity = ButtonAnim.interpolate({
@@ -47,12 +49,12 @@ const NextButton = ({
 
   const ButtonWidth = NextButtonAnim.interpolate({
     inputRange: [0, 100],
-    outputRange: [25, 27],
+    outputRange: [width * 0.066, width * 0.072],
   });
 
   const ButtonHeight = NextButtonAnim.interpolate({
     inputRange: [0, 100],
-    outputRange: [70, 78],
+    outputRange: [width * 0.187, width * 0.208],
   });
 
   return (
@@ -85,9 +87,9 @@ export default NextButton;
 
 const styles = StyleSheet.create({
   nextButtonContainer: {
-    width: 45,
-    height: 80,
+    width: width * 0.12,
+    height: width * 0.213,
     justifyContent: "center",
     alignItems: "center",
-  }
+  },
 });

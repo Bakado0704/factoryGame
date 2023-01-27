@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     height: 55,
     top: 0,
     right: 0,
-    transform: [{ translateX: 20 }, { translateY: -555 }],
+    transform: [{ translateX: 15 }, { translateY: -25 }],
     elevation: 10,
   },
   ButtonContainer: {

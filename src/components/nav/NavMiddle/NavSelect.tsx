@@ -1,4 +1,11 @@
-import { View, Image, StyleSheet, Animated, Easing } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  Animated,
+  Easing,
+  Dimensions,
+} from "react-native";
 import BoardImg from "../../background/BoardImg";
 import RankingButton from "../../button/RankingButton";
 import NextButton from "../../button/NextButton";
@@ -19,6 +26,8 @@ type Props = {
   nextJobHandler: () => void;
   rankingMove: () => void;
 };
+
+const { width } = Dimensions.get("window");
 
 const NavSelect = ({
   maxMoney,
@@ -87,9 +96,9 @@ const NavSelect = ({
           />
           <Image
             source={require("../../../assets/ui/money1.png")}
-            style={styles.moneyImg}
+            style={styles.money}
           />
-          <ShadowText size={20} color="white">
+          <ShadowText size={0.06 * width} color="white">
             {new Intl.NumberFormat().format(maxMoney)}
           </ShadowText>
         </View>
@@ -105,7 +114,7 @@ const styles = StyleSheet.create({
     flex: 4,
     justifyContent: "flex-start",
     alignItems: "center",
-    transform: [{ translateY: -10 }],
+    transform: [{ translateY: -width * 0.026 }],
   },
   containerTop: {
     flexDirection: "row",
@@ -118,19 +127,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   coron: {
-    width: 7,
-    height: 25,
-    marginHorizontal: 5,
+    marginHorizontal: width * 0.013,
+    width: width * 0.018,
+    height: width * 0.066,
+  },
+  money: {
+    marginHorizontal: width * 0.013,
+    width: width * 0.08,
+    height: width * 0.08,
   },
   button: {
-    width: 25,
-    height: 70,
-    marginVertical: 5,
-    marginHorizontal: 10,
-  },
-  moneyImg: {
-    width: 33,
-    height: 33,
-    marginHorizontal: 5,
+    width: width * 0.066,
+    height: width * 0.187,
+    marginVertical: width * 0.013,
+    marginHorizontal: width * 0.026,
   },
 });

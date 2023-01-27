@@ -1,7 +1,8 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import React from "react";
 import { ShadowText } from "../text/ShadowText";
 import Colors from "../../constants/color";
+const { width } = Dimensions.get("window");
 
 export interface Props {
   title: string;
@@ -12,8 +13,8 @@ const Title = ({ title, margintop }: Props) => {
   return (
     <View style={[styles.modalTitleContanier, { marginTop: margintop }]}>
       <View style={styles.modalTitleTop} />
-      <View style={{ transform: [{ translateY: -2 }] }}>
-        <ShadowText size={20} color="white">
+      <View style={{ transform: [{ translateY: -width * 0.005 }] }}>
+        <ShadowText size={width * 0.053} color="white">
           {title}
         </ShadowText>
       </View>
@@ -29,8 +30,8 @@ const styles = StyleSheet.create({
   modalTitleContanier: {
     justifyContent: "center",
     alignItems: "center",
-    width: 260,
-    height: 37,
+    width: width * 0.693,
+    height: width * 0.099,
     backgroundColor: Colors.modalHeadColor,
     borderColor: Colors.modalEdgeColor,
     borderWidth: 1,
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   },
   modalTitleTop: {
     width: "100%",
-    height: 2,
+    height: width * 0.005,
     opacity: 0.1,
     backgroundColor: "white",
     position: "absolute",
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   },
   modalTitleBottom: {
     width: "100%",
-    height: 2,
+    height: width * 0.005,
     opacity: 0.5,
     backgroundColor: Colors.modalEdgeColor,
     position: "absolute",
@@ -56,13 +57,13 @@ const styles = StyleSheet.create({
   },
   modalTitleBottomShadow: {
     width: "100%",
-    height: 5,
+    height: width * 0.013,
     opacity: 0.5,
     backgroundColor: Colors.modalEdgeColor,
     position: "absolute",
     bottom: 0,
     left: 0,
-    transform: [{ translateY: 5 }],
+    transform: [{ translateY: width * 0.013 }],
   },
   modalTitleImg: {
     position: "absolute",

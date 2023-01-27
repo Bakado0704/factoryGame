@@ -1,7 +1,15 @@
 import { useRef } from "react";
-import { Image, StyleSheet, Animated, View, Pressable } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Animated,
+  View,
+  Pressable,
+  Dimensions,
+} from "react-native";
 import User from "../../models/user";
 import { GachaStatus } from "../../types/gacha";
+const { width } = Dimensions.get("window");
 
 type Props = {
   user: User;
@@ -20,22 +28,36 @@ const Envelope = ({ user, resultHandler, envelopeOpenHandler }: Props) => {
 
   const envelopeWidth = envelopeAnim.interpolate({
     inputRange: [0, 1, 2],
-    outputRange: [268, 282, 268],
+    outputRange: [width * 0.715, width * 0.752, width * 0.715],
   });
 
   const envelopeHeight = envelopeAnim.interpolate({
     inputRange: [0, 1, 2],
-    outputRange: [347, 364, 347],
+    outputRange: [width * 0.925, width * 0.971, width * 0.925],
   });
 
   const sheetY = sheetAnim.interpolate({
     inputRange: [0, 1000, 1001, 2000, 2001, 3000],
-    outputRange: [-123, -123, -133, -133, -143, -143],
+    outputRange: [
+      -width * 0.328,
+      -width * 0.328,
+      -width * 0.355,
+      -width * 0.355,
+      -width * 0.381,
+      -width * 0.381,
+    ],
   });
 
   const sheetHeight = sheetAnim.interpolate({
     inputRange: [0, 1000, 1001, 2000, 2001, 3000],
-    outputRange: [32, 32, 52, 52, 72, 72],
+    outputRange: [
+      width * 0.085,
+      width * 0.085,
+      width * 0.139,
+      width * 0.139,
+      width * 0.192,
+      width * 0.192,
+    ],
   });
 
   const sheetAnimation = () => {
@@ -125,11 +147,11 @@ const styles = StyleSheet.create({
   text: {
     position: "absolute",
     top: "50%",
-    fontSize: 20,
+    fontSize: width * 0.053,
     fontFamily: "MochiyPop",
-    margin: 10,
+    margin: width * 0.027,
     color: "white",
-    transform: [{ translateY: -240 }],
+    transform: [{ translateY: -width * 0.64 }],
   },
   envelopeContainer: {
     position: "absolute",
@@ -145,12 +167,12 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   envelopeClosed: {
-    width: 373,
-    height: 482,
+    width: width * 0.995,
+    height: width * 1.285,
   },
   sheet: {
-    width: 207,
-    height: 32,
+    width: width * 0.552,
+    height: width * 0.085,
     backgroundColor: "white",
     position: "absolute",
   },

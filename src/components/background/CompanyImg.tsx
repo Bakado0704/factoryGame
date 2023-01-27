@@ -1,6 +1,7 @@
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, Dimensions } from "react-native";
 import React from "react";
 import { JobType } from "../../types/job";
+const { width } = Dimensions.get("window");
 
 type Props = {
   type: JobType;
@@ -60,6 +61,6 @@ export default companyImg;
 const styles = StyleSheet.create({
   board: {
     width: "100%",
-    height: 310,
+    height: width * 0.826,
   },
 });

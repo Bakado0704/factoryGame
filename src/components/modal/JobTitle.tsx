@@ -1,6 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import React from "react";
 import { ShadowText } from "../text/ShadowText";
+const { width } = Dimensions.get("window");
 
 export interface Props {
   title: string;
@@ -17,8 +18,8 @@ const JobTitle = ({ title, headColor, borderColor }: Props) => {
       ]}
     >
       <View style={styles.modalTitleTop} />
-      <View style={{ transform: [{ translateY: -2 }] }}>
-        <ShadowText size={20} color="white">
+      <View style={{ transform: [{ translateY: -width * 0.005 }] }}>
+        <ShadowText size={width * 0.053} color="white">
           {title}
         </ShadowText>
       </View>
@@ -36,15 +37,15 @@ const styles = StyleSheet.create({
   modalTitleContanier: {
     justifyContent: "center",
     alignItems: "center",
-    width: 260,
-    height: 37,
-    marginTop: -30,
-    borderWidth: 2,
-    transform: [{ translateY: -5 }],
+    width: width * 0.693,
+    height: width * 0.099,
+    marginTop: -width * 0.08,
+    borderWidth: width * 0.005,
+    transform: [{ translateY: -width * 0.013 }],
   },
   modalTitleTop: {
     width: "100%",
-    height: 2,
+    height: width * 0.005,
     opacity: 0.1,
     backgroundColor: "white",
     position: "absolute",
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   },
   modalTitleBottom: {
     width: "100%",
-    height: 2,
+    height: width * 0.005,
     opacity: 0.5,
     position: "absolute",
     bottom: 0,
@@ -61,12 +62,12 @@ const styles = StyleSheet.create({
   },
   modalTitleBottomShadow: {
     width: "100%",
-    height: 5,
+    height: width * 0.013,
     opacity: 0.5,
     position: "absolute",
     bottom: 0,
     left: 0,
-    transform: [{ translateY: 5 }],
+    transform: [{ translateY: width * 0.013 }],
   },
   modalTitleImg: {
     position: "absolute",

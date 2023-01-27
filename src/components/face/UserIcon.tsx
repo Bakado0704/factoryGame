@@ -1,29 +1,14 @@
-import { StyleSheet, Animated, Image } from "react-native";
-import React, { useRef } from "react";
+import { Animated } from "react-native";
+import React from "react";
 import { UserIconType } from "../../types/userIcons";
 
 type Props = {
   icon: UserIconType;
-  width: number;
-  height: number;
+  width: Animated.AnimatedInterpolation<string | number> | number;
+  height: Animated.AnimatedInterpolation<string | number> | number;
 };
 
 const UserIcon = ({ icon, width, height }: Props) => {
-  const iconAnim = useRef(new Animated.Value(0)).current;
-
-  const iconY = iconAnim.interpolate({
-    inputRange: [0, 100, 101, 200],
-    outputRange: [-1, -1, 0, 0],
-  });
-
-  Animated.loop(
-    Animated.timing(iconAnim, {
-      toValue: 200,
-      duration: 300,
-      useNativeDriver: false,
-    })
-  ).start();
-
   let source = require("../../assets/user/man1.png");
 
   switch (icon) {
@@ -110,7 +95,7 @@ const UserIcon = ({ icon, width, height }: Props) => {
   }
 
   return (
-    <Image
+    <Animated.Image
       source={source}
       style={{ width: width, height: height }}
     />
@@ -118,7 +103,3 @@ const UserIcon = ({ icon, width, height }: Props) => {
 };
 
 export default UserIcon;
-
-const styles = StyleSheet.create({
-
-});

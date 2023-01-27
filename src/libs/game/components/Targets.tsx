@@ -4,9 +4,9 @@ import { judgeStatus, Play, PlayGap } from "../../../types/play";
 import PlayPattern from "../../../models/playpattern";
 import Target from "./Target";
 import Animation from "./Animation";
-import ImageButton from "../../../components/button/ImageButton";
 import { productType } from "../../../types/product";
 import PlayButton from "../../../components/button/PlayButton";
+const { width } = Dimensions.get("window");
 
 type Props = {
   playpattern: PlayPattern;
@@ -122,7 +122,7 @@ const Targets = ({
           ]}
         />
       </View>
-      <View style={{ marginTop: 64 }}>
+      <View style={{ marginTop: width * 0.171 }}>
         <PlayButton
           sourceOn={playpattern.target.ImageSourceOn}
           sourceOff={playpattern.target.ImageSourceOff}
@@ -131,9 +131,9 @@ const Targets = ({
           order={order}
           failureOrder={failureOrder}
           onPress={lapHandler}
-          width={59}
-          height={64}
-          padding={8}
+          width={width * 0.157}
+          height={width * 0.171}
+          padding={width * 0.021}
         />
       </View>
     </>
@@ -146,24 +146,21 @@ const styles = StyleSheet.create({
   animationContainer: {
     position: "absolute",
     width: "100%",
-    height: 64,
+    height: width * 0.171,
   },
   box: {
     position: "absolute",
-    width: 10,
-    height: 64,
+    width: width * 0.027,
+    height: width * 0.171,
   },
   boxBackground: {
     position: "absolute",
-    height: 64,
+    height: width * 0.171,
     opacity: 0.02,
   },
   button: {
-    marginTop: 64,
-    width: 59,
-    height: 64,
-  },
-  pressed: {
-    opacity: 0.75,
-  },
+    marginTop: width * 0.171,
+    width: width * 0.157,
+    height: width * 0.171,
+  }
 });

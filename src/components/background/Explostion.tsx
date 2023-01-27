@@ -1,6 +1,7 @@
-import { StyleSheet, Animated } from "react-native";
+import { StyleSheet, Animated, Dimensions } from "react-native";
 import React, { useEffect, useRef } from "react";
 import { judgeStatus, Play } from "../../types/play";
+const { width } = Dimensions.get("window");
 export type Props = {
   playState: Play;
 };
@@ -269,8 +270,8 @@ export default Explosion;
 const styles = StyleSheet.create({
   explosion: {
     position: "absolute",
-    width: 375,
-    height: 204,
+    width: width,
+    height: width * 0.597,
     bottom: "26%",
     alignItems: "center",
     justifyContent: "center",

@@ -1,8 +1,9 @@
-import { Animated, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Animated, Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import React, { useRef } from "react";
 import FaceIcon from "../face/FaceIcon";
 import Colors from "../../constants/color";
 import { JobType } from "../../types/job";
+const { width } = Dimensions.get("window");
 
 export interface Props {
   comment: string;
@@ -15,7 +16,7 @@ const Comment = ({ comment, name, iconType }: Props) => {
 
   const iconY = iconAnim.interpolate({
     inputRange: [0, 100, 101, 200],
-    outputRange: [-2, -2, 0, 0],
+    outputRange: [-width * 0.005, -width * 0.005, 0, 0],
   });
 
   Animated.loop(
@@ -39,7 +40,7 @@ const Comment = ({ comment, name, iconType }: Props) => {
         <Animated.View
           style={[styles.iconBox, { transform: [{ translateY: iconY }] }]}
         >
-          <FaceIcon type={iconType} width={78} height={78} />
+          <FaceIcon type={iconType} width={width * 0.208} height={width * 0.208} />
         </Animated.View>
         <Text style={styles.position}>社長: {name}</Text>
       </View>
@@ -53,30 +54,30 @@ const styles = StyleSheet.create({
   reactionContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -30,
+    marginTop: -width * 0.08,
     position: "relative",
   },
   bubble: {
-    width: 300,
-    height: 86,
+    width: width * 0.8,
+    height: width * 0.229,
   },
   iconContaner: {
-    width: 300,
+    width: width * 0.8,
     flexDirection: "row",
     alignItems: "flex-end",
   },
   iconBox: {
-    width: 78,
-    height: 78,
+    width: width * 0.208,
+    height: width * 0.208,
   },
   icon: {
     width: "100%",
     height: "100%",
   },
   position: {
-    fontSize: 20,
+    fontSize: width * 0.053,
     fontFamily: "MochiyPop",
-    margin: 10,
+    margin: width * 0.027,
     color: "white",
   },
   commentContainer: {
@@ -85,10 +86,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     top: 0,
     width: "100%",
-    height: 64,
+    height: width * 0.171,
   },
   comment: {
-    fontSize: 15,
+    fontSize: width * 0.04,
     fontFamily: "MochiyPop",
     color: Colors.textMainColor,
   },

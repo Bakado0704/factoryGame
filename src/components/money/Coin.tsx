@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
-import { StyleSheet, Animated } from "react-native";
+import { StyleSheet, Animated, Dimensions } from "react-native";
 import { judgeStatus, Play } from "../../types/play";
+const { width } = Dimensions.get("window");
 
 type Props = {
   playState: Play;
@@ -14,7 +15,7 @@ const Coin = ({ playState, delay, combo, allowCombo }: Props) => {
 
   const coinTranslateY = CoinAnim.interpolate({
     inputRange: [0, 50, 75, 100, 125, 150, 175, 200],
-    outputRange: [0, -100, -110, -116, -114, -108, -92, -55],
+    outputRange: [0, -width * 0.267, -width * 0.293, -width * 0.309, -width * 0.304, -width * 0.288, -width * 0.245, -width * 0.147],
   });
 
   const coinOpacity1 = CoinAnim.interpolate({
@@ -117,13 +118,13 @@ export default Coin;
 const styles = StyleSheet.create({
   coinContainer: {
     position: "absolute",
-    bottom: 280,
+    bottom: "42%",
     justifyContent: "center",
     alignItems: "center",
   },
   coin: {
     position: "absolute",
-    width: 30,
-    height: 30,
+    width: width * 0.08,
+    height: width * 0.08,
   },
 });

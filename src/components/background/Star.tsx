@@ -1,6 +1,7 @@
-import { StyleSheet, Animated, View } from "react-native";
+import { StyleSheet, Animated, View, Dimensions } from "react-native";
 import React, { useRef, useEffect } from "react";
 import { productType } from "../../types/product";
+const { width } = Dimensions.get("window");
 
 type Props = {
   activeProductWidth: number;
@@ -53,14 +54,14 @@ const Star = ({ activeProductWidth, activeProductHeight, productType }: Props) =
         source={require("../../assets/ui/light.png")}
         style={[
           styles.light,
-          { opacity: lightOpacity1, width: 35, height: 20, top: 0, left: 20 },
+          { opacity: lightOpacity1, width: width * 0.093, height: width * 0.053, top: 0, left: width * 0.053 },
         ]}
       />
       <Animated.Image
         source={require("../../assets/ui/light.png")}
         style={[
           styles.light,
-          { opacity: lightOpacity1, width: 14, height: 8, bottom: 0, left: 0 },
+          { opacity: lightOpacity1, width: width * 0.037, height: width * 0.021, bottom: 0, left: 0 },
         ]}
       />
       <Animated.Image
@@ -69,10 +70,10 @@ const Star = ({ activeProductWidth, activeProductHeight, productType }: Props) =
           styles.light,
           {
             opacity: lightOpacity1,
-            width: 21,
-            height: 12,
+            width: width * 0.056,
+            height: width * 0.032,
             bottom: 0,
-            right: 30,
+            right: width * 0.08,
           },
         ]}
       />
@@ -83,10 +84,10 @@ const Star = ({ activeProductWidth, activeProductHeight, productType }: Props) =
           styles.light,
           {
             opacity: lightOpacity2,
-            width: 28,
-            height: 16,
+            width: width * 0.075,
+            height: width * 0.043,
             bottom: 0,
-            left: 50,
+            left: width * 0.133,
           },
         ]}
       />
@@ -96,8 +97,8 @@ const Star = ({ activeProductWidth, activeProductHeight, productType }: Props) =
           styles.light,
           {
             opacity: lightOpacity2,
-            width: 35,
-            height: 20,
+            width: width * 0.093,
+            height: width * 0.053,
             bottom: 0,
             right: 0,
           },
@@ -107,14 +108,14 @@ const Star = ({ activeProductWidth, activeProductHeight, productType }: Props) =
         source={require("../../assets/ui/light.png")}
         style={[
           styles.light,
-          { opacity: lightOpacity2, width: 14, height: 8, top: -10, left: 60 },
+          { opacity: lightOpacity2, width: width * 0.037, height: width * 0.021, top: -width * 0.027, left: width * 0.16 },
         ]}
       />
       <Animated.Image
         source={require("../../assets/ui/light.png")}
         style={[
           styles.light,
-          { opacity: lightOpacity2, width: 21, height: 12, top: 0, right: 0 },
+          { opacity: lightOpacity2, width: width * 0.056, height: width * 0.032, top: 0, right: 0 },
         ]}
       />
 
@@ -124,10 +125,10 @@ const Star = ({ activeProductWidth, activeProductHeight, productType }: Props) =
           styles.light,
           {
             opacity: lightOpacity3,
-            width: 28,
-            height: 16,
-            top: -10,
-            right: 40,
+            width: width * 0.075,
+            height: width * 0.043,
+            top: -width * 0.027,
+            right: width * 0.107,
           },
         ]}
       />
@@ -137,10 +138,10 @@ const Star = ({ activeProductWidth, activeProductHeight, productType }: Props) =
           styles.light,
           {
             opacity: lightOpacity3,
-            width: 14,
-            height: 8,
+            width: width * 0.037,
+            height: width * 0.021,
             bottom: 0,
-            right: 80,
+            right: width * 0.213,
           },
         ]}
       />
@@ -148,7 +149,7 @@ const Star = ({ activeProductWidth, activeProductHeight, productType }: Props) =
         source={require("../../assets/ui/light.png")}
         style={[
           styles.light,
-          { opacity: lightOpacity3, width: 28, height: 16, top: 50, left: 0 },
+          { opacity: lightOpacity3, width: width * 0.075, height: width * 0.043, top: width * 0.133, left: 0 },
         ]}
       />
     </View>

@@ -1,5 +1,6 @@
-import { Image, ImageBackground, Text, View, StyleSheet } from "react-native";
+import { Image, ImageBackground, Text, View, StyleSheet, Dimensions } from "react-native";
 import ImageButton from "../button/ImageButton";
+const { width } = Dimensions.get("window");
 
 type Props = {
   userMoney: number;
@@ -29,11 +30,11 @@ const UserMoney = ({ userMoney }: Props) => {
             <ImageButton
               source={require("../../assets/ui/plusButton.png")}
               onPress={pressHandler}
-              width={30}
-              height={30}
-              diffWidth={3}
-              diffHeight={3}
-              padding={5}
+              width={width * 0.08}
+              height={width * 0.08}
+              diffWidth={width * 0.008}
+              diffHeight={width * 0.008}
+              padding={width * 0.013}
             />
           </View>
         </ImageBackground>
@@ -48,35 +49,35 @@ const styles = StyleSheet.create({
   rootScreen: {
     justifyContent: "flex-start",
     alignItems: "center",
-    transform: [{ translateX: -20 }],
+    transform: [{ translateX: -width * 0.053 }],
   },
   backgroundImage: {
     position: "absolute",
-    width: 171,
-    height: 38,
+    width: width * 0.456,
+    height: width * 0.101,
     top: 0,
   },
   innerContainer: {
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    width: 171,
-    height: 38,
+    width: width * 0.456,
+    height: width * 0.101,
   },
   moneyImg: {
-    width: 28,
-    height: 28,
-    transform: [{ translateX: 20 }],
+    width: width * 0.075,
+    height: width * 0.075,
+    transform: [{ translateX: width * 0.053 }],
   },
   numberContainer: {
-    width: 70,
+    width: width * 0.187,
     justifyContent: "flex-end",
     alignItems: "flex-end",
   },
   money: {
-    fontSize: 14,
+    fontSize: width * 0.037,
     fontFamily: "MochiyPop",
     color: "#fff",
-    transform: [{ translateX: 18 }],
+    transform: [{ translateX: width * 0.048 }],
   },
 });

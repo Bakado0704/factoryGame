@@ -1,10 +1,11 @@
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { judgeStatus, Play, PlayGap, PlayStatus } from "../../../types/play";
+import { judgeStatus, Play, PlayGap } from "../../../types/play";
 import PlayPattern from "../../../models/playpattern";
 import Targets from "./Targets";
 import NavGame from "../../../components/game/NavGame";
 import { productType } from "../../../types/product";
+const { width } = Dimensions.get("window");
 
 type Props = {
   playpattern: PlayPattern[][];
@@ -78,7 +79,6 @@ const Counts = ({
         playpattern[Math.floor(Math.random() * playpattern.length)]
       );
       selectedPatternHandler(selectedPlayPattern);
-      // console.log("changed!");
     }
   }, [playState.judge === judgeStatus.waiting]);
 
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   },
   boardTop: {
     position: "absolute",
-    height: 174,
+    height: width * 0.464,
     width: "100%",
     bottom: 0,
     left: 0,

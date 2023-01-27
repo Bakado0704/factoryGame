@@ -1,4 +1,4 @@
-import { StyleSheet, Image} from "react-native";
+import { Image } from "react-native";
 import React from "react";
 import { JobType } from "../../types/job";
 
@@ -54,14 +54,7 @@ const FaceIcon = ({ type, width, height }: Props) => {
     }
   }
 
-  return <Image source={source} style={{width: width, height: height}} />;
+  return <Image source={source} style={{ width: width, height: height }} />;
 };
 
 export default FaceIcon;
-
-const styles = StyleSheet.create({
-  icon: {
-    width: 56,
-    height: 56,
-  },
-});

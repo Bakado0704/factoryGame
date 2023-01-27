@@ -1,6 +1,8 @@
+import { Dimensions } from "react-native";
 import Job from "../../models/job";
 import Outline from "../../models/outline";
 import { JobType } from "../../types/job";
+const { width, height } = Dimensions.get("window");
 
 export type state = {
   jobs: Job[];
@@ -42,7 +44,7 @@ const initialState: state = {
         bonusFailure: [
           { before: require("../../assets/product/product1-gold-failure.png") },
         ],
-        style: { width: 200, height: 80 },
+        style: { width: height * 0.3, height: height * 0.12 },
       },
       {
         name: "山川 哲郎(62)",
@@ -65,7 +67,7 @@ const initialState: state = {
       "c2",
       JobType.souzuki,
       JobType.souzuki,
-      false,
+      true,
       1,
       0,
       0,
@@ -91,7 +93,7 @@ const initialState: state = {
         bonusFailure: [
           { before: require("../../assets/product/product2-gold-failure.png") },
         ],
-        style: { width: 270, height: 207 },
+        style: { width: height * 0.408, height: height * 0.31 },
       },
       {
         name: "新盛 晋(50)",
@@ -115,7 +117,7 @@ const initialState: state = {
       "c3",
       JobType.ashBerry,
       JobType.ashBerry,
-      false,
+      true,
       1,
       0,
       0,
@@ -141,7 +143,7 @@ const initialState: state = {
         bonusFailure: [
           { before: require("../../assets/product/product3-gold-failure.png") },
         ],
-        style: { width: 202, height: 89 },
+        style: { width: height * 0.303, height: height * 0.133 },
       },
       {
         name: "宮古 洋平(56)",
@@ -164,7 +166,7 @@ const initialState: state = {
       "c4",
       JobType.bentaro,
       JobType.bentaro,
-      false,
+      true,
       1,
       0,
       0,
@@ -192,7 +194,7 @@ const initialState: state = {
         bonusFailure: [
           { before: require("../../assets/product/product4-gold-failure.png") },
         ],
-        style: { width: 200, height: 130 },
+        style: { width: height * 0.3, height: height * 0.195 },
       },
       {
         name: "辻 踏弥(48)",
@@ -215,7 +217,7 @@ const initialState: state = {
       "c5",
       JobType.aguron,
       JobType.aguron,
-      false,
+      true,
       1,
       0,
       0,
@@ -241,7 +243,7 @@ const initialState: state = {
         bonusFailure: [
           { before: require("../../assets/product/product5-gold-failure.png") },
         ],
-        style: { width: 200, height: 172 },
+        style: { width: height * 0.3, height: height * 0.258 },
       },
       {
         name: "リー・ハオラン(54)",
@@ -264,7 +266,7 @@ const initialState: state = {
       "c6",
       JobType.starFoods,
       JobType.starFoods,
-      false,
+      true,
       1,
       0,
       0,
@@ -292,7 +294,7 @@ const initialState: state = {
         bonusFailure: [
           { before: require("../../assets/product/product6-gold-failure.png") },
         ],
-        style: { width: 200, height: 150 },
+        style: { width: height * 0.3, height: height * 0.225 },
       },
       {
         name: "竹内 ゲンノシン(47)",
@@ -315,7 +317,7 @@ const initialState: state = {
       "c7",
       JobType.sikaga,
       JobType.sikaga,
-      false,
+      true,
       1,
       0,
       0,
@@ -341,7 +343,7 @@ const initialState: state = {
         bonusFailure: [
           { before: require("../../assets/product/product7-gold-failure.png") },
         ],
-        style: { width: 252, height: 82 },
+        style: { width: height * 0.378, height: height * 0.123 },
       },
       {
         name: "黒口 隆(51)",
@@ -364,7 +366,7 @@ const initialState: state = {
       "c8",
       JobType.tamazu,
       JobType.tamazu,
-      false,
+      true,
       1,
       0,
       0,
@@ -392,7 +394,7 @@ const initialState: state = {
         bonusFailure: [
           { before: require("../../assets/product/product8-gold-failure.png") },
         ],
-        style: { width: 138, height: 222 },
+        style: { width: height * 0.207, height: height * 0.333 },
       },
       {
         name: "山下 五郎(55)",
@@ -415,7 +417,7 @@ const initialState: state = {
       "c9",
       JobType.ozasa,
       JobType.ozasa,
-      false,
+      true,
       1,
       0,
       0,
@@ -441,7 +443,7 @@ const initialState: state = {
         bonusFailure: [
           { before: require("../../assets/product/product9-gold-failure.png") },
         ],
-        style: { width: 300, height: 145 },
+        style: { width: height * 0.45, height: height * 0.217 },
       },
       {
         name: "小篠 隆生(65)",
@@ -464,7 +466,7 @@ const initialState: state = {
       "c10",
       JobType.tanabe,
       JobType.tanabe,
-      false,
+      true,
       1,
       0,
       0,
@@ -494,7 +496,7 @@ const initialState: state = {
         bonusFailure: [
           { before: require("../../assets/product/product10-gold-failure.png") },
         ],
-        style: { width: 280, height: 105 },
+        style: { width: height * 0.42, height: height * 0.157 },
       },
       {
         name: "鴨林 勇太(43)",
@@ -543,7 +545,7 @@ const initialState: state = {
       bonusFailure: [
         { before: require("../../assets/product/product1-gold-failure.png") },
       ],
-      style: { width: 200, height: 80 },
+      style: { width: height * 0.3, height: height * 0.12 },
     },
     owner: {
       name: "山川 哲郎(62)",
@@ -591,7 +593,7 @@ const initialState: state = {
       bonusFailure: [
         { before: require("../../assets/product/product1-gold-failure.png") },
       ],
-      style: { width: 200, height: 80 },
+      style: { width: height * 0.3, height: height * 0.12 },
     },
     owner: {
       name: "山川 哲郎(62)",
@@ -639,7 +641,7 @@ const initialState: state = {
       bonusFailure: [
         { before: require("../../assets/product/product1-normal-failure.png") },
       ],
-      style: { width: 200, height: 80 },
+      style: { width: height * 0.3, height: height * 0.12 },
     },
     owner: {
       name: "山川 哲郎(62)",

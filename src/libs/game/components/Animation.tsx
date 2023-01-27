@@ -1,5 +1,6 @@
-import { View, StyleSheet, Animated } from "react-native";
+import { View, StyleSheet, Animated, Dimensions } from "react-native";
 import React, { useRef, useEffect } from "react";
+const { width } = Dimensions.get("window");
 
 type Props = {
   laps: number[];
@@ -48,13 +49,13 @@ const styles = StyleSheet.create({
   boxInnerContainer: {
     position: "absolute",
     width: "100%",
-    height: 64,
+    height: width * 0.171,
     justifyContent: "flex-start",
     alignItems: "center",
   },
   box: {
     position: "absolute",
-    width: 10,
-    height: 64,
+    width: width * 0.027,
+    height: width * 0.171,
   },
 });

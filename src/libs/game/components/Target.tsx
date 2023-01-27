@@ -1,8 +1,9 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import PlayPattern from "../../../models/playpattern";
 import PlayGap from "../../../models/playgap";
 import { judgeStatus, Play, } from "../../../types/play";
+const { width } = Dimensions.get("window");
 
 type Props = {
   playpattern: PlayPattern;
@@ -82,7 +83,7 @@ const Target = ({
   //ターゲットを押すのが早すぎた
   useEffect(() => {
     if (gap.some((value) => value >= 20)) {
-      damageHandler(100);
+      // damageHandler(100);
       setGap([]);
       setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
@@ -94,7 +95,7 @@ const Target = ({
   //ターゲットを押すのが遅すぎた
   useEffect(() => {
     if (translateX.some((value) => value <= -failureGap)) {
-      damageHandler(100);
+      // damageHandler(100);
       setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
       // console.log("ターゲットを押すのが遅すぎた");
@@ -108,7 +109,7 @@ const Target = ({
       laps.length > playpattern.distance.length &&
       playState.judge !== "success"
     ) {
-      damageHandler(100);
+      // damageHandler(100);
       setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
       // console.log("lapsの数がdistanceの数を超えても失敗");
@@ -149,18 +150,18 @@ export default Target;
 const styles = StyleSheet.create({
   rootContainer: {
     width: "100%",
-    height: 64,
+    height: width * 0.171,
   },
   boxInnerContainer: {
     position: "absolute",
     width: "100%",
-    height: 64,
+    height: width * 0.171,
     justifyContent: "flex-start",
     alignItems: "center",
   },
   box: {
     position: "absolute",
-    width: 6,
-    height: 64,
+    width: width * 0.016,
+    height: width * 0.171,
   },
 });

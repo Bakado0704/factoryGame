@@ -1,5 +1,6 @@
 import { StyleSheet, Animated, Pressable, Image } from "react-native";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { useIsFocused } from "@react-navigation/native";
 
 type Props = {
   jobAddHandler: () => void;
@@ -13,6 +14,29 @@ const JobAddButton = ({ jobAddHandler }: Props) => {
     outputRange: [0, 1, 1, 0],
   });
 
+  const isFocused = useIsFocused();
+  const [flag, setFlag] = useState(false);
+
+  useEffect(() => {
+    setFlag(false);
+  }, [isFocused]);
+
+  const pressInHandler = () => {
+    setFlag(true);
+  };
+
+  const pressOutHandler = () => {
+    setFlag(false);
+  };
+
+  let ImagePressed = require("../../assets/ui/jobAddButtonPressed.png")
+  let ImageOn = require("../../assets/ui/jobAddButton.png")
+  let ImageOff = require("../../assets/ui/jobAddButtonOff.png")
+
+  let ImageSourceOff = flag ? ImagePressed : ImageOff;
+  let ImageSourceOn = flag ? ImagePressed : ImageOn;
+
+
   Animated.loop(
     Animated.timing(ButtonAnim, {
       toValue: 200,
@@ -25,16 +49,18 @@ const JobAddButton = ({ jobAddHandler }: Props) => {
     <Pressable
       style={styles.jobAddButtonContainer}
       onPress={jobAddHandler}
+      onPressIn={pressInHandler}
+      onPressOut={pressOutHandler}
     >
       <Image
-        source={require("../../assets/ui/jobAddButtonOff.png")}
+        source={ImageSourceOff}
         style={styles.jobAddButton}
       />
       <Animated.View
         style={[styles.jobAddButtonActive, { opacity: ButtonImage }]}
       >
         <Image
-          source={require("../../assets/ui/jobAddButton.png")}
+          source={ImageSourceOn}
           style={styles.jobAddButton}
         />
       </Animated.View>

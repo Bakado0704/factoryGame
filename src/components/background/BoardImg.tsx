@@ -1,10 +1,11 @@
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, Dimensions } from "react-native";
 import React from "react";
 import { JobType } from "../../types/job";
 
 type Props = {
   type: JobType;
 };
+const { width } = Dimensions.get("window");
 
 const BoardImg = ({ type }: Props) => {
   let source = require("../../assets/signboard/yamagawaBoard.png");
@@ -61,7 +62,7 @@ export default BoardImg;
 
 const styles = StyleSheet.create({
   board: {
-    width: 222,
-    height: 60,
+    width: width * 0.592,
+    height:  width * 0.16,
   },
 });

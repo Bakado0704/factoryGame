@@ -3,7 +3,7 @@ import React from "react";
 import Counts from "./components/Counts";
 import { PATTERN_DATES } from "./datas/dates";
 import PlayGap from "../../models/playgap";
-import { judgeStatus, Play, PlayPattern, PlayStatus } from "../../types/play";
+import { judgeStatus, Play, PlayPattern } from "../../types/play";
 import { JobType } from "../../types/job";
 import Coins from "../../components/money/Coins";
 import PlusMoney from "../../components/money/PlusMoney";

@@ -48,10 +48,10 @@ const PlayButton = ({
 
   const ButtonFailureOpacity = ButtonFailureAnim.interpolate({
     inputRange: [
-      0, 50, 51, 100, 101, 150, 151, 200, 201, 250, 251, 300, 301, 350, 351,
-      399, 400,
+      0, 1, 50, 51, 100, 101, 150, 151, 200, 201, 250, 251, 300, 301, 350, 351, 
+      400,
     ],
-    outputRange: [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+    outputRange: [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
   });
 
   const pressInHandler = () => {
@@ -66,17 +66,17 @@ const PlayButton = ({
     ButtonAnim.setValue(0);
   };
 
-  //judgeがwaitingになったときリセットする
+  //自分のorderと失敗したorderが同じ時アニメーションスタート
   useEffect(() => {
     if (playState.judge === judgeStatus.failure && order === failureOrder) {
       Animated.timing(ButtonFailureAnim, {
         toValue: 400,
-        duration: 800,
+        duration: 1000,
         useNativeDriver: false,
       }).start();
       setTimeout(() => {
         ButtonFailureAnim.setValue(0);
-      }, 800);
+      }, 1000);
     }
   }, [playState.judge === judgeStatus.failure]);
 
@@ -90,7 +90,6 @@ const PlayButton = ({
         {
           width: width + padding * 2,
           height: height + padding * 2,
-
         },
       ]}
     >

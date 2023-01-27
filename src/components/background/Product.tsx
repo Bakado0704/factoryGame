@@ -262,13 +262,6 @@ const Product = ({
 export default Product;
 
 const styles = StyleSheet.create({
-  conveyor: {
-    position: "absolute",
-    height: 282,
-    width: "100%",
-    bottom: 0,
-    left: 0,
-  },
   productBox: {
     position: "absolute",
     width: "100%",
