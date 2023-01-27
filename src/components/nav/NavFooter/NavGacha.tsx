@@ -1,6 +1,7 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import GachaButton from "../../button/GachaButton";
 import HomeButton from "../../button/HomeButton";
+const { width } = Dimensions.get("window");
 
 type Props = {
   onModal: () => void;
@@ -23,13 +24,13 @@ export default NavGacha;
 const styles = StyleSheet.create({
   buttonsContainer: {
     width: "100%",
-    marginBottom: 5,
+    marginBottom: width * 0.013,
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
   },
   space: {
-    width: 66,
-    height: 67,
+    width: width * 0.176,
+    height: width * 0.179,
   },
 });

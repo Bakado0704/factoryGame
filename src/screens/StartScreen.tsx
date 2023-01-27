@@ -1,4 +1,4 @@
-import { View, StyleSheet, Animated } from "react-native";
+import { View, StyleSheet, Animated, Dimensions } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -29,6 +29,7 @@ import {
 } from "../store/user";
 import { changeStatus, staminaReset } from "../store/play";
 import { changeJob } from "../store/job";
+const { width } = Dimensions.get("window");
 
 const StartScreen = () => {
   const Job = useSelector((state: RootState) => state.job.job);
@@ -129,6 +130,7 @@ const StartScreen = () => {
   };
 
   const jobChangeMove = () => {
+    dispatch(userPage("jobChange"));
     navigation.navigate("JobChange");
   };
 
@@ -208,6 +210,6 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    padding: 8,
+    padding: width * 0.013,
   },
 });

@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Dimensions } from "react-native";
 import NavJobList from "../components/nav/NavFooter/NavJobList";
 import {
   NavigationProp,
@@ -20,6 +20,7 @@ import { page } from "../types/page";
 import { Mute } from "../types/user";
 import { changeMute, changePreviewIcon, changeUser, changeUsername, changeUserNowJob, userPage } from "../store/user";
 import { changeJob, changePreviewJob } from "../store/job";
+const { width } = Dimensions.get("window");
 
 const JobChangeScreen = () => {
   const jobs = useSelector((state: RootState) => state.job.jobs);
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    height: 299,
+    height: width * 0.797,
     width: "100%",
     justifyContent: "space-between",
   },
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
   },
   board: {
     position: "absolute",
-    height: 299,
+    height: width * 0.797,
     width: "100%",
     bottom: 0,
     left: 0,
@@ -172,18 +173,10 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     width: "100%",
-    paddingVertical: 7,
-    paddingHorizontal: 10,
+    paddingVertical: width * 0.019,
+    paddingHorizontal: width * 0.027,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-  },
-  returnButton: {
-    width: 100,
-    height: 32,
-  },
-  gachaButton: {
-    width: 100,
-    height: 32,
-  },
+  }
 });

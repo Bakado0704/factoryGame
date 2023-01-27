@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text, Animated } from "react-native";
+import { View, StyleSheet, Image, Text, Animated, Dimensions } from "react-native";
 import React from "react";
 import ImageButton from "../components/button/ImageButton";
 import Colors from "../constants/color";
@@ -6,6 +6,7 @@ import { ShadowText } from "../components/text/ShadowText";
 import Comment from "../components/modal/Comment";
 import Title from "../components/modal/Title";
 import { JobType } from "../types/job";
+const { width } = Dimensions.get("window");
 
 type Props = {
   nowMoney: number;
@@ -34,7 +35,7 @@ const Gameover = ({
           <Text style={styles.gameover}>GAMEOVER</Text>
         </View>
         <View style={styles.innerContainer}>
-          <Title title="記録" margintop={-20} />
+          <Title title="記録" margintop={-width * 0.053} />
           <View style={styles.resultOuterContainer}>
             <Image
               source={require("../assets/ui/modalBackgroundLight.png")}
@@ -45,16 +46,16 @@ const Gameover = ({
               style={{
                 justifyContent: "center",
                 alignItems: "center",
-                height: 40,
-                marginBottom: -15,
+                height: width * 0.107,
+                marginBottom: -width * 0.04,
               }}
             >
-              <ShadowText size={14} color="white">
+              <ShadowText size={width * 0.037} color="white">
                 時給
               </ShadowText>
               {nowMoney > maxMoney && nowMoney > 0 && (
-                <View style={{ marginTop: -3 }}>
-                  <ShadowText size={16} color={Colors.textYellowColor}>
+                <View style={{ marginTop: -width * 0.008 }}>
+                  <ShadowText size={width * 0.043} color={Colors.textYellowColor}>
                     新記録!
                   </ShadowText>
                 </View>
@@ -66,7 +67,7 @@ const Gameover = ({
                 source={require("../assets/ui/money1.png")}
                 style={styles.moneyBigImg}
               />
-              <ShadowText size={50} color="white">
+              <ShadowText size={width * 0.133} color="white">
                 {new Intl.NumberFormat().format(nowMoney)}
               </ShadowText>
             </View>
@@ -74,10 +75,10 @@ const Gameover = ({
 
           <View style={styles.resultDetailContainer}>
             <View style={styles.resultBackground} />
-            <ShadowText size={18} color="white">
+            <ShadowText size={width * 0.048} color="white">
               成功回数:
             </ShadowText>
-            <ShadowText size={20} color="white">
+            <ShadowText size={width * 0.053} color="white">
               {" "}
               {completeCount}
             </ShadowText>
@@ -85,14 +86,14 @@ const Gameover = ({
 
           <View style={styles.resultDetailContainer}>
             <View style={styles.resultBackground} />
-            <ShadowText size={18} color="white">
+            <ShadowText size={width * 0.048} color="white">
               最高記録:
             </ShadowText>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <ShadowText size={20} color="white">
+            <ShadowText size={width * 0.053} color="white">
               {new Intl.NumberFormat().format(maxMoney)}
             </ShadowText>
           </View>
@@ -102,11 +103,11 @@ const Gameover = ({
           <ImageButton
             source={require("../assets/ui/okButton.png")}
             onPress={offModal}
-            width={322}
-            height={52}
-            diffWidth={10}
-            diffHeight={1.6}
-            padding={5}
+            width={width * 0.859}
+            height={width * 0.139}
+            diffWidth={width * 0.027}
+            diffHeight={width * 0.004}
+            padding={width * 0.013}
           />
         </View>
       </View>
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     position: "absolute",
-    padding: 20,
+    padding: width * 0.053,
     top: 0,
     left: 0,
   },
@@ -136,12 +137,12 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   youdead: {
-    fontSize: 22,
+    fontSize: width * 0.059,
     color: "white",
     fontFamily: "MochiyPop",
   },
   gameover: {
-    fontSize: 15,
+    fontSize: width * 0.04,
     color: "white",
     fontFamily: "MochiyPop",
   },
@@ -149,10 +150,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.modalMainColor,
     width: "100%",
-    marginTop: 25,
-    paddingHorizontal: 10,
-    paddingBottom: 35,
-    borderWidth: 3,
+    marginTop: width * 0.067,
+    paddingHorizontal: width * 0.027,
+    paddingBottom: width * 0.093,
+    borderWidth: width * 0.008,
     borderColor: Colors.modalEdgeColor,
   },
   numberContainer: {
@@ -160,8 +161,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   resultOuterContainer: {
-    width: 260,
-    height: 126,
+    width: width * 0.693,
+    height: width * 0.336,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -172,15 +173,15 @@ const styles = StyleSheet.create({
   },
   modalBackgroundLight: {
     position: "absolute",
-    width: 260,
-    height: 106,
+    width: width * 0.693,
+    height: width * 0.283,
     opacity: 0.7,
-    transform: [{ translateY: 10 }],
+    transform: [{ translateY: width * 0.027 }],
   },
   resultDetailContainer: {
     width: "100%",
-    height: 32,
-    marginVertical: 5,
+    height: width * 0.085,
+    marginVertical: width * 0.013,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    borderRadius: 10,
+    borderRadius: width * 0.027,
     backgroundColor: Colors.modalEdgeColor,
     opacity: 0.5,
   },
@@ -207,36 +208,36 @@ const styles = StyleSheet.create({
   staminaContainerBottom: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 3,
+    marginVertical: width * 0.008,
   },
   resultText: {
-    fontSize: 20,
+    fontSize: width * 0.053,
     fontFamily: "MochiyPop",
   },
   moneyImg: {
-    width: 24,
-    height: 24,
-    marginLeft: 8,
-    marginRight: 4,
+    width: width * 0.064,
+    height: width * 0.064,
+    marginLeft: width * 0.021,
+    marginRight: width * 0.011,
   },
   moneyBigImg: {
-    width: 50,
-    height: 50,
-    marginLeft: 8,
-    marginRight: 4,
+    width: width * 0.13,
+    height: width * 0.13,
+    marginLeft: width * 0.021,
+    marginRight: width * 0.011,
   },
   arrowImg: {
-    width: 20,
-    height: 20,
-    marginHorizontal: 8,
+    width: width * 0.053,
+    height: width * 0.053,
+    marginHorizontal: width * 0.021,
   },
   staminaImg: {
-    width: 90,
-    height: 30,
+    width: width * 0.24,
+    height: width * 0.08,
   },
   buttonContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -5,
+    marginTop: -width * 0.013,
   },
 });

@@ -4,9 +4,11 @@ import {
   StyleSheet,
   ImageBackground,
   Animated,
+  Dimensions
 } from "react-native";
 import NextButton from "../../button/NextButton";
 import PrevButton from "../../button/PrevButton";
+const { width } = Dimensions.get("window");
 
 type Props = {
   drink: number;
@@ -85,25 +87,25 @@ export default NavDrink;
 
 const styles = StyleSheet.create({
   rootContainer: {
-    width: 260,
-    height: 106,
+    width: width * 0.693,
+    height: width * 0.283,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    marginVertical: 10,
+    marginVertical: width * 0.027,
   },
   drinkBackground: {
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    width: 260,
-    height: 106,
+    width: width * 0.693,
+    height: width * 0.283,
   },
   drinkContainer: {
-    width: 37,
-    height: 95,
-    marginHorizontal: 6,
+    width: width * 0.099,
+    height: width * 0.253,
+    marginHorizontal: width * 0.016,
   },
   drinkImg: {
     width: "100%",

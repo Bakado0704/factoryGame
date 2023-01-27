@@ -83,7 +83,7 @@ const Target = ({
   //ターゲットを押すのが早すぎた
   useEffect(() => {
     if (gap.some((value) => value >= 20)) {
-      // damageHandler(100);
+      damageHandler(100);
       setGap([]);
       setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
@@ -95,7 +95,7 @@ const Target = ({
   //ターゲットを押すのが遅すぎた
   useEffect(() => {
     if (translateX.some((value) => value <= -failureGap)) {
-      // damageHandler(100);
+      damageHandler(100);
       setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
       // console.log("ターゲットを押すのが遅すぎた");
@@ -109,7 +109,7 @@ const Target = ({
       laps.length > playpattern.distance.length &&
       playState.judge !== "success"
     ) {
-      // damageHandler(100);
+      damageHandler(100);
       setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
       // console.log("lapsの数がdistanceの数を超えても失敗");

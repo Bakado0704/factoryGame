@@ -5,6 +5,7 @@ import BackgroundImg from "./BackgroundImg";
 import Product from "./Product";
 import Conveyor from "./Conveyor";
 import { RootState } from "../../store/store";
+import { page } from "../../types/page";
 
 export interface Props {
   children: React.ReactNode;
@@ -48,8 +49,8 @@ const ImageBg = ({ children }: Props) => {
 
   return (
     <BackgroundImg type={activeType}>
-      <Conveyor type={activeType} />
-      <Product
+      {user.page !== page.jobChange && <Conveyor type={activeType} />}
+      {user.page !== page.jobChange && <Product
         playState={playState}
         activeProductLength={activeProductLength}
         proccessCount={proccessCount}
@@ -66,7 +67,7 @@ const ImageBg = ({ children }: Props) => {
         bonusProducts={bonusProducts}
         defaultFailureProduct={defaultFailureProduct}
         bonusFailureProduct={bonusFailureProduct}
-      />
+      />}
       {children}
     </BackgroundImg>
   );

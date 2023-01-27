@@ -5,12 +5,14 @@ import {
   Image,
   ImageBackground,
   Animated,
+  Dimensions,
 } from "react-native";
 import React, { useRef } from "react";
 import ImageButton from "../components/button/ImageButton";
 import { Outline } from "../types/outline";
 import FaceIcon from "../components/face/FaceIcon";
 import { JobType } from "../types/job";
+const { width } = Dimensions.get("window");
 
 type Props = {
   offModal: () => void;
@@ -42,7 +44,7 @@ const JobModal = ({ offModal, jobDecide, outline, owner, icon }: Props) => {
 
   const iconY = iconAnim.interpolate({
     inputRange: [0, 100, 101, 200],
-    outputRange: [-2, -2, 0, 0],
+    outputRange: [-width * 0.005, -width * 0.005, 0, 0],
   });
 
   Animated.loop(
@@ -71,13 +73,13 @@ const JobModal = ({ offModal, jobDecide, outline, owner, icon }: Props) => {
                     { transform: [{ translateY: iconY }] },
                   ]}
                 >
-                  <FaceIcon type={iconType} width={56} height={56} />
+                  <FaceIcon type={iconType} width={width * 0.149} height={width * 0.149} />
                 </Animated.View>
                 <View style={styles.textContainer}>
                   <Text
                     style={[
                       styles.text,
-                      { fontSize: 12, color: "white", marginTop: -8 },
+                      { fontSize: width * 0.032, color: "white", marginTop: -width * 0.021 },
                     ]}
                   >
                     社長: {ownerName}
@@ -87,7 +89,7 @@ const JobModal = ({ offModal, jobDecide, outline, owner, icon }: Props) => {
                   <Text
                     style={[
                       styles.text,
-                      { fontSize: 15, color: "white", marginTop: -10 },
+                      { fontSize: width * 0.04, color: "white", marginTop: -width * 0.027 },
                     ]}
                   >
                     {ownerMessage}
@@ -95,55 +97,55 @@ const JobModal = ({ offModal, jobDecide, outline, owner, icon }: Props) => {
                 </View>
               </ImageBackground>
             </View>
-            <Text style={[styles.text, { fontSize: 15, marginTop: 10 }]}>
+            <Text style={[styles.text, { fontSize: width * 0.04, marginTop: width * 0.027 }]}>
               ～募集要項～
             </Text>
             <View style={styles.textContainer}>
-              <Text style={[styles.text, { fontSize: 15 }]}>会社名:</Text>
-              <Text style={[styles.text, { fontSize: 20 }]}> {company}</Text>
+              <Text style={[styles.text, { fontSize: width * 0.04 }]}>会社名:</Text>
+              <Text style={[styles.text, { fontSize: width * 0.053 }]}> {company}</Text>
             </View>
             <View style={styles.textContainer}>
-              <Text style={[styles.text, { fontSize: 15 }]}>区分:</Text>
-              <Text style={[styles.text, { fontSize: 20 }]}> {category}</Text>
+              <Text style={[styles.text, { fontSize: width * 0.04 }]}>区分:</Text>
+              <Text style={[styles.text, { fontSize: width * 0.053 }]}> {category}</Text>
             </View>
             <View style={styles.textContainer}>
-              <Text style={[styles.text, { fontSize: 15 }]}>作業内容:</Text>
-              <Text style={[styles.text, { fontSize: 20 }]}> {work}</Text>
+              <Text style={[styles.text, { fontSize: width * 0.04 }]}>作業内容:</Text>
+              <Text style={[styles.text, { fontSize: width * 0.053 }]}> {work}</Text>
             </View>
             <View style={styles.moneyContainer}>
-              <Text style={[styles.text, { fontSize: 15 }]}>基本給:</Text>
+              <Text style={[styles.text, { fontSize: width * 0.04 }]}>基本給:</Text>
               <Image
                 source={require("../assets/ui/money1.png")}
                 style={styles.moneyImg}
               />
-              <Text style={[styles.text, { fontSize: 20 }]}>{basicMoney}</Text>
+              <Text style={[styles.text, { fontSize: width * 0.053 }]}>{basicMoney}</Text>
             </View>
             <View style={styles.textContainer}>
-              <Text style={[styles.text, { fontSize: 15 }]}>熟練度:</Text>
-              <Text style={[styles.text, { fontSize: 20 }]}> Lv{level}</Text>
+              <Text style={[styles.text, { fontSize: width * 0.04 }]}>熟練度:</Text>
+              <Text style={[styles.text, { fontSize: width * 0.053 }]}> Lv{level}</Text>
             </View>
             <View style={styles.textContainer}>
-              <Text style={[styles.text, { fontSize: 15 }]}>休日:</Text>
-              <Text style={[styles.text, { fontSize: 20 }]}> {holiday}</Text>
+              <Text style={[styles.text, { fontSize: width * 0.04 }]}>休日:</Text>
+              <Text style={[styles.text, { fontSize: width * 0.053 }]}> {holiday}</Text>
             </View>
             <View style={styles.textContainer}>
-              <Text style={[styles.text, { fontSize: 15 }]}>
+              <Text style={[styles.text, { fontSize: width * 0.04 }]}>
                 3年以内離職率:
               </Text>
-              <Text style={[styles.text, { fontSize: 20 }]}> {retirement}</Text>
+              <Text style={[styles.text, { fontSize: width * 0.053 }]}> {retirement}</Text>
             </View>
             <View style={styles.textContainer}>
-              <Text style={[styles.text, { fontSize: 15 }]}>勤務地:</Text>
-              <Text style={[styles.text, { fontSize: 20 }]}> {workplace}</Text>
+              <Text style={[styles.text, { fontSize: width * 0.04 }]}>勤務地:</Text>
+              <Text style={[styles.text, { fontSize: width * 0.053 }]}> {workplace}</Text>
             </View>
             <View style={styles.ButtonContainer}>
               <ImageButton
                source={button}
                onPress={jobDecide}
-                width={290}
-                height={53}
-                diffWidth={10}
-                diffHeight={1.8}
+                width={width * 0.773}
+                height={width * 0.141}
+                diffWidth={width * 0.027}
+                diffHeight={width * 0.005}
                 padding={0}
               />
             </View>
@@ -152,11 +154,11 @@ const JobModal = ({ offModal, jobDecide, outline, owner, icon }: Props) => {
             <ImageButton
               source={require("../assets/ui/closeButton.png")}
               onPress={offModal}
-              width={55}
-              height={55}
-              diffWidth={5}
-              diffHeight={5}
-              padding={5}
+              width={width * 0.147}
+              height={width * 0.147}
+              diffWidth={width * 0.013}
+              diffHeight={width * 0.013}
+              padding={width * 0.013}
             />
           </View>
         </View>
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
   rootScreen: {
     height: "100%",
     width: "100%",
-    paddingHorizontal: 30,
+    paddingHorizontal: width * 0.08,
     justifyContent: "center",
     position: "absolute",
     alignItems: "center",
@@ -194,23 +196,23 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     overflow: "hidden",
-    borderRadius: 20,
+    borderRadius: width * 0.053,
     backgroundColor: "white",
   },
   imageContainer: {
     width: "100%",
-    height: 124,
+    height: width * 0.331,
     alignItems: "center",
   },
   iconContainer: {
     width: "100%",
-    marginTop: 18,
+    marginTop: width * 0.048,
     alignItems: "center",
     justifyContent: "center",
   },
   icon: {
-    width: 56,
-    height: 56,
+    width: width * 0.149,
+    height: width * 0.149,
   },
   ImageBackground: {
     width: "100%",
@@ -219,22 +221,22 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     position: "absolute",
-    width: 55,
-    height: 55,
+    width: width * 0.147,
+    height: width * 0.147,
     top: 0,
     right: 0,
-    transform: [{ translateX: 15 }, { translateY: -25 }],
-    elevation: 10,
+    transform: [{ translateX: width * 0.04 }, { translateY: -width * 0.067 }],
+    elevation: width * 0.027,
   },
   ButtonContainer: {
     width: "100%",
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: width * 0.027,
   },
   textContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 4,
+    marginVertical: width * 0.011,
   },
   text: {
     fontFamily: "MochiyPop",
@@ -242,11 +244,11 @@ const styles = StyleSheet.create({
   moneyContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 4,
+    marginVertical: width * 0.011,
   },
   moneyImg: {
-    width: 27,
-    height: 27,
-    marginLeft: 8,
+    width: width * 0.072,
+    height: width * 0.072,
+    marginLeft: width * 0.021,
   },
 });

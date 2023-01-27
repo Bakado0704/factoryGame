@@ -4,9 +4,9 @@ import {
   StyleSheet,
   SafeAreaView,
   Animated,
-  Easing,
+  Dimensions
 } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import ImageButton from "../components/button/ImageButton";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,6 +19,7 @@ import { RootState } from "../store/store";
 import { Job } from "../types/job";
 import { changeUserNowJob, userPage } from "../store/user";
 import { changeJob } from "../store/job";
+const { width } = Dimensions.get("window");
 
 function RankingScreen() {
   const Job = useSelector((state: RootState) => state.job.job);
@@ -89,11 +90,11 @@ function RankingScreen() {
             <ImageButton
               source={require("../assets/ui/returnButton.png")}
               onPress={returnHandler}
-              width={143}
-              height={52}
-              diffWidth={10}
-              diffHeight={3.6}
-              padding={5}
+              width={width * 0.381}
+              height={width * 0.139}
+              diffWidth={width * 0.027}
+              diffHeight={width * 0.01}
+              padding={width * 0.013}
             />
           </View>
         </View>
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
   },
   bgScreen: {
     flex: 1,
-    padding: 8,
+    padding: width * 0.013,
   },
   innerContainer: {
     flex: 1,

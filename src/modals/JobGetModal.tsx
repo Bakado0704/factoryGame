@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text, Dimensions } from "react-native";
 import React from "react";
 import ImageButton from "../components/button/ImageButton";
 import { Job } from "../types/job";
@@ -7,6 +7,7 @@ import Comment from "../components/modal/Comment";
 import Colors from "../constants/color";
 import { ShadowText } from "../components/text/ShadowText";
 import JobTitle from "../components/modal/JobTitle";
+const { width } = Dimensions.get("window");
 
 type Props = {
   offModal: () => void;
@@ -119,11 +120,11 @@ const JobGet = ({ offModal, job }: Props) => {
           </View>
           <View style={styles.resultDetailContainer}>
             <View style={[styles.resultBackground, {backgroundColor: borderColor}]} />
-            <ShadowText size={18} color="white">
+            <ShadowText size={width * 0.048} color="white">
               熟練度:
             </ShadowText>
             <View style={styles.textInnerContainer}>
-              <ShadowText size={18} color="white">
+              <ShadowText size={width * 0.048} color="white">
                 {" "}
                 Lv{prevLevel}
               </ShadowText>
@@ -134,7 +135,7 @@ const JobGet = ({ offModal, job }: Props) => {
                 />
               )}
               {isActive && (
-                <ShadowText size={18} color={Colors.textYellowColor}>
+                <ShadowText size={width * 0.048} color={Colors.textYellowColor}>
                   {" "}
                   Lv{level}
                 </ShadowText>
@@ -143,14 +144,14 @@ const JobGet = ({ offModal, job }: Props) => {
           </View>
           <View style={styles.resultDetailContainer}>
             <View style={[styles.resultBackground, {backgroundColor: borderColor}]} />
-            <ShadowText size={18} color="white">
+            <ShadowText size={width * 0.048} color="white">
               基本給:
             </ShadowText>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <ShadowText size={20} color="white">
+            <ShadowText size={width * 0.053} color="white">
               {prevPerMoney}
             </ShadowText>
             <View style={styles.textInnerContainer}>
@@ -167,7 +168,7 @@ const JobGet = ({ offModal, job }: Props) => {
                 />
               )}
               {isActive && (
-                <ShadowText size={20} color={Colors.textYellowColor}>
+                <ShadowText size={width * 0.053} color={Colors.textYellowColor}>
                   {perMoney}
                 </ShadowText>
               )}
@@ -183,11 +184,11 @@ const JobGet = ({ offModal, job }: Props) => {
         <ImageButton
             source={require("../assets/ui/okButton.png")}
             onPress={offModal}
-            width={322}
-            height={52}
-            diffWidth={10}
-            diffHeight={1.6}
-            padding={5}
+            width={width * 0.859}
+            height={width * 0.139}
+            diffWidth={width * 0.027}
+            diffHeight={width * 0.004}
+            padding={width * 0.013}
           />
         </View>
       </View>
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     position: "absolute",
-    padding: 20,
+    padding: width * 0.053,
     top: 0,
     left: 0,
   },
@@ -212,49 +213,49 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   youdead: {
-    fontSize: 22,
+    fontSize: width * 0.059,
     color: "white",
     fontFamily: "MochiyPop",
   },
   gameover: {
-    fontSize: 15,
+    fontSize: width * 0.04,
     color: "white",
     fontFamily: "MochiyPop",
   },
   innerContainer: {
     alignItems: "center",
     width: "100%",
-    marginTop: 20,
-    padding: 10,
-    paddingTop: 15,
-    paddingBottom: 35,
-    borderWidth: 3,
+    marginTop: width * 0.053,
+    padding: width * 0.027,
+    paddingTop: width * 0.04,
+    paddingBottom: width * 0.093,
+    borderWidth: width * 0.008,
   },
   textContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 4,
+    marginVertical: width * 0.011,
   },
   textInnerContainer: {
     flexDirection: "row",
     alignItems: "center",
   },
   imageContainer: {
-    width: 300,
-    height: 120,
-    marginVertical: 10,
+    width: width * 0.8,
+    height: width * 0.32,
+    marginVertical: width * 0.027,
     overflow: "hidden",
-    borderWidth: 2,
+    borderWidth: width * 0.005,
   },
   moneyContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 4,
+    marginVertical: width * 0.011,
   },
   resultDetailContainer: {
     width: "100%",
-    height: 32,
-    marginVertical: 5,
+    height: width * 0.085,
+    marginVertical: width * 0.013,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -263,37 +264,37 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    borderRadius: 10,
+    borderRadius: width * 0.027,
     opacity: 0.5,
   },
   resultText: {
-    fontSize: 20,
+    fontSize: width * 0.053,
     fontFamily: "MochiyPop",
   },
   moneyImg: {
-    width: 24,
-    height: 24,
-    marginLeft: 8,
-    marginRight: 4,
+    width: width * 0.064,
+    height: width * 0.064,
+    marginLeft: width * 0.021,
+    marginRight: width * 0.011,
   },
   arrowImg: {
-    width: 14,
-    height: 14,
-    marginLeft: 8,
+    width: width * 0.037,
+    height: width * 0.037,
+    marginLeft: width * 0.021,
   },
   staminaImg: {
-    width: 90,
-    height: 30,
+    width: width * 0.24,
+    height: width * 0.08,
   },
   line: {
     width: "100%",
     borderBottomColor: "#eeeeee",
-    borderBottomWidth: 2,
-    marginVertical: 5,
+    borderBottomWidth: width * 0.005,
+    marginVertical: width * 0.013,
   },
   buttonContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -5,
+    marginTop: -width * 0.013,
   }
 });

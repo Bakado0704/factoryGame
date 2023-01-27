@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Animated, Easing } from "react-native";
+import { View, StyleSheet, Image, Animated, Easing, Dimensions } from "react-native";
 import React, { useEffect, useRef } from "react";
 import ImageButton from "../components/button/ImageButton";
 import { ShadowText } from "../components/text/ShadowText";
@@ -7,6 +7,7 @@ import BgBlack from "../components/background/BgBlack";
 import Stamina from "../components/game/Stamina";
 import NavDrink from "../components/nav/NavMiddle/NavDrink";
 import Title from "../components/modal/Title";
+const { width } = Dimensions.get("window");
 
 type Props = {
   drink: number;
@@ -63,7 +64,7 @@ const Setting = ({
   if (drink > 0) {
     attention = (
       <Animated.View style={{ opacity: TextOpacity }}>
-        <ShadowText size={12} color="white">
+        <ShadowText size={width * 0.032} color="white">
           注意:ゲーム開始時に毎回払います
         </ShadowText>
       </Animated.View>
@@ -84,7 +85,7 @@ const Setting = ({
             },
           ]}
         >
-          <Title title="集中力増強ドリンク" margintop={-40} />
+          <Title title="集中力増強ドリンク" margintop={-width * 0.107} />
           <NavDrink
             drink={drink}
             userDrinkHandler={userDrinkHandler}
@@ -100,14 +101,14 @@ const Setting = ({
                 { backgroundColor: Colors.modalEdgeColor },
               ]}
             />
-            <ShadowText size={27} color="white">
+            <ShadowText size={width * 0.072} color="white">
               費用:
             </ShadowText>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyCostImg}
             />
-            <ShadowText size={30} color={attentionColor}>
+            <ShadowText size={width * 0.08} color={attentionColor}>
               {drinkCost}
             </ShadowText>
           </View>
@@ -119,11 +120,11 @@ const Setting = ({
                 { backgroundColor: Colors.modalEdgeColor },
               ]}
             />
-            <ShadowText size={18} color="white">
+            <ShadowText size={width * 0.048} color="white">
               ゲージの速度:
             </ShadowText>
             <View style={styles.textInnerContainer}>
-              <ShadowText size={18} color="white">
+              <ShadowText size={width * 0.048} color="white">
                 {" "}
                 ×1.0
               </ShadowText>
@@ -131,7 +132,7 @@ const Setting = ({
                 source={require("../assets/ui/arrow.png")}
                 style={styles.arrowImg}
               />
-              <ShadowText size={18} color={Colors.textYellowColor}>
+              <ShadowText size={width * 0.048} color={Colors.textYellowColor}>
                 {" "}
                 ×{nextVelocity}
               </ShadowText>
@@ -145,14 +146,14 @@ const Setting = ({
                 { backgroundColor: Colors.modalEdgeColor },
               ]}
             />
-            <ShadowText size={18} color="white">
+            <ShadowText size={width * 0.048} color="white">
               基本給:
             </ShadowText>
             <Image
               source={require("../assets/ui/money1.png")}
               style={styles.moneyImg}
             />
-            <ShadowText size={20} color="white">
+            <ShadowText size={width * 0.053} color="white">
               {perMoney}
             </ShadowText>
             <View style={styles.textInnerContainer}>
@@ -164,7 +165,7 @@ const Setting = ({
                 source={require("../assets/ui/money1.png")}
                 style={styles.moneyImg}
               />
-              <ShadowText size={20} color={Colors.textYellowColor}>
+              <ShadowText size={width * 0.053} color={Colors.textYellowColor}>
                 {nextBasicmoney}
               </ShadowText>
             </View>
@@ -177,11 +178,11 @@ const Setting = ({
                 { backgroundColor: Colors.modalEdgeColor },
               ]}
             />
-            <ShadowText size={18} color="white">
+            <ShadowText size={width * 0.048} color="white">
               メンタル:
             </ShadowText>
             <Stamina drink={drink} />
-            <ShadowText size={20} color="white">
+            <ShadowText size={width * 0.053} color="white">
               300
             </ShadowText>
             <View style={styles.textInnerContainer}>
@@ -189,7 +190,7 @@ const Setting = ({
                 source={require("../assets/ui/arrow.png")}
                 style={styles.arrowImg}
               />
-              <ShadowText size={20} color={Colors.textYellowColor}>
+              <ShadowText size={width * 0.053} color={Colors.textYellowColor}>
                 {" "}
                 {nextStamina}
               </ShadowText>
@@ -200,11 +201,11 @@ const Setting = ({
           <ImageButton
             source={require("../assets/ui/okButton.png")}
             onPress={offSetting}
-            width={322}
-            height={52}
-            diffWidth={10}
-            diffHeight={1.6}
-            padding={5}
+            width={width * 0.859}
+            height={width * 0.139}
+            diffWidth={width * 0.027}
+            diffHeight={width * 0.004}
+            padding={width * .013}
           />
         </View>
       </View>
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     position: "absolute",
-    padding: 20,
+    padding: width * 0.053,
     top: 0,
     left: 0,
   },
@@ -228,24 +229,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.modalMainColor,
     width: "100%",
-    padding: 10,
-    paddingTop: 20,
-    paddingBottom: 10,
-    borderWidth: 3,
+    padding: width * 0.027,
+    paddingTop: width * 0.053,
+    paddingBottom: width * 0.027,
+    borderWidth: width * 0.008,
     borderColor: Colors.modalEdgeColor,
   },
   CostContainer: {
     width: "100%",
-    height: 48,
-    marginVertical: 5,
+    height: width * 0.128,
+    marginVertical: width * 0.013,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
   },
   detailContainer: {
     width: "100%",
-    height: 32,
-    marginVertical: 5,
+    height: width * 0.085,
+    marginVertical: width * 0.013,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -254,7 +255,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    borderRadius: 10,
+    borderRadius: width * 0.027,
     backgroundColor: Colors.modalEdgeColor,
     opacity: 0.5,
   },
@@ -263,28 +264,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   moneyCostImg: {
-    width: 36,
-    height: 36,
-    marginLeft: 8,
-    marginRight: 4,
+    width: width * 0.096,
+    height: width * 0.096,
+    marginLeft: width * 0.021,
+    marginRight: width * 0.011,
   },
   moneyImg: {
-    width: 24,
-    height: 24,
-    marginLeft: 8,
-    marginRight: 4,
+    width: width * 0.064,
+    height: width * 0.064,
+    marginLeft: width * 0.021,
+    marginRight: width * 0.011,
   },
   arrowImg: {
-    width: 14,
-    height: 14,
-    marginLeft: 8,
+    width: width * 0.037,
+    height: width * 0.037,
+    marginLeft: width * 0.021,
   },
   staminaImg: {
-    width: 90,
-    height: 30,
+    width: width * 0.24,
+    height: width * 0.08,
   },
   buttonContainer: {
-    marginTop: 20,
+    marginTop: width * 0.053,
     justifyContent: "center",
     alignItems: "center",
   }

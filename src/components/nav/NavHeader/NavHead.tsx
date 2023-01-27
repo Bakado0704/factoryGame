@@ -1,4 +1,4 @@
-import { View, StyleSheet, Animated, Pressable } from "react-native";
+import { View, StyleSheet, Animated, Pressable, Dimensions } from "react-native";
 import UserMoney from "../../money/UserMoney";
 import ImageButton from "../../button/ImageButton";
 import { UserIconType } from "../../../types/userIcons";
@@ -6,6 +6,7 @@ import UserIcon from "../../face/UserIcon";
 import { useRef } from "react";
 import { page } from "../../../types/page";
 import User from "../../../models/user";
+const { width } = Dimensions.get("window");
 
 type Props = {
   icon: UserIconType;
@@ -20,7 +21,7 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
 
   const iconY = iconAnim.interpolate({
     inputRange: [0, 100, 101, 200],
-    outputRange: [-1, -1, 0, 0],
+    outputRange: [-width * 0.002, -width * 0.002, 0, 0],
   });
 
   Animated.loop(
@@ -34,12 +35,12 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
   const ButtonAnim = useRef(new Animated.Value(0)).current;
   const ButtonWidth = ButtonAnim.interpolate({
     inputRange: [0, 100],
-    outputRange: [50, 45],
+    outputRange: [width * 0.133, width * 0.12],
   });
 
   const ButtonHeight = ButtonAnim.interpolate({
     inputRange: [0, 100],
-    outputRange: [50, 45],
+    outputRange: [width * 0.133, width * 0.12],
   });
 
   const pressInHandler = () => {
@@ -64,16 +65,16 @@ const NavHead = ({ icon, userMoney, onUserModal, gachaMove, user }: Props) => {
               <ImageButton
                 source={require("../../../assets/ui/gachaButton.png")}
                 onPress={gachaMove}
-                width={47}
-                height={47}
-                diffWidth={5}
-                diffHeight={5}
+                width={width * 0.125}
+                height={width * 0.125}
+                diffWidth={width * 0.013}
+                diffHeight={width * 0.013}
                 padding={0}
               />
             )}
             <Animated.View
               style={{
-                marginLeft: 4,
+                marginLeft: width * 0.011,
                 transform: [{ translateY: iconY }],
               }}
             >
@@ -113,8 +114,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   iconContainer: {
-    width: 50,
-    height: 50,
+    width: width * 0.133,
+    height: width * 0.133,
     justifyContent: "center",
     alignItems: "center",
   },

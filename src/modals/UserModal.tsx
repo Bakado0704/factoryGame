@@ -7,6 +7,7 @@ import {
   TextInput,
   Text,
   Image,
+  Dimensions,
 } from "react-native";
 import React from "react";
 import ImageButton from "../components/button/ImageButton";
@@ -16,6 +17,7 @@ import BgBlack from "../components/background/BgBlack";
 import Colors from "../constants/color";
 import Title from "../components/modal/Title";
 import { Mute } from "../types/user";
+const { width } = Dimensions.get("window");
 
 type Props = {
   offUserModal: () => void;
@@ -73,7 +75,7 @@ const userModal = ({
       <View style={styles.iconContainer}>
         <Pressable onPress={pressHandler} style={styles.iconContainer}>
           <ImageBackground source={source} style={styles.iconBackground}>
-            <UserIcon icon={itemData.item.icon} width={54} height={54} />
+            <UserIcon icon={itemData.item.icon} width={width * 0.144} height={width * 0.144} />
           </ImageBackground>
         </Pressable>
       </View>
@@ -85,12 +87,12 @@ const userModal = ({
       <BgBlack />
       <View style={styles.rootScreen}>
         <View style={styles.innerContainer}>
-          <Title title="各種設定" margintop={-20} />
+          <Title title="各種設定" margintop={-width * 0.053} />
           <View style={styles.userContainer}>
             <View style={styles.userIcon}>
               <View style={styles.userIconBackground} />
-              <View style={{ padding: 5 }}>
-                <UserIcon icon={previewIcon.icon} width={60} height={60} />
+              <View style={{ padding: width * 0.013 }}>
+                <UserIcon icon={previewIcon.icon} width={width * 0.16} height={width * 0.16} />
               </View>
             </View>
             <View style={styles.textContainer}>
@@ -101,7 +103,7 @@ const userModal = ({
                 placeholderTextColor="#9fa0a0"
                 onChangeText={nameInputHandler}
                 value={userName}
-                maxLength={13}
+                maxLength={width * 0.035}
               />
               <Image
                 source={require("../assets/ui/pen.png")}
@@ -133,11 +135,11 @@ const userModal = ({
             <ImageButton
               source={soundSource}
               onPress={soundChange}
-              width={64}
-              height={24}
-              diffWidth={5}
-              diffHeight={1.9}
-              padding={8}
+              width={width * 0.171}
+              height={width * 0.065}
+              diffWidth={width * 0.013}
+              diffHeight={width * 0.005}
+              padding={width * 0.021}
             />
           </View>
         </View>
@@ -145,11 +147,11 @@ const userModal = ({
           <ImageButton
             source={require("../assets/ui/okButton.png")}
             onPress={offUserModal}
-            width={322}
-            height={52}
-            diffWidth={10}
-            diffHeight={1.6}
-            padding={5}
+            width={width * 0.859}
+            height={width * 0.139}
+            diffWidth={width * 0.027}
+            diffHeight={width * 0.004}
+            padding={width * 0.013}
           />
         </View>
       </View>
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     position: "absolute",
-    padding: 20,
+    padding: width * 0.053,
     top: 0,
     left: 0,
   },
@@ -173,87 +175,87 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.modalMainColor,
     width: "100%",
-    paddingHorizontal: 10,
-    paddingBottom: 20,
-    borderWidth: 3,
+    paddingHorizontal: width * 0.027,
+    paddingBottom: width * 0.053,
+    borderWidth: width * 0.008,
     borderColor: Colors.modalEdgeColor,
   },
   userContainer: {
     width: "100%",
-    paddingHorizontal: 5,
-    marginTop: 10,
-    marginBottom: 10,
+    paddingHorizontal: width * 0.013,
+    marginTop: width * 0.027,
+    marginBottom: width * 0.027,
     justifyContent: "space-between",
     alignItems: "flex-start",
     flexDirection: "row",
   },
   textContainer: {
-    width: 210,
+    width: width * 0.56,
     position: "relative",
-    paddingLeft: 5,
+    paddingLeft: width * 0.013,
   },
   textBackground: {
     position: "absolute",
     backgroundColor: Colors.modalEdgeColor,
     opacity: 0.5,
-    width: 210,
+    width: width * 0.56,
     top: 0,
-    height: 25,
-    borderRadius: 2,
+    height: width * 0.067,
+    borderRadius: width * 0.005,
   },
   textInput: {
-    fontSize: 15,
+    fontSize: width * 0.04,
     fontFamily: "MochiyPop",
     color: "white",
   },
   pen: {
     position: "absolute",
-    width: 14,
-    height: 16,
-    top: 4,
-    right: 5,
+    width: width * 0.037,
+    height: width * 0.043,
+    top: width * 0.011,
+    right: width * 0.007,
   },
   textId: {
-    fontSize: 10,
+    fontSize: width * 0.027,
     fontFamily: "MochiyPop",
     color: "white",
-    marginTop: 5,
+    marginTop: width * 0.013,
   },
   container: {
-    height: 270,
+    height: width * 0.72,
     width: "100%",
-    padding: 5,
+    padding: width * 0.013,
     justifyContent: "center",
     alignItems: "center",
   },
   containerBackground: {
     height: "100%",
     width: "100%",
-    padding: 5,
+    padding: width * 0.013,
     position: "absolute",
     backgroundColor: Colors.modalEdgeColor,
     opacity: 0.5,
-    borderRadius: 2,
+    borderRadius: width * 0.005,
   },
   userIcon: {
     position: "relative",
     borderColor: Colors.modalEdgeColor,
-    borderWidth: 3,
-    borderRadius: 5,
+    borderWidth: width * 0.008,
+    borderRadius: width * 0.013,
   },
   userIconBackground: {
     position: "absolute",
-    height: 70,
-    width: 70,
+    height: width * 0.187,
+    width: width * 0.187,
     backgroundColor: Colors.modalEdgeColor,
     opacity: 0.5,
   },
   iconContainer: {
     justifyContent: "center",
     alignItems: "center",
-    width: 66,
-    height: 66,
-    margin: 4,
+    width: width * 0.176,
+    height: width * 0.176,
+    margin: width * 0.011,
   },
   iconBackground: {
     justifyContent: "center",
@@ -263,9 +265,9 @@ const styles = StyleSheet.create({
   },
   soundContainer: {
     width: "100%",
-    marginTop: 10,
-    marginHorizontal: 5,
-    paddingHorizontal: 5,
+    marginTop: width * 0.027,
+    marginHorizontal: width * 0.013,
+    paddingHorizontal: width * 0.013,
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
@@ -273,24 +275,24 @@ const styles = StyleSheet.create({
   soundBackground: {
     height: "100%",
     width: "100%",
-    padding: 5,
-    left: 5,
+    padding: width * 0.013,
+    left: width * 0.013,
     position: "absolute",
     backgroundColor: Colors.modalEdgeColor,
     opacity: 0.5,
-    borderRadius: 2,
+    borderRadius: width * 0.005,
   },
   textSound: {
-    fontSize: 15,
+    fontSize: width * 0.04,
     fontFamily: "MochiyPop",
     color: "white",
-    paddingVertical: 8,
+    paddingVertical: width * 0.021,
   },
   sound: {
-    height: 16,
-    width: 19,
-    marginLeft: 8,
-    marginRight: 4,
+    height: width * 0.043,
+    width: width * 0.051,
+    marginLeft: width * 0.021,
+    marginRight: width * 0.011,
   },
   soundImg: {
     justifyContent: "center",
@@ -300,7 +302,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 20,
-    marginBottom: -5,
+    marginTop: width * 0.053,
+    marginBottom: -width * 0.013,
   },
 });

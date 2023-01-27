@@ -3,8 +3,7 @@ import {
   ImageBackground,
   StyleSheet,
   SafeAreaView,
-  Animated,
-  Easing,
+  Dimensions,
 } from "react-native";
 import React, { useState } from "react";
 import NavGacha from "../components/nav/NavFooter/NavGacha";
@@ -35,6 +34,7 @@ import {
   userPage,
 } from "../store/user";
 import { unlockJob, updateJob } from "../store/job";
+const { width } = Dimensions.get("window");
 
 function GachaScreen() {
   const user = useSelector((state: RootState) => state.user.user);
@@ -205,6 +205,6 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     justifyContent: "space-between",
-    padding: 8,
+    padding: width * 0.021,
   }
 });
