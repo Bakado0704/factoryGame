@@ -58,17 +58,37 @@ const Product = ({
 
   const shakeTranslateX = TargetAnim.interpolate({
     inputRange: [0, 10, 20, 30, 40, 50, 60, 70, 200],
-    outputRange: [0, 10, -10, 0, 5, -4, 0, 0, 0],
+    outputRange: [
+      0,
+      width * 0.027,
+      -width * 0.027,
+      0,
+      width * 0.013,
+      -width * 0.011,
+      0,
+      0,
+      0,
+    ],
   });
 
   const shakeTranslateY = TargetAnim.interpolate({
     inputRange: [0, 10, 20, 30, 40, 50, 60, 70, 200],
-    outputRange: [0, -6, 4, -4, 4, -6, -2, 0, 0],
+    outputRange: [
+      0,
+      -width * 0.016,
+      width * 0.011,
+      -width * 0.011,
+      width * 0.011,
+      -width * 0.016,
+      -width * 0.005,
+      0,
+      0,
+    ],
   });
 
   const successTranslateY = TargetAnim.interpolate({
     inputRange: [0, 10, 20, 30, 200],
-    outputRange: [0, 8, -8, 0, 0],
+    outputRange: [0, width * 0.021, -width * 0.021, 0, 0],
   });
 
   //アニメーション

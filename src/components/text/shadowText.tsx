@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/color";
 import { TextStroke } from "./TextStroke";
+const { width } = Dimensions.get("window");
 
 type Props = {
   size: number;
@@ -13,7 +14,7 @@ export const ShadowText = ({ children, size, color }: Props) => {
   return (
     <View style={styles.outerContainer}>
       <View style={styles.innerContainer}>
-        <TextStroke stroke={1} color={Colors.textMainColor}>
+        <TextStroke stroke={width * 0.002} color={Colors.textMainColor}>
           <Text
             style={{ fontSize: size, fontFamily: "MochiyPop", color: Colors.textMainColor }}
           >
@@ -21,7 +22,7 @@ export const ShadowText = ({ children, size, color }: Props) => {
           </Text>
         </TextStroke>
       </View>
-      <TextStroke stroke={1} color={Colors.textMainColor}>
+      <TextStroke stroke={width * 0.002} color={Colors.textMainColor}>
         <Text
           style={{ fontSize: size, fontFamily: "MochiyPop", color: color }}
         >
@@ -34,10 +35,10 @@ export const ShadowText = ({ children, size, color }: Props) => {
 
 const styles = StyleSheet.create({
   outerContainer: {
-    transform: [{ translateY: -1 }],
+    transform: [{ translateY: -width * 0.002 }],
   },
   innerContainer: {
     position: "absolute",
-    transform: [{ translateY: 2 }],
+    transform: [{ translateY: width * 0.005 }],
   },
 });

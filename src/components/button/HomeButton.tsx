@@ -2,9 +2,11 @@ import {
   StyleSheet,
   Image,
   Pressable,
+  Dimensions,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
+const { width } = Dimensions.get("window");
 
 type Props = {
   onPress: () => void;
@@ -37,7 +39,7 @@ const HomeButton = ({ onPress }: Props) => {
       onPressOut={pressOutHandler}
       style={styles.submitButton}
     >
-      <Image style={{ width: 66, height: 68 }} source={ImageSource} />
+      <Image style={{ width: width * 0.176, height: width * 0.181 }} source={ImageSource} />
     </Pressable>
   );
 };
@@ -46,8 +48,8 @@ export default HomeButton;
 
 const styles = StyleSheet.create({
   submitButton: {
-    width: 76,
-    height: 78,
+    width: width * 0.203,
+    height: width * 0.208,
     alignItems: "center",
     justifyContent: "center",
   }

@@ -1,6 +1,7 @@
-import { StyleSheet, Animated, Pressable, Image } from "react-native";
+import { StyleSheet, Animated, Pressable, Image, Dimensions } from "react-native";
 import { useRef, useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
+const { width } = Dimensions.get("window");
 
 type Props = {
   jobReturnHandler: () => void;
@@ -70,10 +71,10 @@ export default JobReturnButton;
 
 const styles = StyleSheet.create({
   jobReturnButtonContainer: {
-    width: 105,
-    height: 37,
-    paddinRight: 5,
-    paddingTop: 5,
+    width: width * 0.28,
+    height: width * 0.099,
+    paddingRight: width * 0.013,
+    paddingTop: width * 0.013,
   },
   jobReturnButton: {
     width: "100%",
@@ -81,8 +82,8 @@ const styles = StyleSheet.create({
   },
   jobReturnButtonActive: {
     position: "absolute",
-    top: 5,
-    right: 0,
+    top: width * 0.013,
+    right: width * 0.013,
     width: "100%",
     height: "100%",
   },

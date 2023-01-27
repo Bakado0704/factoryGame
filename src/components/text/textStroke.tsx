@@ -40,7 +40,7 @@ export class TextStroke extends React.Component<Props> {
   };
 
   render() {
-    const { color, stroke, children } = this.props;
+    const { color, stroke } = this.props;
     const strokeW = stroke;
     const top = this.createClones(0, -strokeW * 1.2, color);
     const topLeft = this.createClones(-strokeW, -strokeW, color);

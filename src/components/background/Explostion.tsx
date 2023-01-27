@@ -275,5 +275,5 @@ const styles = StyleSheet.create({
     bottom: "26%",
     alignItems: "center",
     justifyContent: "center",
-  },
+  }
 });

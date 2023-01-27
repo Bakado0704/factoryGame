@@ -1,6 +1,7 @@
-import { StyleSheet, Animated, Pressable, Image } from "react-native";
+import { StyleSheet, Animated, Pressable, Image, Dimensions } from "react-native";
 import { useRef, useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
+const { width } = Dimensions.get("window");
 
 type Props = {
   jobAddHandler: () => void;
@@ -72,10 +73,10 @@ export default JobAddButton;
 
 const styles = StyleSheet.create({
   jobAddButtonContainer: {
-    width: 105,
-    height: 37,
-    paddingLeft: 5,
-    paddingTop: 5,
+    width: width * 0.28,
+    height: width * 0.099,
+    paddingLeft: width * 0.013,
+    paddingTop: width * 0.013,
   },
   jobAddButton: {
     width: "100%",
@@ -83,8 +84,8 @@ const styles = StyleSheet.create({
   },
   jobAddButtonActive: {
     position: "absolute",
-    top: 5,
-    left: 5,
+    top: width * 0.013,
+    left: width * 0.013,
     width: "100%",
     height: "100%",
   }

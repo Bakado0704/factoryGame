@@ -1,6 +1,7 @@
-import { View, StyleSheet, Image, Animated } from "react-native";
+import { View, StyleSheet, Image, Animated, Dimensions } from "react-native";
 import React, { useRef, useEffect } from "react";
 import StartButtons from "../../button/StartButtons";
+const { width } = Dimensions.get("window");
 
 type Props = {
   onSetting: () => void;
@@ -46,11 +47,11 @@ const styles = StyleSheet.create({
     flex: 4,
     justifyContent: "flex-end",
     alignItems: "center",
-    transform: [{ translateY: -5 }],
+    transform: [{ translateY: -width * 0.013 }],
   },
   operationBoard: {
-    width: 360,
-    height: 102,
+    width: width * 0.96,
+    height: width * 0.272,
     position: "absolute",
   }
 });

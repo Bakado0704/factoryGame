@@ -1,6 +1,7 @@
-import { StyleSheet, Animated, Pressable, Image } from "react-native";
+import { StyleSheet, Animated, Pressable, Image, Dimensions } from "react-native";
 import { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
+const { width } = Dimensions.get("window");
 
 type Props = {
   rankingPressHandler: () => void;
@@ -69,17 +70,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   prevButton: {
-    width: 25,
-    height: 70,
+    width: width * 0.067,
+    height: width * 0.187,
   },
   nextButton: {
-    width: 25,
-    height: 70,
+    width: width * 0.067,
+    height: width * 0.187,
   },
   rankingButtonContainer: {
-    width: 41,
-    height: 45,
-    padding: 5,
+    width: width * 0.109,
+    height: width * 0.12,
+    padding: width * 0.013,
     alignItems: "flex-start",
   },
   rankingButton: {
@@ -88,12 +89,9 @@ const styles = StyleSheet.create({
   },
   rankingButtonActive: {
     position: "absolute",
-    top: 5,
-    left: 5,
+    top: width * 0.013,
+    left: width * 0.013,
     width: "100%",
     height: "100%",
-  },
-  pressed: {
-    opacity: 0.75,
-  },
+  }
 });

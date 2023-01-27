@@ -4,9 +4,11 @@ import {
   Image,
   Pressable,
   ImageSourcePropType,
+  Dimensions,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
+const { width } = Dimensions.get("window");
 
 type Props = {
   onPress: () => void;
@@ -14,8 +16,8 @@ type Props = {
   ImageOff: ImageSourcePropType;
   ImageOn: ImageSourcePropType;
   ImagePressed: ImageSourcePropType;
-  width: number;
-  height: number;
+  buttonWidth: number;
+  buttonHeight: number;
 };
 
 const OperationButton = ({
@@ -24,8 +26,8 @@ const OperationButton = ({
   ImageOff,
   ImageOn,
   ImagePressed,
-  width,
-  height,
+  buttonWidth,
+  buttonHeight,
 }: Props) => {
   const ButtonImage = ButtonsAnim.interpolate({
     inputRange: [0, 100, 101, 200],
@@ -52,7 +54,7 @@ const OperationButton = ({
 
   return (
     <Pressable
-      style={{ width: width, height: height, padding: 5 }}
+      style={{ width: buttonWidth, height: buttonHeight, padding: width * 0.013 }}
       onPress={onPress}
       onPressIn={pressInHandler}
       onPressOut={pressOutHandler}
@@ -70,8 +72,8 @@ export default OperationButton;
 const styles = StyleSheet.create({
   buttonActive: {
     position: "absolute",
-    top: 5,
-    left: 5,
+    top: width * 0.013,
+    left: width * 0.013,
     width: "100%",
     height: "100%",
   },

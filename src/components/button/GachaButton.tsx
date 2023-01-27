@@ -6,9 +6,11 @@ import {
   Text,
   Animated,
   Easing,
+  Dimensions,
 } from "react-native";
 import React, { useEffect, useRef } from "react";
 import { useIsFocused } from "@react-navigation/native";
+const { width } = Dimensions.get("window");
 
 type Props = {
   onModal: () => void;
@@ -50,11 +52,11 @@ const GachaButton = ({ onModal, gachaCost }: Props) => {
     >
       <Animated.View>
         <Image
-          style={{ width: 210, height: 99 }}
+          style={{ width: width * 0.56, height: width * 0.264 }}
           source={require("../../assets/ui/submitButtonPressed.png")}
         />
         <View
-          style={[styles.gachaContainer, { transform: [{ translateY: 15 }] }]}
+          style={[styles.gachaContainer, { transform: [{ translateY: width * 0.04 }] }]}
         >
           <Image
             style={styles.moneyImg}
@@ -69,11 +71,11 @@ const GachaButton = ({ onModal, gachaCost }: Props) => {
         style={{ position: "absolute", opacity: ButtonOpacity }}
       >
         <Image
-          style={{ width: 210, height: 99 }}
+          style={{ width: width * 0.56, height: width * 0.264 }}
           source={require("../../assets/ui/submitButton.png")}
         />
         <View
-          style={[styles.gachaContainer, { transform: [{ translateY: 11 }] }]}
+          style={[styles.gachaContainer, { transform: [{ translateY: width * 0.029 }] }]}
         >
           <Image
             style={styles.moneyImg}
@@ -93,26 +95,26 @@ export default GachaButton;
 const styles = StyleSheet.create({
   gachaContainer: {
     position: "absolute",
-    width: 210,
-    height: 99,
+    width: width * 0.56,
+    height: width * 0.264,
     bottom: 0,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
   },
   submitButton: {
-    width: 220,
-    height: 109,
+    width: width * 0.587,
+    height: width * 0.291,
     alignItems: "center",
     justifyContent: "center",
   },
   moneyImg: {
-    width: 35,
-    height: 35,
-    marginRight: 10,
+    width: width * 0.093,
+    height: width * 0.093,
+    marginRight: width * 0.027,
   },
   gachaCost: {
-    fontSize: 20,
+    fontSize: width * 0.053,
     fontFamily: "MochiyPop",
     color: "white",
   },

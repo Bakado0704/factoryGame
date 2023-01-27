@@ -2,6 +2,7 @@ import {
   StyleSheet,
   Image,
   Animated,
+  Dimensions,
 } from "react-native";
 import React, { useEffect, useRef } from "react";
 import { judgeStatus, Play } from "../../types/play";
@@ -10,73 +11,74 @@ export type Props = {
   playState: Play;
   jobType: JobType;
 };
+const { width } = Dimensions.get("window");
 
 const Light = ({
   playState, jobType
 }: Props) => {
   let light = require("../../assets/product/productLightPlate.png");
-  let lightWidth = 200;
-  let lightHeight = 519;
+  let lightWidth = width * 0.533;
+  let lightHeight = width * 1.384;
 
   switch (jobType) {
     case "山川製作所": {
       light = require("../../assets/product/productLightPlate.png");
-      lightWidth = 200;
-      lightHeight = 519;
+      lightWidth = width * 0.533;
+      lightHeight = width * 1.384;
       break;
     }
     case "蒼月": {
       light = require("../../assets/product/productLightBox.png");
-      lightWidth = 204;
-      lightHeight = 640;
+      lightWidth = width * 0.544;
+      lightHeight = width * 1.71;
       break;
     }
     case "アッシュベリーInc": {
       light = require("../../assets/product/productLightPlate.png");
-      lightWidth = 200;
-      lightHeight = 519;
+      lightWidth = width * 0.533;
+      lightHeight = width * 1.384;
       break;
     }
     case "オリジン弁太郎": {
       light = require("../../assets/product/productLightBento.png");
-      lightWidth = 202;
-      lightHeight = 530;
+      lightWidth = width * 0.538;
+      lightHeight = width * 1.413;
       break;
     }
     case "アグロン精密": {
       light = require("../../assets/product/productLightPlate.png");
-      lightWidth = 200;
-      lightHeight = 519;
+      lightWidth = width * 0.533;
+      lightHeight = width * 1.384;
       break;
     }
     case "スターフーズ": {
       light = require("../../assets/product/productLightCake.png");
-      lightWidth = 201;
-      lightHeight = 736;
+      lightWidth = width * 0.536;
+      lightHeight = width * 1.963;
       break;
     }
     case "鹿賀水産": {
       light = require("../../assets/product/productLightFish.png");
-      lightWidth = 212;
-      lightHeight = 550;
+      lightWidth = width * 0.565;
+      lightHeight = width * 1.467;
       break;
     }
     case "玉津アーセナル": {
       light = require("../../assets/product/productLightRobot.png");
-      lightWidth = 120;
-      lightHeight = 603;
+      lightWidth = width * 0.32;
+      lightHeight = width * 1.608;
       break;
     }
     case "小篠建設": {
       light = require("../../assets/product/productLightMetal.png");
-      lightWidth = 301;
-      lightHeight = 491;
+      lightWidth = width * 0.803;
+      lightHeight = width * 1.309;
       break;
     }
     case "タナベ建設": {
       light = require("../../assets/product/productLightWood.png");
-      lightWidth = 231;
-      lightHeight = 481;
+      lightWidth = width * 0.616;
+      lightHeight = width * 1.283;
       break;
     }
   }
