@@ -1,12 +1,28 @@
 import { StyleSheet, Image, View } from "react-native";
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { JobType } from "../../types/job";
+import User from "../../models/user";
+import { page } from "../../types/page";
 
 type Props = {
   type: JobType;
+  user: User;
 };
 
-const Conveyor = ({ type }: Props) => {
+const Conveyor = ({ type, user }: Props) => {
+  const [opacity, setOpacity] = useState(1);
+  useEffect(() => {
+    if (user.page === page.jobChange) {
+      setOpacity(0);
+    }
+  }, [user.page === page.jobChange]);
+
+  useEffect(() => {
+    if (user.page !== page.jobChange) {
+      setOpacity(1);
+    }
+  }, [user.page !== page.jobChange]);
+
   let conveyor = require("../../assets/conveyor/cvYamagawa.png");
 
   switch (type) {
@@ -52,7 +68,7 @@ const Conveyor = ({ type }: Props) => {
     }
   }
 
-  return <Image source={conveyor} style={styles.conveyor} />;
+  return <Image source={conveyor} style={[styles.conveyor, {opacity: opacity}]} />;
 };
 
 export default Conveyor;

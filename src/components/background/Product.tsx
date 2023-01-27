@@ -5,7 +5,7 @@ import {
   View,
   ImageSourcePropType,
 } from "react-native";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { judgeStatus, Play, PlayPattern } from "../../types/play";
 import ConveyorLine from "./ConveyorLine";
 import Light from "./Light";
@@ -13,6 +13,8 @@ import { JobType } from "../../types/job";
 import Explosion from "./Explostion";
 import Star from "./Star";
 import { productType } from "../../types/product";
+import User from "../../models/user";
+import { page } from "../../types/page";
 export type Props = {
   playState: Play;
   activeProductLength: number;
@@ -24,6 +26,7 @@ export type Props = {
   height: number;
   productNumber: number;
   jobType: JobType;
+  user: User;
   prevProductType: productType;
   nextProductType: productType;
   defaultProducts: { before: ImageSourcePropType }[];
@@ -39,6 +42,7 @@ const Product = ({
   activeProductLength,
   width,
   height,
+  user,
   productNumber,
   jobType,
   prevProductType,
@@ -50,6 +54,19 @@ const Product = ({
 }: Props) => {
   //画像を動かす
   let TargetAnim = useRef(new Animated.Value(0)).current;
+
+  const [opacity, setOpacity] = useState(1);
+  useEffect(() => {
+    if (user.page === page.jobChange) {
+      setOpacity(0);
+    }
+  }, [user.page === page.jobChange]);
+
+  useEffect(() => {
+    if (user.page !== page.jobChange) {
+      setOpacity(1);
+    }
+  }, [user.page !== page.jobChange]);
 
   const targetTranslateX = TargetAnim.interpolate({
     inputRange: [0, 120, 200],
@@ -265,7 +282,7 @@ const Product = ({
       <Animated.View
         style={[
           styles.productBox,
-          { transform: [{ translateX: targetTranslateX }] },
+          { transform: [{ translateX: targetTranslateX }], opacity: opacity },
         ]}
       >
         <ConveyorLine width={width} height={height} />

@@ -1,5 +1,5 @@
-import { Dimensions } from "react-native";
-import React from "react";
+import { Dimensions, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import BackgroundImg from "./BackgroundImg";
 import Product from "./Product";
@@ -13,6 +13,7 @@ export interface Props {
 
 const ImageBg = ({ children }: Props) => {
   //useSelectorの宣言
+
   const job = useSelector((state: RootState) => state.job.job);
   const user = useSelector((state: RootState) => state.user.user);
   const playState = useSelector((state: RootState) => state.play.play);
@@ -47,10 +48,11 @@ const ImageBg = ({ children }: Props) => {
     ((activeProductLength - 1) * proccessCount) / allDistance.length
   );
 
+
   return (
     <BackgroundImg type={activeType}>
-      {user.page !== page.jobChange && <Conveyor type={activeType} />}
-      {user.page !== page.jobChange && <Product
+      <Conveyor type={activeType} user={user} />
+      <Product
         playState={playState}
         activeProductLength={activeProductLength}
         proccessCount={proccessCount}
@@ -67,7 +69,9 @@ const ImageBg = ({ children }: Props) => {
         bonusProducts={bonusProducts}
         defaultFailureProduct={defaultFailureProduct}
         bonusFailureProduct={bonusFailureProduct}
-      />}
+        user={user}
+      />
+
       {children}
     </BackgroundImg>
   );

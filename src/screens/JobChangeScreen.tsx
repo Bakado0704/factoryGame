@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   },
   headContainer: {
     flex: 1,
-    padding: 8,
+    padding: width * 0.013,
   },
   board: {
     position: "absolute",
