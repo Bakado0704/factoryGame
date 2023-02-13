@@ -291,7 +291,7 @@ const Product = ({
         <View style={styles.ImageContainer}>{BOTHSIDESPRODUCT}</View>
       </Animated.View>
       <Light playState={playState} jobType={jobType} />
-      <Explosion playState={playState} />
+      <Explosion playState={playState} user={user} />
     </>
   );
 };

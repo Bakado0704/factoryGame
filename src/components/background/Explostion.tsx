@@ -1,12 +1,14 @@
-import { StyleSheet, Animated, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, Image, Animated, Platform } from "react-native";
 import React, { useEffect, useRef } from "react";
 import { judgeStatus, Play } from "../../types/play";
+import User from "../../models/user";
 const { width } = Dimensions.get("window");
 export type Props = {
   playState: Play;
+  user: User;
 };
 
-const Explosion = ({ playState }: Props) => {
+const Explosion = ({ playState, user }: Props) => {
   let ExplosionAnim = useRef(new Animated.Value(0)).current;
 
   const exOpacity1 = ExplosionAnim.interpolate({
@@ -126,6 +128,16 @@ const Explosion = ({ playState }: Props) => {
     outputRange: [0, 0, 1, 0],
   });
 
+  let explosion;
+  if (user.gachaStatus === "closed" && Platform.OS === 'android') {
+    explosion = (
+      <Image
+        source={require("../../assets/ui/explosion.gif")}
+        style={[styles.explosion]}
+      />
+    );
+  }
+
   useEffect(() => {
     if (playState.judge === judgeStatus.failure) {
       Animated.timing(ExplosionAnim, {
@@ -136,7 +148,7 @@ const Explosion = ({ playState }: Props) => {
     }
   }, [playState.judge === judgeStatus.failure]);
 
-  //waitingの時元に戻す
+  // waitingの時元に戻す
   useEffect(() => {
     if (playState.judge === judgeStatus.waiting) {
       ExplosionAnim.setValue(0);
@@ -275,5 +287,5 @@ const styles = StyleSheet.create({
     bottom: "26%",
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
 });
