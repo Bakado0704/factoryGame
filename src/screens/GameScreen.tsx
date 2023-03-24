@@ -5,7 +5,7 @@ import {
   NavigationProp,
   ParamListBase,
 } from "@react-navigation/native";
-import Gameover from "../modals/GameoverModal";
+
 import BgBlack from "../components/background/BgBlack";
 import Game from "../libs/game";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +30,7 @@ import {
   userMoneyIncrease,
 } from "../store/user";
 import { changeJobMaxMoney, changeJobRecord } from "../store/job";
+import Gameover from "../modals/GameoverModal";
 
 const GameScreen = () => {
   const dispatch = useDispatch();

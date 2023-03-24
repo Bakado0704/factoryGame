@@ -34,7 +34,6 @@ import {
   userPage,
 } from "../store/user";
 import { unlockJob, updateJob } from "../store/job";
-import ExplosionTest from "../components/background/ExplostionTest";
 const { width } = Dimensions.get("window");
 
 function GachaScreen() {
