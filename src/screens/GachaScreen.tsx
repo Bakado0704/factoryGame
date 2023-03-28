@@ -205,6 +205,6 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     justifyContent: "space-between",
-    padding: width * 0.021,
+    padding: width * 0.013,
   }
 });
