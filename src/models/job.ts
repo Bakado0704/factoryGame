@@ -1,4 +1,4 @@
-import { JobProduct, Job as _Job, JobType } from "../types/job";
+import { JobProduct, Job as _Job, JobType, CommentType } from "../types/job";
 import { Outline } from "../types/outline";
 
 export default class job implements _Job {
@@ -18,6 +18,11 @@ export default class job implements _Job {
       name: string;
       message: string;
     },
+    public comments: {
+      poor: CommentType[];
+      average: CommentType[];
+      good: CommentType[];
+    },
     public outline: Outline,
 
   ) {
@@ -32,6 +37,7 @@ export default class job implements _Job {
     this.backgroundImg = backgroundImg;
     this.boardImg = boardImg;
     this.owner = owner;
+    this.comments = comments;
     this.outline = outline;
   }
 }

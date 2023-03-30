@@ -2,11 +2,11 @@ import { Animated, Dimensions, Image, StyleSheet, Text, View } from "react-nativ
 import React, { useRef } from "react";
 import FaceIcon from "../face/FaceIcon";
 import Colors from "../../constants/color";
-import { JobType } from "../../types/job";
+import { CommentType, JobType } from "../../types/job";
 const { width } = Dimensions.get("window");
 
 export interface Props {
-  comment: string;
+  comment: CommentType;
   name: string;
   iconType: JobType;
 }
@@ -14,7 +14,8 @@ export interface Props {
 const Comment = ({ comment, name, iconType }: Props) => {
   const iconAnim = useRef(new Animated.Value(0)).current;
 
-  const iconY = iconAnim.interpolate({
+  let iconY;
+  iconY = iconAnim.interpolate({
     inputRange: [0, 100, 101, 200],
     outputRange: [-width * 0.005, -width * 0.005, 0, 0],
   });
@@ -22,7 +23,7 @@ const Comment = ({ comment, name, iconType }: Props) => {
   Animated.loop(
     Animated.timing(iconAnim, {
       toValue: 200,
-      duration: 300,
+      duration: comment.duration,
       useNativeDriver: false,
     })
   ).start();
@@ -34,7 +35,7 @@ const Comment = ({ comment, name, iconType }: Props) => {
         style={styles.bubble}
       />
       <View style={styles.commentContainer}>
-        <Text style={styles.comment}>{comment}</Text>
+        <Text style={styles.comment}>{comment.comment}</Text>
       </View>
       <View style={styles.iconContaner}>
         <Animated.View

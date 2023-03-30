@@ -31,6 +31,11 @@ export interface Job {
     name: string;
     message: string;
   };
+  comments: {
+    poor: CommentType[];
+    average: CommentType[];
+    good: CommentType[];
+  }
   outline: Outline;
 }
 
@@ -48,4 +53,9 @@ export interface JobProduct {
     before: ImageSourcePropType;
   }[];
   style: { width: number; height: number };
+}
+
+export interface CommentType {
+  comment: string;
+  duration: number;
 }

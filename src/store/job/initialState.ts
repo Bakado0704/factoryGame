@@ -50,6 +50,11 @@ const initialState: state = {
         name: "山川 哲郎(62)",
         message: "「残業なき労働に価値なし」",
       },
+      {
+        poor: [{comment: "アドバイスのしようがない。", duration: 300}, {comment: "明日から来なくていいよ。", duration: 300}],
+        average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 150}],
+        good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
+      },
       new Outline(
         "山川製作所",
         "精密機械工場",
@@ -98,6 +103,11 @@ const initialState: state = {
       {
         name: "新盛 晋(50)",
         message: "「仕事は定時を過ぎてから本番」",
+      },
+      {
+        poor: [{comment: "面倒みきれん。", duration: 300}, {comment: "1から出直し!", duration: 300}],
+        average: [{comment: "服装だけは一人前。", duration: 300}, {comment: "少しは成長しているのね。", duration: 300}],
+        good: [{comment: "ワシの若いころを思い出した。", duration: 200}, {comment: "愛してるよ。", duration: 200}],
       },
       new Outline(
         "蒼月",
@@ -148,6 +158,11 @@ const initialState: state = {
       {
         name: "宮古 洋平(56)",
         message: "「有給なんて都市伝説」",
+      },
+      {
+        poor: [{comment: "キミ向いてないよ。", duration: 300}, {comment: "何やってるの!", duration: 150}],
+        average: [{comment: "居眠りしてたでしょ。", duration: 300}, {comment: "なんで休んでるの？", duration: 300}],
+        good: [{comment: "やるやん。", duration: 200}, {comment: "ナイス～。", duration: 200}],
       },
       new Outline(
         "アッシュベリー Inc.",
@@ -200,6 +215,11 @@ const initialState: state = {
         name: "辻 踏弥(48)",
         message: "「経費を建て替えるのはやる気がある証拠」",
       },
+      {
+        poor: [{comment: "諦めんなよ、お前!", duration: 100}, {comment: "反省はしろ!後悔はするな!", duration: 100}],
+        average: [{comment: "ピンチはチャンスだ!", duration: 100}, {comment: "苦しいか? 笑え!", duration: 100}],
+        good: [{comment: "今日からお前は!!一番だ!!!", duration: 50}, {comment: "崖っぷちありがとう!!最高だああ。", duration: 50}],
+      },
       new Outline(
         "オリジン弁太郎",
         "弁当工場",
@@ -249,6 +269,11 @@ const initialState: state = {
         name: "リー・ハオラン(54)",
         message: "「日本を侵略するアルヨ」",
       },
+      {
+        poor: [{comment: "やる気アルか?", duration: 300}, {comment: "なんたるたいまん。", duration: 300}],
+        average: [{comment: "技術が足りない、技術が。", duration: 300}, {comment: "今月の給料没収。", duration: 300}],
+        good: [{comment: "謝々。", duration: 150}, {comment: "Good Job!", duration: 200}],
+      },
       new Outline(
         "アグロン精密",
         "精密機械工場",
@@ -266,7 +291,7 @@ const initialState: state = {
       "c6",
       JobType.starFoods,
       JobType.starFoods,
-      false,
+      true,
       1,
       0,
       0,
@@ -299,6 +324,11 @@ const initialState: state = {
       {
         name: "竹内 ゲンノシン(47)",
         message: "「サービス残業は社会人の常識」",
+      },
+      {
+        poor: [{comment: "・・・。", duration: 300}, {comment: "本気でやってますか。", duration: 300}],
+        average: [{comment: "ギリギリ許します。", duration: 300}, {comment: "まだまだですね。", duration: 300}],
+        good: [{comment: "いい仕事でした。", duration: 300}, {comment: "次もよろしくお願いします。", duration: 300}],
       },
       new Outline(
         "スター・フーズ",
@@ -348,6 +378,11 @@ const initialState: state = {
       {
         name: "黒口 隆(51)",
         message: "「用事がないなら休むな当然だ」",
+      },
+      {
+        poor: [{comment: "集中しろ!", duration: 200}, {comment: "しっかりしろ!", duration: 200}],
+        average: [{comment: "おそいおそいおそい!", duration: 200}, {comment: "諦めんな!", duration: 200}],
+        good: [{comment: "もっと、もっとだあああ!", duration: 100}, {comment: "もっと熱くなれ!", duration: 100}],
       },
       new Outline(
         "鹿賀水産",
@@ -400,6 +435,11 @@ const initialState: state = {
         name: "山下 五郎(55)",
         message: "「無理を1週間続けたら、無理じゃなくなる」",
       },
+      {
+        poor: [{comment: "おは養分。", duration: 300}, {comment: "努力が足りない。", duration: 300}],
+        average: [{comment: "これで満足してないよな。", duration: 300}, {comment: "喜べ、今日は残業できるぞ。", duration: 200}],
+        good: [{comment: "契約延長!", duration: 150}, {comment: "エクセレント。", duration: 150}],
+      },
       new Outline(
         "玉津アーセナル",
         "精密機械工場",
@@ -417,7 +457,7 @@ const initialState: state = {
       "c9",
       JobType.ozasa,
       JobType.ozasa,
-      false,
+      true,
       1,
       0,
       0,
@@ -448,6 +488,11 @@ const initialState: state = {
       {
         name: "小篠 隆生(65)",
         message: "「ストレスで胃に穴をあけるのも給料のうち」",
+      },
+      {
+        poor: [{comment: "よゆうでクビ!", duration: 150}, {comment: "あーあって感じ。", duration: 300}],
+        average: [{comment: "テキパキこなせないもんかねえ。", duration: 200}, {comment: "時給5円上げてやろうか。", duration: 100}],
+        good: [{comment: "まあ及第点。", duration: 300}, {comment: "できて当たり前だから、こんなの。", duration: 300}],
       },
       new Outline(
         "小篠建設",
@@ -502,6 +547,11 @@ const initialState: state = {
         name: "鴨林 勇太(43)",
         message: "「定時退社は早退と同じ」",
       },
+      {
+        poor: [{comment: "そういうときもある。", duration: 300}, {comment: "今日はもう帰りなさい。", duration: 300}],
+        average: [{comment: "良くなってきてるよ!", duration: 300}, {comment: "まだまだいける!", duration: 300}],
+        good: [{comment: "よくできました。", duration: 300}, {comment: "すばらしい。", duration: 300}],
+      },
       new Outline(
         "タナベ工務店",
         "建材工場",
@@ -551,6 +601,11 @@ const initialState: state = {
       name: "山川 哲郎(62)",
       message: "「残業なき労働に価値なし」",
     },
+    comments: {
+      poor: [{comment: "アドバイスのしようがない。", duration: 300}, {comment: "明日から来なくていいよ。", duration: 300}],
+      average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 200}],
+      good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
+    },
     outline: {
       company: "山川製作所",
       category: "精密機械工場",
@@ -599,6 +654,11 @@ const initialState: state = {
       name: "山川 哲郎(62)",
       message: "「残業なき労働に価値なし」",
     },
+    comments: {
+      poor: [{comment: "アドバイスのしようがない。", duration: 300}, {comment: "明日から来なくていいよ。", duration: 300}],
+      average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 200}],
+      good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
+    },
     outline: {
       company: "山川製作所",
       category: "精密機械工場",
@@ -646,6 +706,11 @@ const initialState: state = {
     owner: {
       name: "山川 哲郎(62)",
       message: "「残業なき労働に価値なし」",
+    },
+    comments: {
+      poor: [{comment: "アドバイスのしようがない。", duration: 300}, {comment: "明日から来なくていいよ。", duration: 300}],
+      average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 200}],
+      good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
     },
     outline: {
       company: "山川製作所",

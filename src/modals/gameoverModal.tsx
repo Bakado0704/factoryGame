@@ -5,7 +5,7 @@ import Colors from "../constants/color";
 import { ShadowText } from "../components/text/ShadowText";
 import Comment from "../components/modal/Comment";
 import Title from "../components/modal/Title";
-import { JobType } from "../types/job";
+import { CommentType, JobType } from "../types/job";
 const { width } = Dimensions.get("window");
 
 type Props = {
@@ -15,6 +15,7 @@ type Props = {
   name: string;
   iconType: JobType;
   message: string;
+  comment: CommentType;
   offModal: () => void;
 };
 
@@ -25,6 +26,7 @@ const Gameover = ({
   name,
   iconType,
   message,
+  comment,
   completeCount,
 }: Props) => {
   return (
@@ -98,7 +100,7 @@ const Gameover = ({
             </ShadowText>
           </View>
         </View>
-        <Comment name={name} comment="あーあって感じ" iconType={iconType} />
+        <Comment name={name} comment={comment} iconType={iconType} />
         <View style={styles.buttonContainer}>
           <ImageButton
             source={require("../assets/ui/okButton.png")}

@@ -53,6 +53,7 @@ const GameScreen = () => {
   const perMoney = Job.outline.basicMoney;
   const jobName = Job.name;
   const name = Job.owner.name;
+  const commenters = Job.comments;
   const iconType = Job.icon;
   const prevProductType = user.prevProductType;
   const drink = user.drink;
@@ -74,6 +75,16 @@ const GameScreen = () => {
   }
 
   let r = Math.random() * 10;
+
+  let comments;
+
+  if (completeCount <= 2) {
+    comments = commenters.poor;
+  } else if (completeCount <= 4) {
+    comments = commenters.average;
+  } else {
+    comments = commenters.good;
+  }
 
   //dispatch関数の宣言
   const judgeHandler = (judge: judgeStatus) => {
@@ -133,6 +144,7 @@ const GameScreen = () => {
     navigation.navigate("Start");
   };
 
+
   const youdeadMessage = [
     "倒れてしまった…",
     "メンタルがやられてしまった...",
@@ -145,6 +157,7 @@ const GameScreen = () => {
   ];
 
   const messageNumber = Math.floor(Math.random() * youdeadMessage.length);
+  const commentNumber = Math.floor(Math.random() * comments.length);
 
   //statusがplayingの場合Gameを出す
   let game;
@@ -194,6 +207,7 @@ const GameScreen = () => {
           maxMoney={maxMoney}
           name={name}
           iconType={iconType}
+          comment={comments[commentNumber]}
         />
       </>
     );

@@ -177,7 +177,7 @@ const JobGet = ({ offModal, job }: Props) => {
         </View>
         <Comment
           name={ownerName}
-          comment="ウチは厳しいぞ、置いてかれるなよ!!"
+          comment={{comment: "ウチは厳しいぞ、置いてかれるなよ!!", duration: 300}}
           iconType={icon}
         />
         <View style={styles.buttonContainer}>
