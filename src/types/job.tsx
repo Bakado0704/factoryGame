@@ -35,7 +35,8 @@ export interface Job {
     poor: CommentType[];
     average: CommentType[];
     good: CommentType[];
-  }
+  };
+  unlock: CommentType[];
   outline: Outline;
 }
 

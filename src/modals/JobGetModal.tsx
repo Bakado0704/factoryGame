@@ -22,6 +22,7 @@ const JobGet = ({ offModal, job }: Props) => {
   const icon = job.icon;
   const BackgroundImg = job.backgroundImg;
   const isActive = job.isActive;
+  const unlocks = job.unlock;
 
   let perMoney = job.perMoney[level - 1];
   let prevPerMoney = job.perMoney[prevLevel - 1];
@@ -29,6 +30,13 @@ const JobGet = ({ offModal, job }: Props) => {
   let headColor = Colors.yamagawaHeadColor;
   let mainColor = Colors.yamagawaMainColor;
   let borderColor = Colors.yamagawaBorderColor;
+  let unlock;
+
+  if (isActive === false) {
+    unlock = unlocks[0]
+  } else {
+    unlock = unlocks[1]
+  }
 
   if (level >= 10) {
     perMoney = job.perMoney[9] + level - 10;
@@ -177,7 +185,7 @@ const JobGet = ({ offModal, job }: Props) => {
         </View>
         <Comment
           name={ownerName}
-          comment={{comment: "ウチは厳しいぞ、置いてかれるなよ!!", duration: 300}}
+          comment={unlock}
           iconType={icon}
         />
         <View style={styles.buttonContainer}>

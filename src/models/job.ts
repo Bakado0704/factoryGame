@@ -23,6 +23,7 @@ export default class job implements _Job {
       average: CommentType[];
       good: CommentType[];
     },
+    public unlock: CommentType[],
     public outline: Outline,
 
   ) {
@@ -38,6 +39,7 @@ export default class job implements _Job {
     this.boardImg = boardImg;
     this.owner = owner;
     this.comments = comments;
+    this.unlock = unlock;
     this.outline = outline;
   }
 }

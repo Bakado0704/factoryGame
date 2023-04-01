@@ -12,6 +12,9 @@ const Colors = {
   yamagawaHeadColor: "#595757",
   yamagawaMainColor: "#848484",
   yamagawaBorderColor: "#3e3a39",
+  yamagawaGameGreen: "",
+  yamagawaGameYellow: "",
+  yamagawaGameBlack: "",
 
   souzukiHeadColor: "#67682c",
   souzukiMainColor: "#a8a574",

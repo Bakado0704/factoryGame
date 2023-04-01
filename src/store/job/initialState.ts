@@ -55,6 +55,7 @@ const initialState: state = {
         average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 150}],
         good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
       },
+      [{comment: "ビシバシいくぞ!", duration: 200}, {comment: "ビシバシいくぞ!", duration: 200}],
       new Outline(
         "山川製作所",
         "精密機械工場",
@@ -109,6 +110,7 @@ const initialState: state = {
         average: [{comment: "服装だけは一人前。", duration: 300}, {comment: "少しは成長しているのね。", duration: 300}],
         good: [{comment: "ワシの若いころを思い出した。", duration: 200}, {comment: "愛してるよ。", duration: 200}],
       },
+      [{comment: "共に頂点を目指そう。", duration: 300}, {comment: "文句を言わず、働く!", duration: 300}],
       new Outline(
         "蒼月",
         "化粧品工場",
@@ -164,6 +166,7 @@ const initialState: state = {
         average: [{comment: "居眠りしてたでしょ。", duration: 300}, {comment: "なんで休んでるの？", duration: 300}],
         good: [{comment: "やるやん。", duration: 200}, {comment: "ナイス～。", duration: 200}],
       },
+      [{comment: "ようこそ、ブラック企業へ。", duration: 300}, {comment: "給料もらいすぎ!", duration: 300}],
       new Outline(
         "アッシュベリー Inc.",
         "食品工場",
@@ -220,6 +223,7 @@ const initialState: state = {
         average: [{comment: "ピンチはチャンスだ!", duration: 100}, {comment: "苦しいか? 笑え!", duration: 100}],
         good: [{comment: "今日からお前は!!一番だ!!!", duration: 50}, {comment: "崖っぷちありがとう!!最高だああ。", duration: 50}],
       },
+      [{comment: "ビシバシいくぞ!", duration: 200}, {comment: "死ぬまで働く、当たり前!", duration: 150}],
       new Outline(
         "オリジン弁太郎",
         "弁当工場",
@@ -274,6 +278,7 @@ const initialState: state = {
         average: [{comment: "技術が足りない、技術が。", duration: 300}, {comment: "今月の給料没収。", duration: 300}],
         good: [{comment: "謝々。", duration: 150}, {comment: "Good Job!", duration: 200}],
       },
+      [{comment: "ようこそ。", duration: 300}, {comment: "文句を言わず、働ケ!", duration: 200}],
       new Outline(
         "アグロン精密",
         "精密機械工場",
@@ -291,7 +296,7 @@ const initialState: state = {
       "c6",
       JobType.starFoods,
       JobType.starFoods,
-      true,
+      false,
       1,
       0,
       0,
@@ -330,6 +335,7 @@ const initialState: state = {
         average: [{comment: "ギリギリ許します。", duration: 300}, {comment: "まだまだですね。", duration: 300}],
         good: [{comment: "いい仕事でした。", duration: 300}, {comment: "次もよろしくお願いします。", duration: 300}],
       },
+      [{comment: "頑張りましょう。", duration: 300}, {comment: "頑張りましょう。", duration: 300}],
       new Outline(
         "スター・フーズ",
         "洋菓子工場",
@@ -384,6 +390,7 @@ const initialState: state = {
         average: [{comment: "おそいおそいおそい!", duration: 200}, {comment: "諦めんな!", duration: 200}],
         good: [{comment: "もっと、もっとだあああ!", duration: 100}, {comment: "もっと熱くなれ!", duration: 100}],
       },
+      [{comment: "ウチは厳しいぞ、置いてかれるなよ。", duration: 200}, {comment: "ビシバシいくぞ!", duration: 200}],
       new Outline(
         "鹿賀水産",
         "食品工場",
@@ -440,6 +447,7 @@ const initialState: state = {
         average: [{comment: "これで満足してないよな。", duration: 300}, {comment: "喜べ、今日は残業できるぞ。", duration: 200}],
         good: [{comment: "契約延長!", duration: 150}, {comment: "エクセレント。", duration: 150}],
       },
+      [{comment: "アットホームな会社です。", duration: 300}, {comment: "働け、いっそう働け、常に働け。", duration: 300}],
       new Outline(
         "玉津アーセナル",
         "精密機械工場",
@@ -457,7 +465,7 @@ const initialState: state = {
       "c9",
       JobType.ozasa,
       JobType.ozasa,
-      true,
+      false,
       1,
       0,
       0,
@@ -494,6 +502,7 @@ const initialState: state = {
         average: [{comment: "テキパキこなせないもんかねえ。", duration: 200}, {comment: "時給5円上げてやろうか。", duration: 100}],
         good: [{comment: "まあ及第点。", duration: 300}, {comment: "できて当たり前だから、こんなの。", duration: 300}],
       },
+      [{comment: "働かせてやってもいいぞ。", duration: 300}, {comment: "「ここで働かせてください」だろ？", duration: 150}],
       new Outline(
         "小篠建設",
         "建材工場",
@@ -552,6 +561,7 @@ const initialState: state = {
         average: [{comment: "良くなってきてるよ!", duration: 300}, {comment: "まだまだいける!", duration: 300}],
         good: [{comment: "よくできました。", duration: 300}, {comment: "すばらしい。", duration: 300}],
       },
+      [{comment: "一緒に頑張りましょう。", duration: 300}, {comment: "おめでとう、昇給です。", duration: 300}],
       new Outline(
         "タナベ工務店",
         "建材工場",
@@ -606,6 +616,7 @@ const initialState: state = {
       average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 200}],
       good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
     },
+    unlock: [{comment: "ビシバシいくぞ!", duration: 200}, {comment: "ビシバシいくぞ!", duration: 200}],
     outline: {
       company: "山川製作所",
       category: "精密機械工場",
@@ -659,6 +670,7 @@ const initialState: state = {
       average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 200}],
       good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
     },
+    unlock: [{comment: "ビシバシいくぞ!", duration: 200}, {comment: "ビシバシいくぞ!", duration: 200}],
     outline: {
       company: "山川製作所",
       category: "精密機械工場",
@@ -712,6 +724,7 @@ const initialState: state = {
       average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 200}],
       good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
     },
+    unlock: [{comment: "ビシバシいくぞ!", duration: 200}, {comment: "ビシバシいくぞ!", duration: 200}],
     outline: {
       company: "山川製作所",
       category: "精密機械工場",
