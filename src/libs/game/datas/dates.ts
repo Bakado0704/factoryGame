@@ -1,6 +1,6 @@
-import { PlayColor } from "../../../types/play";
 import PlayPattern from "../../../models/playpattern";
 import PlayTarget from "../../../models/playtarget";
+import Colors from "../../../constants/color";
 
 export const PATTERN_DATES = [
   //山川製作所
@@ -11,7 +11,7 @@ export const PATTERN_DATES = [
         [1],
         new PlayTarget(
           100,
-          PlayColor.Black,
+          Colors.Black,
           require("../../../assets/play/blackButton.png"),
           require("../../../assets/play/blackButtonOff.png"),
           require("../../../assets/play/blackButtonPressed.png")
@@ -22,7 +22,7 @@ export const PATTERN_DATES = [
         [-1, 1, -1],
         new PlayTarget(
           80,
-          PlayColor.Green,
+          Colors.Green,
           require("../../../assets/play/greenButton.png"),
           require("../../../assets/play/greenButtonOff.png"),
           require("../../../assets/play/greenButtonPressed.png")
@@ -33,7 +33,7 @@ export const PATTERN_DATES = [
         [1, -1],
         new PlayTarget(
           120,
-          PlayColor.Yellow,
+          Colors.Yellow,
           require("../../../assets/play/yellowButton.png"),
           require("../../../assets/play/yellowButtonOff.png"),
           require("../../../assets/play/yellowButtonPressed.png"),
@@ -46,7 +46,7 @@ export const PATTERN_DATES = [
         [1],
         new PlayTarget(
           100,
-          PlayColor.Black,
+          Colors.Black,
           require("../../../assets/play/blackButton.png"),
           require("../../../assets/play/blackButtonOff.png"),
           require("../../../assets/play/blackButtonPressed.png")
@@ -57,7 +57,7 @@ export const PATTERN_DATES = [
         [-1, 1, -1],
         new PlayTarget(
           80,
-          PlayColor.Green,
+          Colors.Green,
           require("../../../assets/play/greenButton.png"),
           require("../../../assets/play/greenButtonOff.png"),
           require("../../../assets/play/greenButtonPressed.png")
@@ -68,7 +68,7 @@ export const PATTERN_DATES = [
         [1, -1],
         new PlayTarget(
           120,
-          PlayColor.Yellow,
+          Colors.Yellow,
           require("../../../assets/play/yellowButton.png"),
           require("../../../assets/play/yellowButtonOff.png"),
           require("../../../assets/play/yellowButtonPressed.png"),
@@ -81,7 +81,7 @@ export const PATTERN_DATES = [
         [1],
         new PlayTarget(
           100,
-          PlayColor.Black,
+          Colors.Black,
           require("../../../assets/play/blackButton.png"),
           require("../../../assets/play/blackButtonOff.png"),
           require("../../../assets/play/blackButtonPressed.png")
@@ -92,7 +92,7 @@ export const PATTERN_DATES = [
         [-1, 1, -1],
         new PlayTarget(
           80,
-          PlayColor.Green,
+          Colors.Green,
           require("../../../assets/play/greenButton.png"),
           require("../../../assets/play/greenButtonOff.png"),
           require("../../../assets/play/greenButtonPressed.png")
@@ -103,7 +103,7 @@ export const PATTERN_DATES = [
         [1, -1],
         new PlayTarget(
           120,
-          PlayColor.Yellow,
+          Colors.Yellow,
           require("../../../assets/play/yellowButton.png"),
           require("../../../assets/play/yellowButtonOff.png"),
           require("../../../assets/play/yellowButtonPressed.png"),

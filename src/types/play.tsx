@@ -35,7 +35,7 @@ export interface PlayPattern {
 
 export interface PlayTarget {
   velocity: number;
-  color: PlayColor;
+  color: string;
   ImageSourceOn: ImageSourcePropType;
   ImageSourceOff: ImageSourcePropType;
   ImageSourcePressed: ImageSourcePropType;
@@ -45,10 +45,3 @@ export interface PlayGap {
   frontGap: number;
   passedGap: number;
 }
-
-export const PlayColor = {
-  Black: "black",
-  Green: "green",
-  Yellow: "yellow"
-} as const;
-export type PlayColor = typeof PlayColor[keyof typeof PlayColor];
