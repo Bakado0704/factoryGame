@@ -13,18 +13,6 @@ const Colors = {
   yamagawaMainColor: "#848484",
   yamagawaBorderColor: "#3e3a39",
 
-  Green: "#6cba4a",
-  Yellow: "#dcdc35",
-  Black: "#000",
-  Blue: "#84b7d1",
-  Brown: "#d0956c",
-  indigo: "#425e66",
-  moss: "#287b63",
-  orchre: "#a7bc67",
-  purple: "#824798",
-  red: "#b72d33",
-  white: "#fff",
-
   souzukiHeadColor: "#67682c",
   souzukiMainColor: "#a8a574",
   souzukiBorderColor: "#464721",
@@ -60,6 +48,18 @@ const Colors = {
   tanabeHeadColor: "#5d624f",
   tanabeMainColor: "#a1a98e",
   tanabeBorderColor: "#383d32",
+
+  Green: "#6cba4a",
+  Yellow: "#dcdc35",
+  Black: "#000",
+  Blue: "#84b7d1",
+  Brown: "#d0956c",
+  indigo: "#425e66",
+  moss: "#287b63",
+  orchre: "#a7bc67",
+  purple: "#824798",
+  red: "#b72d33",
+  white: "#fff",
 };
 
 export default Colors;

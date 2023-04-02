@@ -36,7 +36,11 @@ const NavJobList = ({ onModal, jobs, user }: Props) => {
     return (
       <View style={styles.outerContainer}>
         {isActive && (
-          <Pressable onPress={pressHandler}>
+          <Pressable
+            onPress={pressHandler}
+            android_ripple={{ color: "#ccc" }}
+            style={({ pressed }) => [pressed && styles.Pressed]}
+          >
             <ImageBackground
               source={iconBackground}
               style={styles.iconBackground}
@@ -96,4 +100,7 @@ const styles = StyleSheet.create({
     width: width * 0.189,
     height: width * 0.189,
   },
+  Pressed: {
+    opacity: 0.7,
+  }
 });

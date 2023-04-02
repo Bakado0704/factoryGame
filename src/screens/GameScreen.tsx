@@ -64,11 +64,11 @@ const GameScreen = () => {
   }
 
   let plusMoney = Math.floor(perMoney) * bonus * (1 + drink * 0.2);
-  if (combo <= 2) {
+  if (combo <= 1) {
     plusMoney = Math.floor(perMoney * bonus * (1 + drink * 0.2));
-  } else if (combo <= 4) {
+  } else if (combo <= 3) {
     plusMoney = Math.floor(perMoney * 1.2 * bonus * (1 + drink * 0.2));
-  } else if (combo <= 6) {
+  } else if (combo <= 5) {
     plusMoney = Math.floor(perMoney * 1.6 * bonus * (1 + drink * 0.2));
   } else {
     plusMoney = Math.floor(perMoney * 2.0 * bonus * (1 + drink * 0.2));

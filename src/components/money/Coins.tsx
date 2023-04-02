@@ -10,11 +10,11 @@ type Props = {
 const Coins = ({ playState, combo }: Props) => {
   return (
     <>
-      <Coin playState={playState} delay={0} combo={combo} allowCombo={1} />
-      <Coin playState={playState} delay={80} combo={combo} allowCombo={3} />
-      <Coin playState={playState} delay={160} combo={combo} allowCombo={5} />
-      <Coin playState={playState} delay={240} combo={combo} allowCombo={7} />
-      <Coin playState={playState} delay={320} combo={combo} allowCombo={9} />
+      <Coin playState={playState} delay={0} combo={combo} allowCombo={0} />
+      <Coin playState={playState} delay={80} combo={combo} allowCombo={2} />
+      <Coin playState={playState} delay={160} combo={combo} allowCombo={4} />
+      <Coin playState={playState} delay={240} combo={combo} allowCombo={6} />
+      <Coin playState={playState} delay={320} combo={combo} allowCombo={8} />
     </>
   );
 };

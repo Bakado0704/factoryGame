@@ -115,8 +115,8 @@ function GachaScreen() {
   };
 
   const startMove = () => {
-    dispatch(userPage("start"));
-    navigation.navigate("Start");
+    dispatch(userPage("jobChange"));
+    navigation.navigate("JobChange");
   };
 
   const gachaMove = () => {

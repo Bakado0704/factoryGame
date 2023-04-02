@@ -104,12 +104,12 @@ const Counts = ({
       judgeHandler(judgeStatus.success);
       changeNowMoneyHandler(plusMoney);
       changeNextProductTypeHandler(),
-      changeComboHandler(1);
       changeCompleteCount(1);
       setTimeout(() => {
         setIsRunning(false);
       }, 200);
       setTimeout(() => {
+        changeComboHandler(1);
         changePrevProductTypeHandler();
         judgeHandler(judgeStatus.waiting);
       }, 800);
