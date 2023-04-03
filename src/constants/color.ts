@@ -54,12 +54,12 @@ const Colors = {
   Black: "#000",
   Blue: "#84b7d1",
   Brown: "#d0956c",
-  indigo: "#425e66",
-  moss: "#287b63",
-  orchre: "#a7bc67",
-  purple: "#824798",
-  red: "#b72d33",
-  white: "#fff",
+  Indigo: "#425e66",
+  Moss: "#287b63",
+  Orchre: "#a7bc67",
+  Purple: "#824798",
+  Red: "#b72d33",
+  White: "#fff",
 };
 
 export default Colors;

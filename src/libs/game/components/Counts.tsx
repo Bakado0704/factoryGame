@@ -134,7 +134,7 @@ const Counts = ({
 
   //ターゲットをfor文で表示
   var TargetSet = [];
-  for (let i = 0; i < playpattern.length; i++) {
+  for (let i = 0; i < playpattern[0].length; i++) {
     TargetSet.push(
       <Targets
         key={i}

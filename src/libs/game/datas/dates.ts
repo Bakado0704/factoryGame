@@ -7,8 +7,8 @@ export const PATTERN_DATES = [
   [
     [
       new PlayPattern(
-        [100],
-        [1],
+        [80],
+        [-1],
         new PlayTarget(
           100,
           Colors.Black,
@@ -18,8 +18,8 @@ export const PATTERN_DATES = [
         )
       ),
       new PlayPattern(
-        [80, 150, 200],
-        [-1, 1, -1],
+        [120, 140],
+        [-1, 1],
         new PlayTarget(
           80,
           Colors.Green,
@@ -29,7 +29,7 @@ export const PATTERN_DATES = [
         )
       ),
       new PlayPattern(
-        [90, 150],
+        [100, 180],
         [1, -1],
         new PlayTarget(
           120,
@@ -38,77 +38,8 @@ export const PATTERN_DATES = [
           require("../../../assets/play/yellowButtonOff.png"),
           require("../../../assets/play/yellowButtonPressed.png"),
         )
-      ),
+      )
     ],
-    [
-      new PlayPattern(
-        [200],
-        [1],
-        new PlayTarget(
-          100,
-          Colors.Black,
-          require("../../../assets/play/blackButton.png"),
-          require("../../../assets/play/blackButtonOff.png"),
-          require("../../../assets/play/blackButtonPressed.png")
-        )
-      ),
-      new PlayPattern(
-        [100, 150, 200],
-        [-1, 1, -1],
-        new PlayTarget(
-          80,
-          Colors.Green,
-          require("../../../assets/play/greenButton.png"),
-          require("../../../assets/play/greenButtonOff.png"),
-          require("../../../assets/play/greenButtonPressed.png")
-        )
-      ),
-      new PlayPattern(
-        [120, 250],
-        [1, -1],
-        new PlayTarget(
-          120,
-          Colors.Yellow,
-          require("../../../assets/play/yellowButton.png"),
-          require("../../../assets/play/yellowButtonOff.png"),
-          require("../../../assets/play/yellowButtonPressed.png"),
-        )
-      ),
-    ],
-    [
-      new PlayPattern(
-        [300],
-        [1],
-        new PlayTarget(
-          100,
-          Colors.Black,
-          require("../../../assets/play/blackButton.png"),
-          require("../../../assets/play/blackButtonOff.png"),
-          require("../../../assets/play/blackButtonPressed.png")
-        )
-      ),
-      new PlayPattern(
-        [200, 250, 300],
-        [-1, 1, -1],
-        new PlayTarget(
-          80,
-          Colors.Green,
-          require("../../../assets/play/greenButton.png"),
-          require("../../../assets/play/greenButtonOff.png"),
-          require("../../../assets/play/greenButtonPressed.png")
-        )
-      ),
-      new PlayPattern(
-        [120, 250],
-        [1, -1],
-        new PlayTarget(
-          120,
-          Colors.Yellow,
-          require("../../../assets/play/yellowButton.png"),
-          require("../../../assets/play/yellowButtonOff.png"),
-          require("../../../assets/play/yellowButtonPressed.png"),
-        )
-      ),
-    ],
+
   ],
 ];
