@@ -2,7 +2,7 @@ import { View, StyleSheet, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import PlayPattern from "../../../models/playpattern";
 import PlayGap from "../../../models/playgap";
-import { judgeStatus, Play, } from "../../../types/play";
+import { judgeStatus, Play } from "../../../types/play";
 const { width } = Dimensions.get("window");
 
 type Props = {
@@ -55,30 +55,30 @@ const Target = ({
   let translateX: number[] = [];
 
   //translateの位置を指定
-  for (let i = 0; i < distance.length; i++) {
-    translateX[i] = Math.floor(distance[i] - (velocity * count) / 100);
-    gaps[i] = Math.floor(distance[i] - (velocity * laps[i]) / 100);
+  // for (let i = 0; i < distance.length; i++) {
+  //   translateX[i] = Math.floor(distance[i] - (velocity * count) / 100);
+  //   gaps[i] = Math.floor(distance[i] - (velocity * laps[i]) / 100);
 
-    //もしgapsが設定されたら,translateXはそこ
-    if (gaps[i] || gaps[i] === 0) {
-      translateX[i] = gaps[i];
+  //   //もしgapsが設定されたら,translateXはそこ
+  //   if (gaps[i] || gaps[i] === 0) {
+  //     translateX[i] = gaps[i];
 
-      //かつallowGapから外れていた場合opecityは1のまま赤く
-      if (gaps[i] <= allowGap) {
-        opacities[i] = 0;
-      } else {
-        opacities[i] = 1;
-      }
-    }
+  //     //かつallowGapから外れていた場合opecityは1のまま赤く
+  //     if (gaps[i] <= allowGap) {
+  //       opacities[i] = 0;
+  //     } else {
+  //       opacities[i] = 1;
+  //     }
+  //   }
 
-    //もしGapsが設定されたら、allgaps,gapに入れる
-    useEffect(() => {
-      if (gaps[i] || gaps[i] === 0) {
-        setAllGaps([...allGaps, gaps[i]]);
-        setGap([...gap, gaps[i]]);
-      }
-    }, [gaps[i] || gaps[i] === 0]);
-  }
+  //   //もしGapsが設定されたら、allgaps,gapに入れる
+  //   useEffect(() => {
+  //     if (gaps[i] || gaps[i] === 0) {
+  //       setAllGaps([...allGaps, gaps[i]]);
+  //       setGap([...gap, gaps[i]]);
+  //     }
+  //   }, [gaps[i] || gaps[i] === 0]);
+  // }
 
   //ターゲットを押すのが早すぎた
   useEffect(() => {
@@ -105,16 +105,13 @@ const Target = ({
   // lapsの数がdistanceの数を超えても失敗
   //success後にクリックしても発動しないように
   useEffect(() => {
-    if (
-      laps.length > playpattern.distance.length &&
-      playState.judge !== "success"
-    ) {
+    if (laps.length > distance.length && playState.judge !== "success") {
       damageHandler(100);
       setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
       // console.log("lapsの数がdistanceの数を超えても失敗");
     }
-  }, [laps.length > playpattern.distance.length]);
+  }, [laps.length > distance.length]);
 
   //ターゲットをfor文で表示
   var Targets1 = [];
@@ -125,7 +122,7 @@ const Target = ({
         style={[
           styles.boxInnerContainer,
           {
-            transform: [{ translateX: translateX[i] * direction[i] }],
+            // transform: [{ translateX: translateX[i] * direction[i] }],
             opacity: opacities[i],
           },
         ]}

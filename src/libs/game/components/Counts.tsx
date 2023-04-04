@@ -79,6 +79,7 @@ const Counts = ({
         playpattern[Math.floor(Math.random() * playpattern.length)]
       );
       selectedPatternHandler(selectedPlayPattern);
+      console.log(selectedPlayPattern);
     }
   }, [playState.judge === judgeStatus.waiting]);
 
@@ -134,7 +135,7 @@ const Counts = ({
 
   //ターゲットをfor文で表示
   var TargetSet = [];
-  for (let i = 0; i < playpattern[0].length; i++) {
+  for (let i = 0; i < selectedPlayPattern.length; i++) {
     TargetSet.push(
       <Targets
         key={i}
