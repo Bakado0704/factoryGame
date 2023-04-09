@@ -52,7 +52,7 @@ const initialState: state = {
       },
       {
         poor: [{comment: "アドバイスのしようがない。", duration: 300}, {comment: "明日から来なくていいよ。", duration: 300}],
-        average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 150}],
+        average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く!", duration: 150}],
         good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
       },
       [{comment: "ビシバシいくぞ!", duration: 200}, {comment: "ビシバシいくぞ!", duration: 200}],
@@ -613,7 +613,7 @@ const initialState: state = {
     },
     comments: {
       poor: [{comment: "アドバイスのしようがない。", duration: 300}, {comment: "明日から来なくていいよ。", duration: 300}],
-      average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 200}],
+      average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く!", duration: 200}],
       good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
     },
     unlock: [{comment: "ビシバシいくぞ!", duration: 200}, {comment: "ビシバシいくぞ!", duration: 200}],
@@ -667,7 +667,7 @@ const initialState: state = {
     },
     comments: {
       poor: [{comment: "アドバイスのしようがない。", duration: 300}, {comment: "明日から来なくていいよ。", duration: 300}],
-      average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 200}],
+      average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く!", duration: 200}],
       good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
     },
     unlock: [{comment: "ビシバシいくぞ!", duration: 200}, {comment: "ビシバシいくぞ!", duration: 200}],
@@ -721,7 +721,7 @@ const initialState: state = {
     },
     comments: {
       poor: [{comment: "アドバイスのしようがない。", duration: 300}, {comment: "明日から来なくていいよ。", duration: 300}],
-      average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く！", duration: 200}],
+      average: [{comment: "まだまだ半人前。", duration: 300}, {comment: "もっとキビキビ動く!", duration: 200}],
       good: [{comment: "グッジョビ。", duration: 200}, {comment: "ワンダフル。", duration: 200}],
     },
     unlock: [{comment: "ビシバシいくぞ!", duration: 200}, {comment: "ビシバシいくぞ!", duration: 200}],

@@ -54,31 +54,36 @@ const Target = ({
   let gaps: number[] = [];
   let translateX: number[] = [];
 
-  //translateの位置を指定
-  // for (let i = 0; i < distance.length; i++) {
-  //   translateX[i] = Math.floor(distance[i] - (velocity * count) / 100);
-  //   gaps[i] = Math.floor(distance[i] - (velocity * laps[i]) / 100);
+  // translateの位置を指定
+  for (let i = 0; i < distance.length; i++) {
+    translateX[i] = Math.floor(distance[i] - (velocity * count) / 100);
+    gaps[i] = Math.floor(distance[i] - (velocity * laps[i]) / 100);
 
-  //   //もしgapsが設定されたら,translateXはそこ
-  //   if (gaps[i] || gaps[i] === 0) {
-  //     translateX[i] = gaps[i];
+    //もしgapsが設定されたら,translateXはそこ
+    if (gaps[i] || gaps[i] === 0) {
+      translateX[i] = gaps[i];
 
-  //     //かつallowGapから外れていた場合opecityは1のまま赤く
-  //     if (gaps[i] <= allowGap) {
-  //       opacities[i] = 0;
-  //     } else {
-  //       opacities[i] = 1;
-  //     }
-  //   }
+      //かつallowGapから外れていた場合opacityは1のまま赤く
+      if (gaps[i] <= allowGap) {
+        opacities[i] = 0;
+      } else {
+        opacities[i] = 1;
+      }
+    }
+  }
 
-  //   //もしGapsが設定されたら、allgaps,gapに入れる
-  //   useEffect(() => {
-  //     if (gaps[i] || gaps[i] === 0) {
-  //       setAllGaps([...allGaps, gaps[i]]);
-  //       setGap([...gap, gaps[i]]);
-  //     }
-  //   }, [gaps[i] || gaps[i] === 0]);
-  // }
+  useEffect(() => {
+    for (let i = 0; i < distance.length; i++) {
+      if (gaps[i] || gaps[i] === 0) {
+        setAllGaps([...allGaps, gaps[i]]);
+        setGap([...gap, gaps[i]]);
+      }
+    }
+  }, [gaps.filter(function (x) { return x === x }).length]);
+  
+  // console.log(gaps.filter(function (x) { return x === x }).length)
+  // console.log("translateX" + translateX)
+  // console.log("direction" + direction)
 
   //ターゲットを押すのが早すぎた
   useEffect(() => {
@@ -87,7 +92,6 @@ const Target = ({
       setGap([]);
       setFailureOrder(order);
       judgeHandler(judgeStatus.failure);
-
       // console.log("ターゲットを押すのが早すぎた");
     }
   }, [gap.some((value) => value >= 20)]);
@@ -122,7 +126,7 @@ const Target = ({
         style={[
           styles.boxInnerContainer,
           {
-            // transform: [{ translateX: translateX[i] * direction[i] }],
+            transform: [{ translateX: translateX[i] * direction[i] }],
             opacity: opacities[i],
           },
         ]}

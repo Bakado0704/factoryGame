@@ -75,14 +75,11 @@ const Counts = ({
   //judgeが waitingに変わったときパターンの選定
   useEffect(() => {
     if (playState.judge === judgeStatus.waiting) {
-      setSelectedPlayPattern(
-        playpattern[Math.floor(Math.random() * playpattern.length)]
-      );
+      setSelectedPlayPattern(playpattern[Math.floor(Math.random() * playpattern.length)]);
       selectedPatternHandler(selectedPlayPattern);
-      console.log(selectedPlayPattern);
     }
   }, [playState.judge === judgeStatus.waiting]);
-
+  
   // すべてのDitanceの宣言
   let allDistance = [];
   for (let i = 0; i < selectedPlayPattern.length; i++) {
