@@ -73,7 +73,7 @@ const initialState: state = {
       "c2",
       JobType.souzuki,
       JobType.souzuki,
-      false,
+      true,
       1,
       0,
       0,

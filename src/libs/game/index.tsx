@@ -56,7 +56,7 @@ const Game = ({
       break;
     }
     case "蒼月": {
-      playpattern = PATTERN_DATES[0];
+      playpattern = PATTERN_DATES[1];
       break;
     }
     case "アッシュベリーInc": {
