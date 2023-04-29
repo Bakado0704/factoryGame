@@ -48,7 +48,7 @@ const ImageBg = ({ children }: Props) => {
     ((activeProductLength - 1) * proccessCount) / allDistance.length
   );
 
-  //test
+  //test key
 
   return (
     <BackgroundImg type={activeType}>
