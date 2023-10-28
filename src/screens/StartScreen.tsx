@@ -27,8 +27,9 @@ import {
   userMoneyIncrease,
   userPage,
 } from "../store/user";
-import { changeStatus, staminaReset } from "../store/play";
+import { changeActivePattern, changeStatus, staminaReset } from "../store/play";
 import { changeJob } from "../store/job";
+import { PATTERN_DATES } from "../libs/game/datas/dates";
 const { width } = Dimensions.get("window");
 
 const StartScreen = () => {
@@ -40,6 +41,7 @@ const StartScreen = () => {
   const previewIcon = useSelector((state: RootState) => state.user.previewIcon);
   const userIcons = useSelector((state: RootState) => state.user.UserIcons);
 
+  const type = Job.name;
   const activeBoard = Job.boardImg;
   const perMoney = Job.outline.basicMoney;
   let maxMoney = Job.maxMoney;
@@ -71,6 +73,51 @@ const StartScreen = () => {
   const NextButtonAnim = useRef(new Animated.Value(0)).current;
   const PrevDrinkButtonAnim = useRef(new Animated.Value(0)).current;
   const NextDrinkButtonAnim = useRef(new Animated.Value(0)).current;
+
+  let playpattern = PATTERN_DATES[0];
+
+  switch (type) {
+    case "山川製作所": {
+      playpattern = PATTERN_DATES[0];
+      break;
+    }
+    case "蒼月": {
+      playpattern = PATTERN_DATES[1];
+      break;
+    }
+    case "アッシュベリーInc": {
+      playpattern = PATTERN_DATES[0];
+      break;
+    }
+    case "オリジン弁太郎": {
+      playpattern = PATTERN_DATES[0];
+      break;
+    }
+    case "アグロン精密": {
+      playpattern = PATTERN_DATES[0];
+      break;
+    }
+    case "スターフーズ": {
+      playpattern = PATTERN_DATES[0];
+      break;
+    }
+    case "鹿賀水産": {
+      playpattern = PATTERN_DATES[0];
+      break;
+    }
+    case "玉津アーセナル": {
+      playpattern = PATTERN_DATES[0];
+      break;
+    }
+    case "小篠建設": {
+      playpattern = PATTERN_DATES[0];
+      break;
+    }
+    case "タナベ建設": {
+      playpattern = PATTERN_DATES[0];
+      break;
+    }
+  }
 
   const prevJobHandler = () => {
     dispatch(changeJob(prevJob));
@@ -135,7 +182,9 @@ const StartScreen = () => {
   };
 
   const gameMove = () => {
+    dispatch(changeActivePattern(playpattern[Math.floor(Math.random() * playpattern.length)]));
     dispatch(changeStatus(PlayStatus.playing));
+
     if (userMoney <= drinkCost) {
       dispatch(userDrinkReset());
       dispatch(staminaReset(0));

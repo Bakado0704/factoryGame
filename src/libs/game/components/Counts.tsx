@@ -5,6 +5,7 @@ import PlayPattern from "../../../models/playpattern";
 import Targets from "./Targets";
 import NavGame from "../../../components/game/NavGame";
 import { productType } from "../../../types/product";
+import playpattern from "../../../models/playpattern";
 const { width } = Dimensions.get("window");
 
 type Props = {
@@ -14,6 +15,7 @@ type Props = {
   drink: number;
   plusMoney: number;
   productType: productType;
+  selectedPlayPattern: playpattern[];
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
   changeComboHandler: (number: number) => void;
@@ -32,6 +34,7 @@ const Counts = ({
   drink,
   plusMoney,
   productType,
+  selectedPlayPattern,
   judgeHandler,
   damageHandler,
   changeComboHandler,
@@ -46,7 +49,7 @@ const Counts = ({
   const [count, setCount] = useState<number>(0); //アニメーションを動かす基盤の数
   const [allGaps, setAllGaps] = useState<number[]>([]);
   const [isRunning, setIsRunning] = useState<boolean>(true); //アニメーションが動いているかどうか
-  const [selectedPlayPattern, setSelectedPlayPattern] = useState<PlayPattern[]>(
+  const [playPattern, setPlayPattern] = useState<PlayPattern[]>(
     playpattern[0]
   );
 
@@ -75,8 +78,8 @@ const Counts = ({
   //judgeが waitingに変わったときパターンの選定
   useEffect(() => {
     if (playState.judge === judgeStatus.waiting) {
-      setSelectedPlayPattern(playpattern[Math.floor(Math.random() * playpattern.length)]);
-      selectedPatternHandler(selectedPlayPattern);
+      setPlayPattern(playpattern[Math.floor(Math.random() * playpattern.length)]);
+      selectedPatternHandler(playPattern);
     }
   }, [playState.judge === judgeStatus.waiting]);
   
@@ -87,6 +90,9 @@ const Counts = ({
       allDistance.push(selectedPlayPattern[i].distance[y]);
     }
   }
+
+  // console.log("↓count内");
+  // console.log(selectedPlayPattern);
 
   useEffect(() => {
     processCountHandler(allGaps.length);

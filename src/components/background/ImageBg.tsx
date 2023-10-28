@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import BackgroundImg from "./BackgroundImg";
 import Product from "./Product";
 import Conveyor from "./Conveyor";
-import { RootState } from "../../store/store";
-import { page } from "../../types/page";
+import { RootState } from "../../store/store"
 
 export interface Props {
   children: React.ReactNode;
@@ -48,7 +47,13 @@ const ImageBg = ({ children }: Props) => {
     ((activeProductLength - 1) * proccessCount) / allDistance.length
   );
 
-  //test key
+  // console.log("...Image");
+  // console.log(selectedPlayPattern);
+  // console.log("productNumber"+productNumber);
+  // console.log("activeProductLength"+activeProductLength);
+  // console.log("proccessCount"+proccessCount);
+  // console.log("allDistance.length"+allDistance.length);
+
 
   return (
     <BackgroundImg type={activeType}>

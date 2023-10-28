@@ -9,6 +9,7 @@ import Coins from "../../components/money/Coins";
 import PlusMoney from "../../components/money/PlusMoney";
 import { productType } from "../../types/product";
 import { ShadowText } from "../../components/text/ShadowText";
+import playpattern from "../../models/playpattern";
 
 type Props = {
   type: JobType;
@@ -18,6 +19,7 @@ type Props = {
   plusMoney: number;
   nowMoney: number;
   productType: productType;
+  selectedPlayPattern: playpattern[];
   judgeHandler: (judge: judgeStatus) => void;
   damageHandler: (number: number) => void;
   changeComboHandler: (number: number) => void;
@@ -37,6 +39,7 @@ const Game = ({
   productType,
   plusMoney,
   nowMoney,
+  selectedPlayPattern,
   judgeHandler,
   damageHandler,
   changeComboHandler,
@@ -113,6 +116,7 @@ const Game = ({
           drink={drink}
           playState={playState}
           productType={productType}
+          selectedPlayPattern={selectedPlayPattern}
           judgeHandler={judgeHandler}
           damageHandler={damageHandler}
           changeComboHandler={changeComboHandler}

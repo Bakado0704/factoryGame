@@ -37,6 +37,8 @@ const GameScreen = () => {
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   //現在のplay状態
   const playState = useSelector((state: RootState) => state.play.play);
+  //現在のplayPattern
+  const selectedPlayPattern = useSelector((state: RootState) => state.play.activePlayPattern);
   //現在のjob
   const Job: Job = useSelector((state: RootState) => state.job.job);
   //現在のuser
@@ -171,6 +173,7 @@ const GameScreen = () => {
         nowMoney={nowMoney}
         plusMoney={plusMoney}
         productType={prevProductType}
+        selectedPlayPattern={selectedPlayPattern}
         judgeHandler={judgeHandler}
         damageHandler={damageHandler}
         changeComboHandler={changeComboHandler}
